@@ -18,6 +18,7 @@ node_modules/
 .idea/**/dynamic.xml
 .idea/**/uiDesigner.xml
 .idea/**/dbnavigator.xml
+.idea/**/webServers.xml
 
 # File-based project format
 *.iws

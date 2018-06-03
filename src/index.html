@@ -4,32 +4,39 @@
     <!-- DDR Calc | https://github.com/Andrew67/ddr-calc -->
     <meta charset="UTF-8">
     <title>DDR Calc</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style.css">
+    <script src="calc.js"></script>
 </head>
 <body>
 <div id="app">
     <div id="display">
-
+        <div id="calculation">
+            <span id="bpm"></span>
+            <span id="multsign">×</span>
+            <span id="speedmod"></span>
+        </div>
+        <div id="result"></div>
     </div>
     <ul id="keypad-main" class="keypad">
-        <li>7
-        <li>8
-        <li>9
-        <li>4
-        <li>5
-        <li>6
-        <li>1
-        <li>2
-        <li>3
-        <li>×
-        <li>0
-        <li>=
+        <li data-keytype="int">7
+        <li data-keytype="int">8
+        <li data-keytype="int">9
+        <li data-keytype="int">4
+        <li data-keytype="int">5
+        <li data-keytype="int">6
+        <li data-keytype="int">1
+        <li data-keytype="int">2
+        <li data-keytype="int">3
+        <li data-keytype="func">×
+        <li data-keytype="int">0
+        <li data-keytype="func">=
     </ul>
     <ul id="keypad-ext" class="keypad">
-        <li>DEL
-        <li>.25
-        <li>.5
-        <li>.75
+        <li data-keytype="func">DEL
+        <li data-keytype="dec">.25
+        <li data-keytype="dec">.5
+        <li data-keytype="dec">.75
     </ul>
 </div>
 </body>

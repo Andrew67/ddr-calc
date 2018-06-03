@@ -3,6 +3,7 @@
 body {
     margin: 0;
     font-family: "Roboto", sans-serif;
+    font-weight: lighter;
 
     user-select: none;
     -moz-user-select: none;
@@ -27,11 +28,34 @@ li {
 #display {
     width: 100vw;
     height: 30vh;
+    font-size: calc(5vh + 5vw);
+    text-align: right;
+}
+
+#display div {
+    margin-right: 3vw;
+    height: 15vh;
+    line-height: 15vh;
+}
+
+#display .active {
+    color: #00227b; /* Material Indigo 600 Dark */
+}
+
+#result {
+    color: #00600f; /* Material Green 700 Dark */
+}
+
+.keypad {
+    height: 70vh;
+    color: white;
+    line-height: calc(70vh / 4);
+    font-size: calc(5vh + 5vw);
+    text-align: center;
 }
 
 #keypad-main {
     width: 75vw;
-    height: 70vh;
     background-color: #263238; /* Material Blue Grey 900 */
     float: left;
 }
@@ -47,14 +71,10 @@ li {
     display: inline-block;
     width: 25vw;
     height: calc(70vh / 4);
-    line-height: calc(70vh / 4);
-    font-size: calc(5vh + 5vw);
-    text-align: center;
     vertical-align: top;
-    color: white;
 }
 
-.keypad li:active {
+.keypad li.active {
     background-color: #546e7a; /* Material Blue Grey 600 */
 }
 
