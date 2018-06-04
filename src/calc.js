@@ -8,11 +8,11 @@ var KEYTYPE = { INT: 'int', FUNC: 'func', DEC: 'dec' };
 
 /** App state object */
 var state = {
-    mode: null,
+    mode: MODE.BPM,
     bpm: '',
     speedModInt: '',
     speedModDec: '',
-    result: ''
+    result: '0'
 };
 
 /**
@@ -129,6 +129,16 @@ function commit () {
     dom.result.textContent = state.result;
 }
 
+/**
+ * Hack for line-height needing to be equal to height to get vertical text alignment.
+ * Used vh before but iOS Safari and Chrome on Android chose to break it, and % is based on font size.
+ */
+function adjustLineHeights () {
+    document.querySelectorAll('#display div, .keypad li').forEach(function (e) {
+        e.style.lineHeight = e.clientHeight + 'px';
+    });
+}
+
 document.addEventListener('DOMContentLoaded', function () {
     // Init DOM
     dom.bpm = document.getElementById('bpm');
@@ -137,8 +147,10 @@ document.addEventListener('DOMContentLoaded', function () {
     dom.result = document.getElementById('result');
     dom.decimalKeys = document.querySelectorAll('[data-keytype="dec"]');
 
+    adjustLineHeights();
+    window.addEventListener('resize', adjustLineHeights);
+
     // Init state
-    action.switchMode(MODE.BPM);
     commit();
 
     // Set keyPress listeners
