@@ -108,7 +108,10 @@ function commit () {
                 e.classList.add('disabled');
             });
             dom.bpm.classList.add('active');
+
+            if (!state.speedModInt && !state.speedModDec) dom.multsign.style.display = 'none';
             dom.multsign.classList.remove('active');
+
             dom.speedmod.classList.remove('active');
             break;
         case MODE.SPEEDMOD:
@@ -116,7 +119,10 @@ function commit () {
                 e.classList.remove('disabled');
             });
             dom.bpm.classList.remove('active');
+
+            dom.multsign.style.display = 'inline';
             dom.multsign.classList.add('active');
+
             dom.speedmod.classList.add('active');
             break;
         default:
