@@ -188,41 +188,41 @@ document.addEventListener('DOMContentLoaded', function () {
          */
         var touchEndTime = 0;
 
-        e.addEventListener('touchstart', function (evt) {
+        e.addEventListener('touchstart', function () {
             e.classList.add('active');
             interactionStartTime = new Date().getTime();
+        }, { passive: true });
 
-            evt.preventDefault();
-        });
-
-        e.addEventListener('touchend', function (evt) {
+        e.addEventListener('touchend', function () {
             e.classList.remove('active');
             touchEndTime = new Date().getTime();
             if (touchEndTime - interactionStartTime > 650) longKeyPress();
             else keyPress();
+        }, { passive: true });
 
-            evt.preventDefault();
-        });
-
-        e.addEventListener('mousedown', function (evt) {
+        e.addEventListener('mousedown', function () {
             var mouseStartTime = new Date().getTime();
             if (mouseStartTime - touchEndTime > 500) {
                 e.classList.add('active');
                 interactionStartTime = mouseStartTime;
             }
-
-            evt.preventDefault();
         });
 
-        e.addEventListener('mouseup', function (evt) {
+        e.addEventListener('mouseup', function () {
             var mouseEndTime = new Date().getTime();
             if (mouseEndTime - touchEndTime > 500) {
                 e.classList.remove('active');
                 if (mouseEndTime - interactionStartTime > 650) longKeyPress();
                 else keyPress();
             }
-
-            evt.preventDefault();
         });
     });
 });
+
+// See: https://developers.google.com/web/fundamentals/primers/service-workers/
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+        // noinspection JSIgnoredPromiseFromCall
+        navigator.serviceWorker.register('./sw.js');
+    });
+}
