@@ -188,16 +188,26 @@ document.addEventListener('DOMContentLoaded', function () {
          */
         var touchEndTime = 0;
 
+        /**
+         * ID returned by setTimeout for the longPress event, which should fire while user is holding down a key
+         * past the timer threshold (currently 650ms).
+         * We keep the ID in order to cancel this event in touchend/mouseup if the hold time is under the threshold.
+         */
+        var longPressTimeoutId;
+
         e.addEventListener('touchstart', function () {
             e.classList.add('active');
             interactionStartTime = new Date().getTime();
+            longPressTimeoutId = setTimeout(longKeyPress, 650);
         }, { passive: true });
 
         e.addEventListener('touchend', function () {
             e.classList.remove('active');
             touchEndTime = new Date().getTime();
-            if (touchEndTime - interactionStartTime > 650) longKeyPress();
-            else keyPress();
+            if (touchEndTime - interactionStartTime <= 650) {
+                clearTimeout(longPressTimeoutId);
+                keyPress();
+            }
         }, { passive: true });
 
         e.addEventListener('mousedown', function () {
@@ -205,6 +215,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (mouseStartTime - touchEndTime > 500) {
                 e.classList.add('active');
                 interactionStartTime = mouseStartTime;
+                longPressTimeoutId = setTimeout(longKeyPress, 650);
             }
         });
 
@@ -212,8 +223,10 @@ document.addEventListener('DOMContentLoaded', function () {
             var mouseEndTime = new Date().getTime();
             if (mouseEndTime - touchEndTime > 500) {
                 e.classList.remove('active');
-                if (mouseEndTime - interactionStartTime > 650) longKeyPress();
-                else keyPress();
+                if (touchEndTime - interactionStartTime <= 650) {
+                    clearTimeout(longPressTimeoutId);
+                    keyPress();
+                }
             }
         });
     });
