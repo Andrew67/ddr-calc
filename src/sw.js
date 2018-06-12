@@ -1,7 +1,7 @@
 /*! DDR Calc | https://github.com/Andrew67/ddr-calc */
 
 // Bump this number to force a refresh of the static assets, by having it be considered a new SW version
-var swVersion = 1;
+var swVersion = 2;
 
 // See: https://developers.google.com/web/fundamentals/instant-and-offline/offline-cookbook/
 self.addEventListener('install', function(event) {
