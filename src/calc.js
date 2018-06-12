@@ -159,6 +159,18 @@ document.addEventListener('DOMContentLoaded', function () {
     // Init state
     commit();
 
+    // Set click listeners to switch between BPM and speedmod input by touching the text on either side
+    dom.bpm.addEventListener('click', function () {
+        action.switchMode(MODE.BPM);
+        commit();
+    });
+    var switchToSpeedModAndCommit = function () {
+        action.switchMode(MODE.SPEEDMOD);
+        commit();
+    };
+    dom.multsign.addEventListener('click', switchToSpeedModAndCommit);
+    dom.speedmod.addEventListener('click', switchToSpeedModAndCommit);
+
     // Set keyPress listeners
     // Lots of code here just to handle fast key clicks (< 300ms) and long presses on desktop + mobile
     document.querySelectorAll('.keypad li').forEach(function (e) {
