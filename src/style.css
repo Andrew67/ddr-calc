@@ -58,6 +58,10 @@ li {
     color: white;
     font-size: calc(5vh + 5vw);
     text-align: center;
+
+    /* Blocks double-tap-zoom;
+       should be "none" but iOS only supports manipulation (doesn't disable pinch to zoom or panning) */
+    touch-action: manipulation;
 }
 
 #keypad-main {

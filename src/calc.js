@@ -5,6 +5,7 @@
 var MODE = { BPM: 'bpm', SPEEDMOD: 'speedmod' };
 var KEY = { MULT: '×', EQUALS: '=', DEL: 'DEL' };
 var KEYTYPE = { INT: 'int', FUNC: 'func', DEC: 'dec' };
+var LONG_PRESS_MS = 450, SIMULATED_MOUSE_IGNORE_DELAY_MS = 500;
 
 /** App state object */
 var state = {
@@ -210,13 +211,13 @@ document.addEventListener('DOMContentLoaded', function () {
         e.addEventListener('touchstart', function () {
             e.classList.add('active');
             interactionStartTime = new Date().getTime();
-            longPressTimeoutId = setTimeout(longKeyPress, 650);
+            longPressTimeoutId = setTimeout(longKeyPress, LONG_PRESS_MS);
         }, { passive: true });
 
         e.addEventListener('touchend', function () {
             e.classList.remove('active');
             touchEndTime = new Date().getTime();
-            if (touchEndTime - interactionStartTime <= 650) {
+            if (touchEndTime - interactionStartTime <= LONG_PRESS_MS) {
                 clearTimeout(longPressTimeoutId);
                 keyPress();
             }
@@ -224,18 +225,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
         e.addEventListener('mousedown', function () {
             var mouseStartTime = new Date().getTime();
-            if (mouseStartTime - touchEndTime > 500) {
+            if (mouseStartTime - touchEndTime > SIMULATED_MOUSE_IGNORE_DELAY_MS) {
                 e.classList.add('active');
                 interactionStartTime = mouseStartTime;
-                longPressTimeoutId = setTimeout(longKeyPress, 650);
+                longPressTimeoutId = setTimeout(longKeyPress, LONG_PRESS_MS);
             }
         });
 
         e.addEventListener('mouseup', function () {
             var mouseEndTime = new Date().getTime();
-            if (mouseEndTime - touchEndTime > 500) {
+            if (mouseEndTime - touchEndTime > SIMULATED_MOUSE_IGNORE_DELAY_MS) {
                 e.classList.remove('active');
-                if (touchEndTime - interactionStartTime <= 650) {
+                if (touchEndTime - interactionStartTime <= LONG_PRESS_MS) {
                     clearTimeout(longPressTimeoutId);
                     keyPress();
                 }
