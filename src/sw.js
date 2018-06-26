@@ -1,16 +1,22 @@
 /*! DDR Calc | https://github.com/Andrew67/ddr-calc */
 
 // Bump this number to force a refresh of the static assets, by having it be considered a new SW version
-var swVersion = 3;
+var swVersion = 4;
 
 // See: https://developers.google.com/web/fundamentals/instant-and-offline/offline-cookbook/
 self.addEventListener('install', function(event) {
     event.waitUntil(
         caches.open('ddrcalc-static-v1').then(function(cache) {
+            // Delete stale entries
+            cache.delete('index.html');
+            // Add cache entries and wait for them to finalize SW install
             return cache.addAll([
+                './',
                 'calc.js',
-                'index.html',
-                'style.css'
+                'manifest.json',
+                'style.css',
+                'img/fa-gamepad.svg',
+                'img/md-more_vert.svg'
             ]);
         })
     );

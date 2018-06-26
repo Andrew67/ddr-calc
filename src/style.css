@@ -11,7 +11,6 @@ body {
 
     margin: 0;
     font-family: "Roboto", sans-serif;
-    font-weight: lighter;
 
     user-select: none;
     -moz-user-select: none;
@@ -38,11 +37,23 @@ li {
     height: 30%;
     font-size: calc(5vh + 5vw);
     text-align: right;
+    position: relative;
 }
 
 #display div {
     margin-right: 3vw;
     height: 50%;
+}
+
+#display .overlay {
+    position: absolute;
+    display: block;
+
+    /* Material Design text button: https://material.io/design/components/buttons.html#specs */
+    font-size: 14px;
+    line-height: 14px;
+    opacity: 0.6;
+    font-weight: 500; /* Medium */
 }
 
 #display .active {
@@ -51,6 +62,38 @@ li {
 
 #result {
     color: #00600f; /* Material Green 700 Dark */
+}
+
+#menu-btn {
+    top: 16px;
+    left: 8px;
+}
+
+#game-btn {
+    bottom: 16px;
+    left: 16px;
+}
+
+#game-name {
+    margin-left: 4px;
+    text-transform: uppercase;
+}
+
+#game-btn .svg-icon svg {
+    width: 18px;
+    height: 14.4px;
+}
+
+/* Inspired by alignment trick from
+   https://blog.prototypr.io/align-svg-icons-to-text-and-say-goodbye-to-font-icons-d44b3d7b26b4 */
+.svg-icon {
+    display: inline-block;
+}
+
+.svg-icon svg {
+    top: 0.125em;
+    position: relative;
+    fill: currentColor;
 }
 
 .keypad {
@@ -62,6 +105,10 @@ li {
     /* Blocks double-tap-zoom;
        should be "none" but iOS only supports manipulation (doesn't disable pinch to zoom or panning) */
     touch-action: manipulation;
+}
+
+#display div, .keypad {
+    font-weight: 200; /* Extra Light */
 }
 
 #keypad-main {
