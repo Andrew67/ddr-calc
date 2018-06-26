@@ -19,6 +19,7 @@ node_modules/
 .idea/**/uiDesigner.xml
 .idea/**/dbnavigator.xml
 .idea/**/webServers.xml
+.idea/**/deployment.xml
 
 # File-based project format
 *.iws

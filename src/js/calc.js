@@ -1,5 +1,32 @@
 /*! DDR Calc | https://github.com/Andrew67/ddr-calc */
+/* Contains core app shell and calculator JS that all functionality relies on */
 'use strict';
+
+
+// Core app shell functions / hacks and workarounds
+
+/**
+ * Hack for line-height needing to be equal to height to get vertical text alignment.
+ * Used vh before but iOS Safari and Chrome on Android chose to break it, and % is based on font size.
+ */
+function adjustLineHeights () {
+    document.querySelectorAll('#display div, .keypad li').forEach(function (e) {
+        e.style.lineHeight = e.clientHeight + 'px';
+    });
+}
+document.addEventListener('DOMContentLoaded', adjustLineHeights);
+window.addEventListener('resize', adjustLineHeights);
+
+// See: https://developers.google.com/web/fundamentals/primers/service-workers/
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+        // noinspection JSIgnoredPromiseFromCall
+        navigator.serviceWorker.register('./sw.js');
+    });
+}
+
+
+// Core calculator functions
 
 /** State constants */
 var MODE = { BPM: 'bpm', SPEEDMOD: 'speedmod' };
@@ -136,16 +163,6 @@ function commit () {
     dom.result.textContent = state.result;
 }
 
-/**
- * Hack for line-height needing to be equal to height to get vertical text alignment.
- * Used vh before but iOS Safari and Chrome on Android chose to break it, and % is based on font size.
- */
-function adjustLineHeights () {
-    document.querySelectorAll('#display div, .keypad li').forEach(function (e) {
-        e.style.lineHeight = e.clientHeight + 'px';
-    });
-}
-
 document.addEventListener('DOMContentLoaded', function () {
     // Init DOM
     dom.bpm = document.getElementById('bpm');
@@ -153,9 +170,6 @@ document.addEventListener('DOMContentLoaded', function () {
     dom.speedmod = document.getElementById('speedmod');
     dom.result = document.getElementById('result');
     dom.decimalKeys = document.querySelectorAll('[data-keytype="dec"]');
-
-    adjustLineHeights();
-    window.addEventListener('resize', adjustLineHeights);
 
     // Init state
     commit();
@@ -244,11 +258,3 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
-
-// See: https://developers.google.com/web/fundamentals/primers/service-workers/
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function() {
-        // noinspection JSIgnoredPromiseFromCall
-        navigator.serviceWorker.register('./sw.js');
-    });
-}

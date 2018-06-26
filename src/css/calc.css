@@ -1,4 +1,5 @@
 /*! DDR Calc | https://github.com/Andrew67/ddr-calc */
+/* Core app shell and calculator CSS */
 
 html {
     width: 100%;
@@ -81,7 +82,7 @@ li {
 
 #game-btn .svg-icon svg {
     width: 18px;
-    height: 14.4px;
+    height: 14px;
 }
 
 /* Inspired by alignment trick from
