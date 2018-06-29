@@ -1,0 +1,40 @@
+/*! DDR Calc | https://github.com/Andrew67/ddr-calc */
+/* Game selector CSS */
+
+#display .overlay {
+    position: absolute;
+
+    /* Material Design text button: https://material.io/design/components/buttons.html#specs */
+    font-size: 14px;
+    line-height: 14px;
+    opacity: 0.6;
+    font-weight: 500; /* Medium */
+}
+
+#game-btn {
+    display: block;
+    bottom: 16px;
+    left: 16px;
+}
+
+#game-name {
+    margin-left: 4px;
+    text-transform: uppercase;
+}
+
+#game-btn .svg-icon svg {
+    width: 18px;
+    height: 14px;
+}
+
+/* Inspired by alignment trick from
+   https://blog.prototypr.io/align-svg-icons-to-text-and-say-goodbye-to-font-icons-d44b3d7b26b4 */
+.svg-icon {
+    display: inline-block;
+}
+
+.svg-icon svg {
+    top: 0.125em;
+    position: relative;
+    fill: currentColor;
+}

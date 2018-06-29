@@ -6,6 +6,42 @@
 // Core app shell functions / hacks and workarounds
 
 /**
+ * List of additional scripts to lazy-load after this one loads core app shell and calculator functionality
+ */
+var asyncModules = [
+
+];
+
+/**
+ * Adds the given script to the page asynchronously
+ * @param scriptName Name of the script (with no "js/" prefix or ".js" suffix)
+ */
+function addScript (scriptName) {
+    var script = document.createElement('script');
+    script.src = 'js/' + scriptName + '.js';
+    document.head.appendChild(script);
+}
+
+/**
+ * Adds the given stylesheet to the page asynchronously
+ * @param stylesheetName Name of the stylesheet (with no "css/" prefix or ".css" suffix)
+ */
+function addStylesheet (stylesheetName) {
+    var stylesheet = document.createElement('link');
+    stylesheet.rel = 'stylesheet';
+    stylesheet.href = 'css/' + stylesheetName + '.css';
+    document.head.appendChild(stylesheet);
+}
+
+/**
+ * If available, loads the next module from {@link asyncModules} into the current page.
+ * Should be called at the end of each module's initialization method, unless execution order doesn't matter.
+ */
+function loadNextModule () {
+    if (asyncModules.length > 0) addScript(asyncModules.shift());
+}
+
+/**
  * Hack for line-height needing to be equal to height to get vertical text alignment.
  * Used vh before but iOS Safari and Chrome on Android chose to break it, and % is based on font size.
  */
@@ -257,4 +293,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     });
+
+    loadNextModule();
 });

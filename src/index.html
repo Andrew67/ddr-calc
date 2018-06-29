@@ -8,10 +8,10 @@
     <meta name="Description" content="Calculator app for DDR speed modifier BPM">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#ffffff">
-    <link rel="icon" sizes="192x192" href="img/icon-192.png">
-    <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <link rel="stylesheet" href="css/calc.css">
     <script src="js/calc.js" defer></script>
+    <link rel="icon" sizes="192x192" href="img/icon-192.png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
 </head>
 <body>
 <div id="app">
@@ -23,13 +23,14 @@
         </div>
         <div id="result"></div>
 
-        <span id="menu-btn" class="overlay">
+        <!-- TODO: Load dynamically so browser doesn't fetch these images too early -->
+        <!-- <span id="menu-btn" class="overlay">
             <img src="img/md-more_vert.svg" alt="Menu">
         </span>
         <span id="game-btn" class="overlay">
             <span class="svg-icon"><svg><use xlink:href="img/fa-gamepad.svg#icon"></use></svg></span>
             <span id="game-name">No game selected</span>
-        </span>
+        </span> -->
     </div>
     <ul id="keypad-main" class="keypad">
         <li data-keytype="int">7
