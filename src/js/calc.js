@@ -50,7 +50,10 @@ function adjustLineHeights () {
         e.style.lineHeight = e.clientHeight + 'px';
     });
 }
-document.addEventListener('DOMContentLoaded', adjustLineHeights);
+document.addEventListener('DOMContentLoaded', function () {
+    // Formerly only DOMContentLoaded, but a race condition was being hit so it's safer to wait for the CSS to load
+    document.querySelector('link[rel="stylesheet"]').addEventListener('load', adjustLineHeights);
+});
 window.addEventListener('resize', adjustLineHeights);
 
 // See: https://developers.google.com/web/fundamentals/primers/service-workers/
