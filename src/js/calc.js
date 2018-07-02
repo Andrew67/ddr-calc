@@ -51,7 +51,8 @@ function adjustLineHeights () {
     });
 }
 document.addEventListener('DOMContentLoaded', function () {
-    // Formerly only DOMContentLoaded, but a race condition was being hit so it's safer to wait for the CSS to load
+    // Formerly only DOMContentLoaded, but a race condition was being hit so it's safer to also wait for the CSS to load
+    adjustLineHeights();
     document.querySelector('link[rel="stylesheet"]').addEventListener('load', adjustLineHeights);
 });
 window.addEventListener('resize', adjustLineHeights);

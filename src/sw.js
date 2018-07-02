@@ -1,7 +1,7 @@
 /*! DDR Calc | https://github.com/Andrew67/ddr-calc */
 
 /** Bump this number to force a refresh of the static assets, by having it be considered a new SW version */
-var swVersion = 7;
+var swVersion = 8;
 /** Bump this number to force the creation of a new cache; useful for wiping out old entries if files are moved/deleted */
 var swCacheName = 'ddrcalc-static-v2';
 
