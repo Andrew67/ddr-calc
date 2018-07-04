@@ -105,6 +105,7 @@ li {
 
 .keypad li.disabled {
     opacity: 0;
+    pointer-events: none;
 }
 
 #keypad-ext li {

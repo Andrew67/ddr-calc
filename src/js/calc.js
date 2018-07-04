@@ -74,14 +74,40 @@ var KEY = { MULT: '×', EQUALS: '=', DEL: 'DEL' };
 var KEYTYPE = { INT: 'int', FUNC: 'func', DEC: 'dec' };
 var LONG_PRESS_MS = 450, SIMULATED_MOUSE_IGNORE_DELAY_MS = 500;
 
-/** App state object */
+/** App state object (user input) */
 var state = {
     mode: MODE.BPM,
     bpm: '',
     speedModInt: '',
-    speedModDec: '',
-    result: '0'
+    speedModDec: ''
 };
+
+/** App computed state object (state that's derived from {@link state} */
+var computedState = {
+    /** Array of callback functions that gets called on every action completion, to recalculate computed state */
+    hooks: [],
+    /** Runs all the attached hooks to update computed state */
+    update: function () {
+        this.hooks.forEach(function (hook) { hook(); });
+    },
+
+    result: '0',
+    /** Key state (keyed by label). Currently contains a field to query disabled status. */
+    keys: {}
+};
+
+/** Map of key labels to key types. Populated as DOM is loaded from the HTML data-keytype. */
+var keyTypes = {};
+
+/**
+ * Helper method that iterates over all calculator keys (in no particular order) into the given callback function,
+ * providing the following parameters: key, type, keyState, el (label, key type, key state, DOM element).
+ */
+function keysForEach (callbackfn) {
+    Object.keys(computedState.keys).forEach(function (key) {
+        callbackfn(key, keyTypes[key], computedState.keys[key], dom.keys[key]);
+    });
+}
 
 /**
  * Event actions.
@@ -91,6 +117,7 @@ var state = {
 var action = {
     switchMode: function (mode) {
         state.mode = mode;
+        computedState.update();
     },
 
     keyPress: function (key, type) {
@@ -115,14 +142,12 @@ var action = {
                 state.speedModInt = key;
                 state.speedModDec = '';
             }
-
-            this.calculateResult();
         } else if (type === KEYTYPE.DEC && state.mode === MODE.SPEEDMOD) {
             // Decimal keys (speedmod mode only) replace the previously input decimal
             state.speedModDec = key;
-
-            this.calculateResult();
         }
+
+        computedState.update();
     },
 
     longKeyPress: function (key, type) {
@@ -140,8 +165,6 @@ var action = {
             else if (state.speedModInt.length > 0) state.speedModInt = '';
             else if (state.speedModInt.length === 0) this.switchMode(MODE.BPM);
         }
-
-        this.calculateResult();
     },
 
     clear: function () {
@@ -150,13 +173,19 @@ var action = {
         state.speedModDec = '';
 
         this.switchMode(MODE.BPM);
-        this.calculateResult();
-    },
-
-    calculateResult: function () {
-        state.result = Math.round(Number(state.bpm) * Number(state.speedModInt + state.speedModDec));
     }
 };
+
+// Add computed state hooks for key enable/disable based on mode (BPM/Speedmod) and result calculation
+computedState.hooks.push(function disableDecKeysInBpmMode () {
+    keysForEach(function (key, type, keyState) {
+        keyState.disabled = (state.mode === MODE.BPM && type === KEYTYPE.DEC);
+    });
+});
+
+computedState.hooks.push(function calculateResult () {
+    computedState.result = Math.round(Number(state.bpm) * Number(state.speedModInt + state.speedModDec));
+});
 
 /** DOM elements. HTML is static so one query is enough */
 var dom = {
@@ -164,7 +193,8 @@ var dom = {
     multsign: null,
     speedmod: null,
     result: null,
-    decimalKeys: null
+    /** Key DOM elements (keyed by label). Labels match those in state and keyTypes objects and are loaded with the DOM. */
+    keys: {}
 };
 
 /** Updates the DOM to match the app state object */
@@ -172,9 +202,6 @@ function commit () {
     // Mode
     switch (state.mode) {
         case MODE.BPM:
-            dom.decimalKeys.forEach(function (e) {
-                e.classList.add('disabled');
-            });
             dom.bpm.classList.add('active');
 
             if (!state.speedModInt && !state.speedModDec) dom.multsign.style.display = 'none';
@@ -183,9 +210,6 @@ function commit () {
             dom.speedmod.classList.remove('active');
             break;
         case MODE.SPEEDMOD:
-            dom.decimalKeys.forEach(function (e) {
-                e.classList.remove('disabled');
-            });
             dom.bpm.classList.remove('active');
 
             dom.multsign.style.display = 'inline';
@@ -197,10 +221,16 @@ function commit () {
             break;
     }
 
-    // BPM, speedmod, result
+    // Update keys' disabled state in DOM
+    keysForEach(function (key, type, state, el) {
+        if (state.disabled) el.classList.add('disabled');
+        else el.classList.remove('disabled');
+    });
+
+    // Text fields: BPM, speedmod, result
     dom.bpm.textContent = state.bpm;
     dom.speedmod.textContent = state.speedModInt + state.speedModDec;
-    dom.result.textContent = state.result;
+    dom.result.textContent = computedState.result;
 }
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -209,10 +239,6 @@ document.addEventListener('DOMContentLoaded', function () {
     dom.multsign = document.getElementById('multsign');
     dom.speedmod = document.getElementById('speedmod');
     dom.result = document.getElementById('result');
-    dom.decimalKeys = document.querySelectorAll('[data-keytype="dec"]');
-
-    // Init state
-    commit();
 
     // Set click listeners to switch between BPM and speedmod input by touching the text on either side
     dom.bpm.addEventListener('click', function () {
@@ -226,10 +252,15 @@ document.addEventListener('DOMContentLoaded', function () {
     dom.multsign.addEventListener('click', switchToSpeedModAndCommit);
     dom.speedmod.addEventListener('click', switchToSpeedModAndCommit);
 
-    // Set keyPress listeners
+    // Set up keyPress listeners and "register" DOM elements
     // Lots of code here just to handle fast key clicks (< 300ms) and long presses on desktop + mobile
     document.querySelectorAll('.keypad li').forEach(function (e) {
         var key = e.textContent.trim(), type = e.getAttribute('data-keytype');
+
+        // "Register" the key label, initial state, type, and DOM element
+        computedState.keys[key] = { };
+        keyTypes[key] = type;
+        dom.keys[key] = e;
 
         var keyPress = function () {
             action.keyPress(key, type);
@@ -297,6 +328,10 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     });
+
+    // Init state
+    computedState.update();
+    commit();
 
     loadNextModule();
 });
