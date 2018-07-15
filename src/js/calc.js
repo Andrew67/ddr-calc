@@ -197,6 +197,9 @@ var dom = {
     keys: {}
 };
 
+/** Hooks to run after the main commit is complete. Used for plug-in functions. */
+var postCommitHooks = [];
+
 /** Updates the DOM to match the app state object */
 function commit () {
     // Mode
@@ -231,6 +234,9 @@ function commit () {
     dom.bpm.textContent = state.bpm;
     dom.speedmod.textContent = state.speedModInt + state.speedModDec;
     dom.result.textContent = computedState.result;
+
+    // Run post-commit hooks
+    postCommitHooks.forEach(function (hook) { hook(); });
 }
 
 document.addEventListener('DOMContentLoaded', function () {
