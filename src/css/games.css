@@ -15,11 +15,17 @@
     display: block;
     bottom: 16px;
     left: 16px;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+#game-premium-enabled {
+    display: block;
+    opacity: 0.7;
 }
 
 #game-name {
     margin-left: 4px;
-    text-transform: uppercase;
 }
 
 #game-btn .svg-icon svg {

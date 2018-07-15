@@ -9,7 +9,7 @@
  * List of additional scripts to lazy-load after this one loads core app shell and calculator functionality
  */
 var asyncModules = [
-
+    'games'
 ];
 
 /**
