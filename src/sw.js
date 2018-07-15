@@ -4,6 +4,14 @@
 var swVersion = 8;
 /** Bump this number to force the creation of a new cache; useful for wiping out old entries if files are moved/deleted */
 var swCacheName = 'ddrcalc-static-v2';
+/** Assets to cache on first network load (but not for initial install) */
+var cacheOnFirstLoad = [
+    'js/games.js',
+    'img/fa-gamepad.svg',
+    'css/games.css',
+    'games.json',
+    'img/md-more_vert.svg'
+];
 
 // Cache all paths required for app's offline operation
 // See: https://developers.google.com/web/fundamentals/instant-and-offline/offline-cookbook/
@@ -14,8 +22,6 @@ self.addEventListener('install', function(event) {
                 './',
                 'manifest.json',
                 'css/calc.css',
-                'img/fa-gamepad.svg',
-                'img/md-more_vert.svg',
                 'js/calc.js'
             ]);
         })
@@ -40,11 +46,20 @@ self.addEventListener('activate', function(event) {
     );
 });
 
-// Strategy: Cache, falling back to network
+// Strategy: Cache, falling back to network, caching items in the whitelist above
 self.addEventListener('fetch', function(event) {
     event.respondWith(
-        caches.match(event.request).then(function(response) {
-            return response || fetch(event.request);
+        caches.open(swCacheName).then(function(cache) {
+            return cache.match(event.request).then(function(response) {
+                return response || fetch(event.request).then(function(response) {
+                    var shouldCache = cacheOnFirstLoad
+                        .map(function (path) { return event.request.url.endsWith(path); })
+                        .reduce(function (accumulator, currentValue) { return accumulator || currentValue; }, false);
+
+                    if (shouldCache) cache.put(event.request, response.clone());
+                    return response;
+                });
+            })
         })
     );
 });

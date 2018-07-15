@@ -97,6 +97,7 @@ li {
     width: 33%;
     height: 25%;
     vertical-align: top;
+    transition: opacity .1s, background-color .1s;
 }
 
 .keypad li.active {
@@ -104,7 +105,7 @@ li {
 }
 
 .keypad li.disabled {
-    opacity: 0;
+    opacity: .19;
     pointer-events: none;
 }
 
