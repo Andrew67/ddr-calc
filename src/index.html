@@ -15,39 +15,41 @@
 </head>
 <body>
 <div id="app">
-    <div id="display">
-        <div id="calculation">
-            <span id="bpm"></span>
-            <span id="multsign">×</span>
-            <span id="speedmod"></span>
-        </div>
-        <div id="result"></div>
+    <div id="calculator">
+        <div id="display">
+            <div id="calculation">
+                <span id="bpm"></span>
+                <span id="multsign">×</span>
+                <span id="speedmod"></span>
+            </div>
+            <div id="result"></div>
 
-        <!-- TODO: Load dynamically so browser doesn't fetch these images too early -->
-        <!-- <span id="menu-btn" class="overlay">
-            <img src="img/md-more_vert.svg" alt="Menu">
-        </span> -->
+            <!-- TODO: Load dynamically so browser doesn't fetch these images too early -->
+            <!-- <span id="menu-btn" class="overlay">
+                <img src="img/md-more_vert.svg" alt="Menu">
+            </span> -->
+        </div>
+        <ul id="keypad-main" class="keypad">
+            <li data-keytype="int">7
+            <li data-keytype="int">8
+            <li data-keytype="int">9
+            <li data-keytype="int">4
+            <li data-keytype="int">5
+            <li data-keytype="int">6
+            <li data-keytype="int">1
+            <li data-keytype="int">2
+            <li data-keytype="int">3
+            <li data-keytype="func">×
+            <li data-keytype="int">0
+            <li data-keytype="func">=
+        </ul>
+        <ul id="keypad-ext" class="keypad">
+            <li data-keytype="func">DEL
+            <li data-keytype="dec">.25
+            <li data-keytype="dec">.5
+            <li data-keytype="dec">.75
+        </ul>
     </div>
-    <ul id="keypad-main" class="keypad">
-        <li data-keytype="int">7
-        <li data-keytype="int">8
-        <li data-keytype="int">9
-        <li data-keytype="int">4
-        <li data-keytype="int">5
-        <li data-keytype="int">6
-        <li data-keytype="int">1
-        <li data-keytype="int">2
-        <li data-keytype="int">3
-        <li data-keytype="func">×
-        <li data-keytype="int">0
-        <li data-keytype="func">=
-    </ul>
-    <ul id="keypad-ext" class="keypad">
-        <li data-keytype="func">DEL
-        <li data-keytype="dec">.25
-        <li data-keytype="dec">.5
-        <li data-keytype="dec">.75
-    </ul>
 </div>
 </body>
 </html>
