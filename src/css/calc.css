@@ -13,10 +13,19 @@ body {
     margin: 0;
     font-family: "Roboto", sans-serif;
 
+    /* Block text selection for app-like experience */
     user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     -webkit-user-select: none;
+
+    /* Blocks scrolling, zooming, and pull-to-refresh (does not work on iOS) */
+    touch-action: none;
+}
+
+* {
+    /* Cancel iOS highlighting of buttons since we have our own */
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
 ul {
@@ -28,7 +37,7 @@ li {
     list-style: none;
 }
 
-#app {
+#app, #calculator {
     width: 100%;
     height: 100%;
 }
@@ -70,13 +79,12 @@ li {
     font-size: calc(5vh + 5vw);
     text-align: center;
 
-    /* Blocks double-tap-zoom;
-       should be "none" but iOS only supports manipulation (doesn't disable pinch to zoom or panning) */
+    /* Blocks double-tap-zoom (the only touch-action supported by iOS, does not block scroll or zoom) */
     touch-action: manipulation;
 }
 
 #display div, .keypad {
-    font-weight: 200; /* Extra Light */
+    font-weight: 300; /* Light */
 }
 
 #keypad-main {
