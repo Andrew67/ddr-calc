@@ -35,12 +35,40 @@ fetch('games.json').then(function (response) {
         '</span>';
     document.getElementById('display').appendChild(container.firstChild);
 
+    // Load HTML for the game settings
+    container.innerHTML = '<div id="game-settings">' +
+        '<div class="scrim"></div>' +
+        '<div class="side-sheet">' +
+            '<form name="game-settings-form">' +
+            '<fieldset>' +
+                '<legend>Game settings</legend>' +
+                '<label>Premium Play<input type="checkbox" name="premiumPlay"></label>' +
+            '</fieldset>' +
+            '<fieldset>' +
+                '<legend>Game version</legend>' +
+                '<label><input type="radio" name="gameid" value="0">No Game Selected</label>' +
+                gameData.map(function (game) {
+                    return '<label><input type="radio" name="gameid" value="' + game.id + '">' + game.name + '</label>';
+                }).join('') +
+            '</fieldset>' +
+            '</form>' +
+        '</div>' +
+        '</div>';
+    document.getElementById('app').appendChild(container.firstChild);
+
+    // localStorage keys
+    var KEY_GAMEID = 'gameid-v1', KEY_PREMIUMPLAY = 'premiumPlayEnabled';
+
     // Set up calc variables
-    state.gameid = 0;
-    state.premiumPlayEnabled = true;
+    state.gameid = Number(localStorage.getItem(KEY_GAMEID)) || 0; // Change version if IDs ever change in games.json
+    state.premiumPlayEnabled = localStorage.getItem(KEY_PREMIUMPLAY) === null ?
+        true : Boolean(localStorage.getItem(KEY_PREMIUMPLAY));
+    state.gameSettingsOpen = false;
     computedState.gamename = '';
     dom.gamename = document.getElementById('game-name');
     dom.premiumPlayEnabled = document.getElementById('game-premium-enabled');
+    dom.gameSettings = document.getElementById('game-settings');
+    dom.gameSettingsForm = document.forms['game-settings-form'];
 
     // Set the game name based on the selected game ID
     computedState.hooks.push(function setGameName () {
@@ -75,6 +103,42 @@ fetch('games.json').then(function (response) {
             });
         }
     });
+
+    // Show the game settings when the name is clicked, hide when the scrim is clicked
+    // Using history.pushState and onpopstate so that browser/Android back button can dismiss the settings
+    document.getElementById('game-btn').addEventListener('click', function () {
+        state.gameSettingsOpen = true;
+        commit();
+        history.pushState({ gameSettingsOpen: true }, "", "");
+    });
+    document.querySelectorAll('#game-settings .scrim, #game-settings input[name=gameid]').forEach(function (e) {
+        e.addEventListener('click', function () { history.back(); });
+    });
+    window.addEventListener('popstate', function (event) {
+        state.gameSettingsOpen = event.state && event.state.gameSettingsOpen;
+
+        // Commit settings to state upon dismissal (avoids running a postCommit hook on every keypress)
+        if (!state.gameSettingsOpen) {
+            state.premiumPlayEnabled = dom.gameSettingsForm.elements['premiumPlay'].checked;
+            state.gameid = Number(dom.gameSettingsForm.elements['gameid'].value);
+            computedState.update();
+
+            try {
+                localStorage.setItem(KEY_GAMEID, state.gameid);
+                localStorage.setItem(KEY_PREMIUMPLAY, state.premiumPlayEnabled);
+            } catch (e) { /* Silently fail on exception (namely Safari in private browsing mode) */ }
+        }
+
+        commit();
+    });
+    postCommitHooks.push( function showHideGameSettings () {
+        if (state.gameSettingsOpen) dom.gameSettings.classList.add('show');
+        else dom.gameSettings.classList.remove('show');
+    });
+
+    // Sync game settings form with initial state
+    dom.gameSettingsForm.elements['premiumPlay'].checked = state.premiumPlayEnabled;
+    dom.gameSettingsForm.elements['gameid'].value = state.gameid;
 
     // Init plug-in state into calculator
     computedState.update();

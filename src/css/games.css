@@ -44,3 +44,65 @@
     position: relative;
     fill: currentColor;
 }
+
+/*
+  Settings overlay; implements Material Design Side Sheet
+  https://material.io/design/components/sheets-side.html
+
+  Clever use of off-screen start positions, opacity, transform and transition allow animations to trigger with one
+  toggle of the "show" class on the parent element
+*/
+#game-settings {
+    position: absolute;
+    top: 0;
+    /* Start off screen */
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    /* Exit: Delay the transform to hide the entire thing for 200ms so that animations can complete */
+    transition: transform 0s .2s;
+}
+
+.scrim {
+    background-color: black;
+    opacity: 0;
+    transition: opacity .2s;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+}
+
+.side-sheet {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    width: calc(100% - 56px);
+    height: 100%;
+    background-color: white;
+    /* Box Shadow Level 4 from https://medium.com/@Florian/freebie-google-material-design-shadow-helper-2a0501295a2d */
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    /* Material Design Accelerate/exit easing: https://material.io/design/motion/speed.html#easing */
+    transition: transform .2s cubic-bezier(0.4, 0.0, 1, 1);
+}
+
+#game-settings.show {
+    transform: translateX(100%);
+    /* Entry: Don't delay the transform so that animations can be seen */
+    transition-delay: 0s;
+}
+
+#game-settings.show .scrim {
+    opacity: 0.32;
+    transition: opacity .25s;
+}
+
+#game-settings.show .side-sheet {
+    transform: translateX(-100%);
+    /* Material Design Decelerate/enter easing: https://material.io/design/motion/speed.html#easing */
+    transition: transform .25s cubic-bezier(0.0, 0.0, 0.2, 1);
+}
+
+#game-settings label {
+    display: block;
+}
