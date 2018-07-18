@@ -1,15 +1,16 @@
 /*! DDR Calc | https://github.com/Andrew67/ddr-calc */
 /* Core app shell and calculator CSS */
 
-html {
+html, body {
     width: 100%;
     height: 100%;
+
+    /* Prevents bounce scroll on iOS */
+    position: fixed;
+    overflow: hidden;
 }
 
 body {
-    width: 100%;
-    height: 100%;
-
     margin: 0;
     font-family: "Roboto", sans-serif;
 
