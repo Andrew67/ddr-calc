@@ -299,11 +299,16 @@ document.addEventListener('DOMContentLoaded', function () {
          */
         var longPressTimeoutId;
 
-        e.addEventListener('touchstart', function () {
+        e.addEventListener('touchstart', function (evt) {
+            // This preventDefault is used to recover key fast-tapping, as otherwise even with
+            // touch-action: manipulation, iOS Safari (and only Safari; iOS Chrome lacks this issue),
+            // Safari can delay or not even fire touchstart events (sometimes showing you a magnifier instead)
+            evt.preventDefault();
+
             e.classList.add('active');
             interactionStartTime = new Date().getTime();
             longPressTimeoutId = setTimeout(longKeyPress, LONG_PRESS_MS);
-        }, { passive: true });
+        }, { passive: false });
 
         e.addEventListener('touchend', function () {
             e.classList.remove('active');

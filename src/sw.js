@@ -1,13 +1,15 @@
 /*! DDR Calc | https://github.com/Andrew67/ddr-calc */
 
 /** Bump this number to force a refresh of the static assets, by having it be considered a new SW version */
-var swVersion = 9;
+var swVersion = 10;
 /** Bump this number to force the creation of a new cache; useful for wiping out old entries if files are moved/deleted */
 var swCacheName = 'ddrcalc-static-v2';
 /** Assets to cache on first network load (but not for initial install) */
 var cacheOnFirstLoad = [
     'js/games.js',
     'img/fa-gamepad.svg',
+    'img/md-check_box.svg',
+    'img/md-radio_button.svg',
     'css/games.css',
     'games.json',
     'img/md-more_vert.svg'
