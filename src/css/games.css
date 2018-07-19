@@ -77,9 +77,10 @@
     position: absolute;
     top: 0;
     left: 100%;
-    width: calc(100% - 56px);
+    width: 276px; /* Accommodates longest MAX/MAX2/EXTREME/SN entry */
     height: 100%;
     background-color: white;
+    overflow-y: scroll;
     /* Box Shadow Level 4 from https://medium.com/@Florian/freebie-google-material-design-shadow-helper-2a0501295a2d */
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
     /* Material Design Accelerate/exit easing: https://material.io/design/motion/speed.html#easing */
@@ -103,6 +104,50 @@
     transition: transform .25s cubic-bezier(0.0, 0.0, 0.2, 1);
 }
 
-#game-settings label {
+#game-settings form {
+    padding-top: 5px;
+}
+
+#game-settings label, #game-settings legend {
     display: block;
+    padding-left: 16px;
+}
+
+#game-settings label {
+    font-size: 16px; /* Material Body 1 */
+    line-height: 48px;
+}
+
+#game-settings legend {
+    font-size: 12px; /* Material Caption */
+    line-height: 32px;
+}
+
+fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+input[type=radio], input[type=checkbox] {
+    display: none;
+}
+
+input + span.svg-icon svg {
+    top: 6px;
+    margin-right: 24px;
+}
+
+input + span svg .unchecked {
+    opacity: .54;
+}
+
+input + span svg .checked {
+    opacity: 0;
+    transition: opacity .1s;
+    color: #1976d2; /* Material Blue 700; same as DDR Finder primary color */
+}
+
+input:checked + span svg .checked {
+    opacity: 1;
 }

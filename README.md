@@ -22,8 +22,8 @@ or delete keys
 select "Add to Homescreen" or equivalent
 
 ## Roadmap
-* Support for selecting which version of the game you're playing and disabling input
-of unavailable speed modifiers
+* [DONE] Support for selecting which version of the game you're playing (and whether you're playing in premium mode)
+and disabling input of unavailable speed modifiers
 * "Target BPM" mode
 
 ## Licenses

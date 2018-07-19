@@ -2,10 +2,19 @@
 /* Contains functionality for selecting a game and disabling keys based on valid combinations */
 'use strict';
 
-// Kick off after game data loaded
-fetch('games.json').then(function (response) {
-    return response.json();
-}).then(function (gameData) {
+// Start loading CSS asynchronously
+addStylesheet('games');
+// Kick off after game data and icons loaded
+Promise.all([
+    fetch('games.json'), fetch('img/fa-gamepad.svg'), fetch('img/md-check_box.svg'), fetch('img/md-radio_button.svg')
+]).then(function (r) {
+    return Promise.all([r[0].json(), r[1].text(), r[2].text(), r[3].text()]);
+}).then(function (data) {
+    var gameData = data[0],
+        gamepad = '<span class="svg-icon">' + data[1] + '</span>',
+        checkbox = '<span class="svg-icon">' + data[2] + '</span>',
+        radioBtn = '<span class="svg-icon">' + data[3] + '</span>';
+
     // Map game data by ID for easier retrieval without walking the array
     // Furthermore, convert the mods and premiumPlayMods into their respective Map forms
     var gameDataById = new Map(gameData.map(function (game) {
@@ -25,30 +34,29 @@ fetch('games.json').then(function (response) {
         })];
     }));
 
-    // Load CSS and HTML for the game button
-    addStylesheet('games');
+    // Load HTML for the game button
     var container = document.createElement('div');
     container.innerHTML = '<span id="game-btn" class="overlay">' +
         '<span id="game-premium-enabled"></span>' +
-        '<span class="svg-icon"><svg><use xlink:href="img/fa-gamepad.svg#icon"></use></svg></span>' +
-        '<span id="game-name">&nbsp;</span>' +
+        gamepad + '<span id="game-name">&nbsp;</span>' +
         '</span>';
     document.getElementById('display').appendChild(container.firstChild);
 
     // Load HTML for the game settings
+    // SVG for the checkbox and radio buttons must be in-lined for CSS to work properly
     container.innerHTML = '<div id="game-settings">' +
         '<div class="scrim"></div>' +
         '<div class="side-sheet">' +
             '<form name="game-settings-form">' +
             '<fieldset>' +
                 '<legend>Game settings</legend>' +
-                '<label>Premium Play<input type="checkbox" name="premiumPlay"></label>' +
+                '<label><input type="checkbox" name="premiumPlay">' + checkbox + 'Premium Play</label>' +
             '</fieldset>' +
             '<fieldset>' +
                 '<legend>Game version</legend>' +
-                '<label><input type="radio" name="gameid" value="0">No Game Selected</label>' +
-                gameData.map(function (game) {
-                    return '<label><input type="radio" name="gameid" value="' + game.id + '">' + game.name + '</label>';
+                [{ id: 0, name: 'Any' }].concat(gameData).map(function (game) {
+                    return '<label><input type="radio" name="gameid" value="' + game.id + '">'
+                        + radioBtn + game.name + '</label>';
                 }).join('') +
             '</fieldset>' +
             '</form>' +
