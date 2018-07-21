@@ -28,11 +28,6 @@
     margin-left: 4px;
 }
 
-#game-btn .svg-icon svg {
-    width: 18px;
-    height: 14px;
-}
-
 /* Inspired by alignment trick from
    https://blog.prototypr.io/align-svg-icons-to-text-and-say-goodbye-to-font-icons-d44b3d7b26b4 */
 .svg-icon {
@@ -80,7 +75,6 @@
     width: 276px; /* Accommodates longest MAX/MAX2/EXTREME/SN entry */
     height: 100%;
     background-color: white;
-    overflow-y: scroll;
     /* Box Shadow Level 4 from https://medium.com/@Florian/freebie-google-material-design-shadow-helper-2a0501295a2d */
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
     /* Material Design Accelerate/exit easing: https://material.io/design/motion/speed.html#easing */
