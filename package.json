@@ -1,0 +1,23 @@
+{
+  "name": "ddr-calc",
+  "version": "1.0.0",
+  "description": "Calculator with DDR speed-modifier specific functionality; fast and offline PWA",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Andrew67/ddr-calc.git"
+  },
+  "author": {
+    "name": "Andrés Cordero",
+    "email": "andres@andrew67.com",
+    "url": "http://andrew67.com/"
+  },
+  "license": "GPL-3.0-only",
+  "private": true,
+  "bugs": {
+    "url": "https://github.com/Andrew67/ddr-calc/issues"
+  },
+  "homepage": "https://github.com/Andrew67/ddr-calc#readme"
+}
