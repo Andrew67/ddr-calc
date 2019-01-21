@@ -19,5 +19,9 @@
   "bugs": {
     "url": "https://github.com/Andrew67/ddr-calc/issues"
   },
-  "homepage": "https://github.com/Andrew67/ddr-calc#readme"
+  "homepage": "https://github.com/Andrew67/ddr-calc#readme",
+  "devDependencies": {
+    "eslint": "^5.12.1",
+    "eslint-plugin-compat": "^2.6.3"
+  }
 }
