@@ -109,6 +109,14 @@ body {
     transition: opacity .1s, background-color .1s;
 }
 
+/* Workaround for inability to use vh/%s for vertical centering of dynamically-sized keypad buttons / display */
+.keypad li span, #display div > span {
+    display: block;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
 .keypad li.active {
     background-color: #546e7a; /* Material Blue Grey 600 */
 }

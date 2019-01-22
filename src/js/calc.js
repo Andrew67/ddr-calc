@@ -41,22 +41,6 @@ function loadNextModule () {
     if (asyncModules.length > 0) addScript(asyncModules.shift());
 }
 
-/**
- * Hack for line-height needing to be equal to height to get vertical text alignment.
- * Used vh before but iOS Safari and Chrome on Android chose to break it, and % is based on font size.
- */
-function adjustLineHeights () {
-    document.querySelectorAll('#display div, .keypad li').forEach(function (e) {
-        e.style.lineHeight = e.clientHeight + 'px';
-    });
-}
-document.addEventListener('DOMContentLoaded', function () {
-    // Formerly only DOMContentLoaded, but a race condition was being hit so it's safer to also wait for the CSS to load
-    adjustLineHeights();
-    document.querySelector('link[rel="stylesheet"]').addEventListener('load', adjustLineHeights);
-});
-window.addEventListener('resize', adjustLineHeights);
-
 // See: https://developers.google.com/web/fundamentals/primers/service-workers/
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {
