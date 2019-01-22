@@ -5,7 +5,11 @@ not ie_mob 11
 not op_mini all             # interactive app
 
 not android 4.4.3-4.4.4     # fetch
-not chrome < 50             # NodeList.forEach
-not ios_saf < 10.3          # fetch
+not chrome < 51             # NodeList.forEach
+not and_chr < 51            # NodeList.forEach
+not firefox < 50            # NodeList.forEach
+not and_ff < 50             # NodeList.forEach
+not samsung < 5             # NodeList.forEach (5.0 = Chromium 51)
 
+not ios_saf < 10.3          # fetch
 ios_saf >= 10.3

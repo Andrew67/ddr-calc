@@ -22,6 +22,28 @@
 </head>
 <body>
 <div id="app">
+    <!-- Incompatible browser overlay -->
+    <div id="browser-dialog" style="position: absolute; z-index: 9999; background-color: rgba(0, 0, 0, 0.64); width: 100%; height: 100%">
+        <div style="background-color: white; border-radius: 15px; padding: 8px; width: 80%; position: relative; top: 50%; left: 50%; transform: translate(-50%, -50%)">
+            <h1 style="font-size: 18px; margin: 0; text-align: center">Browser upgrade needed</h1>
+            <p>In order to use DDR Calc, one of the following minimum browser/OS versions is required:</p>
+            <ul>
+                <li>iOS version 10.3</li>
+                <li>Android System WebView 58</li>
+                <li>Chrome for Android 58</li>
+                <li>Firefox for Android 63</li>
+                <li>Samsung Internet 6.2</li>
+            </ul>
+            <noscript><p>JavaScript must also be enabled</p></noscript>
+            <p style="text-align: center; margin-bottom: 4px"><a href="https://github.com/Andrew67/ddr-calc">Project Site</a></p>
+        </div>
+    </div>
+    <!-- In-line browser compatibility check, so that the incompatibility dialog is dismissed ASAP -->
+    <script>
+        if ('fetch' in window && 'forEach' in NodeList.prototype) document.getElementById('browser-dialog').remove();
+    </script>
+
+    <!-- Calculator UI -->
     <div id="calculator">
         <div id="display">
             <div id="calculation">
