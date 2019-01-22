@@ -54,7 +54,7 @@ if ('serviceWorker' in navigator) {
 
 /** State constants */
 var MODE = { BPM: 'bpm', SPEEDMOD: 'speedmod' };
-var KEY = { MULT: '×', EQUALS: '=', DEL: 'DEL' };
+var KEY = { MULT: '×', BPM: 'BPM', DEL: 'DEL' };
 var KEYTYPE = { INT: 'int', FUNC: 'func', DEC: 'dec' };
 var LONG_PRESS_MS = 450, SIMULATED_MOUSE_IGNORE_DELAY_MS = 500;
 
@@ -108,7 +108,7 @@ var action = {
         if (type === KEYTYPE.FUNC) {
             // Function keys switch BPM/speedmod mode OR perform "special" backspace behavior
             if (key === KEY.MULT) this.switchMode(MODE.SPEEDMOD);
-            else if (key === KEY.EQUALS) this.switchMode(MODE.BPM);
+            else if (key === KEY.BPM) this.switchMode(MODE.BPM);
             else if (key === KEY.DEL) this.backspace();
         } else if (type === KEYTYPE.INT) {
             // Integer keys in BPM mode will:

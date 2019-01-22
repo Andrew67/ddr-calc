@@ -109,6 +109,11 @@ body {
     transition: opacity .1s, background-color .1s;
 }
 
+/* Reduce font size for BPM key */
+.keypad li:last-of-type {
+    font-size: calc(3vh + 3vw);
+}
+
 /* Workaround for inability to use vh/%s for vertical centering of dynamically-sized keypad buttons / display */
 .keypad li span, #display div > span {
     display: block;

@@ -9,7 +9,7 @@ Calculator with DDR speed-modifier specific functionality; fast and offline PWA
 e.g. 4, .25, .5 results in 4.5 (saves pushing delete key multiple times and re-typing decimal)
 * Pushing a 1-9 key erases the decimal portion;
 e.g. 4, .25, .5, 5 results in 5 (saves deleting the decimal portion when trying a new whole number)
-* Pushing the equals key moves the cursor back to BPM, and the next number key press starts it over
+* Pushing the BPM key moves the cursor back to BPM, and the next number key press starts it over
 (saves having to place the cursor back on the left and deleting)
 * The above tips, when put in practice, mean you should never have to press the multiplication
 or delete keys
