@@ -68,12 +68,6 @@ body {
     color: #00600f; /* Material Green 700 Dark */
 }
 
-/* TODO: Move to CSS file for menu functionality */
-/*#menu-btn {
-    top: 16px;
-    left: 8px;
-}*/
-
 .keypad {
     height: 70%;
     color: white;

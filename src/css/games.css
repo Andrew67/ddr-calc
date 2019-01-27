@@ -63,18 +63,20 @@
     background-color: black;
     opacity: 0;
     transition: opacity .2s;
-    z-index: 1;
     width: 100%;
     height: 100%;
 }
 
 .side-sheet {
     position: absolute;
+    background-color: white;
     top: 0;
     left: 100%;
     width: 276px; /* Accommodates longest MAX/MAX2/EXTREME/SN entry */
     height: 100%;
-    background-color: white;
+    /* For slim screens, leave some space for dismissal scrim, and add scrollbars */
+    max-width: calc(100% - 44px);
+    overflow: auto;
     /* Box Shadow Level 4 from https://medium.com/@Florian/freebie-google-material-design-shadow-helper-2a0501295a2d */
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
     /* Material Design Accelerate/exit easing: https://material.io/design/motion/speed.html#easing */
