@@ -1,0 +1,61 @@
+/*! DDR Calc | https://github.com/Andrew67/ddr-calc */
+/* Menu CSS */
+#menu-btn {
+    display: block;
+    top: 16px;
+    left: 8px;
+    /* Increase the touch target */
+    text-align: left;
+    width: 56px;
+    height: 40px;
+}
+
+#menu {
+    opacity: 0;
+    transition: transform 0s .1s, opacity .1s; /* Delay transition to let dismissal effects show */
+}
+
+#menu.show {
+    transform: translateX(100%);
+    opacity: 1;
+    transition: opacity .1s;
+}
+
+/*
+  Menu overlay; implements Material Design Menus
+  https://material.io/design/components/menus.html
+*/
+#menu-popup {
+    display: inline-block;
+    background-color: white;
+    border-radius: 8px;
+    min-width: 112px;
+    /* Place on top of menu button */
+    position: relative;
+    top: 16px;
+    left: 12px;
+    /* Box Shadow Level 3 from https://medium.com/@Florian/freebie-google-material-design-shadow-helper-2a0501295a2d */
+    box-shadow: 0 0 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    /* Expand animation from top-left corner */
+    transform: scale(.5, .5);
+    transform-origin: top left;
+    transition: transform .1s;
+}
+
+#menu.show #menu-popup {
+    transform: scale(1, 1);
+}
+
+#menu li {
+    padding: 0 16px 0 16px;
+    height: 48px;
+    line-height: 48px;
+}
+
+#menu-popup .disabled {
+    opacity: .38;
+}
+
+#menu-popup .hidden {
+    display: none;
+}

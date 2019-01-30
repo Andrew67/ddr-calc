@@ -29,12 +29,12 @@ body {
     -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
-#calculator ul {
+#calculator ul, #menu ul {
     margin: 0;
     padding: 0;
 }
 
-#calculator li {
+#calculator li, #menu li {
     list-style: none;
 }
 

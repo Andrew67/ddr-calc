@@ -44,7 +44,7 @@ Promise.all([
 
     // Load HTML for the game settings
     // SVG for the checkbox and radio buttons must be in-lined for CSS to work properly
-    container.innerHTML = '<div id="game-settings">' +
+    container.innerHTML = '<div id="game-settings" class="full-screen-overlay">' +
         '<div class="scrim"></div>' +
         '<div class="side-sheet">' +
             '<form name="game-settings-form">' +
@@ -123,10 +123,10 @@ Promise.all([
         e.addEventListener('click', function () { history.back(); });
     });
     window.addEventListener('popstate', function (event) {
-        state.gameSettingsOpen = event.state && event.state.gameSettingsOpen;
+        var newGameSettingsOpen = event.state && event.state.gameSettingsOpen;
 
         // Commit settings to state upon dismissal (avoids running a postCommit hook on every keypress)
-        if (!state.gameSettingsOpen) {
+        if (state.gameSettingsOpen && !newGameSettingsOpen) {
             state.premiumPlayEnabled = dom.gameSettingsForm.elements['premiumPlay'].checked;
             state.gameid = Number(dom.gameSettingsForm.elements['gameid'].value);
             computedState.update();
@@ -137,6 +137,7 @@ Promise.all([
             } catch (e) { /* Silently fail on exception (namely Safari in private browsing mode) */ }
         }
 
+        state.gameSettingsOpen = newGameSettingsOpen;
         commit();
     });
     postCommitHooks.push( function showHideGameSettings () {

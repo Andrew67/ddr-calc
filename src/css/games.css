@@ -47,7 +47,7 @@
   Clever use of off-screen start positions, opacity, transform and transition allow animations to trigger with one
   toggle of the "show" class on the parent element
 */
-#game-settings {
+.full-screen-overlay {
     position: absolute;
     top: 0;
     /* Start off screen */
