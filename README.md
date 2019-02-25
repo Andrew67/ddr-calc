@@ -32,5 +32,5 @@ and disabling input of unavailable speed modifiers
   * Calculator base: GPL-3 (see `LICENSE`)
   * DDR Arrow: sourced from https://inkjuse.deviantart.com/art/DDR-Arrow-111309080
 * Other icons:
-  * FontAwesome (all `src/img/fa-*.svg` files): CC BY 4.0 License (see: https://fontawesome.com/license)
+  * FontAwesome (all `src/img/fa-*.svg` files): CC BY 4.0 License (see: https://fontawesome.com/license/free)
   * Material Design Icons (all `src/img/md-*.svg` files): Apache 2.0 (see: https://material.io/tools/icons/)
