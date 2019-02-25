@@ -71,7 +71,7 @@ Promise.all([
     state.gameid = Number(localStorage.getItem(KEY_GAMEID)) || 0; // Change version if IDs ever change in games.json
     state.premiumPlayEnabled = localStorage.getItem(KEY_PREMIUMPLAY) === null ?
         true : Boolean(localStorage.getItem(KEY_PREMIUMPLAY));
-    state.gameSettingsOpen = false;
+    state.gameSettingsOpen = Boolean(history.state && history.state.gameSettingsOpen);
     computedState.gamename = '';
     dom.gamename = document.getElementById('game-name');
     dom.premiumPlayEnabled = document.getElementById('game-premium-enabled');
@@ -141,8 +141,7 @@ Promise.all([
         commit();
     });
     postCommitHooks.push( function showHideGameSettings () {
-        if (state.gameSettingsOpen) dom.gameSettings.classList.add('show');
-        else dom.gameSettings.classList.remove('show');
+        dom.gameSettings.classList.toggle('show', state.gameSettingsOpen);
     });
 
     // Sync game settings form with initial state

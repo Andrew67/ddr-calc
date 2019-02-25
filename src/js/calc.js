@@ -211,8 +211,7 @@ function commit () {
 
     // Update keys' disabled state in DOM
     keysForEach(function (key, type, state, el) {
-        if (state.disabled) el.classList.add('disabled');
-        else el.classList.remove('disabled');
+        el.classList.toggle('disabled', state.disabled);
     });
 
     // Text fields: BPM, speedmod, result

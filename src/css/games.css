@@ -89,7 +89,7 @@
     transition-delay: 0s;
 }
 
-#game-settings.show .scrim {
+.show .scrim {
     opacity: 0.32;
     transition: opacity .25s;
 }
