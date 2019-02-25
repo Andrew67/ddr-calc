@@ -13,6 +13,7 @@ self.addEventListener('install', function(event) {
             return cache.addAll([
                 './',
                 'manifest.json',
+                'img/icon-192.png',
                 'css/calc.css',
                 'js/calc.js',
                 'js/games.js',
@@ -21,7 +22,9 @@ self.addEventListener('install', function(event) {
                 'img/md-radio_button.svg',
                 'css/games.css',
                 'games.json',
-                'img/md-more_vert.svg'
+                'js/menu.js',
+                'img/md-more_vert.svg',
+                'css/menu.css'
             ]);
         })
     );

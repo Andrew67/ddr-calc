@@ -10,12 +10,12 @@
     height: 40px;
 }
 
-#menu {
+#menu, #about {
     opacity: 0;
     transition: transform 0s .1s, opacity .1s; /* Delay transition to let dismissal effects show */
 }
 
-#menu.show {
+#menu.show, #about.show {
     transform: translateX(100%);
     opacity: 1;
     transition: opacity .1s;
@@ -35,7 +35,7 @@
     top: 16px;
     left: 12px;
     /* Box Shadow Level 3 from https://medium.com/@Florian/freebie-google-material-design-shadow-helper-2a0501295a2d */
-    box-shadow: 0 0 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    box-shadow: 0 2px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
     /* Expand animation from top-left corner */
     transform: scale(.5, .5);
     transform-origin: top left;
@@ -48,7 +48,6 @@
 
 #menu li {
     padding: 0 16px 0 16px;
-    height: 48px;
     line-height: 48px;
 }
 
@@ -58,4 +57,46 @@
 
 #menu-popup .hidden {
     display: none;
+}
+
+#about-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 275px;
+    max-height: calc(100% - 80px);
+    overflow: auto;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border-radius: 15px;
+    padding: 8px;
+    /* Box Shadow Level 5 from https://medium.com/@Florian/freebie-google-material-design-shadow-helper-2a0501295a2d */
+    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+}
+
+#about-box li {
+    line-height: 32px;
+}
+
+#app-logo * {
+    margin: 4px 0 4px 0;
+    text-align: center;
+}
+
+#app-logo img {
+    display: block;
+    margin: 0 auto;
+}
+
+#app-logo h1 {
+    font-size: 16px;
+}
+
+#app-version {
+    font-weight: normal;
+}
+
+#app-logo h2 {
+    font-size: 14px;
+    font-weight: normal;
 }

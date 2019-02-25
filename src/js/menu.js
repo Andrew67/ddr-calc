@@ -27,7 +27,7 @@ fetch('img/md-more_vert.svg')
     dom.menu = document.getElementById('menu');
     dom.menuList = document.querySelector('#menu-popup > ul');
     dom.menuListItems = [];
-    state.menuOpen = false;
+    state.menuOpen = Boolean(history.state && history.state.menuOpen);
     var menuItems = [];
 
     /** Builds the menu DOM based on the items currently added in state.menuItems */
@@ -39,8 +39,17 @@ fetch('img/md-more_vert.svg')
             var menuItemDOM = document.createElement('li');
             menuItemDOM.textContent = menuItem.title;
             menuItemDOM.addEventListener('click', function (evt) {
-                if (!menuItem.options.disabled()) menuItem.action();
-                else evt.stopPropagation(); // Prevent propagation that would result in menu closure
+                var preventPropagation = menuItem.options.disabled();
+
+                if (!menuItem.options.disabled()) {
+                    state.menuOpen = false;
+                    menuItem.action();
+                    // Menu item action has replaced the state, so no pop is necessary
+                    preventPropagation = !history.state || !history.state.menuOpen;
+                }
+
+                // Prevent propagation that would result in unwanted history pop
+                if (preventPropagation) evt.stopPropagation();
             });
             dom.menuList.appendChild(menuItemDOM);
             dom.menuListItems.push(menuItemDOM);
@@ -51,7 +60,7 @@ fetch('img/md-more_vert.svg')
      * Adds a new item to the overflow menu
      * @param idx Index number for the item (useful for pushing to an arbitrary list location)
      * @param title Title to show in the menu
-     * @param action Action to execute when the menu item is selected
+     * @param action Action to execute when the menu item is selected. Should use history.replaceState and not pushState
      * @param options Additional options object (such as disabled, hidden)
      */
     window.addMenuItem = function addMenuItem (idx, title, action, options) {
@@ -71,11 +80,8 @@ fetch('img/md-more_vert.svg')
     /** Updates DOM to match hidden/disabled status for menu entries as required **/
     var updateDynamicMenuItems = function updateDynamicMenuItems () {
         menuItems.forEach(function (menuItem, idx) {
-            if (menuItem.options.disabled()) dom.menuListItems[idx].classList.add('disabled');
-            else dom.menuListItems[idx].classList.remove('disabled');
-
-            if (menuItem.options.hidden()) dom.menuListItems[idx].classList.add('hidden');
-            else dom.menuListItems[idx].classList.remove('hidden');
+            dom.menuListItems[idx].classList.toggle('disabled', menuItem.options.disabled());
+            dom.menuListItems[idx].classList.toggle('hidden', menuItem.options.hidden());
         });
     };
 
@@ -96,16 +102,51 @@ fetch('img/md-more_vert.svg')
     });
 
     postCommitHooks.push( function showHideMenu () {
-        if (state.menuOpen) {
-            updateDynamicMenuItems();
-            dom.menu.classList.add('show');
-        }
-        else dom.menu.classList.remove('show');
+        if (state.menuOpen) updateDynamicMenuItems();
+        dom.menu.classList.toggle('show', state.menuOpen);
     });
 
-    // Add static menu item
-    addMenuItem(100, 'About', function () { alert('DDR Calc'); });
+    // Load HTML for the about screen
+    container.innerHTML = '<div id="about" class="full-screen-overlay">' +
+            '<div class="scrim"></div>' +
+            '<div id="about-box">' +
+                '<div id="app-logo">' +
+                    '<img src="img/icon-192.png" width="72" height="72" alt="App Icon">' +
+                    '<h1>DDR Calc <span id="app-version">Version 2.1.0</span></h1>' +
+                    '<h2>&copy; 2018&ndash;2019 Andrés Cordero</h2>' +
+                '</div>' +
+                '<ul>' +
+                    '<li><a href="https://github.com/Andrew67/ddr-calc" target="_blank" rel="noopener">Project Site / Usage Guide</a>' +
+                    '<li>DDR Arrow by <a href="https://inkjuse.deviantart.com/art/DDR-Arrow-111309080" target="_blank" rel="noopener">inkjuse</a>' +
+                    '<li>Gamepad by <a href="https://fontawesome.com/license/free" target="_blank" rel="noopener">FontAwesome</a>' +
+                    '<li>Other icons by <a href="https://material.io/tools/icons/" target="_blank" rel="noopener">Google</a>' +
+                '</ul>' +
+            '</div>' +
+        '</div>';
+    document.getElementById('app').appendChild(container.firstChild);
 
+    // Set up About screen
+    dom.about = document.getElementById('about');
+    state.aboutOpen = Boolean(history.state && history.state.aboutOpen);
+
+    // Show/hide code
+    addMenuItem(100, 'About', function () {
+        state.aboutOpen = true;
+        commit();
+        history.replaceState({ aboutOpen: true }, "", "");
+    });
+    document.querySelector('#about .scrim')
+        .addEventListener('click', function () { history.back(); });
+    window.addEventListener('popstate', function (event) {
+        state.aboutOpen = event.state && event.state.aboutOpen;
+        commit();
+    });
+
+    postCommitHooks.push( function showHideAbout () {
+        dom.about.classList.toggle('show', state.aboutOpen);
+    });
+
+    commit();
     loadNextModule();
 }).catch(function (err) {
     console.error("Error in menu.js:", err, "\nModule loading has been halted");
