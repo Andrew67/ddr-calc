@@ -90,12 +90,12 @@ Promise.all([
         );
     });
 
-    // Disable speedmod keys in SPEEDMOD mode based on:
+    // Disable speedmod keys in SPEEDMOD input based on:
     // integer keys: based on current game selected, whether the mods map contains an entry for it
     // decimal keys: based on current game and integer selected, whether the mods map value contains an entry for it
-    computedState.hooks.push(function disableKeysInSpeedmodModeBasedOnGameAndIntegerSelection () {
-        // Skip computation if a game has not been selected or we're not in speedmod mode
-        if (state.gameId && state.mode === MODE.SPEEDMOD) {
+    computedState.hooks.push(function disableKeysInSpeedmodInputBasedOnGameAndIntegerSelection () {
+        // Skip computation if a game has not been selected or we're not in speedmod input
+        if (state.gameId && state.input === INPUT.SPEEDMOD) {
             var availableMods = state.premiumPlayEnabled ?
                 gameDataById.get(state.gameId).allMods : gameDataById.get(state.gameId).mods;
 

@@ -54,14 +54,16 @@ if ('serviceWorker' in navigator) {
 // Core calculator functions
 
 /** State constants */
-var MODE = { BPM: 'bpm', SPEEDMOD: 'speedmod' };
+var MODE = { SPEEDMOD: 'm-speedmod', TARGETBPM: 'm-targetbpm' };
+var INPUT = { SONGBPM: 'songbpm', SPEEDMOD: 'speedmod', TARGETBPM: 'targetbpm' };
 var KEY = { MULT: '×', BPM: 'BPM', DEL: 'DEL' };
 var KEYTYPE = { INT: 'int', FUNC: 'func', DEC: 'dec' };
 var LONG_PRESS_MS = 450, SIMULATED_MOUSE_IGNORE_DELAY_MS = 500;
 
 /** App state object (user input) */
 var state = {
-    mode: MODE.BPM,
+    mode: MODE.SPEEDMOD,
+    input: INPUT.SONGBPM,
     bpm: '',
     speedModInt: '',
     speedModDec: ''
@@ -100,35 +102,35 @@ function keysForEach (callbackfn) {
  * Call commit() to finalize them into the DOM.
  */
 var action = {
-    switchMode: function (mode) {
-        state.mode = mode;
+    setActiveInput: function (input) {
+        state.input = input;
         computedState.update();
     },
 
     keyPress: function (key, type) {
         if (type === KEYTYPE.FUNC) {
-            // Function keys switch BPM/speedmod mode OR perform "special" backspace behavior
-            if (key === KEY.MULT) this.switchMode(MODE.SPEEDMOD);
-            else if (key === KEY.BPM) this.switchMode(MODE.BPM);
+            // Function keys switch BPM/speedmod input OR perform "special" backspace behavior
+            if (key === KEY.MULT) this.setActiveInput(INPUT.SPEEDMOD);
+            else if (key === KEY.BPM) this.setActiveInput(INPUT.SONGBPM);
             else if (key === KEY.DEL) this.backspace();
         } else if (type === KEYTYPE.INT) {
-            // Integer keys in BPM mode will:
+            // Integer keys in BPM input will:
             // - If input was already 3 digits, start a new BPM
             // - If input is between 0 and 2 digits, append
-            // - If input becomes 3 digits, switch to speedmod mode
-            if (state.mode === MODE.BPM) {
+            // - If input becomes 3 digits, switch to speedmod input
+            if (state.input === INPUT.SONGBPM) {
                 if (state.bpm.length === 3) state.bpm = key;
                 else state.bpm += key;
 
-                if (state.bpm.length === 3) this.switchMode(MODE.SPEEDMOD);
+                if (state.bpm.length === 3) this.setActiveInput(INPUT.SPEEDMOD);
             }
-            // In speedmod mode, the previous integer is replaced, and any decimal portion is discarded
-            else if (state.mode === MODE.SPEEDMOD) {
+            // In speedmod input, the previous integer is replaced, and any decimal portion is discarded
+            else if (state.input === INPUT.SPEEDMOD) {
                 state.speedModInt = key;
                 state.speedModDec = '';
             }
-        } else if (type === KEYTYPE.DEC && state.mode === MODE.SPEEDMOD) {
-            // Decimal keys (speedmod mode only) replace the previously input decimal
+        } else if (type === KEYTYPE.DEC && state.input === INPUT.SPEEDMOD) {
+            // Decimal keys (speedmod input only) replace the previously input decimal
             state.speedModDec = key;
         }
 
@@ -141,14 +143,14 @@ var action = {
     },
 
     backspace: function () {
-        // In BPM mode, delete the right-most digit (if available)
-        if (state.mode === MODE.BPM && state.bpm.length > 0) state.bpm = state.bpm.substr(0, state.bpm.length - 1);
-        // In speedmod mode, tries to delete the decimal part first, then the integer.
-        // If we run out the integer, switches back to BPM mode (for continuous delete).
-        if (state.mode === MODE.SPEEDMOD) {
+        // In BPM input, delete the right-most digit (if available)
+        if (state.input === INPUT.SONGBPM && state.bpm.length > 0) state.bpm = state.bpm.substr(0, state.bpm.length - 1);
+        // In speedmod input, tries to delete the decimal part first, then the integer.
+        // If we run out the integer, switches back to BPM input (for continuous delete).
+        if (state.input === INPUT.SPEEDMOD) {
             if (state.speedModDec.length > 0) state.speedModDec = '';
             else if (state.speedModInt.length > 0) state.speedModInt = '';
-            else if (state.speedModInt.length === 0) this.switchMode(MODE.BPM);
+            else if (state.speedModInt.length === 0) this.setActiveInput(INPUT.SONGBPM);
         }
     },
 
@@ -157,14 +159,14 @@ var action = {
         state.speedModInt = '';
         state.speedModDec = '';
 
-        this.switchMode(MODE.BPM);
+        this.setActiveInput(INPUT.SONGBPM);
     }
 };
 
-// Add computed state hooks for key enable/disable based on mode (BPM/Speedmod) and result calculation
-computedState.hooks.push(function disableDecKeysInBpmMode () {
+// Add computed state hooks for key enable/disable based on input (BPM/Speedmod) and result calculation
+computedState.hooks.push(function disableDecKeysOutsideSpeedModInput () {
     keysForEach(function (key, type, keyState) {
-        keyState.disabled = (state.mode === MODE.BPM && type === KEYTYPE.DEC);
+        keyState.disabled = (state.input !== INPUT.SPEEDMOD && type === KEYTYPE.DEC);
     });
 });
 
@@ -184,8 +186,8 @@ var postCommitHooks = [];
 /** Updates the DOM to match the app state object */
 function commit () {
     // Mode
-    switch (state.mode) {
-        case MODE.BPM:
+    switch (state.input) {
+        case INPUT.SONGBPM:
             dom.bpm.classList.add('active');
 
             if (!state.speedModInt && !state.speedModDec) dom.multSign.style.display = 'none';
@@ -193,7 +195,7 @@ function commit () {
 
             dom.speedMod.classList.remove('active');
             break;
-        case MODE.SPEEDMOD:
+        case INPUT.SPEEDMOD:
             dom.bpm.classList.remove('active');
 
             dom.multSign.style.display = 'inline';
@@ -229,11 +231,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Set click listeners to switch between BPM and speedmod input by touching the text on either side
     dom.bpm.addEventListener('click', function () {
-        action.switchMode(MODE.BPM);
+        action.setActiveInput(INPUT.SONGBPM);
         commit();
     });
     var switchToSpeedModAndCommit = function () {
-        action.switchMode(MODE.SPEEDMOD);
+        action.setActiveInput(INPUT.SPEEDMOD);
         commit();
     };
     dom.multSign.addEventListener('click', switchToSpeedModAndCommit);
