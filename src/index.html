@@ -47,17 +47,25 @@
     <!-- Calculator UI -->
     <div id="calculator">
         <div id="display">
-            <div id="calculation">
-                <span>
-                    <span id="bpm">191</span>
-                    <span id="multsign">×</span>
-                    <span id="speedmod">3</span>
-                </span>
+            <div id="surface-speedmod">
+                <div id="calculation">
+                    <span>
+                        <span id="bpm">191</span>
+                        <span id="multsign">×</span>
+                        <span id="speedmod">3</span>
+                    </span>
+                </div>
+                <div>
+                    <span id="result">573</span>
+                </div>
             </div>
-            <div>
-                <span id="result">573</span>
+            <div id="surface-targetbpm">
+                <!-- Target BPM display UI gets inserted here -->
             </div>
             <!-- Display overlays get inserted here -->
+        </div>
+        <div id="mode-switcher">
+            <!-- Speed mod / Target BPM switcher tabs get inserted here -->
         </div>
         <ul id="keypad-main" class="keypad">
             <li data-keytype="int"><span>7</span>

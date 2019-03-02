@@ -112,7 +112,7 @@ fetch('img/md-more_vert.svg')
             '<div id="about-box">' +
                 '<div id="app-logo">' +
                     '<img src="img/icon-192.png" width="72" height="72" alt="App Icon">' +
-                    '<h1>DDR Calc <span id="app-version">Version 2.1.0</span></h1>' +
+                    '<h1>DDR Calc <span id="app-version">Version 3.0.0</span></h1>' +
                     '<h2>&copy; 2018&ndash;2019 Andrés Cordero</h2>' +
                 '</div>' +
                 '<ul>' +

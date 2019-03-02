@@ -51,9 +51,19 @@ body {
     position: relative;
 }
 
-#display div {
+#display > div {
+    height: 100%;
+}
+
+#surface-speedmod div {
     margin-right: 3vw;
     height: 50%;
+}
+
+#surface-targetbpm {
+    position: absolute;
+    top: 0;
+    left: 100%;
 }
 
 .overlay {
@@ -68,6 +78,15 @@ body {
     color: #00600f; /* Material Green 700 Dark */
 }
 
+#mode-switcher {
+    position: relative;
+    height: 48px;
+    line-height: 48px;
+    display: none;
+    font-size: 14px;
+    font-weight: 500;
+}
+
 .keypad {
     height: 70%;
     color: white;
@@ -76,6 +95,16 @@ body {
 
     /* Blocks double-tap-zoom (the only touch-action supported by iOS, does not block scroll or zoom) */
     touch-action: manipulation;
+}
+
+/* Mode switcher visible only on displays where it occupies 8% or less of total height */
+@media (min-height: 600px) {
+    #mode-switcher {
+        display: block;
+    }
+    .keypad {
+        height: calc(70% - 48px);
+    }
 }
 
 #display div, .keypad {
