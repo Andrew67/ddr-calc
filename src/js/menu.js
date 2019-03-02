@@ -21,7 +21,7 @@ fetch('img/md-more_vert.svg')
                 '<ul></ul>' +
             '</div>' +
         '</div>';
-    document.getElementById('app').appendChild(container.firstChild);
+    dom.app.appendChild(container.firstChild);
 
     // Set up menu variables
     dom.menu = document.getElementById('menu');
@@ -123,7 +123,7 @@ fetch('img/md-more_vert.svg')
                 '</ul>' +
             '</div>' +
         '</div>';
-    document.getElementById('app').appendChild(container.firstChild);
+    dom.app.appendChild(container.firstChild);
 
     // Set up About screen
     dom.about = document.getElementById('about');

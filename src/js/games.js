@@ -62,7 +62,7 @@ Promise.all([
             '</form>' +
         '</div>' +
         '</div>';
-    document.getElementById('app').appendChild(container.firstChild);
+    dom.app.appendChild(container.firstChild);
 
     // localStorage keys
     var KEY_GAMEID = 'gameid-v1', KEY_PREMIUMPLAY = 'premiumPlayEnabled';

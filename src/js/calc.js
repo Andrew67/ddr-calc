@@ -174,10 +174,6 @@ computedState.hooks.push(function calculateResult () {
 
 /** DOM elements. HTML is static so one query is enough */
 var dom = {
-    bpm: null,
-    multSign: null,
-    speedMod: null,
-    result: null,
     /** Key DOM elements (keyed by label). Labels match those in state and keyTypes objects and are loaded with the DOM. */
     keys: {}
 };
@@ -225,6 +221,7 @@ function commit () {
 
 document.addEventListener('DOMContentLoaded', function () {
     // Init DOM
+    dom.app = document.getElementById('app');
     dom.bpm = document.getElementById('bpm');
     dom.multSign = document.getElementById('multsign');
     dom.speedMod = document.getElementById('speedmod');
