@@ -72,7 +72,6 @@
     background-color: white;
     top: 0;
     left: 100%;
-    width: 276px; /* Accommodates longest MAX/MAX2/EXTREME/SN entry */
     height: 100%;
     /* For slim screens, leave some space for dismissal scrim, and add scrollbars */
     max-width: calc(100% - 44px);
@@ -107,6 +106,8 @@
 #game-settings label, #game-settings legend {
     display: block;
     padding-left: 16px;
+    padding-right: 16px;
+    white-space: nowrap;
 }
 
 #game-settings label {
