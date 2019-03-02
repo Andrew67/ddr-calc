@@ -97,7 +97,7 @@ fetch('img/md-more_vert.svg')
         history.back();
     });
     window.addEventListener('popstate', function (event) {
-        state.menuOpen = event.state && event.state.menuOpen;
+        state.menuOpen = Boolean(event.state && event.state.menuOpen);
         commit();
     });
 
@@ -138,7 +138,7 @@ fetch('img/md-more_vert.svg')
     document.querySelector('#about .scrim')
         .addEventListener('click', function () { history.back(); });
     window.addEventListener('popstate', function (event) {
-        state.aboutOpen = event.state && event.state.aboutOpen;
+        state.aboutOpen = Boolean(event.state && event.state.aboutOpen);
         commit();
     });
 

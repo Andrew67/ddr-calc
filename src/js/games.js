@@ -123,7 +123,7 @@ Promise.all([
         e.addEventListener('click', function () { history.back(); });
     });
     window.addEventListener('popstate', function (event) {
-        var newGameSettingsOpen = event.state && event.state.gameSettingsOpen;
+        var newGameSettingsOpen = Boolean(event.state && event.state.gameSettingsOpen);
 
         // Commit settings to state upon dismissal (avoids running a postCommit hook on every keypress)
         if (state.gameSettingsOpen && !newGameSettingsOpen) {
