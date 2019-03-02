@@ -175,8 +175,8 @@ computedState.hooks.push(function calculateResult () {
 /** DOM elements. HTML is static so one query is enough */
 var dom = {
     bpm: null,
-    multsign: null,
-    speedmod: null,
+    multSign: null,
+    speedMod: null,
     result: null,
     /** Key DOM elements (keyed by label). Labels match those in state and keyTypes objects and are loaded with the DOM. */
     keys: {}
@@ -192,18 +192,18 @@ function commit () {
         case MODE.BPM:
             dom.bpm.classList.add('active');
 
-            if (!state.speedModInt && !state.speedModDec) dom.multsign.style.display = 'none';
-            dom.multsign.classList.remove('active');
+            if (!state.speedModInt && !state.speedModDec) dom.multSign.style.display = 'none';
+            dom.multSign.classList.remove('active');
 
-            dom.speedmod.classList.remove('active');
+            dom.speedMod.classList.remove('active');
             break;
         case MODE.SPEEDMOD:
             dom.bpm.classList.remove('active');
 
-            dom.multsign.style.display = 'inline';
-            dom.multsign.classList.add('active');
+            dom.multSign.style.display = 'inline';
+            dom.multSign.classList.add('active');
 
-            dom.speedmod.classList.add('active');
+            dom.speedMod.classList.add('active');
             break;
         default:
             break;
@@ -216,7 +216,7 @@ function commit () {
 
     // Text fields: BPM, speedmod, result
     dom.bpm.textContent = state.bpm;
-    dom.speedmod.textContent = state.speedModInt + state.speedModDec;
+    dom.speedMod.textContent = state.speedModInt + state.speedModDec;
     dom.result.textContent = computedState.result;
 
     // Run post-commit hooks
@@ -226,8 +226,8 @@ function commit () {
 document.addEventListener('DOMContentLoaded', function () {
     // Init DOM
     dom.bpm = document.getElementById('bpm');
-    dom.multsign = document.getElementById('multsign');
-    dom.speedmod = document.getElementById('speedmod');
+    dom.multSign = document.getElementById('multsign');
+    dom.speedMod = document.getElementById('speedmod');
     dom.result = document.getElementById('result');
 
     // Set click listeners to switch between BPM and speedmod input by touching the text on either side
@@ -239,8 +239,8 @@ document.addEventListener('DOMContentLoaded', function () {
         action.switchMode(MODE.SPEEDMOD);
         commit();
     };
-    dom.multsign.addEventListener('click', switchToSpeedModAndCommit);
-    dom.speedmod.addEventListener('click', switchToSpeedModAndCommit);
+    dom.multSign.addEventListener('click', switchToSpeedModAndCommit);
+    dom.speedMod.addEventListener('click', switchToSpeedModAndCommit);
 
     // Set up keyPress listeners and "register" DOM elements
     // Lots of code here just to handle fast key clicks (< 300ms) and long presses on desktop + mobile

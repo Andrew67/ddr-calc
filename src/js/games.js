@@ -68,24 +68,24 @@ Promise.all([
     var KEY_GAMEID = 'gameid-v1', KEY_PREMIUMPLAY = 'premiumPlayEnabled';
 
     // Set up calc variables
-    state.gameid = Number(localStorage.getItem(KEY_GAMEID)) || 0; // Change version if IDs ever change in games.json
+    state.gameId = Number(localStorage.getItem(KEY_GAMEID)) || 0; // Change version if IDs ever change in games.json
     state.premiumPlayEnabled = localStorage.getItem(KEY_PREMIUMPLAY) === null ?
         true : Boolean(localStorage.getItem(KEY_PREMIUMPLAY));
     state.gameSettingsOpen = Boolean(history.state && history.state.gameSettingsOpen);
-    computedState.gamename = '';
-    dom.gamename = document.getElementById('game-name');
+    computedState.gameName = '';
+    dom.gameName = document.getElementById('game-name');
     dom.premiumPlayEnabled = document.getElementById('game-premium-enabled');
     dom.gameSettings = document.getElementById('game-settings');
     dom.gameSettingsForm = document.forms['game-settings-form'];
 
     // Set the game name based on the selected game ID
     computedState.hooks.push(function setGameName () {
-        if (state.gameid === 0 || !gameDataById.has(state.gameid)) computedState.gamename = 'No game selected';
-        else computedState.gamename = gameDataById.get(state.gameid).name;
+        if (state.gameId === 0 || !gameDataById.has(state.gameId)) computedState.gameName = 'No game selected';
+        else computedState.gameName = gameDataById.get(state.gameId).name;
     });
     postCommitHooks.push(function updateGameNameAndPremiumPlay () {
-        dom.gamename.textContent = computedState.gamename;
-        dom.premiumPlayEnabled.textContent = (!state.gameid || !gameDataById.get(state.gameid).hasPremiumPlay) ? '' : (
+        dom.gameName.textContent = computedState.gameName;
+        dom.premiumPlayEnabled.textContent = (!state.gameId || !gameDataById.get(state.gameId).hasPremiumPlay) ? '' : (
             state.premiumPlayEnabled ? 'Premium Play On' : 'Premium Play Off'
         );
     });
@@ -95,9 +95,9 @@ Promise.all([
     // decimal keys: based on current game and integer selected, whether the mods map value contains an entry for it
     computedState.hooks.push(function disableKeysInSpeedmodModeBasedOnGameAndIntegerSelection () {
         // Skip computation if a game has not been selected or we're not in speedmod mode
-        if (state.gameid && state.mode === MODE.SPEEDMOD) {
+        if (state.gameId && state.mode === MODE.SPEEDMOD) {
             var availableMods = state.premiumPlayEnabled ?
-                gameDataById.get(state.gameid).allMods : gameDataById.get(state.gameid).mods;
+                gameDataById.get(state.gameId).allMods : gameDataById.get(state.gameId).mods;
 
             keysForEach(function (key, type, keyState) {
                 if (type === KEYTYPE.INT) keyState.disabled = !availableMods.has(key);
@@ -128,11 +128,11 @@ Promise.all([
         // Commit settings to state upon dismissal (avoids running a postCommit hook on every keypress)
         if (state.gameSettingsOpen && !newGameSettingsOpen) {
             state.premiumPlayEnabled = dom.gameSettingsForm.elements['premiumPlay'].checked;
-            state.gameid = Number(dom.gameSettingsForm.elements['gameid'].value);
+            state.gameId = Number(dom.gameSettingsForm.elements['gameid'].value);
             computedState.update();
 
             try {
-                localStorage.setItem(KEY_GAMEID, state.gameid);
+                localStorage.setItem(KEY_GAMEID, state.gameId);
                 localStorage.setItem(KEY_PREMIUMPLAY, state.premiumPlayEnabled);
             } catch (e) { /* Silently fail on exception (namely Safari in private browsing mode) */ }
         }
@@ -146,7 +146,7 @@ Promise.all([
 
     // Sync game settings form with initial state
     dom.gameSettingsForm.elements['premiumPlay'].checked = state.premiumPlayEnabled;
-    dom.gameSettingsForm.elements['gameid'].value = state.gameid;
+    dom.gameSettingsForm.elements['gameid'].value = state.gameId;
 
     // Init plug-in state into calculator
     computedState.update();
