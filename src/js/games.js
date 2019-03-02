@@ -6,7 +6,8 @@
 addStylesheet('games');
 // Kick off after game data and icons loaded
 Promise.all([
-    fetch('games.json'), fetch('img/fa-gamepad.svg'), fetch('img/md-check_box.svg'), fetch('img/md-radio_button.svg')
+    fetch('games.json'),
+    fetch('img/fa-gamepad.svg'), fetch('img/md-check_box.svg'), fetch('img/md-radio_button.svg')
 ]).then(function (r) {
     return Promise.all([r[0].json(), r[1].text(), r[2].text(), r[3].text()]);
 }).then(function (data) {
@@ -73,19 +74,26 @@ Promise.all([
         true : Boolean(localStorage.getItem(KEY_PREMIUMPLAY));
     state.gameSettingsOpen = Boolean(history.state && history.state.gameSettingsOpen);
     computedState.gameName = '';
+    computedState.availableSpeedMods = [];
     dom.gameName = document.getElementById('game-name');
     dom.premiumPlayEnabled = document.getElementById('game-premium-enabled');
     dom.gameSettings = document.getElementById('game-settings');
     dom.gameSettingsForm = document.forms['game-settings-form'];
 
-    // Set the game name based on the selected game ID
-    computedState.hooks.push(function setGameName () {
-        if (state.gameId === 0 || !gameDataById.has(state.gameId)) computedState.gameName = 'No game selected';
-        else computedState.gameName = gameDataById.get(state.gameId).name;
+    // Set the game name and available speed mods based on the selected game ID and premium play
+    computedState.hooks.push(function setGameNameAndAvailableMods () {
+        if (state.gameId === 0 || !gameDataById.has(state.gameId)) {
+            computedState.gameName = 'No game selected';
+            computedState.availableSpeedMods = [];
+        } else {
+            computedState.gameName = gameDataById.get(state.gameId).name;
+            computedState.availableSpeedMods = state.premiumPlayEnabled ?
+                gameDataById.get(state.gameId).allMods : gameDataById.get(state.gameId).mods;
+        }
     });
     postCommitHooks.push(function updateGameNameAndPremiumPlay () {
         dom.gameName.textContent = computedState.gameName;
-        dom.premiumPlayEnabled.textContent = (!state.gameId || !gameDataById.get(state.gameId).hasPremiumPlay) ? '' : (
+        dom.premiumPlayEnabled.textContent = (!state.gameId || !gameDataById.get(state.gameId)['hasPremiumPlay']) ? '' : (
             state.premiumPlayEnabled ? 'Premium Play On' : 'Premium Play Off'
         );
     });
@@ -96,17 +104,14 @@ Promise.all([
     computedState.hooks.push(function disableKeysInSpeedmodInputBasedOnGameAndIntegerSelection () {
         // Skip computation if a game has not been selected or we're not in speedmod input
         if (state.gameId && state.input === INPUT.SPEEDMOD) {
-            var availableMods = state.premiumPlayEnabled ?
-                gameDataById.get(state.gameId).allMods : gameDataById.get(state.gameId).mods;
-
             keysForEach(function (key, type, keyState) {
-                if (type === KEYTYPE.INT) keyState.disabled = !availableMods.has(key);
+                if (type === KEYTYPE.INT) keyState.disabled = !computedState.availableSpeedMods.has(key);
                 else if (type === KEYTYPE.DEC) {
                     var currentInt = state.speedModInt || '0'; // no integer is treated as 0
                     // Don't let your guard down! If we don't check for the integer first, and the user inputs one,
                     // then switches game version, we could run into a missing object scenario!
-                    keyState.disabled = !(availableMods.has(currentInt) &&
-                        availableMods.get(currentInt).includes(key));
+                    keyState.disabled = !(computedState.availableSpeedMods.has(currentInt) &&
+                        computedState.availableSpeedMods.get(currentInt).includes(key));
                 }
             });
         }

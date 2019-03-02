@@ -117,12 +117,12 @@ var action = {
             // Integer keys in BPM input will:
             // - If input was already 3 digits, start a new BPM
             // - If input is between 0 and 2 digits, append
-            // - If input becomes 3 digits, switch to speedmod input
+            // - If input becomes 3 digits in speedmod mode, switch to speedmod input
             if (state.input === INPUT.SONGBPM) {
                 if (state.bpm.length === 3) state.bpm = key;
                 else state.bpm += key;
 
-                if (state.bpm.length === 3) this.setActiveInput(INPUT.SPEEDMOD);
+                if (state.mode === MODE.SPEEDMOD && state.bpm.length === 3) this.setActiveInput(INPUT.SPEEDMOD);
             }
             // In speedmod input, the previous integer is replaced, and any decimal portion is discarded
             else if (state.input === INPUT.SPEEDMOD) {
