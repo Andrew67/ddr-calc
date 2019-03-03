@@ -165,11 +165,15 @@ var action = {
     },
 
     clear: function () {
-        state.songBpm = '';
+        // In speed mod mode, clears all fields (except target BPM)
+        // In target BPM mode, clears only the currently focused field (only way to clear target BPM)
+        if (state.input === INPUT.TARGETBPM) state.targetBpm = '';
+        else state.songBpm = '';
         state.speedModInt = '';
         state.speedModDec = '';
 
-        this.setActiveInput(INPUT.SONGBPM);
+        // Keeps focus on target BPM field if it was the focused one
+        if (state.input !== INPUT.TARGETBPM) this.setActiveInput(INPUT.SONGBPM);
     }
 };
 
