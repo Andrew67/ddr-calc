@@ -64,7 +64,7 @@ var LONG_PRESS_MS = 450, SIMULATED_MOUSE_IGNORE_DELAY_MS = 500;
 var state = {
     mode: MODE.SPEEDMOD,
     input: INPUT.SONGBPM,
-    bpm: '',
+    songBpm: '',
     speedModInt: '',
     speedModDec: ''
 };
@@ -109,20 +109,20 @@ var action = {
 
     keyPress: function (key, type) {
         if (type === KEYTYPE.FUNC) {
-            // Function keys switch BPM/speedmod input OR perform "special" backspace behavior
+            // Function keys switch song BPM/speedmod input OR perform "special" backspace behavior
             if (key === KEY.MULT) this.setActiveInput(INPUT.SPEEDMOD);
             else if (key === KEY.BPM) this.setActiveInput(INPUT.SONGBPM);
             else if (key === KEY.DEL) this.backspace();
         } else if (type === KEYTYPE.INT) {
-            // Integer keys in BPM input will:
-            // - If input was already 3 digits, start a new BPM
+            // Integer keys in song BPM input will:
+            // - If input was already 3 digits, start a new song BPM
             // - If input is between 0 and 2 digits, append
             // - If input becomes 3 digits in speedmod mode, switch to speedmod input
             if (state.input === INPUT.SONGBPM) {
-                if (state.bpm.length === 3) state.bpm = key;
-                else state.bpm += key;
+                if (state.songBpm.length === 3) state.songBpm = key;
+                else state.songBpm += key;
 
-                if (state.mode === MODE.SPEEDMOD && state.bpm.length === 3) this.setActiveInput(INPUT.SPEEDMOD);
+                if (state.mode === MODE.SPEEDMOD && state.songBpm.length === 3) this.setActiveInput(INPUT.SPEEDMOD);
             }
             // In speedmod input, the previous integer is replaced, and any decimal portion is discarded
             else if (state.input === INPUT.SPEEDMOD) {
@@ -143,8 +143,9 @@ var action = {
     },
 
     backspace: function () {
-        // In BPM input, delete the right-most digit (if available)
-        if (state.input === INPUT.SONGBPM && state.bpm.length > 0) state.bpm = state.bpm.substr(0, state.bpm.length - 1);
+        // In song BPM input, delete the right-most digit (if available)
+        if (state.input === INPUT.SONGBPM && state.songBpm.length > 0)
+            state.songBpm = state.songBpm.substr(0, state.songBpm.length - 1);
         // In speedmod input, tries to delete the decimal part first, then the integer.
         // If we run out the integer, switches back to BPM input (for continuous delete).
         if (state.input === INPUT.SPEEDMOD) {
@@ -155,7 +156,7 @@ var action = {
     },
 
     clear: function () {
-        state.bpm = '';
+        state.songBpm = '';
         state.speedModInt = '';
         state.speedModDec = '';
 
@@ -163,7 +164,7 @@ var action = {
     }
 };
 
-// Add computed state hooks for key enable/disable based on input (BPM/Speedmod) and result calculation
+// Add computed state hooks for key enable/disable based on input (song BPM/Speedmod) and result calculation
 computedState.hooks.push(function disableDecKeysOutsideSpeedModInput () {
     keysForEach(function (key, type, keyState) {
         keyState.disabled = (state.input !== INPUT.SPEEDMOD && type === KEYTYPE.DEC);
@@ -171,7 +172,7 @@ computedState.hooks.push(function disableDecKeysOutsideSpeedModInput () {
 });
 
 computedState.hooks.push(function calculateResult () {
-    computedState.result = Math.round(Number(state.bpm) * Number(state.speedModInt + state.speedModDec));
+    computedState.result = Math.round(Number(state.songBpm) * Number(state.speedModInt + state.speedModDec));
 });
 
 /** DOM elements. HTML is static so one query is enough */
@@ -212,8 +213,8 @@ function commit () {
         el.classList.toggle('disabled', state.disabled);
     });
 
-    // Text fields: BPM, speedmod, result
-    dom.bpm.textContent = state.bpm;
+    // Text fields: song BPM, speedmod, result
+    dom.bpm.textContent = state.songBpm;
     dom.speedMod.textContent = state.speedModInt + state.speedModDec;
     dom.result.textContent = computedState.result;
 
@@ -229,7 +230,7 @@ document.addEventListener('DOMContentLoaded', function () {
     dom.speedMod = document.getElementById('speedmod');
     dom.result = document.getElementById('result');
 
-    // Set click listeners to switch between BPM and speedmod input by touching the text on either side
+    // Set click listeners to switch between song BPM and speedmod input by touching the text on either side
     dom.bpm.addEventListener('click', function () {
         action.setActiveInput(INPUT.SONGBPM);
         commit();
