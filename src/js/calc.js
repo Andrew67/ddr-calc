@@ -102,6 +102,11 @@ function keysForEach (callbackfn) {
  * Call commit() to finalize them into the DOM.
  */
 var action = {
+    setMode: function (mode) {
+        state.mode = mode;
+        computedState.update();
+    },
+
     setActiveInput: function (input) {
         state.input = input;
         computedState.update();

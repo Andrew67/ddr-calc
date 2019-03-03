@@ -37,7 +37,6 @@ fetch('img/md-more_vert.svg')
         dom.menuListItems = [];
         menuItems.forEach(function (menuItem) {
             var menuItemDOM = document.createElement('li');
-            menuItemDOM.textContent = menuItem.title;
             menuItemDOM.addEventListener('click', function (evt) {
                 var preventPropagation = menuItem.options.disabled();
 
@@ -65,12 +64,12 @@ fetch('img/md-more_vert.svg')
      */
     window.addMenuItem = function addMenuItem (idx, title, action, options) {
         var defaultOptions = {
+            title: function () { return title; },
             disabled: function () { return false; },
             hidden: function () { return false; }
         };
         menuItems.push({
             idx: idx,
-            title: title,
             action: action,
             options: Object.assign({}, defaultOptions, options)
         });
@@ -80,6 +79,7 @@ fetch('img/md-more_vert.svg')
     /** Updates DOM to match hidden/disabled status for menu entries as required **/
     var updateDynamicMenuItems = function updateDynamicMenuItems () {
         menuItems.forEach(function (menuItem, idx) {
+            dom.menuListItems[idx].textContent = menuItem.options.title();
             dom.menuListItems[idx].classList.toggle('disabled', menuItem.options.disabled());
             dom.menuListItems[idx].classList.toggle('hidden', menuItem.options.hidden());
         });

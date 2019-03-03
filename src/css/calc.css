@@ -52,6 +52,7 @@ body {
 }
 
 #display > div {
+    width: 100%;
     height: 100%;
 }
 
@@ -74,7 +75,7 @@ body {
     color: #00227b; /* Material Indigo 600 Dark */
 }
 
-#result {
+#result, #high-result, #low-result {
     color: #00600f; /* Material Green 700 Dark */
 }
 
