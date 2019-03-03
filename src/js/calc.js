@@ -119,15 +119,18 @@ var action = {
             else if (key === KEY.BPM) this.setActiveInput(INPUT.SONGBPM);
             else if (key === KEY.DEL) this.backspace();
         } else if (type === KEYTYPE.INT) {
-            // Integer keys in song BPM input will:
-            // - If input was already 3 digits, start a new song BPM
+            // Integer keys in BPM input will:
+            // - If input was already 3 digits, start a new BPM
             // - If input is between 0 and 2 digits, append
-            // - If input becomes 3 digits in speedmod mode, switch to speedmod input
-            if (state.input === INPUT.SONGBPM) {
-                if (state.songBpm.length === 3) state.songBpm = key;
-                else state.songBpm += key;
+            // - If song BPM input becomes 3 digits in speedmod mode, switch to speedmod input
+            // - If target BPM input becomes 3 digits in targetbpm mode, switch to songbpm input
+            if (state.input === INPUT.SONGBPM || state.input === INPUT.TARGETBPM) {
+                var bpm = (state.input === INPUT.SONGBPM) ? 'songBpm' : 'targetBpm';
+                if (state[bpm].length === 3) state[bpm] = key;
+                else state[bpm] += key;
 
                 if (state.mode === MODE.SPEEDMOD && state.songBpm.length === 3) this.setActiveInput(INPUT.SPEEDMOD);
+                else if (state.mode === MODE.TARGETBPM && state.targetBpm.length === 3) this.setActiveInput(INPUT.SONGBPM);
             }
             // In speedmod input, the previous integer is replaced, and any decimal portion is discarded
             else if (state.input === INPUT.SPEEDMOD) {
@@ -148,9 +151,10 @@ var action = {
     },
 
     backspace: function () {
-        // In song BPM input, delete the right-most digit (if available)
-        if (state.input === INPUT.SONGBPM && state.songBpm.length > 0)
-            state.songBpm = state.songBpm.substr(0, state.songBpm.length - 1);
+        // In BPM inputs, delete the right-most digit (if available)
+        var bpm = (state.input === INPUT.SONGBPM) ? 'songBpm' : 'targetBpm';
+        if ((state.input === INPUT.SONGBPM || state.input === INPUT.TARGETBPM) && state[bpm].length > 0)
+            state[bpm] = state[bpm].substr(0, state[bpm].length - 1);
         // In speedmod input, tries to delete the decimal part first, then the integer.
         // If we run out the integer, switches back to BPM input (for continuous delete).
         if (state.input === INPUT.SPEEDMOD) {
