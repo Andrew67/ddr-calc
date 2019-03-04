@@ -24,7 +24,11 @@ self.addEventListener('install', function(event) {
                 'games.json',
                 'js/menu.js',
                 'img/md-more_vert.svg',
-                'css/menu.css'
+                'css/menu.css',
+                'js/targetbpm.js',
+                'css/targetbpm.css',
+                'img/md-music_note.svg',
+                'img/np-target.svg'
             ]);
         })
     );

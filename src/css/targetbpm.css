@@ -1,0 +1,81 @@
+/*! DDR Calc | https://github.com/Andrew67/ddr-calc */
+/* Target BPM CSS */
+
+#mode-switcher span {
+    display: inline-block;
+    width: 50%;
+    text-transform: uppercase;
+    text-align: center;
+    transition: opacity .2s;
+}
+
+#switch-speedmod {
+    opacity: 0.6;
+}
+
+#switch-targetbpm {
+    opacity: 0.34;
+}
+
+#switch-underline {
+    height: 2px;
+    width: 50%;
+    background-color: #1976d2; /* Material Blue 700 */
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transition: transform .2s;
+}
+
+.targetbpm #switch-speedmod {
+    opacity: 0.34;
+}
+
+.targetbpm #switch-targetbpm {
+    opacity: 0.6;
+}
+
+.targetbpm #switch-underline {
+    transform: translateX(100%);
+}
+
+/* Limit display switching animation to devices that show the tab bar */
+@media (min-height: 600px) {
+    #display > div {
+        transition: transform .2s;
+    }
+}
+
+.targetbpm #display > div {
+    transform: translateX(-100%);
+}
+
+#surface-targetbpm > div {
+    height: 25%;
+    margin-right: 3vw;
+    font-size: calc(3.5vw + 3.5vh);
+}
+
+#surface-targetbpm > #bpms {
+    height: 50%;
+    font-size: calc(4vw + 4vh);
+}
+
+#targetbpm {
+    position: absolute;
+    right: 40%;
+}
+
+#targetbpm-icon, #songbpm-icon {
+    position: absolute;
+    width: calc(4vw + 4vh);
+    transform: translateY(-50%);
+}
+
+#targetbpm-icon {
+    right: 63%;
+}
+
+#songbpm-icon {
+    right: 21%;
+}

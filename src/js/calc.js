@@ -10,7 +10,8 @@
  */
 var asyncModules = [
     'games',
-    'menu'
+    'menu',
+    'targetbpm'
 ];
 
 /**

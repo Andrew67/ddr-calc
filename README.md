@@ -14,17 +14,24 @@ e.g. 4, .25, .5, 5 results in 5 (saves deleting the decimal portion when trying 
 * The above tips, when put in practice, mean you should never have to press the multiplication
 or delete keys
 
-## App Mode
+## Target BPM Mode
+* To change your preferred reading speed, touch the current target BPM
+* Your preferred speed is saved automatically for future use
+* You can continue to type new song BPMs without having to use the delete key, as the field resets once 3 digits are
+keyed in
+* Note: 3 digits must be entered on both sides in order to obtain a calculation (leading 0s are allowed, e.g. 084)
+
+## App-like Installation
 * Keep this calculator in your pocket by adding it to your homescreen!
-* Looks and feels like an app, working fully offline
+* Works fully offline
 * On iOS: Open it in Safari, tap on the Share icon, then select "Add to Homescreen"
-* On Android: Open it in Chrome, Firefox, or another compatible browser and
+* On Android: Open it in Chrome, Firefox, Samsung Internet, or another compatible browser and
 select "Add to Homescreen" or equivalent
 
 ## Roadmap
 * [DONE] Support for selecting which version of the game you're playing (and whether you're playing in premium mode)
 and disabling input of unavailable speed modifiers
-* "Target BPM" mode
+* [DONE] "Target BPM" mode
 
 ## Licenses
 * Code: GPL-3 (see LICENSE)
@@ -32,5 +39,6 @@ and disabling input of unavailable speed modifiers
   * Calculator base: GPL-3 (see `LICENSE`)
   * DDR Arrow: sourced from https://inkjuse.deviantart.com/art/DDR-Arrow-111309080
 * Other icons:
+  * "[Target](https://thenounproject.com/search/?q=target&i=32462)" icon (`src/img/np-target.svg`) by Chris Kerr from [the Noun Project](https://thenounproject.com/).
   * FontAwesome (all `src/img/fa-*.svg` files): CC BY 4.0 License (see: https://fontawesome.com/license/free)
   * Material Design Icons (all `src/img/md-*.svg` files): Apache 2.0 (see: https://material.io/tools/icons/)
