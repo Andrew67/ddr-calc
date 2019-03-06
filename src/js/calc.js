@@ -79,7 +79,7 @@ var computedState = {
         this.hooks.forEach(function (hook) { hook(); });
     },
 
-    result: '0',
+    result: 0,
     /** Key state (keyed by label). Currently contains a field to query disabled status. */
     keys: {}
 };
@@ -230,7 +230,10 @@ function commit () {
     // Text fields: song BPM, speedmod, result
     dom.bpm.textContent = state.songBpm;
     dom.speedMod.textContent = state.speedModInt + state.speedModDec;
-    dom.result.textContent = computedState.result;
+
+    // Don't show result until there's a non-zero value available (implicitly depends on having complete inputs)
+    // This helps prevent startup flicker for users that prefer Target BPM mode
+    dom.result.textContent = (computedState.result === 0) ? '' : computedState.result;
 
     // Run post-commit hooks
     postCommitHooks.forEach(function (hook) { hook(); });
