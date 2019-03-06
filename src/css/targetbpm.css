@@ -6,15 +6,15 @@
     width: 50%;
     text-transform: uppercase;
     text-align: center;
-    transition: opacity .2s;
+    transition: color .2s;
 }
 
 #switch-speedmod {
-    opacity: 0.6;
+    color: #1976d2; /* Material Blue 700 */
 }
 
 #switch-targetbpm {
-    opacity: 0.34;
+    color: rgba(0,0,0,.54);
 }
 
 #switch-underline {
@@ -28,11 +28,11 @@
 }
 
 .targetbpm #switch-speedmod {
-    opacity: 0.34;
+    color: rgba(0,0,0,.54);
 }
 
 .targetbpm #switch-targetbpm {
-    opacity: 0.6;
+    color: #1976d2; /* Material Blue 700 */
 }
 
 .targetbpm #switch-underline {
