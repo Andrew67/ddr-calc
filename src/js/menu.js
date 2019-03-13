@@ -79,9 +79,11 @@ fetch('img/md-more_vert.svg')
     /** Updates DOM to match hidden/disabled status for menu entries as required **/
     var updateDynamicMenuItems = function updateDynamicMenuItems () {
         menuItems.forEach(function (menuItem, idx) {
-            dom.menuListItems[idx].textContent = menuItem.options.title();
-            dom.menuListItems[idx].classList.toggle('disabled', menuItem.options.disabled());
-            dom.menuListItems[idx].classList.toggle('hidden', menuItem.options.hidden());
+            var el = dom.menuListItems[idx];
+            el.textContent = menuItem.options.title();
+            el.setAttribute('aria-disabled', menuItem.options.disabled());
+            if (menuItem.options.hidden()) el.setAttribute('hidden', '');
+            else el.removeAttribute('hidden');
         });
     };
 

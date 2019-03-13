@@ -224,7 +224,7 @@ function commit () {
 
     // Update keys' disabled state in DOM
     keysForEach(function (key, type, state, el) {
-        el.classList.toggle('disabled', state.disabled);
+        el.setAttribute('aria-disabled', state.disabled);
     });
 
     // Text fields: song BPM, speedmod, result

@@ -51,12 +51,8 @@
     line-height: 48px;
 }
 
-#menu-popup .disabled {
+#menu-popup [aria-disabled="true"] {
     opacity: .38;
-}
-
-#menu-popup .hidden {
-    display: none;
 }
 
 #about-box {
