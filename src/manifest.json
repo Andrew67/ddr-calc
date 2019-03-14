@@ -1,7 +1,12 @@
 {
   "short_name": "DDR Calc",
-  "name": "DDR Speed Calculator",
+  "name": "DDR Calc",
   "icons": [
+    {
+      "src": "./favicon.png",
+      "type": "image/png",
+      "sizes": "48x48"
+    },
     {
       "src": "./img/icon-192.png",
       "type": "image/png",
@@ -14,7 +19,7 @@
     }
   ],
   "start_url": "./",
-  "background_color": "#FFFFFF",
+  "background_color": "#263238",
   "display": "standalone",
   "orientation": "portrait",
   "scope": "./",

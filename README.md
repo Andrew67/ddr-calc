@@ -24,8 +24,8 @@ keyed in
 ## App-like Installation
 * Keep this calculator in your pocket by adding it to your homescreen!
 * Works fully offline
-* On iOS: Open it in Safari, tap on the Share icon, then select "Add to Homescreen"
-* On Android: Open it in Chrome, Firefox, Samsung Internet, or another compatible browser and
+* On iOS: Open in Safari, tap on the Share icon, then select "Add to Homescreen"
+* On Android: Open in Chrome, Firefox, Samsung Internet, or another compatible browser and
 select "Add to Homescreen" or equivalent
 
 ## Roadmap
@@ -34,7 +34,8 @@ and disabling input of unavailable speed modifiers
 * [DONE] "Target BPM" mode
 
 ## Licenses
-* Code: GPL-3 (see LICENSE)
+* Code: GPL-3 (see `LICENSE`)
+* List of speed modifiers per mix (`games.json`): [CC0-1.0 Public Domain](https://creativecommons.org/publicdomain/zero/1.0/)
 * App icon:
   * Calculator base: GPL-3 (see `LICENSE`)
   * DDR Arrow: sourced from https://inkjuse.deviantart.com/art/DDR-Arrow-111309080
@@ -42,3 +43,7 @@ and disabling input of unavailable speed modifiers
   * "[Target](https://thenounproject.com/search/?q=target&i=32462)" icon (`src/img/np-target.svg`) by Chris Kerr from [the Noun Project](https://thenounproject.com/).
   * FontAwesome (all `src/img/fa-*.svg` files): CC BY 4.0 License (see: https://fontawesome.com/license/free)
   * Material Design Icons (all `src/img/md-*.svg` files): Apache 2.0 (see: https://material.io/tools/icons/)
+ 
+ ## Acknowledgements
+ * [Remywiki](https://remywiki.com/)'s DDR pages for listing added/removed speed modifiers per mix
+ * [pngquant](https://pngquant.org/) for reducing the app icon PNGs by over 50%

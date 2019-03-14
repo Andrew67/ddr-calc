@@ -70,6 +70,12 @@
     box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
 }
 
+#about-box ul {
+    margin-left: 25px;
+    margin-right: 8px;
+    padding: 0;
+}
+
 #about-box li {
     line-height: 32px;
 }

@@ -13,6 +13,7 @@ self.addEventListener('install', function(event) {
             return cache.addAll([
                 './',
                 'manifest.json',
+                'favicon.png',
                 'img/icon-192.png',
                 'css/calc.css',
                 'js/calc.js',
