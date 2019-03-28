@@ -1,9 +1,7 @@
 /*! DDR Calc | https://github.com/Andrew67/ddr-calc */
 
-/** Bump this number to force a refresh of the static assets, by having it be considered a new SW version */
-var swVersion = 19;
 /** Bump this number to force the creation of a new cache; useful for wiping out old entries if files are moved/deleted */
-var swCacheName = 'ddrcalc-static-v4';
+var swCacheName = 'ddrcalc-static-v5';
 
 // Cache all paths required for app's offline operation
 // See: https://developers.google.com/web/fundamentals/instant-and-offline/offline-cookbook/
@@ -33,7 +31,7 @@ self.addEventListener('install', function(event) {
             ]);
         })
     );
-    console.log("Installed SW version " + swVersion);
+    console.log("Installed cache: " + swCacheName);
 });
 
 // Remove outdated caches when swCacheName ticks over
