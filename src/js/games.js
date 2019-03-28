@@ -71,7 +71,7 @@ Promise.all([
     // Set up calc variables
     state.gameId = Number(localStorage.getItem(KEY_GAMEID)) || 0; // Change version if IDs ever change in games.json
     state.premiumPlayEnabled = localStorage.getItem(KEY_PREMIUMPLAY) === null ?
-        true : Boolean(localStorage.getItem(KEY_PREMIUMPLAY));
+        true : localStorage.getItem(KEY_PREMIUMPLAY) === 'true';
     state.gameSettingsOpen = Boolean(history.state && history.state.gameSettingsOpen);
     computedState.gameName = '';
     computedState.availableSpeedMods = [];
