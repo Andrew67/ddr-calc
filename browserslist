@@ -11,5 +11,6 @@ not firefox < 50            # NodeList.forEach
 not and_ff < 50             # NodeList.forEach
 not samsung < 5             # NodeList.forEach (5.0 = Chromium 51)
 
+not safari < 10.1           # fetch
 not ios_saf < 10.3          # fetch
-ios_saf >= 10.3
+ios_saf >= 10.3             # explicit bare minimum active support
