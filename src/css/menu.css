@@ -21,6 +21,10 @@
     transition: opacity .1s;
 }
 
+a {
+    color: #1976d2; /* Material Blue 700 */
+}
+
 /*
   Menu overlay; implements Material Design Menus
   https://material.io/design/components/menus.html

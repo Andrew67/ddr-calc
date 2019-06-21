@@ -7,7 +7,7 @@
     /* Material Design text button: https://material.io/design/components/buttons.html#specs */
     font-size: 14px;
     line-height: 14px;
-    opacity: 0.6;
+    color: rgba(0,0,0,0.6);
     font-weight: 500; /* Medium */
 }
 
@@ -21,7 +21,6 @@
 
 #game-premium-enabled {
     display: block;
-    opacity: 0.7;
 }
 
 #game-name {
