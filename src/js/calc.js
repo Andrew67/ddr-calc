@@ -320,6 +320,11 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }, { passive: true });
 
+        // In cases such as locking the phone while holding a key, touchend is never fired
+        e.addEventListener('touchcancel', function () {
+            e.classList.remove('active');
+        }, { passive: true });
+
         e.addEventListener('mousedown', function () {
             var mouseStartTime = new Date().getTime();
             if (mouseStartTime - touchEndTime > SIMULATED_MOUSE_IGNORE_DELAY_MS) {
