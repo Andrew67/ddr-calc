@@ -17,6 +17,9 @@
     left: 16px;
     text-align: left;
     text-transform: uppercase;
+    /* Increases the touch target for shorter game names, overflows long game names to next line */
+    width: 40%;
+    word-break: break-all;
 }
 
 #game-premium-enabled {
