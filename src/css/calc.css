@@ -19,7 +19,7 @@
     --color-keypad-ext-bg: #455a64; /* Material Blue Grey 700 */
     --color-keypad-bg-active: #546e7a; /* Material Blue Grey 600 */
 
-    --color-keypad-fg: white;
+    --color-keypad-fg: rgba(255,255,255,.87);
 }
 
 html, body {
