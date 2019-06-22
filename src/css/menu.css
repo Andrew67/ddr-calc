@@ -64,7 +64,8 @@ a {
     top: 50%;
     left: 50%;
     width: 275px;
-    max-height: calc(100% - 80px);
+    max-height: calc(100% - 88px);
+    max-width: calc(100% - 88px);
     overflow: auto;
     transform: translate(-50%, -50%);
     background-color: white;
