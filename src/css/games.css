@@ -150,7 +150,7 @@ input + span svg .unchecked {
 input + span svg .checked {
     opacity: 0;
     transition: opacity .1s;
-    color: #1976d2; /* Material Blue 700; same as DDR Finder primary color */
+    color: var(--color-accent);
 }
 
 input:checked + span svg .checked {

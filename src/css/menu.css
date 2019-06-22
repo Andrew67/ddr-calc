@@ -22,7 +22,7 @@
 }
 
 a {
-    color: #1976d2; /* Material Blue 700 */
+    color: var(--color-accent);
 }
 
 /*

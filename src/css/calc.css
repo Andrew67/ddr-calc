@@ -1,6 +1,17 @@
 /*! DDR Calc | https://github.com/Andrew67/ddr-calc */
 /* Core app shell and calculator CSS */
 
+:root {
+    --color-accent: #1976d2; /* Material Blue 700; same as DDR Finder primary color */
+    --color-accent-lg: #004ba0; /* Material Blue 700 Dark; variant for larger UI elements */
+
+    --color-result: #00600f; /* Material Green 700 Dark */
+
+    --color-keypad-bg: #263238; /* Material Blue Grey 900 */
+    --color-keypad-ext-bg: #455a64; /* Material Blue Grey 700 */
+    --color-keypad-bg-active: #546e7a; /* Material Blue Grey 600 */
+}
+
 html, body {
     width: 100%;
     height: 100%;
@@ -77,11 +88,11 @@ body {
 }
 
 #display .active {
-    color: #004ba0; /* Material Blue 700 Dark */
+    color: var(--color-accent-lg);
 }
 
 #result, #high-result, #low-result {
-    color: #00600f; /* Material Green 700 Dark */
+    color: var(--color-result);
 }
 
 #mode-switcher {
@@ -119,13 +130,13 @@ body {
 
 #keypad-main {
     width: 75%;
-    background-color: #263238; /* Material Blue Grey 900 */
+    background-color: var(--color-keypad-bg);
     float: left;
 }
 
 #keypad-ext {
     width: 25%;
-    background-color: #4f5b62; /* Material Blue Grey 900 Light */
+    background-color: var(--color-keypad-ext-bg);
     float: right;
 }
 
@@ -156,7 +167,7 @@ body {
 }
 
 .keypad li.active {
-    background-color: #546e7a; /* Material Blue Grey 600 */
+    background-color: var(--color-keypad-bg-active);
 }
 
 .keypad li.active > span {

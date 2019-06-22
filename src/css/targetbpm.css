@@ -10,7 +10,7 @@
 }
 
 #switch-speedmod {
-    color: #1976d2; /* Material Blue 700 */
+    color: var(--color-accent);
 }
 
 #switch-targetbpm {
@@ -20,7 +20,7 @@
 #switch-underline {
     height: 2px;
     width: 50%;
-    background-color: #1976d2; /* Material Blue 700 */
+    background-color: var(--color-accent);
     position: absolute;
     bottom: 0;
     left: 0;
@@ -32,7 +32,7 @@
 }
 
 .targetbpm #switch-targetbpm {
-    color: #1976d2; /* Material Blue 700 */
+    color: var(--color-accent);
 }
 
 .targetbpm #switch-underline {
