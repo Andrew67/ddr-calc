@@ -2,6 +2,14 @@
 /* Core app shell and calculator CSS */
 
 :root {
+    --color-background: white; /* Lowest level; essentially the display */
+    --color-surface: white; /* Elevated surface such as side-sheet and dialog */
+
+    --color-foreground: rgba(0,0,0,.87);
+    --color-foreground-medium: rgba(0,0,0,.6);
+    --color-foreground-medium-lg: rgba(0,0,0,.7); /* Variant for larger UI elements */
+    --color-foreground-disabled: rgba(0,0,0,.38);
+
     --color-accent: #1976d2; /* Material Blue 700; same as DDR Finder primary color */
     --color-accent-lg: #004ba0; /* Material Blue 700 Dark; variant for larger UI elements */
 
@@ -24,6 +32,8 @@ html, body {
 body {
     margin: 0;
     font-family: "Roboto", system-ui, sans-serif;
+    background-color: var(--color-background);
+    color: var(--color-foreground);
 
     /* Block text selection for app-like experience */
     user-select: none;
@@ -65,7 +75,7 @@ body {
 #display > div {
     width: 100%;
     height: 100%;
-    color: rgba(0,0,0,0.7);
+    color: var(--color-foreground-medium-lg);
 }
 
 #display > div span {

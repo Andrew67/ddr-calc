@@ -14,7 +14,7 @@
 }
 
 #switch-targetbpm {
-    color: rgba(0,0,0,.54);
+    color: var(--color-foreground-medium);
 }
 
 #switch-underline {
@@ -28,7 +28,7 @@
 }
 
 .targetbpm #switch-speedmod {
-    color: rgba(0,0,0,.54);
+    color: var(--color-foreground-medium);
 }
 
 .targetbpm #switch-targetbpm {
