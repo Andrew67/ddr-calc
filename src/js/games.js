@@ -55,7 +55,7 @@ Promise.all([
             '</fieldset>' +
             '<fieldset>' +
                 '<legend>Game version</legend>' +
-                [{ id: 0, name: 'Any' }].concat(gameData).map(function (game) {
+                [{ id: 0, name: 'N/A' }].concat(gameData).map(function (game) {
                     return '<label><input type="radio" name="gameid" value="' + game.id + '">'
                         + radioBtn + game.name + '</label>';
                 }).join('') +
@@ -83,7 +83,7 @@ Promise.all([
     // Set the game name and available speed mods based on the selected game ID and premium play
     computedState.hooks.push(function setGameNameAndAvailableMods () {
         if (state.gameId === 0 || !gameDataById.has(state.gameId)) {
-            computedState.gameName = 'No game selected';
+            computedState.gameName = 'Select game';
             computedState.availableSpeedMods = [];
         } else {
             computedState.gameName = gameDataById.get(state.gameId).name;
