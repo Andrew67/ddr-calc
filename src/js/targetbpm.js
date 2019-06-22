@@ -91,7 +91,8 @@ Promise.all([
     var LOW_START = 0, HIGH_START = 10;
     computedState.hooks.push(function calculateTargetBpmMods () {
         // Skip calculation until both BPM fields are filled
-        if (state.songBpm.length < 3 || state.targetBpm.length < 3) {
+        if (state.songBpm.length < 3 || state.targetBpm.length < 3 ||
+            state.songBpm === '000' || state.targetBpm === '000') {
             computedState.lowResult = '';
             computedState.highResult = '';
         } else {
