@@ -5,6 +5,9 @@
 
 // Core app shell functions / hacks and workarounds
 
+/* Detect Mobile Safari via presence of non-standard navigator.standalone field */
+const isMobileSafari = 'standalone' in navigator;
+
 /**
  * List of additional scripts to lazy-load after this one loads core app shell and calculator functionality
  */
@@ -304,12 +307,12 @@ document.addEventListener('DOMContentLoaded', function () {
             // This preventDefault is used to recover key fast-tapping, as otherwise even with
             // touch-action: manipulation, iOS Safari (and only Safari; iOS Chrome lacks this issue),
             // Safari can delay or not even fire touchstart events (sometimes showing you a magnifier instead)
-            evt.preventDefault();
+            if (isMobileSafari) evt.preventDefault();
 
             e.classList.add('active');
             interactionStartTime = new Date().getTime();
             longPressTimeoutId = setTimeout(longKeyPress, LONG_PRESS_MS);
-        }, { passive: false });
+        }, { passive: !isMobileSafari });
 
         e.addEventListener('touchend', function () {
             e.classList.remove('active');
@@ -345,6 +348,16 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     });
+
+    // Workaround for Safari which does not support touch-action: none CSS to block pinch-to-zoom
+    // Applied only to keypad as applying to display blocks click events for interactive components
+    if (isMobileSafari) {
+        document.querySelectorAll('.keypad').forEach(function (e) {
+            e.addEventListener('touchstart', function (evt) {
+                evt.preventDefault();
+            }, { passive: false });
+        });
+    }
 
     // Init state
     computedState.update();
