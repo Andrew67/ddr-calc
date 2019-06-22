@@ -14,7 +14,8 @@ const isMobileSafari = 'standalone' in navigator;
 var asyncModules = [
     'games',
     'menu',
-    'targetbpm'
+    'targetbpm',
+    'dark'
 ];
 
 /**

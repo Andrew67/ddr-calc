@@ -1,6 +1,7 @@
 /*! DDR Calc | https://github.com/Andrew67/ddr-calc */
 /* Core app shell and calculator CSS */
 
+/* Default theme */
 :root {
     --color-background: white; /* Lowest level; essentially the display */
     --color-surface: white; /* Elevated surface such as side-sheet and dialog */
@@ -20,6 +21,25 @@
     --color-keypad-bg-active: #546e7a; /* Material Blue Grey 600 */
 
     --color-keypad-fg: rgba(255,255,255,.87);
+}
+
+/* Dark theme; added here to load ASAP for flicker-free UI purposes for returning users */
+body.theme-dark {
+    --color-background: black;
+    --color-surface: #373737; /* Material Design 24dp elevation / 16% white overlay */
+
+    --color-foreground: rgba(255,255,255,.87);
+    --color-foreground-medium: rgba(255,255,255,.6);
+    --color-foreground-medium-lg: rgba(255,255,255,.7);
+
+    --color-accent: #90caf9; /* Material Blue 200 */
+    --color-accent-lg: #bbdefb; /* Material Blue 100 */
+
+    --color-result: #c8e6c9; /* Material Green 100 */
+
+    --color-keypad-bg: #102027; /* Material Blue Grey 800 Dark */
+    --color-keypad-ext-bg: #1c313a; /* Material Blue Grey 700 Dark */
+    --color-keypad-bg-active: #29434e; /* Material Blue Grey 600 Dark */
 }
 
 html, body {
@@ -78,10 +98,6 @@ body {
     width: 100%;
     height: 100%;
     color: var(--color-foreground-medium-lg);
-}
-
-#display > div span {
-    transition: color .2s;
 }
 
 #surface-speedmod div {
