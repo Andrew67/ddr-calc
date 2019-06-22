@@ -18,8 +18,15 @@
     text-align: left;
     text-transform: uppercase;
     /* Increases the touch target for shorter game names, overflows long game names to next line */
-    width: 40%;
+    width: 45%;
     word-break: break-all;
+}
+
+/* Set the game button a little higher on devices showing the tab bar, to further avoid touching calculations */
+@media (min-height: 600px) {
+    #game-btn {
+        bottom: 32px;
+    }
 }
 
 #game-premium-enabled {
