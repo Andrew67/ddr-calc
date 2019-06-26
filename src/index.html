@@ -61,7 +61,7 @@
 
     <!-- In-line dark mode check, so that dark mode is applied flicker-free -->
     <script>
-        if (localStorage.getItem('dark-mode') === 'true') {
+        if (localStorage.getItem('dark-mode') === 'true' || window.matchMedia('(prefers-color-scheme: dark)').matches) {
             document.body.classList.add('theme-dark');
             document.querySelector('meta[name=theme-color]').content = '#000000';
         }
