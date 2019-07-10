@@ -51,7 +51,7 @@ function loadNextModule () {
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {
         // noinspection JSIgnoredPromiseFromCall
-        navigator.serviceWorker.register('./sw.js');
+        navigator.serviceWorker.register('./sw.js'); // eslint-disable-line
     });
 }
 
