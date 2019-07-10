@@ -78,3 +78,7 @@
 #songbpm-icon {
     right: 21%;
 }
+
+#surface-targetbpm > div > .ideal {
+    font-weight: 400;
+}

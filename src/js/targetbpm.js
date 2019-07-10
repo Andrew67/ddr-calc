@@ -59,6 +59,7 @@ Promise.all([
     state.targetBpm = localStorage.getItem(KEY_TARGETBPM) || '450';
     computedState.highResult = '';
     computedState.lowResult = '';
+    computedState.shouldEmphasizeHighResult = false;
     dom.songBpm = document.getElementById('songbpm');
     dom.songBpmIcon = document.getElementById('songbpm-icon');
     dom.targetBpm = document.getElementById('targetbpm');
@@ -107,7 +108,7 @@ Promise.all([
                 highSpeedMod = idealSpeedMod;
             } else {
                 computedState.availableSpeedMods.forEach(function (decimals, int) {
-                    decimals.concat('.0').forEach(function (dec) {
+                    ['.0'].concat(decimals).forEach(function (dec) {
                         const currentSpeedMod = Number(int + dec);
                         if (currentSpeedMod <= idealSpeedMod && currentSpeedMod > lowSpeedMod)
                             lowSpeedMod = currentSpeedMod;
@@ -123,6 +124,10 @@ Promise.all([
             // Avoid duplicate information when the mods happen to resolve to the same number
             if (lowSpeedMod === highSpeedMod || lowSpeedMod === LOW_START) computedState.lowResult = '';
             else computedState.lowResult = 'x ' + lowSpeedMod + ' = ' + Math.round(state.songBpm * lowSpeedMod);
+
+            // Hint to bold the higher speed mod when both resolved and it's the closest
+            computedState.shouldEmphasizeHighResult = computedState.highResult && computedState.lowResult &&
+                highSpeedMod - idealSpeedMod < idealSpeedMod - lowSpeedMod;
         }
     });
 
@@ -153,6 +158,8 @@ Promise.all([
         dom.targetBpmIcon.classList.toggle('active', state.input === INPUT.TARGETBPM);
         dom.highResult.textContent = computedState.highResult;
         dom.lowResult.textContent = computedState.lowResult;
+        dom.highResult.classList.toggle('ideal', computedState.shouldEmphasizeHighResult);
+        dom.lowResult.classList.toggle('ideal', !computedState.shouldEmphasizeHighResult);
     });
     let previousTargetBpmLength = 0;
     postCommitHooks.push(function saveTargetBpm () {
