@@ -11,22 +11,22 @@ Promise.all([
 ]).then(function (r) {
     return Promise.all([r[0].json(), r[1].text(), r[2].text(), r[3].text()]);
 }).then(function (data) {
-    var gameData = data[0],
+    const gameData = data[0],
         gamepad = '<span class="svg-icon">' + data[1] + '</span>',
         checkbox = '<span class="svg-icon">' + data[2] + '</span>',
         radioBtn = '<span class="svg-icon">' + data[3] + '</span>';
 
     // Map game data by ID for easier retrieval without walking the array
     // Furthermore, convert the mods and premiumPlayMods into their respective Map forms
-    var gameDataById = new Map(gameData.map(function (game) {
+    const gameDataById = new Map(gameData.map(function (game) {
         return [game.id, Object.assign({}, game, {
             mods: new Map(game.mods),
             premiumPlayMods: new Map(game.premiumPlayMods),
             // Contains a merger of mods and premiumPlayMods, which are all available mods in premium play mode
             allMods: (function() {
-                var m = new Map(game.mods);
+                const m = new Map(game.mods);
                 game.premiumPlayMods.forEach(function (pM) {
-                    var key = pM[0], values = pM[1];
+                    const key = pM[0], values = pM[1];
                     if (m.has(key)) m.set(key, m.get(key).concat(values));
                     else m.set(key, values);
                 });
@@ -36,7 +36,7 @@ Promise.all([
     }));
 
     // Load HTML for the game button
-    var container = document.createElement('div');
+    const container = document.createElement('div');
     container.innerHTML = '<span id="game-btn" class="overlay">' +
         '<span id="game-premium-enabled"></span>' +
         gamepad + '<span id="game-name">&nbsp;</span>' +
@@ -66,7 +66,7 @@ Promise.all([
     dom.app.appendChild(container.firstChild);
 
     // localStorage keys
-    var KEY_GAMEID = 'gameid-v1', KEY_PREMIUMPLAY = 'premiumPlayEnabled';
+    const KEY_GAMEID = 'gameid-v1', KEY_PREMIUMPLAY = 'premiumPlayEnabled';
 
     // Set up calc variables
     state.gameId = Number(localStorage.getItem(KEY_GAMEID)) || 0; // Change version if IDs ever change in games.json
@@ -107,7 +107,7 @@ Promise.all([
             keysForEach(function (key, type, keyState) {
                 if (type === KEYTYPE.INT) keyState.disabled = !computedState.availableSpeedMods.has(key);
                 else if (type === KEYTYPE.DEC) {
-                    var currentInt = state.speedModInt || '0'; // no integer is treated as 0
+                    const currentInt = state.speedModInt || '0'; // no integer is treated as 0
                     // Don't let your guard down! If we don't check for the integer first, and the user inputs one,
                     // then switches game version, we could run into a missing object scenario!
                     keyState.disabled = !(computedState.availableSpeedMods.has(currentInt) &&
@@ -128,7 +128,7 @@ Promise.all([
         e.addEventListener('click', function () { history.back(); });
     });
     window.addEventListener('popstate', function (event) {
-        var newGameSettingsOpen = Boolean(event.state && event.state.gameSettingsOpen);
+        const newGameSettingsOpen = Boolean(event.state && event.state.gameSettingsOpen);
 
         // Commit settings to state upon dismissal (avoids running a postCommit hook on every keypress)
         if (state.gameSettingsOpen && !newGameSettingsOpen) {

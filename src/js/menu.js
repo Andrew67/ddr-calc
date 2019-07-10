@@ -11,7 +11,7 @@ fetch('img/md-more_vert.svg')
     return img.text();
 }).then(function (menuBtn) {
     // Load HTML for the menu button
-    var container = document.createElement('div');
+    const container = document.createElement('div');
     container.innerHTML = '<span id="menu-btn" class="overlay">' + menuBtn + '</span>';
     document.getElementById('display').appendChild(container.firstChild);
 
@@ -28,17 +28,17 @@ fetch('img/md-more_vert.svg')
     dom.menuList = document.querySelector('#menu-popup > ul');
     dom.menuListItems = [];
     state.menuOpen = Boolean(history.state && history.state.menuOpen);
-    var menuItems = [];
+    const menuItems = [];
 
     /** Builds the menu DOM based on the items currently added in state.menuItems */
-    var buildMenu = function buildMenu () {
+    const buildMenu = function buildMenu () {
         menuItems.sort(function (a, b) { return a.idx - b.idx; });
         dom.menuList.innerHTML = '';
         dom.menuListItems = [];
         menuItems.forEach(function (menuItem) {
-            var menuItemDOM = document.createElement('li');
+            const menuItemDOM = document.createElement('li');
             menuItemDOM.addEventListener('click', function (evt) {
-                var preventPropagation = menuItem.options.disabled();
+                let preventPropagation = menuItem.options.disabled();
 
                 if (!menuItem.options.disabled()) {
                     state.menuOpen = false;
@@ -63,7 +63,7 @@ fetch('img/md-more_vert.svg')
      * @param options Additional options object (such as disabled, hidden)
      */
     window.addMenuItem = function addMenuItem (idx, title, action, options) {
-        var defaultOptions = {
+        const defaultOptions = {
             title: function () { return title; },
             disabled: function () { return false; },
             hidden: function () { return false; }
@@ -77,9 +77,9 @@ fetch('img/md-more_vert.svg')
     };
 
     /** Updates DOM to match hidden/disabled status for menu entries as required **/
-    var updateDynamicMenuItems = function updateDynamicMenuItems () {
+    const updateDynamicMenuItems = function updateDynamicMenuItems () {
         menuItems.forEach(function (menuItem, idx) {
-            var el = dom.menuListItems[idx];
+            const el = dom.menuListItems[idx];
             el.textContent = menuItem.options.title();
             el.setAttribute('aria-disabled', menuItem.options.disabled());
             if (menuItem.options.hidden()) el.setAttribute('hidden', '');

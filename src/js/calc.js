@@ -11,7 +11,7 @@ const isMobileSafari = 'standalone' in navigator;
 /**
  * List of additional scripts to lazy-load after this one loads core app shell and calculator functionality
  */
-var asyncModules = [
+const asyncModules = [
     'games',
     'menu',
     'targetbpm',
@@ -23,7 +23,7 @@ var asyncModules = [
  * @param scriptName Name of the script (with no "js/" prefix or ".js" suffix)
  */
 function addScript (scriptName) {
-    var script = document.createElement('script');
+    const script = document.createElement('script');
     script.src = 'js/' + scriptName + '.js';
     document.head.appendChild(script);
 }
@@ -33,7 +33,7 @@ function addScript (scriptName) {
  * @param stylesheetName Name of the stylesheet (with no "css/" prefix or ".css" suffix)
  */
 function addStylesheet (stylesheetName) {
-    var stylesheet = document.createElement('link');
+    const stylesheet = document.createElement('link');
     stylesheet.rel = 'stylesheet';
     stylesheet.href = 'css/' + stylesheetName + '.css';
     document.head.appendChild(stylesheet);
@@ -59,14 +59,14 @@ if ('serviceWorker' in navigator) {
 // Core calculator functions
 
 /** State constants */
-var MODE = { SPEEDMOD: 'm-speedmod', TARGETBPM: 'm-targetbpm' };
-var INPUT = { SONGBPM: 'songbpm', SPEEDMOD: 'speedmod', TARGETBPM: 'targetbpm' };
-var KEY = { MULT: '×', BPM: 'BPM', DEL: 'DEL' };
-var KEYTYPE = { INT: 'int', FUNC: 'func', DEC: 'dec' };
-var LONG_PRESS_MS = 450, SIMULATED_MOUSE_IGNORE_DELAY_MS = 500;
+const MODE = { SPEEDMOD: 'm-speedmod', TARGETBPM: 'm-targetbpm' };
+const INPUT = { SONGBPM: 'songbpm', SPEEDMOD: 'speedmod', TARGETBPM: 'targetbpm' };
+const KEY = { MULT: '×', BPM: 'BPM', DEL: 'DEL' };
+const KEYTYPE = { INT: 'int', FUNC: 'func', DEC: 'dec' };
+const LONG_PRESS_MS = 450, SIMULATED_MOUSE_IGNORE_DELAY_MS = 500;
 
 /** App state object (user input) */
-var state = {
+const state = {
     mode: MODE.SPEEDMOD,
     input: INPUT.SONGBPM,
     songBpm: '',
@@ -75,7 +75,7 @@ var state = {
 };
 
 /** App computed state object (state that's derived from {@link state} */
-var computedState = {
+const computedState = {
     /** Array of callback functions that gets called on every action completion, to recalculate computed state */
     hooks: [],
     /** Runs all the attached hooks to update computed state */
@@ -89,7 +89,7 @@ var computedState = {
 };
 
 /** Map of key labels to key types. Populated as DOM is loaded from the HTML data-keytype. */
-var keyTypes = {};
+const keyTypes = {};
 
 /**
  * Helper method that iterates over all calculator keys (in no particular order) into the given callback function,
@@ -106,7 +106,7 @@ function keysForEach (callbackfn) {
  * These take in the current state and the event and perform state object mutations.
  * Call commit() to finalize them into the DOM.
  */
-var action = {
+const action = {
     setMode: function (mode) {
         state.mode = mode;
         computedState.update();
@@ -130,7 +130,7 @@ var action = {
             // - If song BPM input becomes 3 digits in speedmod mode, switch to speedmod input
             // - If target BPM input becomes 3 digits in targetbpm mode, switch to songbpm input
             if (state.input === INPUT.SONGBPM || state.input === INPUT.TARGETBPM) {
-                var bpm = (state.input === INPUT.SONGBPM) ? 'songBpm' : 'targetBpm';
+                const bpm = (state.input === INPUT.SONGBPM) ? 'songBpm' : 'targetBpm';
                 if (state[bpm].length === 3) state[bpm] = key;
                 else state[bpm] += key;
 
@@ -157,7 +157,7 @@ var action = {
 
     backspace: function () {
         // In BPM inputs, delete the right-most digit (if available)
-        var bpm = (state.input === INPUT.SONGBPM) ? 'songBpm' : 'targetBpm';
+        const bpm = (state.input === INPUT.SONGBPM) ? 'songBpm' : 'targetBpm';
         if ((state.input === INPUT.SONGBPM || state.input === INPUT.TARGETBPM) && state[bpm].length > 0)
             state[bpm] = state[bpm].substr(0, state[bpm].length - 1);
         // In speedmod input, tries to delete the decimal part first, then the integer.
@@ -194,13 +194,13 @@ computedState.hooks.push(function calculateResult () {
 });
 
 /** DOM elements. HTML is static so one query is enough */
-var dom = {
+const dom = {
     /** Key DOM elements (keyed by label). Labels match those in state and keyTypes objects and are loaded with the DOM. */
     keys: {}
 };
 
 /** Hooks to run after the main commit is complete. Used for plug-in functions. */
-var postCommitHooks = [];
+const postCommitHooks = [];
 
 /** Updates the DOM to match the app state object */
 function commit () {
@@ -256,7 +256,7 @@ document.addEventListener('DOMContentLoaded', function () {
         action.setActiveInput(INPUT.SONGBPM);
         commit();
     });
-    var switchToSpeedModAndCommit = function () {
+    const switchToSpeedModAndCommit = function () {
         action.setActiveInput(INPUT.SPEEDMOD);
         commit();
     };
@@ -266,18 +266,18 @@ document.addEventListener('DOMContentLoaded', function () {
     // Set up keyPress listeners and "register" DOM elements
     // Lots of code here just to handle fast key clicks (< 300ms) and long presses on desktop + mobile
     document.querySelectorAll('.keypad li').forEach(function (e) {
-        var key = e.textContent.trim(), type = e.getAttribute('data-keytype');
+        const key = e.textContent.trim(), type = e.getAttribute('data-keytype');
 
         // "Register" the key label, initial state, type, and DOM element
         computedState.keys[key] = { };
         keyTypes[key] = type;
         dom.keys[key] = e;
 
-        var keyPress = function () {
+        const keyPress = function () {
             action.keyPress(key, type);
             commit();
         };
-        var longKeyPress = function () {
+        const longKeyPress = function () {
             action.longKeyPress(key, type);
             commit();
         };
@@ -287,7 +287,7 @@ document.addEventListener('DOMContentLoaded', function () {
          * Note: the firing sequence on mobile is:
          * touchstart -> touchend -> mousedown (~300ms later) -> mouseup (~10ms later)
          */
-        var interactionStartTime = 0;
+        let interactionStartTime = 0;
 
         /**
          * Time (in ms) of when the touchend event was fired.
@@ -295,14 +295,14 @@ document.addEventListener('DOMContentLoaded', function () {
          * and skip the handlers if touchend was handled within the past 500ms (mousedown fires ~300ms later).
          * Otherwise, we'll get duplicate key presses.
          */
-        var touchEndTime = 0;
+        let touchEndTime = 0;
 
         /**
          * ID returned by setTimeout for the longPress event, which should fire while user is holding down a key
          * past the timer threshold (currently 650ms).
          * We keep the ID in order to cancel this event in touchend/mouseup if the hold time is under the threshold.
          */
-        var longPressTimeoutId;
+        let longPressTimeoutId;
 
         e.addEventListener('touchstart', function (evt) {
             // This preventDefault is used to recover key fast-tapping, as otherwise even with
@@ -330,7 +330,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }, { passive: true });
 
         e.addEventListener('mousedown', function () {
-            var mouseStartTime = new Date().getTime();
+            const mouseStartTime = new Date().getTime();
             if (mouseStartTime - touchEndTime > SIMULATED_MOUSE_IGNORE_DELAY_MS) {
                 e.classList.add('active');
                 interactionStartTime = mouseStartTime;
@@ -339,7 +339,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         e.addEventListener('mouseup', function () {
-            var mouseEndTime = new Date().getTime();
+            const mouseEndTime = new Date().getTime();
             if (mouseEndTime - touchEndTime > SIMULATED_MOUSE_IGNORE_DELAY_MS) {
                 e.classList.remove('active');
                 if (touchEndTime - interactionStartTime <= LONG_PRESS_MS) {

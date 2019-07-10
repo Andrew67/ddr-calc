@@ -11,7 +11,7 @@ Promise.all([
 ]).then(function (r) {
     return Promise.all([r[0].text(), r[1].text()]);
 }).then(function (data) {
-    var songIcon = '<span class="svg-icon">' + data[0] + '</span>',
+    const songIcon = '<span class="svg-icon">' + data[0] + '</span>',
         targetIcon = '<span class="svg-icon">' + data[1] + '</span>';
 
     // Set up mode switcher tabs HTML
@@ -52,7 +52,7 @@ Promise.all([
         '<style id="suppress-targetbpm-animation">#display > div { transition: none !important; }</style>';
 
     // localStorage keys
-    var KEY_MODE = 'mode-v1', KEY_TARGETBPM = 'targetbpm';
+    const KEY_MODE = 'mode-v1', KEY_TARGETBPM = 'targetbpm';
 
     // Set up state and DOM
     state.mode = localStorage.getItem(KEY_MODE) || state.mode;
@@ -67,11 +67,11 @@ Promise.all([
     dom.lowResult = document.getElementById('low-result');
 
     // Click events to switch BPM input focus
-    var focusSongBpm = function () {
+    const focusSongBpm = function () {
         action.setActiveInput(INPUT.SONGBPM);
         commit();
     };
-    var focusTargetBpm = function () {
+    const focusTargetBpm = function () {
         action.setActiveInput(INPUT.TARGETBPM);
         commit();
     };
@@ -88,7 +88,7 @@ Promise.all([
     });
 
     // Computed state hook to recalculate speed mod results
-    var LOW_START = 0, HIGH_START = 10;
+    const LOW_START = 0, HIGH_START = 10;
     computedState.hooks.push(function calculateTargetBpmMods () {
         // Skip calculation until both BPM fields are filled
         if (state.songBpm.length < 3 || state.targetBpm.length < 3 ||
@@ -96,19 +96,19 @@ Promise.all([
             computedState.lowResult = '';
             computedState.highResult = '';
         } else {
-            var idealSpeedMod = (state.targetBpm / state.songBpm).toFixed(2);
+            const idealSpeedMod = (state.targetBpm / state.songBpm).toFixed(2);
 
             // If no speed mod information is available (e.g. no game selected), present the ideal speed mod
             // Otherwise, iterate through available speed mods to pick one just above and just below the ideal
-            var lowSpeedMod = LOW_START;
-            var /*(number|string)*/ highSpeedMod = HIGH_START;
+            let lowSpeedMod = LOW_START;
+            let /*(number|string)*/ highSpeedMod = HIGH_START;
 
             if (computedState.availableSpeedMods.length === 0) {
                 highSpeedMod = idealSpeedMod;
             } else {
                 computedState.availableSpeedMods.forEach(function (decimals, int) {
                     decimals.concat('.0').forEach(function (dec) {
-                        var currentSpeedMod = Number(int + dec);
+                        const currentSpeedMod = Number(int + dec);
                         if (currentSpeedMod <= idealSpeedMod && currentSpeedMod > lowSpeedMod)
                             lowSpeedMod = currentSpeedMod;
                         if (currentSpeedMod >= idealSpeedMod && currentSpeedMod < highSpeedMod)
@@ -127,7 +127,7 @@ Promise.all([
     });
 
     // Post-commit hooks to update DOM
-    var previousMode = null;
+    let previousMode = null;
     postCommitHooks.push(function toggleTargetBpmMode () {
         if (state.mode !== previousMode) {
             previousMode = state.mode;
@@ -154,7 +154,7 @@ Promise.all([
         dom.highResult.textContent = computedState.highResult;
         dom.lowResult.textContent = computedState.lowResult;
     });
-    var previousTargetBpmLength = 0;
+    let previousTargetBpmLength = 0;
     postCommitHooks.push(function saveTargetBpm () {
         if (state.targetBpm.length !== previousTargetBpmLength) {
             previousTargetBpmLength = state.targetBpm.length;

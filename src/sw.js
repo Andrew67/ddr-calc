@@ -1,7 +1,7 @@
 /*! DDR Calc | https://github.com/Andrew67/ddr-calc */
 
 /** Bump this number to force the creation of a new cache for deployment of next version */
-var swCacheName = 'ddrcalc-static-v6';
+const swCacheName = 'ddrcalc-static-v6';
 
 // Cache all paths required for app's offline operation
 // See: https://developers.google.com/web/fundamentals/instant-and-offline/offline-cookbook/
