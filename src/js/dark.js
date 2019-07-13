@@ -9,7 +9,8 @@ try {
 
     // Dark mode toggle for browsers that don't report dark mode
     // NOTE: any changes to this behavior need to be mirrored in the synchronous flicker-free block in index.html
-    if (!window.matchMedia('(prefers-color-scheme)').matches) {
+    if (!window.matchMedia('(prefers-color-scheme: light)').matches &&
+        !window.matchMedia('(prefers-color-scheme: dark)').matches) {
         const KEY_DARKMODE = 'dark-mode';
         state.darkModeEnabled = localStorage.getItem(KEY_DARKMODE) === 'true';
 
