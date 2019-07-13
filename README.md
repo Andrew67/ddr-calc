@@ -45,5 +45,5 @@ and disabling input of unavailable speed modifiers
   * Material Design Icons (all `src/img/md-*.svg` files): Apache 2.0 (see: https://material.io/tools/icons/)
  
  ## Acknowledgements
- * [Remywiki](https://remywiki.com/)'s DDR pages for listing added/removed speed modifiers per mix
+ * [RemyWiki](https://remywiki.com/)'s DDR pages for listing added/removed speed modifiers per mix
  * [pngquant](https://pngquant.org/) for reducing the app icon PNGs by over 50%

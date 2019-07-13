@@ -1,6 +1,6 @@
 # games.json
 Contains game-version specific metadata, for game picker functionality (and later Target BPM).
-Thanks to Remywiki for the speedmod information.
+Thanks to RemyWiki for the speedmod information.
 
 
 Fields:
