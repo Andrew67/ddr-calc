@@ -5,8 +5,12 @@
 
 // Core app shell functions / hacks and workarounds
 
-/* Detect Mobile Safari via presence of non-standard navigator.standalone field */
-const isMobileSafari = 'standalone' in navigator;
+/** Detect Mobile Safari via presence of non-standard navigator.standalone field */
+const isMobileSafari = 'standalone' in navigator || location.hash.includes('saf');
+
+/** Detect app loaded via Google Play (for compliance with Google Play developer policies) */
+const isGPlay = document.referrer === 'android-app://com.andrew67.ddrcalc' ||
+    document.referrer.includes('play.google.com') || location.hash.includes('gplay');
 
 /**
  * List of additional scripts to lazy-load after this one loads core app shell and calculator functionality
