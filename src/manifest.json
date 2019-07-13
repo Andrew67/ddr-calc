@@ -23,5 +23,12 @@
   "display": "standalone",
   "orientation": "portrait",
   "scope": "./",
-  "theme_color": "#263238"
+  "theme_color": "#263238",
+  "related_applications": [
+    {
+      "platform": "play",
+      "id": "com.andrew67.ddrcalc"
+    }
+  ],
+  "prefer_related_applications": false
 }
