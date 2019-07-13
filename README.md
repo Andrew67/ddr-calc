@@ -43,6 +43,7 @@ and disabling input of unavailable speed modifiers
   * "[Target](https://thenounproject.com/search/?q=target&i=32462)" icon (`src/img/np-target.svg`) by Chris Kerr from [the Noun Project](https://thenounproject.com/).
   * FontAwesome (all `src/img/fa-*.svg` files): CC BY 4.0 License (see: https://fontawesome.com/license/free)
   * Material Design Icons (all `src/img/md-*.svg` files): Apache 2.0 (see: https://material.io/tools/icons/)
+  * Back icon in Privacy Policy from [Bytesize](https://danklammer.com/bytesize-icons/)
  
  ## Acknowledgements
  * [RemyWiki](https://remywiki.com/)'s DDR pages for listing added/removed speed modifiers per mix

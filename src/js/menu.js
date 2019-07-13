@@ -159,7 +159,7 @@ fetch('img/md-more_vert.svg')
     // Set up top-level Privacy Policy shortcut for Google Play users
     if (isGPlay) {
         addMenuItem(200, 'Privacy Policy', function () {
-            window.open('privacy-policy.html');
+            location.assign('privacy-policy.html');
         });
     }
 

@@ -4,12 +4,50 @@
     <meta charset='utf-8'>
     <meta name='viewport' content='width=device-width'>
     <title>Privacy Policy</title>
-    <style> body {
-        font-family: "Roboto", system-ui, sans-serif;
-        padding: 1em;
-    } </style>
+    <style>
+        body {
+            font-family: "Roboto", system-ui, sans-serif;
+            padding: 1em;
+        }
+        #toolbar {
+            width: calc(100% - 32px);
+            height: 24px;
+            background-color: #263238;
+            color: white;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: none;
+            padding: 16px;
+        }
+        body.show-toolbar {
+            padding-top: calc(1em + 56px);
+        }
+        .show-toolbar #toolbar {
+            display: block;
+        }
+        #i-arrow-left {
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
+
+<!-- Tool to provide pseudo-browser UI for TWA -->
+<div id="toolbar">
+    <svg id="i-arrow-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+        <path d="M10 6 L2 16 10 26 M2 16 L30 16"></path>
+    </svg>
+</div>
+<script>
+    if (history.length > 1) {
+        document.body.classList.add('show-toolbar');
+        document.getElementById('i-arrow-left').addEventListener('click', function () {
+            history.back();
+        });
+    }
+</script>
+
 <h2>Privacy Policy</h2>
 <p> Andrew67 Software built the DDR Calc app as an Open Source app. This SERVICE is provided by Andrew67 Software at
     no cost and is intended for use as is.
