@@ -48,3 +48,4 @@ and disabling input of unavailable speed modifiers
  ## Acknowledgements
  * [RemyWiki](https://remywiki.com/)'s DDR pages for listing added/removed speed modifiers per mix
  * [pngquant](https://pngquant.org/) for reducing the app icon PNGs by over 50%
+ * [AppMockUp](https://app-mockup.com/) for their fun app store mock-up tool

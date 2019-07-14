@@ -1,0 +1,9 @@
+Screenshots generated via https://app-mockup.com/android/
+
+The design.json located here, combined with the raw screenshots, can be used to edit the final products
+
+A Google Pixel 3 Android 9 emulator with updated Google Chrome was used, following these instructions:
+https://www.inflectra.com/Support/KnowledgeBase/KB276.aspx
+
+To get the empty 9:00 status bar, activate Demo mode inside Developer Options
+(activate by tapping Build number in Software information multiple times)

@@ -1,0 +1,21 @@
+Title
+DDR Calc - Speed Mod & Target BPM Calculator
+
+
+Short description
+It's dance time! The clock is ticking! Fast speed mod calculator
+
+
+Full description
+(This is a Progressive Web App which requires Chrome; Chrome 75 and up are recommended.
+If you do not wish to use Chrome, visit the website listed below in your preferred browser for the same functionality.)
+
+Do you have a preferred reading speed?
+Just started playing DDR and still need to figure out what works best for you?
+Need to double-check while the clock's ticking down?
+Don't have all the multiplier tables for your favorite speed stuck in your head yet?
+
+DDR Calc to the rescue!
+It's a fast, offline-friendly, optimized-for-slow-connections calculator for all your BPM needs.
+Run simple calculations in Speed Mod mode or switch to Target BPM mode once you know your reading speed.
+All without hitting irrelevant keys or having to constantly use the delete key like in your default calculator app!
