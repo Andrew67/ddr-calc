@@ -1,6 +1,10 @@
 /*! DDR Calc | https://github.com/Andrew67/ddr-calc */
 /* Target BPM CSS */
 
+#mode-switcher#mode-switcher {
+    opacity: 1;
+}
+
 #mode-switcher span {
     display: inline-block;
     width: 50%;
