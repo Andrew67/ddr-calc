@@ -8,6 +8,8 @@
     text-align: left;
     width: 56px;
     height: 40px;
+    animation-name: fade-in;
+    animation-duration: .12s;
 }
 
 #menu, #about {

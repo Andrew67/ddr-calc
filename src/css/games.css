@@ -11,6 +11,16 @@
     font-weight: 500; /* Medium */
 }
 
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
 #game-btn {
     display: block;
     bottom: 16px;
@@ -20,6 +30,8 @@
     /* Increases the touch target for shorter game names, overflows long game names to next line */
     width: 45%;
     word-break: break-all;
+    animation-name: fade-in;
+    animation-duration: .12s;
 }
 
 /* Set the game button a little higher on devices showing the tab bar, to further avoid touching calculations */

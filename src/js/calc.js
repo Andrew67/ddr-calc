@@ -239,9 +239,9 @@ function commit () {
     dom.bpm.textContent = state.songBpm;
     dom.speedMod.textContent = state.speedModInt + state.speedModDec;
 
-    // Don't show result until there's a non-zero value available (implicitly depends on having complete inputs)
-    // This helps prevent startup flicker for users that prefer Target BPM mode
-    dom.result.textContent = (computedState.result === 0) ? '' : computedState.result;
+    // Until recently, we hid the result when it was 0
+    // Unfortunately, that loses us the implication that the calculator is ready to crunch some numbers
+    dom.result.textContent = computedState.result;
 
     // Run post-commit hooks
     postCommitHooks.forEach(function (hook) { hook(); });

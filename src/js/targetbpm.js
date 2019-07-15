@@ -177,10 +177,12 @@ Promise.all([
     commit();
     loadNextModule();
 
-    // Remove mode switch animation suppression after init
-    // Otherwise, frequent users that prefer target BPM mode will be hit with the slide animation on every startup
+    // Remove mode switch animation suppression after init, and cancel the mode switcher fade-in
+    // This suppression reduces the chance that the slide happens during the initial fade-in
+    // Canceling the mode switcher fade-in eliminates it fading in during window resize after initial load
     setTimeout(function () {
         document.getElementById('suppress-targetbpm-animation').remove();
+        document.getElementById('mode-switcher').style.animationDuration = '0s';
     }, 600);
 }).catch(function (err) {
     console.error("Error in targetbpm.js:", err, "\nModule loading has been halted");
