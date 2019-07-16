@@ -11,6 +11,10 @@
     font-weight: 500; /* Medium */
 }
 
+:root {
+    --duration-fade-in-extra: .12s; /* Duration of fade-in animation during loading of extra components */
+}
+
 @keyframes fade-in {
     from {
         opacity: 0;
@@ -31,7 +35,7 @@
     width: 45%;
     word-break: break-all;
     animation-name: fade-in;
-    animation-duration: .12s;
+    animation-duration: var(--duration-fade-in-extra);
 }
 
 /* Set the game button a little higher on devices showing the tab bar, to further avoid touching calculations */

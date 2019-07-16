@@ -9,7 +9,7 @@
     width: 56px;
     height: 40px;
     animation-name: fade-in;
-    animation-duration: .12s;
+    animation-duration: var(--duration-fade-in-extra);
 }
 
 #menu, #about {

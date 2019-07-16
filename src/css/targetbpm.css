@@ -10,6 +10,8 @@
     width: 50%;
     text-transform: uppercase;
     text-align: center;
+    animation-name: fade-in;
+    animation-duration: var(--duration-fade-in-extra);
 }
 
 #switch-speedmod {
