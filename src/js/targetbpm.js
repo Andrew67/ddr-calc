@@ -184,6 +184,10 @@ Promise.all([
         document.getElementById('suppress-targetbpm-animation').remove();
         document.getElementById('mode-switcher').style.animationDuration = '0s';
     }, 600);
+
+    // At this point, all main UI elements have loaded
+    // We can reduce the init fade-in animation time and be confident we avoided flicker effects
+    document.documentElement.style.setProperty('--duration-fade-in-delayed-init', '.25s');
 }).catch(function (err) {
     console.error("Error in targetbpm.js:", err, "\nModule loading has been halted");
 });
