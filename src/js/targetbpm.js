@@ -49,7 +49,11 @@ Promise.all([
         '</div>' +
         '<div><span id="high-result">x 2.5 = 450</span></div>' +
         '<div><span id="low-result">x 2.25 = 425</span></div>' +
-        '<style id="suppress-targetbpm-animation">#display > div { transition: none !important; }</style>';
+        '<style id="suppress-targetbpm-animation">' +
+            '#display > div { transition: none !important; } ' +
+            '.keypad li > span { transition: none !important } ' +
+            '#switch-underline { transition: none !important } ' +
+        '</style>';
 
     // localStorage keys
     const KEY_MODE = 'mode-v1', KEY_TARGETBPM = 'targetbpm';
