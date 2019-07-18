@@ -77,7 +77,7 @@ const MODE = { SPEEDMOD: 'm-speedmod', TARGETBPM: 'm-targetbpm' };
 const INPUT = { SONGBPM: 'songbpm', SPEEDMOD: 'speedmod', TARGETBPM: 'targetbpm' };
 const KEY = { MULT: '×', BPM: 'BPM', DEL: 'DEL' };
 const KEYTYPE = { INT: 'int', FUNC: 'func', DEC: 'dec' };
-const LONG_PRESS_MS = 450, SIMULATED_MOUSE_IGNORE_DELAY_MS = 500;
+const LONG_PRESS_MS = 450, SIMULATED_MOUSE_IGNORE_DELAY_MS = 500, SAVE_DEBOUNCE_MS = 1200;
 const LS_KEY = { SONGBPM: 'songbpm', SPEEDMOD_INT: 'speedModInt', SPEEDMOD_DEC: 'speedModDec' };
 
 /** App state object (user input) */
@@ -207,6 +207,32 @@ computedState.hooks.push(function disableDecKeysOutsideSpeedModInput () {
 computedState.hooks.push(function calculateResult () {
     computedState.result = Math.round(Number(state.songBpm) * Number(state.speedModInt + state.speedModDec));
 });
+
+// Save song BPM and selected speed mod after SAVE_DEBOUNCE_MS if inputs have changed
+computedState.hooks.push((function () {
+    let previousSongBpm = state.songBpm;
+    let previousSpeedModInt = state.speedModInt;
+    let previousSpeedModDec = state.speedModDec;
+    let debounceTimer = null;
+
+    return function saveBpmAndSpeedMod () {
+        if (debounceTimer) clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(function saveAfterDelay () {
+            if (state.songBpm !== previousSongBpm) {
+                previousSongBpm = state.songBpm;
+                localStorage.setAllowingLoss(LS_KEY.SONGBPM, previousSongBpm);
+            }
+            if (state.speedModInt !== previousSpeedModInt) {
+                previousSpeedModInt = state.speedModInt;
+                localStorage.setAllowingLoss(LS_KEY.SPEEDMOD_INT, previousSpeedModInt);
+            }
+            if (state.speedModDec !== previousSpeedModDec) {
+                previousSpeedModDec = state.speedModDec;
+                localStorage.setAllowingLoss(LS_KEY.SPEEDMOD_DEC, previousSpeedModDec);
+            }
+        }, SAVE_DEBOUNCE_MS);
+    }
+})());
 
 /** DOM elements. HTML is static so one query is enough */
 const dom = {
