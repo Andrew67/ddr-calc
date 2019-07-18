@@ -78,14 +78,15 @@ const INPUT = { SONGBPM: 'songbpm', SPEEDMOD: 'speedmod', TARGETBPM: 'targetbpm'
 const KEY = { MULT: '×', BPM: 'BPM', DEL: 'DEL' };
 const KEYTYPE = { INT: 'int', FUNC: 'func', DEC: 'dec' };
 const LONG_PRESS_MS = 450, SIMULATED_MOUSE_IGNORE_DELAY_MS = 500;
+const LS_KEY = { SONGBPM: 'songbpm', SPEEDMOD_INT: 'speedModInt', SPEEDMOD_DEC: 'speedModDec' };
 
 /** App state object (user input) */
 const state = {
     mode: MODE.SPEEDMOD,
     input: INPUT.SONGBPM,
-    songBpm: '',
-    speedModInt: '',
-    speedModDec: ''
+    songBpm: localStorage.getItem(LS_KEY.SONGBPM) || '',
+    speedModInt: localStorage.getItem(LS_KEY.SPEEDMOD_INT) || '',
+    speedModDec: localStorage.getItem(LS_KEY.SPEEDMOD_DEC) || ''
 };
 
 /** App computed state object (state that's derived from {@link state} */
