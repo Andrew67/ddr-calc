@@ -136,10 +136,8 @@ Promise.all([
             state.gameId = Number(dom.gameSettingsForm.elements['gameid'].value);
             computedState.update();
 
-            try {
-                localStorage.setItem(KEY_GAMEID, state.gameId);
-                localStorage.setItem(KEY_PREMIUMPLAY, state.premiumPlayEnabled);
-            } catch (e) { /* Silently fail on exception (namely Safari in private browsing mode) */ }
+            localStorage.setAllowingLoss(KEY_GAMEID, state.gameId);
+            localStorage.setAllowingLoss(KEY_PREMIUMPLAY, state.premiumPlayEnabled);
         }
 
         state.gameSettingsOpen = newGameSettingsOpen;

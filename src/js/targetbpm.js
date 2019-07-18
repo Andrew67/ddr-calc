@@ -141,10 +141,7 @@ Promise.all([
         if (state.mode !== previousMode) {
             previousMode = state.mode;
             dom.app.classList.toggle('targetbpm', state.mode === MODE.TARGETBPM);
-
-            try {
-                localStorage.setItem(KEY_MODE, state.mode);
-            } catch (e) { /* Silently fail on exception (namely Safari in private browsing mode) */ }
+            localStorage.setAllowingLoss(KEY_MODE, state.mode);
 
             // Switching to target BPM? Set active input to song BPM
             // Otherwise, set to speedmod if song bpm is full and switching to that mode
@@ -170,13 +167,10 @@ Promise.all([
         if (state.targetBpm.length !== previousTargetBpmLength) {
             previousTargetBpmLength = state.targetBpm.length;
             if (state.targetBpm.length === 3) {
-                try {
-                    localStorage.setItem(KEY_TARGETBPM, state.targetBpm);
-                } catch (e) { /* Silently fail on exception (namely Safari in private browsing mode) */ }
+                localStorage.setAllowingLoss(KEY_TARGETBPM, state.targetBpm);
             }
         }
     });
-
     computedState.update();
     commit();
     loadNextModule();

@@ -21,9 +21,7 @@ try {
     // Manual toggle
     addMenuItem(5, 'Dark Theme On/Off', () => {
         state.darkModeEnabled = !state.darkModeEnabled;
-        try {
-            localStorage.setItem(KEY_DARKMODE, state.darkModeEnabled);
-        } catch (e) { /* Silently fail on exception (namely Safari in private browsing mode) */ }
+        localStorage.setAllowingLoss(KEY_DARKMODE, state.darkModeEnabled);
         commit();
     }, {
         title: () => state.darkModeEnabled ? 'Light Theme' : 'Dark Theme',

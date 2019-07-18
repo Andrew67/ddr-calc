@@ -13,6 +13,16 @@ const isGPlay = document.referrer === 'android-app://com.andrew67.ddrcalc' ||
     document.referrer.includes('play.google.com') || location.hash.includes('gplay');
 
 /**
+ * Works like setItem, but silently catches all exceptions (most likely QuotaExceededException)
+ * Most likely to happen on Safari (iOS <= 10.3) incognito mode and users with full storage on their phones
+ */
+Storage.prototype.setAllowingLoss = function (key, value) {
+    try {
+        this.setItem(key, value);
+    } catch (e) { }
+};
+
+/**
  * List of additional scripts to lazy-load after this one loads core app shell and calculator functionality
  */
 const asyncModules = [
