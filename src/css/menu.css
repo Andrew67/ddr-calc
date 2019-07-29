@@ -65,7 +65,7 @@ a {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 275px;
+    width: 300px;
     max-height: calc(100% - 88px);
     max-width: calc(100% - 88px);
     overflow: auto;
@@ -78,8 +78,7 @@ a {
 }
 
 #about-box ul {
-    margin-left: 25px;
-    margin-right: 8px;
+    margin: 16px 8px 8px 25px;
     padding: 0;
 }
 
