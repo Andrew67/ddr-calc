@@ -55,7 +55,7 @@ html, body {
 
 body {
     margin: 0;
-    font-family: "Roboto", system-ui, sans-serif;
+    font-family: "Roboto", system-ui, -apple-system, sans-serif;
     background-color: var(--color-background);
     color: var(--color-foreground);
 
