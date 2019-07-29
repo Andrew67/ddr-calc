@@ -28,6 +28,14 @@ try {
         hidden: () => darkModeMediaQuery.matches
     });
 
+    // Safari does not yet support addEventListener on MediaQueryList objects
+    if (!('addEventListener' in darkModeMediaQuery)) {
+        darkModeMediaQuery.addEventListener = function (evt, callback) {
+            // noinspection JSDeprecatedSymbols
+            this.addListener(callback);
+        };
+    }
+
     // Automatic toggle
     darkModeMediaQuery.addEventListener('change', () => {
         state.darkModeEnabled = isDarkModePreferred();
