@@ -77,7 +77,7 @@ const MODE = { SPEEDMOD: 'm-speedmod', TARGETBPM: 'm-targetbpm' };
 const INPUT = { SONGBPM: 'songbpm', SPEEDMOD: 'speedmod', TARGETBPM: 'targetbpm' };
 const KEY = { MULT: '×', BPM: 'BPM', DEL: 'DEL' };
 const KEYTYPE = { INT: 'int', FUNC: 'func', DEC: 'dec' };
-const LONG_PRESS_MS = 450, SIMULATED_MOUSE_IGNORE_DELAY_MS = 500, SAVE_DEBOUNCE_MS = 1200;
+const LONG_PRESS_MS = 450, SIMULATED_MOUSE_IGNORE_DELAY_MS = 500, SAVE_DEBOUNCE_MS = 700;
 const LS_KEY = { SONGBPM: 'songbpm', SPEEDMOD_INT: 'speedModInt', SPEEDMOD_DEC: 'speedModDec' };
 
 /** App state object (user input) */
