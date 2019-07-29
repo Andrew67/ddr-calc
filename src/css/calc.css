@@ -70,6 +70,11 @@ body {
 }
 
 * {
+    /* Recommended CSS reset from https://internetingishard.com/html-and-css/css-box-model/ */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
     /* Cancel iOS highlighting of buttons since we have our own */
     -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
