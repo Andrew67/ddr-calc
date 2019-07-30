@@ -62,7 +62,9 @@ function loadNextModule () {
 }
 
 // See: https://developers.google.com/web/fundamentals/primers/service-workers/
+let lastUpdateCheck = Date.now();
 if ('serviceWorker' in navigator) {
+    asyncModules.push('update');
     window.addEventListener('load', function() {
         // noinspection JSIgnoredPromiseFromCall
         navigator.serviceWorker.register('./sw.js'); // eslint-disable-line

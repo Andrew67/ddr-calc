@@ -22,6 +22,7 @@
     Header add Link "</img/md-music_note.svg>; rel=preload; as=fetch; crossorigin"
     Header add Link "</img/np-target.svg>; rel=preload; as=fetch; crossorigin"
     # Lack of dark mode toggle script is intentional
+    # Lack of update checker script is intentional
 </Files>
 
 <FilesMatch "\.html$">

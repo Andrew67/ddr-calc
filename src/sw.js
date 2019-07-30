@@ -28,7 +28,9 @@ self.addEventListener('install', function(event) {
                 'css/targetbpm.css',
                 'img/md-music_note.svg',
                 'img/np-target.svg',
-                'js/dark.js'
+                'js/dark.js',
+                'js/update.js',
+                'css/update.css'
             ]);
         })
     );
@@ -61,4 +63,9 @@ self.addEventListener('fetch', function(event) {
             })
         })
     );
+});
+
+// Allow front-end to signal to the SW that it should activate immediately
+self.addEventListener('message', messageEvent => {
+    if (messageEvent.data === 'skipWaiting') return self.skipWaiting();
 });
