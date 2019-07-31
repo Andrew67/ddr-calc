@@ -49,3 +49,4 @@ and disabling input of unavailable speed modifiers
  * [RemyWiki](https://remywiki.com/)'s DDR pages for listing added/removed speed modifiers per mix
  * [pngquant](https://pngquant.org/) for reducing the app icon PNGs by over 50%
  * [AppMockUp](https://app-mockup.com/) for their fun app store mock-up tool
+ * [Redfin Engineering](https://redfin.engineering/how-to-fix-the-refresh-button-when-using-service-workers-a8e27af6df68) for their comprehensive practical Service Worker upgrade guide

@@ -18,9 +18,12 @@ try {
 
     // reload once when the new Service Worker starts activating
     let refreshing = false;
+    // Don't do auto-refresh without user interaction
+    // This lets us have the first service worker that loads claim control of the app when it loads without refreshing
+    let shouldRefresh = false;
     // eslint-disable-next-line compat/compat
     navigator.serviceWorker.addEventListener('controllerchange', function () {
-        if (refreshing) return;
+        if (refreshing || !shouldRefresh) return;
         refreshing = true;
         window.location.reload();
     });
@@ -29,6 +32,7 @@ try {
     navigator.serviceWorker.getRegistration().then(function (reg) {
         const callback = function () {
             computedState.updateAvailable = true;
+            shouldRefresh = true;
             document.getElementById('apply-update').addEventListener('click', function () {
                 reg.waiting.postMessage('skipWaiting');
             });
