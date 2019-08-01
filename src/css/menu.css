@@ -87,13 +87,13 @@ a {
 }
 
 #app-logo * {
-    margin: 4px 0 4px 0;
+    margin: 4px 0;
     text-align: center;
 }
 
 #app-logo img {
     display: block;
-    margin: 0 auto;
+    margin: 8px auto;
 }
 
 #app-logo h1 {
