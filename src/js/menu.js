@@ -163,6 +163,15 @@ fetch('img/md-more_vert.svg')
         });
     }
 
+    // Set up "Force Reload" shortcut for iOS home-screen app users
+    // iOS 12.2 introduced behavior where the page state is always frozen, which also causes updates to get stuck
+    if (isMobileSafari) {
+        addMenuItem(99, 'Force Reload', function () {
+            history.replaceState({}, '', '');
+            location.reload();
+        });
+    }
+
     commit();
     loadNextModule();
 }).catch(function (err) {
