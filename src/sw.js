@@ -13,6 +13,7 @@ self.addEventListener('install', event => {
             'manifest.json',
             'favicon.png',
             'img/icon-192.png',
+            'img/logo-192.png',
             'css/calc.css',
             'js/calc.js',
             'js/games.js',
