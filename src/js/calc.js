@@ -8,9 +8,16 @@
 /** Detect Mobile Safari via presence of non-standard navigator.standalone field */
 const isMobileSafari = 'standalone' in navigator || location.hash.includes('saf');
 
-/** Detect app loaded via Google Play (for compliance with Google Play developer policies) */
+/**
+ * Detect app loaded via Google Play (for compliance with Google Play developer policies).
+ * The sessionStorage method is used to preserve Google Play mode across reloads,
+ * which change the referrer (namely Apply Update button in About), but only within the session that triggers it.
+ */
 const isGPlay = document.referrer === 'android-app://com.andrew67.ddrcalc' ||
-    document.referrer.includes('play.google.com') || location.hash.includes('gplay');
+    document.referrer.includes('play.google.com') ||
+    sessionStorage.getItem('gplay') === 'true' ||
+    location.hash.includes('gplay');
+if (isGPlay) sessionStorage.setItem('gplay', 'true');
 
 /**
  * Works like setItem, but silently catches all exceptions (most likely QuotaExceededException)
