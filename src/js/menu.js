@@ -159,7 +159,8 @@ fetch('img/md-more_vert.svg')
     // Set up top-level Privacy Policy shortcut for Google Play users
     if (isGPlay) {
         addMenuItem(200, 'Privacy Policy', function () {
-            location.assign('privacy-policy.html');
+            // The original code with no timeout began to fail starting in Chrome 76
+            setTimeout(() => location.assign('privacy-policy.html'), 300);
         });
     }
 
