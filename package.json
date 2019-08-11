@@ -21,12 +21,9 @@
   },
   "homepage": "https://github.com/Andrew67/ddr-calc#readme",
   "devDependencies": {
-    "browserslist": "^4.6.4",
-    "caniuse-lite": "^1.0.30000983",
     "eslint": "^5.16.0",
     "eslint-plugin-compat": "^3.2.0",
     "stylelint": "^10.1.0",
-    "stylelint-no-unsupported-browser-features": "^3.0.2",
-    "lodash": ">=4.17.13"
+    "stylelint-no-unsupported-browser-features": "^3.0.2"
   }
 }
