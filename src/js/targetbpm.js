@@ -10,7 +10,7 @@ Promise.all([
     fetch('img/md-music_note.svg'), fetch('img/np-target.svg')
 ]).then(function (r) {
     return Promise.all([r[0].text(), r[1].text()]);
-}).then(function (data) {
+}).then(function initTargetBpmModule (data) {
     const songIcon = '<span class="svg-icon">' + data[0] + '</span>',
         targetIcon = '<span class="svg-icon">' + data[1] + '</span>';
 
@@ -21,11 +21,11 @@ Promise.all([
         '<div id="switch-underline"></div>';
     document.getElementById('switch-speedmod').addEventListener('click', function () {
         action.setMode(MODE.SPEEDMOD);
-        commit();
+        toggleTargetBpmMode(); // direct call in order to avoid a commit() cycle
     });
     document.getElementById('switch-targetbpm').addEventListener('click', function () {
         action.setMode(MODE.TARGETBPM);
-        commit();
+        toggleTargetBpmMode();
     });
 
     // Set up menu entry for smaller devices where the tabs won't show
@@ -136,8 +136,8 @@ Promise.all([
     });
 
     // Post-commit hooks to update DOM
-    let previousMode = null;
-    postCommitHooks.push(function toggleTargetBpmMode () {
+    let previousMode = MODE.SPEEDMOD;
+    function toggleTargetBpmMode () {
         if (state.mode !== previousMode) {
             previousMode = state.mode;
             dom.app.classList.toggle('targetbpm', state.mode === MODE.TARGETBPM);
@@ -149,7 +149,9 @@ Promise.all([
             else action.setActiveInput((state.songBpm.length === 3) ? INPUT.SPEEDMOD : INPUT.SONGBPM);
             commit();
         }
-    });
+    }
+    postCommitHooks.push(toggleTargetBpmMode);
+
     postCommitHooks.push(function updateDisplay () {
         dom.songBpm.textContent = state.songBpm;
         dom.songBpm.classList.toggle('active', state.input === INPUT.SONGBPM);

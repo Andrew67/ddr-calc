@@ -10,7 +10,7 @@ Promise.all([
     fetch('img/fa-gamepad.svg'), fetch('img/md-check_box.svg'), fetch('img/md-radio_button.svg')
 ]).then(function (r) {
     return Promise.all([r[0].json(), r[1].text(), r[2].text(), r[3].text()]);
-}).then(function (data) {
+}).then(function initGamesModule (data) {
     const gameData = data[0],
         gamepad = '<span class="svg-icon">' + data[1] + '</span>',
         checkbox = '<span class="svg-icon">' + data[2] + '</span>',

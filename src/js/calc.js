@@ -293,7 +293,7 @@ function commit () {
     postCommitHooks.forEach(function (hook) { hook(); });
 }
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function initKeypad () {
     // Init DOM
     dom.app = document.getElementById('app');
     dom.bpm = document.getElementById('bpm');

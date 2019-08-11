@@ -9,7 +9,7 @@ addStylesheet('menu');
 fetch('img/md-more_vert.svg')
 .then(function (img) {
     return img.text();
-}).then(function (menuBtn) {
+}).then(function initMenuModule (menuBtn) {
     // Load HTML for the menu button
     const container = document.createElement('div');
     container.innerHTML = '<span id="menu-btn" class="overlay">' + menuBtn + '</span>';
