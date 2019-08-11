@@ -119,7 +119,7 @@ Promise.all([
 
     // Show the game settings when the name is clicked, hide when the scrim is clicked
     // Using history.pushState and onpopstate so that browser/Android back button can dismiss the settings
-    document.getElementById('game-btn').addEventListener('click', function () {
+    document.getElementById('game-btn').addEventListener('click', function showGameSettings () {
         state.gameSettingsOpen = true;
         commit();
         history.pushState({ gameSettingsOpen: true }, "", "");
@@ -127,7 +127,7 @@ Promise.all([
     document.querySelectorAll('#game-settings .scrim, #game-settings input[name=gameid]').forEach(function (e) {
         e.addEventListener('click', function () { history.back(); });
     });
-    window.addEventListener('popstate', function (event) {
+    window.addEventListener('popstate', function handleGameSettingsStateChange (event) {
         const newGameSettingsOpen = Boolean(event.state && event.state.gameSettingsOpen);
 
         // Commit settings to state upon dismissal (avoids running a postCommit hook on every keypress)
@@ -140,8 +140,11 @@ Promise.all([
             localStorage.setAllowingLoss(KEY_PREMIUMPLAY, state.premiumPlayEnabled);
         }
 
-        state.gameSettingsOpen = newGameSettingsOpen;
-        commit();
+        // Commit state change upon actual change (avoids running a postCommit hook on every browser navigation)
+        if (state.gameSettingsOpen !== newGameSettingsOpen) {
+            state.gameSettingsOpen = newGameSettingsOpen;
+            commit();
+        }
     });
     postCommitHooks.push( function showHideGameSettings () {
         dom.gameSettings.classList.toggle('show', state.gameSettingsOpen);

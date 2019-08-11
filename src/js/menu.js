@@ -37,7 +37,7 @@ fetch('img/md-more_vert.svg')
         dom.menuListItems = [];
         menuItems.forEach(function (menuItem) {
             const menuItemDOM = document.createElement('li');
-            menuItemDOM.addEventListener('click', function (evt) {
+            menuItemDOM.addEventListener('click', function menuItemAction (evt) {
                 let preventPropagation = menuItem.options.disabled();
 
                 if (!menuItem.options.disabled()) {
@@ -90,7 +90,7 @@ fetch('img/md-more_vert.svg')
     // Show the menu when the button is clicked, hide when the invisible scrim is clicked
     // Using history.pushState and onpopstate so that browser/Android back button can dismiss the settings
     // Based on code from games module
-    document.getElementById('menu-btn').addEventListener('click', function () {
+    document.getElementById('menu-btn').addEventListener('click', function openMenu () {
         state.menuOpen = true;
         commit();
         history.pushState({ menuOpen: true }, "", "");
@@ -98,9 +98,12 @@ fetch('img/md-more_vert.svg')
     document.getElementById('menu').addEventListener('click', function () {
         history.back();
     });
-    window.addEventListener('popstate', function (event) {
-        state.menuOpen = Boolean(event.state && event.state.menuOpen);
-        commit();
+    window.addEventListener('popstate', function handleMenuStateChange (event) {
+        const newMenuOpen = Boolean(event.state && event.state.menuOpen);
+        if (state.menuOpen !== newMenuOpen) {
+            state.menuOpen = newMenuOpen;
+            commit();
+        }
     });
 
     postCommitHooks.push( function showHideMenu () {
@@ -140,16 +143,19 @@ fetch('img/md-more_vert.svg')
     state.aboutOpen = Boolean(history.state && history.state.aboutOpen);
 
     // Show/hide code
-    addMenuItem(100, 'About', function () {
+    addMenuItem(100, 'About', function openAbout () {
         state.aboutOpen = true;
         commit();
         history.replaceState({ aboutOpen: true }, "", "");
     });
     document.querySelector('#about .scrim')
         .addEventListener('click', function () { history.back(); });
-    window.addEventListener('popstate', function (event) {
-        state.aboutOpen = Boolean(event.state && event.state.aboutOpen);
-        commit();
+    window.addEventListener('popstate', function handleAboutStateChange (event) {
+        const newAboutOpen = Boolean(event.state && event.state.aboutOpen);
+        if (state.aboutOpen !== newAboutOpen) {
+            state.aboutOpen = newAboutOpen;
+            commit();
+        }
     });
 
     postCommitHooks.push( function showHideAbout () {
