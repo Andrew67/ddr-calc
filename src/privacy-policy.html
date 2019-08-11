@@ -8,6 +8,8 @@
         body {
             font-family: "Roboto", system-ui, sans-serif;
             padding: 1em;
+            background-color: white;
+            color: rgba(0,0,0,.87);
         }
         #toolbar {
             width: calc(100% - 32px);
@@ -29,6 +31,13 @@
         #i-arrow-left {
             cursor: pointer;
         }
+        body.dark {
+            background-color: black;
+            color: rgba(255,255,255,.87);
+        }
+        body.dark a {
+            color: #90caf9;
+        }
     </style>
     <link rel="icon" sizes="48x48" href="favicon.png">
 </head>
@@ -41,11 +50,14 @@
     </svg>
 </div>
 <script>
-    if (history.length > 1) {
+    if (history.length > 1 && !navigator['standalone']) {
         document.body.classList.add('show-toolbar');
         document.getElementById('i-arrow-left').addEventListener('click', function () {
             history.back();
         });
+    }
+    if (localStorage.getItem('dark-mode') === 'true' || window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
     }
 </script>
 
