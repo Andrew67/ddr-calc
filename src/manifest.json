@@ -23,7 +23,7 @@
   "display": "standalone",
   "orientation": "portrait",
   "scope": "./",
-  "theme_color": "#263238",
+  "theme_color": "#ffffff",
   "related_applications": [
     {
       "platform": "play",
