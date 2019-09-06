@@ -44,7 +44,7 @@ try {
 
     postCommitHooks.push(function toggleDarkMode () {
         document.body.classList.toggle('theme-dark', state.darkModeEnabled);
-        dom.themeColor.content = state.darkModeEnabled ? '#000000' : '#ffffff';
+        dom.themeColor.content = state.darkModeEnabled ? '#121212' : '#ffffff';
     });
 
     // No commit required, as toggleDarkMode above must match the flicker-free block that already ran in index.html

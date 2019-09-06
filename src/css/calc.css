@@ -27,7 +27,7 @@
 
 /* Dark theme; added here to load ASAP for flicker-free UI purposes for returning users */
 body.theme-dark {
-    --color-background: black;
+    --color-background: #121212;
     --color-surface: #373737; /* Material Design 24dp elevation / 16% white overlay */
 
     --color-foreground: rgba(255,255,255,.87);
