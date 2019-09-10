@@ -33,15 +33,14 @@ a {
 */
 #menu-popup {
     display: inline-block;
-    background-color: var(--color-surface);
+    background-color: var(--color-surface-z8);
+    box-shadow: var(--shadow-surface-z8);
     border-radius: 8px;
     min-width: 112px;
     /* Place on top of menu button */
     position: relative;
     top: 16px;
     left: 12px;
-    /* Box Shadow Level 3 from https://medium.com/@Florian/freebie-google-material-design-shadow-helper-2a0501295a2d */
-    box-shadow: 0 2px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
     /* Expand animation from top-left corner */
     transform: scale(.5, .5);
     transform-origin: top left;
@@ -70,11 +69,10 @@ a {
     max-width: calc(100% - 88px);
     overflow: auto;
     transform: translate(-50%, -50%);
-    background-color: var(--color-surface);
+    background-color: var(--color-surface-z24);
+    box-shadow: var(--shadow-surface-z24);
     border-radius: 15px;
     padding: 8px;
-    /* Box Shadow Level 5 from https://medium.com/@Florian/freebie-google-material-design-shadow-helper-2a0501295a2d */
-    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
 }
 
 #about-box ul {

@@ -93,15 +93,14 @@
 
 .side-sheet {
     position: absolute;
-    background-color: var(--color-surface);
+    background-color: var(--color-surface-z16);
+    box-shadow: var(--shadow-surface-z16);
     top: 0;
     left: 100%;
     height: 100%;
     /* For slim screens, leave some space for dismissal scrim, and add scrollbars */
     max-width: calc(100% - 44px);
     overflow: auto;
-    /* Box Shadow Level 4 from https://medium.com/@Florian/freebie-google-material-design-shadow-helper-2a0501295a2d */
-    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
     /* Material Design Accelerate/exit easing: https://material.io/design/motion/speed.html#easing */
     transition: transform .2s cubic-bezier(0.4, 0.0, 1, 1);
 }
