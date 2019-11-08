@@ -5,6 +5,7 @@
 :root {
     /* Material Design elevation; see https://material.io/design/environment/elevation.html#default-elevations */
     --color-surface-z0: white; /* Lowest level; essentially the display */
+    --color-surface-z1: white; /* Card */
     --color-surface-z8: white; /* Menu */
     --color-surface-z16: white; /* Modal side sheet */
     --color-surface-z24: white; /* Dialog */
@@ -16,6 +17,7 @@
 
     --color-accent: #1976d2; /* Material Blue 700; same as DDR Finder primary color */
     --color-accent-lg: #004ba0; /* Material Blue 700 Dark; variant for larger UI elements */
+    --color-accent-focus: rgba(25, 118, 210, .12); /* Variant of Material Blue 700 for focused elements on surface */
 
     --color-result: #00600f; /* Material Green 700 Dark */
 
@@ -28,6 +30,7 @@
     --duration-fade-in-delayed-init: .6s; /* Duration of fade-in-delayed animation during init */
 
     /* Shadows; sourced from https://material-components.github.io/material-components-web-catalog/#/component/elevation */
+    --shadow-surface-z1: 0 2px 1px -1px rgba(0,0,0,.2),0 1px 1px 0 rgba(0,0,0,.14),0 1px 3px 0 rgba(0,0,0,.12);
     --shadow-surface-z8: 0 5px 5px -3px rgba(0,0,0,.2),0 8px 10px 1px rgba(0,0,0,.14),0 3px 14px 2px rgba(0,0,0,.12);
     --shadow-surface-z16: 0 8px 10px -5px rgba(0,0,0,.2),0 16px 24px 2px rgba(0,0,0,.14),0 6px 30px 5px rgba(0,0,0,.12);
     --shadow-surface-z24: 0 11px 15px -7px rgba(0,0,0,.2),0 24px 38px 3px rgba(0,0,0,.14),0 9px 46px 8px rgba(0,0,0,.12);
@@ -37,6 +40,7 @@
 body.theme-dark {
     /* Dark theme overlay-based elevations; see https://material.io/design/color/dark-theme.html#properties */
     --color-surface-z0: #121212;
+    --color-surface-z1: #1d1d1d; /* 5% white overlay */
     --color-surface-z8: #2d2d2d; /* 12% white overlay */
     --color-surface-z16: #353535; /* 15% white overlay */
     --color-surface-z24: #373737; /* 16% white overlay */
@@ -48,6 +52,7 @@ body.theme-dark {
 
     --color-accent: #90caf9; /* Material Blue 200 */
     --color-accent-lg: #bbdefb; /* Material Blue 100 */
+    --color-accent-focus: rgba(144, 202, 249, .12); /* Variant of Material Blue 200 for focused elements on surface */
 
     --color-result: #c8e6c9; /* Material Green 100 */
 
@@ -66,9 +71,8 @@ html, body {
 }
 
 body {
-    margin: 0;
     font-family: "Roboto", system-ui, -apple-system, sans-serif;
-    background-color: var(--color-surface-z0);
+    background: var(--color-surface-z0);
     color: var(--color-foreground);
 
     /* Block text selection for app-like experience */
@@ -87,8 +91,19 @@ body {
     padding: 0;
     box-sizing: border-box;
 
-    /* Cancel iOS highlighting of buttons since we have our own */
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-tap-highlight-color: rgba(0,0,0,0); /* Cancel iOS highlighting of buttons since we have our own */
+    transition: background-color .1s; /* Default fade across states (focused, active, etc) and theme switches */
+}
+
+button {
+    font: inherit;
+    color: currentColor;
+    background: transparent;
+    border: 0;
+}
+
+button::-moz-focus-inner {
+    border: 0;
 }
 
 @keyframes fade-in-delayed {
@@ -105,12 +120,7 @@ body {
     }
 }
 
-#calculator ul, #menu ul {
-    margin: 0;
-    padding: 0;
-}
-
-#calculator li, #menu li {
+#calculator li, #menu li, #song-list li {
     list-style: none;
 }
 
@@ -192,13 +202,13 @@ body {
 
 #keypad-main {
     width: 75%;
-    background-color: var(--color-keypad-bg);
+    background: var(--color-keypad-bg);
     float: left;
 }
 
 #keypad-ext {
     width: 25%;
-    background-color: var(--color-keypad-ext-bg);
+    background: var(--color-keypad-ext-bg);
     float: right;
 }
 
@@ -207,7 +217,6 @@ body {
     width: 33%;
     height: 25%;
     vertical-align: top;
-    transition: background-color .1s;
 }
 
 /* Reduce font size for BPM key */
@@ -229,7 +238,7 @@ body {
 }
 
 .keypad li.active {
-    background-color: var(--color-keypad-bg-active);
+    background: var(--color-keypad-bg-active);
 }
 
 .keypad li.active > span {
