@@ -63,6 +63,7 @@ Promise.all([
     state.targetBpm = localStorage.getItem(KEY_TARGETBPM) || '450';
     computedState.highResult = '';
     computedState.lowResult = '';
+    computedState.bothResultsResolved = false;
     computedState.shouldEmphasizeHighResult = false;
     dom.songBpm = document.getElementById('songbpm');
     dom.songBpmIcon = document.getElementById('songbpm-icon');
@@ -96,7 +97,10 @@ Promise.all([
     const LOW_START = 0, HIGH_START = 10;
     computedState.hooks.push(function calculateTargetBpmMods () {
         // Skip calculation until both BPM fields are filled
-        if (state.songBpm.length < 3 || state.targetBpm.length < 3 ||
+        // Until 3.2.2, this required song BPM to be of length 3, for which adding a leading 0 may not be intuitive,
+        // since it's not required in speed mod mode, therefore the minimum qualifier is now a song BPM of at least 50
+        // (the lowest constant BPM in DDR according to RemyWiki)
+        if ((state.songBpm.length < 3 && state.songBpm < 50) || state.targetBpm.length < 3 ||
             state.songBpm === '000' || state.targetBpm === '000') {
             computedState.lowResult = '';
             computedState.highResult = '';
@@ -130,8 +134,8 @@ Promise.all([
             else computedState.lowResult = 'x ' + lowSpeedMod + ' = ' + Math.round(state.songBpm * lowSpeedMod);
 
             // Hint to bold the higher speed mod when both resolved and it's the closest
-            computedState.shouldEmphasizeHighResult = computedState.highResult && computedState.lowResult &&
-                highSpeedMod - idealSpeedMod < idealSpeedMod - lowSpeedMod;
+            computedState.bothResultsResolved = Boolean(computedState.highResult && computedState.lowResult);
+            computedState.shouldEmphasizeHighResult = highSpeedMod - idealSpeedMod < idealSpeedMod - lowSpeedMod;
         }
     });
 
@@ -161,8 +165,10 @@ Promise.all([
         dom.targetBpmIcon.classList.toggle('active', state.input === INPUT.TARGETBPM);
         dom.highResult.textContent = computedState.highResult;
         dom.lowResult.textContent = computedState.lowResult;
-        dom.highResult.classList.toggle('ideal', computedState.shouldEmphasizeHighResult);
-        dom.lowResult.classList.toggle('ideal', !computedState.shouldEmphasizeHighResult);
+        dom.highResult.classList.toggle('ideal',
+            computedState.bothResultsResolved && computedState.shouldEmphasizeHighResult);
+        dom.lowResult.classList.toggle('ideal',
+            computedState.bothResultsResolved && !computedState.shouldEmphasizeHighResult);
     });
     let previousTargetBpmLength = 0;
     postCommitHooks.push(function saveTargetBpm () {
