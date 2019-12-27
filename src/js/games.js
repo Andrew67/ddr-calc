@@ -124,8 +124,12 @@ Promise.all([
         commit();
         history.pushState({ gameSettingsOpen: true }, "", "");
     });
-    document.querySelectorAll('#game-settings .scrim, #game-settings input[name=gameid]').forEach(function (e) {
-        e.addEventListener('click', function () { history.back(); });
+    document.querySelectorAll('#game-settings .scrim, #game-settings label').forEach(function (e) {
+        // Using mouseup as original click event would trigger the dismissal when keyboarding through the radio group
+        e.addEventListener('mouseup', function () { history.back(); });
+    });
+    document.querySelector('#game-settings form').addEventListener('keyup', function (e) {
+        if (state.gameSettingsOpen && (e.key === 'Enter' || e.key === 'Escape')) history.back();
     });
     window.addEventListener('popstate', function handleGameSettingsStateChange (event) {
         const newGameSettingsOpen = Boolean(event.state && event.state.gameSettingsOpen);

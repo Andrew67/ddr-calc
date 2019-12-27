@@ -14,10 +14,11 @@
     --color-foreground-medium: rgba(0,0,0,.6);
     --color-foreground-medium-lg: rgba(0,0,0,.7); /* Variant for larger UI elements */
     --color-foreground-disabled: rgba(0,0,0,.38);
+    --color-foreground-focus: rgba(0,0,0,.12); /* Variant for non-selected focused elements on surface */
 
     --color-accent: #1976d2; /* Material Blue 700; same as DDR Finder primary color */
     --color-accent-lg: #004ba0; /* Material Blue 700 Dark; variant for larger UI elements */
-    --color-accent-focus: rgba(25, 118, 210, .12); /* Variant of Material Blue 700 for focused elements on surface */
+    --color-accent-focus: rgba(25,118,210,.12); /* Variant of Material Blue 700 for selected focused elements on surface */
 
     --color-result: #00600f; /* Material Green 700 Dark */
 
@@ -49,10 +50,11 @@ body.theme-dark {
     --color-foreground-medium: rgba(255,255,255,.6);
     --color-foreground-medium-lg: rgba(255,255,255,.7);
     --color-foreground-disabled: rgba(255,255,255,.38);
+    --color-foreground-focus: rgba(255,255,255,.12);
 
     --color-accent: #90caf9; /* Material Blue 200 */
     --color-accent-lg: #bbdefb; /* Material Blue 100 */
-    --color-accent-focus: rgba(144, 202, 249, .12); /* Variant of Material Blue 200 for focused elements on surface */
+    --color-accent-focus: rgba(144,202,249,.12); /* Variant of Material Blue 200 for focused elements on surface */
 
     --color-result: #c8e6c9; /* Material Green 100 */
 
@@ -92,6 +94,10 @@ body {
     box-sizing: border-box;
 
     -webkit-tap-highlight-color: rgba(0,0,0,0); /* Cancel iOS highlighting of buttons since we have our own */
+    transition: background-color .1s; /* Default fade across states (focused, active, etc) and theme switches */
+}
+
+*::before {
     transition: background-color .1s; /* Default fade across states (focused, active, etc) and theme switches */
 }
 
