@@ -180,9 +180,10 @@ input:checked + span svg .checked {
 input + span.svg-icon::before {
     content: '';
     position: absolute;
+    top: 0;
     left: -16px;
-    width: calc(100% + 16px);
-    height: 100%;
+    right: 0;
+    bottom: 0;
 }
 
 input:focus + span.svg-icon::before {
