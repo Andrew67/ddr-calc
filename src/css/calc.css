@@ -135,6 +135,51 @@ button::-moz-focus-inner {
     height: 100%;
 }
 
+/* Incompatible browser overlay; these should work down to Android 4.4 */
+#browser-dialog {
+    position: absolute;
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 0.64);
+    width: 100%;
+    height: 100%;
+    animation-name: fade-in-delayed;
+    animation-duration: 1s;
+}
+
+#browser-dialog > div {
+    background: white;
+    background: var(--color-surface-z24);
+    border-radius: 15px;
+    padding: 8px;
+    width: 80%;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+}
+
+#browser-dialog h1 {
+    font-size: 18px;
+    margin: 0;
+    text-align: center;
+}
+
+#browser-dialog p {
+    margin: 8px 8px 0;
+}
+
+#browser-dialog ul {
+    padding-left: 25px;
+    margin: 8px 0;
+}
+
+#browser-dialog p.footer {
+    text-align: center;
+    margin: 4px;
+}
+
+/* Calculator */
 #display {
     width: 100%;
     height: 30%;

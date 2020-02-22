@@ -42,11 +42,11 @@
 <body>
 <div id="app">
     <!-- Incompatible browser overlay -->
-    <div id="browser-dialog" style="position: absolute; z-index: 10; background-color: rgba(0, 0, 0, 0.64); width: 100%; height: 100%; animation-name: fade-in-delayed; animation-duration: 1s">
-        <div style="background: white; background: var(--color-surface-z24); border-radius: 15px; padding: 8px; width: 80%; position: relative; top: 50%; left: 50%; transform: translate(-50%, -50%); -webkit-transform: translate(-50%, -50%)">
-            <h1 style="font-size: 18px; margin: 0; text-align: center">Browser upgrade needed</h1>
-            <p style="margin: 8px 8px 0">In order to use DDR Calc, one of the following minimum browser/OS versions is required:</p>
-            <ul style="padding-left: 25px; margin: 8px 0">
+    <div id="browser-dialog">
+        <div>
+            <h1>Browser upgrade needed</h1>
+            <p>In order to use DDR Calc, one of the following minimum browser/OS versions is required:</p>
+            <ul>
                 <li>iOS version 10.3</li>
                 <li>Android System WebView 76</li>
                 <li>Chrome for Android 71</li>
@@ -54,7 +54,7 @@
                 <li>Samsung Internet 9.2</li>
             </ul>
             <noscript><p>JavaScript must also be enabled</p></noscript>
-            <p style="text-align: center; margin: 4px"><a href="https://github.com/Andrew67/ddr-calc">Project Site</a></p>
+            <p class="footer"><a href="https://github.com/Andrew67/ddr-calc">Project Site</a></p>
         </div>
     </div>
     <script src="js/inline.js"></script>
