@@ -5,8 +5,9 @@ not ie_mob 11
 not op_mini all             # interactive app
 
 # these entries appear to be stagnant (and also lack String.padStart support)
-not and_qq 1.2              # QQ as of September 2019 is 9.7.1 which is Chrome 57
-not baidu 7.12              # follows Android System WebView version which follows Chrome
+not and_qq 1.2              # QQ as of January 2020 is 10.0.2 which is Chrome 66
+not baidu 7.12              # Baidu as of November 2019 is 7.20.11 which is Chrome 48
 
+not chrome 49               # Chrome 49 pops up due to being last version supporting Windows XP/Vista
 chrome >= 71                # last release supporting Android 4.1+ (2012), 72+ requires Android 4.4+ (2013)
 ios_saf >= 10.3             # fetch; last version available for iPhone 5 (2012), iPhone 4S ended with iOS 9
