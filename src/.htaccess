@@ -1,6 +1,7 @@
 <Files "index.html">
     # Preload assets for app shell/core functionality
     # Note: only works when deployed on server at root level
+    Header add Link "</js/inline.js>; rel=preload; as=script"
     Header add Link "</css/calc.css>; rel=preload; as=style"
     Header add Link "</js/calc.js>; rel=preload; as=script"
     # "Non-core" but expected to load with any request-features below
@@ -27,11 +28,25 @@
 
 <FilesMatch "\.html$">
     # Security headers as recommended by securityheaders.com
-    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com;"
+    Header always set Content-Security-Policy "\
+default-src 'self'; \
+style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; \
+font-src https://fonts.gstatic.com; \
+object-src 'none'; \
+"
+
     Header always set X-Frame-Options "SAMEORIGIN"
     Header always set X-XSS-Protection "1; mode=block"
     Header always set Referrer-Policy "strict-origin"
-    Header always set Feature-Policy "vibrate 'self'; geolocation 'none'; microphone 'none'; camera 'none'; autoplay 'none'; payment 'none'"
+
+    Header always set Feature-Policy "\
+vibrate 'self'; \
+geolocation 'none'; \
+microphone 'none'; \
+camera 'none'; \
+autoplay 'none'; \
+payment 'none'; \
+"
 </FilesMatch>
 
 Header set Cache-Control "public, max-age=600, s-max-age=86400"
