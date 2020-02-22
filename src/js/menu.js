@@ -117,9 +117,9 @@ fetch('img/md-more_vert.svg')
             '<div id="about-box">' +
                 '<div id="app-logo">' +
                     '<img src="img/logo-192.png" width="64" height="64" alt="App Icon">' +
-                    '<h1>DDR Calc <span id="app-version">Version 3.2.2' +
+                    '<h1>DDR Calc <span id="app-version">Version 3.3.0' +
                         (isGPlay ? 'g' : '') + (isMobileSafari ? 's' : '') + '</span></h1>' +
-                    '<h2>&copy; 2018&ndash;2019 Andrés Cordero</h2>' +
+                    '<h2>&copy; 2018&ndash;2020 Andrés Cordero</h2>' +
                 '</div>' +
                 '<ul>' +
                     '<li><a href="https://github.com/Andrew67/ddr-calc" target="_blank" rel="noopener">Project Site / Usage Guide</a>' +
