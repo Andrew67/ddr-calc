@@ -29,11 +29,11 @@ Promise.all([
     });
 
     // Set up menu entry for smaller devices where the tabs won't show
-    addMenuItem(0, 'Target BPM On/Off', function () {
+    addMenuItem(0, 'Switch to/from Target BPM', function () {
         action.setMode((state.mode === MODE.SPEEDMOD) ? MODE.TARGETBPM : MODE.SPEEDMOD);
         commit();
     }, {
-        title: function () { return (state.mode === MODE.TARGETBPM) ? 'Disable Target BPM' : 'Enable Target BPM' },
+        title: function () { return (state.mode === MODE.TARGETBPM) ? 'Switch to Speed Mod' : 'Switch to Target BPM' },
         hidden: function () { return window.innerHeight >= 600; }
     });
 
@@ -71,6 +71,10 @@ Promise.all([
     dom.targetBpmIcon = document.getElementById('targetbpm-icon');
     dom.highResult = document.getElementById('high-result');
     dom.lowResult = document.getElementById('low-result');
+
+    // Enable hash-based shortcuts to override the mode selection
+    if (location.hash.includes('target-bpm')) state.mode = MODE.TARGETBPM;
+    else if (location.hash.includes('speed-mod')) state.mode = MODE.SPEEDMOD;
 
     // Click events to switch BPM input focus
     const focusSongBpm = function () {
@@ -145,12 +149,13 @@ Promise.all([
         if (state.mode !== previousMode) {
             previousMode = state.mode;
             dom.app.classList.toggle('targetbpm', state.mode === MODE.TARGETBPM);
-            localStorage.setAllowingLoss(KEY_MODE, state.mode);
+            if (!location.hash.includes('target-bpm')) localStorage.setAllowingLoss(KEY_MODE, state.mode);
 
             // Switching to target BPM? Set active input to song BPM
             // Otherwise, set to speedmod if song bpm is full and switching to that mode
             if (state.mode === MODE.TARGETBPM) action.setActiveInput(INPUT.SONGBPM);
-            else action.setActiveInput((state.songBpm.length === 3) ? INPUT.SPEEDMOD : INPUT.SONGBPM);
+            else action.setActiveInput((state.songBpm.length === 3 || state.songBpm >= 50) ?
+                INPUT.SPEEDMOD : INPUT.SONGBPM);
             commit();
         }
     }
