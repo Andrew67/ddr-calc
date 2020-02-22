@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>iOS Splash</title>
+    <style>
+        html, body {
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background: #263238;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        img {
+            width: 256px;
+        }
+        @media(min-width: 1000px) {
+            img {
+                width: 384px;
+            }
+        }
+    </style>
+</head>
+<body>
+<!--
+    npm install --global pwa-asset-generator
+    brew install pngquant
+
+    pwa-asset-generator icon/ios-splash.html ./src/img --splash-only --portrait-only --scrape false
+    pngquant ./src/img/apple-splash-*
+-->
+<img src="combined-bare.png">
+</body>
+</html>
