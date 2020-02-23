@@ -1,6 +1,6 @@
 /*! DDR Calc | https://github.com/Andrew67/ddr-calc */
 /* Contains functionality for the privacy policy page */
-if (history.length > 1 && !navigator['standalone']) {
+if (history.length > 1 && !('standalone' in navigator)) {
     document.body.classList.add('show-toolbar');
     document.getElementById('i-arrow-left').addEventListener('click', function () {
         history.back();
