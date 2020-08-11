@@ -74,7 +74,7 @@ if ('serviceWorker' in navigator) {
     asyncModules.push('update');
     window.addEventListener('load', function() {
         // noinspection JSIgnoredPromiseFromCall
-        navigator.serviceWorker.register('./sw.js'); // eslint-disable-line compat/compat
+        navigator.serviceWorker.register('./sw.js');
     });
 }
 

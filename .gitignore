@@ -20,6 +20,7 @@ node_modules/
 .idea/**/dbnavigator.xml
 .idea/**/webServers.xml
 .idea/**/deployment.xml
+.idea/**/sshConfigs.xml
 
 # File-based project format
 *.iws
