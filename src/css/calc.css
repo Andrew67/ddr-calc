@@ -231,7 +231,9 @@ button::-moz-focus-inner {
     height: 70%;
     color: var(--color-keypad-fg);
     font-size: calc(5vh + 5vw);
-    text-align: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 
     /* Blocks double-tap-zoom (the only touch-action supported by iOS, does not block scroll or zoom) */
     touch-action: manipulation;
@@ -264,10 +266,11 @@ button::-moz-focus-inner {
 }
 
 .keypad li {
-    display: inline-block;
-    width: 33%;
+    display: inline-flex;
+    width: 33.3333%;
     height: 25%;
-    vertical-align: top;
+    justify-content: center;
+    align-items: center;
 }
 
 /* Reduce font size for BPM key */
@@ -276,15 +279,14 @@ button::-moz-focus-inner {
 }
 
 /* Workaround for inability to use vh/%s for vertical centering of dynamically-sized keypad buttons / display */
-.keypad li span, #display div > span {
+#display div > span {
     display: block;
     position: relative;
     top: 50%;
     transform: translateY(-50%);
 }
 
-.keypad li > span {
-    transform-origin: 50% 25%; /* Meant to be center, but 25% on y-axis is required due to above translate workaround */
+.keypad li > * {
     transition: transform .1s;
 }
 
@@ -292,15 +294,15 @@ button::-moz-focus-inner {
     background: var(--color-keypad-bg-active);
 }
 
-.keypad li.active > span {
-    transform: scale(0.95, 0.95) translateY(-50%); /* The above workaround must be preserved in this transform */
+.keypad li.active > * {
+    transform: scale(0.95, 0.95);
 }
 
 .keypad li[aria-disabled="true"] {
     pointer-events: none;
 }
 
-.keypad li[aria-disabled="true"] > span {
+.keypad li[aria-disabled="true"] > * {
     opacity: .19;
     transition: opacity .1s;
 }
