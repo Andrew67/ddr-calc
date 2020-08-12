@@ -66,23 +66,21 @@
     font-size: calc(4vw + 4vh);
 }
 
-#targetbpm {
-    position: absolute;
-    right: 40%;
+#targetbpm, #songbpm {
+    display: inline-block;
+    min-width: 3ch; /* Prevents shift of other UI elements when typing */
+    min-height: 1em; /* Keeps the area clickable when there's no input */
+    text-align: right;
 }
 
 #targetbpm-icon, #songbpm-icon {
-    position: absolute;
-    width: calc(4vw + 4vh);
-    transform: translateY(-50%);
+    margin-right: 3vw;
+    margin-left: 7vw;
 }
 
-#targetbpm-icon {
-    right: 63%;
-}
-
-#songbpm-icon {
-    right: 21%;
+#targetbpm-icon svg, #songbpm-icon svg {
+    width: 1em;
+    height: 1em;
 }
 
 #surface-targetbpm > div > .ideal {

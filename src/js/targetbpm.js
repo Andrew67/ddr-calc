@@ -40,11 +40,10 @@ Promise.all([
     // Set up display HTML
     document.getElementById('surface-targetbpm').innerHTML = '<div id="bpms">' +
         '<span>' +
+            '<span id="targetbpm-icon">' + targetIcon + '</span>' +
             '<span id="targetbpm"></span>' +
-            '&nbsp;' + // without this white-space, if song BPM is empty, other elements in this zone will shift
+            '<span id="songbpm-icon">' + songIcon + '</span>' +
             '<span id="songbpm"></span>' +
-            '<div id="targetbpm-icon">' + targetIcon + '</div>' +
-            '<div id="songbpm-icon">' + songIcon + '</div>' +
         '</span>' +
         '</div>' +
         '<div><span id="high-result">x 2.5 = 450</span></div>' +

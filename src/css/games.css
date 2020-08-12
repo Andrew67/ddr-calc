@@ -29,7 +29,6 @@
     display: block;
     bottom: 16px;
     left: 16px;
-    text-align: left;
     text-transform: uppercase;
     /* Increases the touch target for shorter game names, overflows long game names to next line */
     width: 45%;
