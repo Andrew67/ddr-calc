@@ -43,7 +43,7 @@ font-src https://fonts.gstatic.com; \
 img-src 'self'; \
 manifest-src 'self'; \
 script-src 'self'; \
-style-src 'self' 'sha256-gQRWXhVM4X7h9Gmz0EcgOJ3hER5eL5aqQomYcTkGZWg=' https://fonts.googleapis.com; \
+style-src 'self' 'sha256-nMc1pJn0ceZrXu1/AseDqpkZXDXIFbK3DPdspz3f+6c=' https://fonts.googleapis.com; \
 "
 
 Header always set X-Frame-Options "SAMEORIGIN"

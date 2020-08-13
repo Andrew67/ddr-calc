@@ -315,7 +315,7 @@ document.addEventListener('DOMContentLoaded', function initKeypad () {
 
     // Set up keyPress listeners and "register" DOM elements
     // Lots of code here just to handle fast key clicks (< 300ms) and long presses on desktop + mobile
-    document.querySelectorAll('.keypad li').forEach(function (e) {
+    document.querySelectorAll('#keypad li').forEach(function (e) {
         const key = e.textContent.trim(), type = e.getAttribute('data-keytype');
 
         // "Register" the key label, initial state, type, and DOM element
@@ -403,11 +403,8 @@ document.addEventListener('DOMContentLoaded', function initKeypad () {
     // Workaround for Safari which does not support touch-action: none CSS to block pinch-to-zoom
     // Applied only to keypad as applying to display blocks click events for interactive components
     if (isMobileSafari) {
-        document.querySelectorAll('.keypad').forEach(function (e) {
-            e.addEventListener('touchstart', function (evt) {
-                evt.preventDefault();
-            }, { passive: false });
-        });
+        document.getElementById('keypad')
+            .addEventListener('touchstart', evt => evt.preventDefault(), { passive: false });
     }
 
     // Init state

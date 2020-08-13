@@ -50,7 +50,7 @@ Promise.all([
         '<div><span id="low-result">x 2.25 = 425</span></div>' +
         '<style id="suppress-targetbpm-animation">' +
             '#display > div { transition: none !important; } ' +
-            '.keypad li > span { transition: none !important } ' +
+            '#keypad li > * { transition: none !important } ' +
             '#switch-underline { transition: none !important } ' +
         '</style>';
 

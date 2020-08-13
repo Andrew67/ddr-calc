@@ -226,8 +226,13 @@ button::-moz-focus-inner {
     opacity: 0;
 }
 
-.keypad {
-    height: 70%;
+#calculator {
+    display: flex;
+    flex-direction: column;
+}
+
+#keypad {
+    flex: 1;
     color: var(--color-keypad-fg);
     font-size: calc(5vh + 5vw);
     display: flex;
@@ -242,12 +247,9 @@ button::-moz-focus-inner {
     #mode-switcher {
         display: block;
     }
-    .keypad {
-        height: calc(70% - 48px);
-    }
 }
 
-#display div, .keypad {
+#display div, #keypad {
     font-weight: 300; /* Light */
 }
 
@@ -257,48 +259,50 @@ button::-moz-focus-inner {
     justify-content: flex-end;
 }
 
+#keypad > ul {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 #keypad-main {
-    width: 75%;
+    flex: 3;
     background: var(--color-keypad-bg);
-    float: left;
 }
 
 #keypad-ext {
-    width: 25%;
+    flex: 1;
     background: var(--color-keypad-ext-bg);
-    float: right;
 }
 
-.keypad li {
+#keypad li {
     display: inline-flex;
     width: 33.3333%;
-    height: 25%;
     justify-content: center;
     align-items: center;
 }
 
 /* Reduce font size for BPM key */
-.keypad li:last-of-type {
+#keypad li:last-of-type {
     font-size: calc(3vh + 3vw);
 }
 
-.keypad li > * {
+#keypad li > * {
     transition: transform .1s;
 }
 
-.keypad li.active {
+#keypad li.active {
     background: var(--color-keypad-bg-active);
 }
 
-.keypad li.active > * {
+#keypad li.active > * {
     transform: scale(0.95, 0.95);
 }
 
-.keypad li[aria-disabled="true"] {
+#keypad li[aria-disabled="true"] {
     pointer-events: none;
 }
 
-.keypad li[aria-disabled="true"] > * {
+#keypad li[aria-disabled="true"] > * {
     opacity: .19;
     transition: opacity .1s;
 }
@@ -308,7 +312,7 @@ button::-moz-focus-inner {
     font-size: calc(3vh + 3vw);
 }
 
-#display, #mode-switcher, .keypad li {
+#display, #mode-switcher, #keypad li {
     animation-name: fade-in-delayed;
     animation-duration: var(--duration-fade-in-delayed-init);
 }

@@ -68,7 +68,7 @@
 
 #targetbpm, #songbpm {
     display: inline-block;
-    min-width: 3ch; /* Prevents shift of other UI elements when typing */
+    min-width: calc(3ch + 2px); /* Prevents shift of other UI elements when typing */
     min-height: 1em; /* Keeps the area clickable when there's no input */
     text-align: right;
 }
