@@ -51,7 +51,6 @@ Header always set X-XSS-Protection "1; mode=block"
 Header always set Referrer-Policy "strict-origin"
 
 Header always set Feature-Policy "\
-vibrate 'self'; \
 geolocation 'none'; \
 microphone 'none'; \
 camera 'none'; \
