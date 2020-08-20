@@ -279,6 +279,7 @@ function commit () {
     // Update keys' disabled state in DOM
     keysForEach(function (key, type, state, el) {
         el.setAttribute('aria-disabled', state.disabled);
+        el.firstElementChild.disabled = state.disabled;
     });
 
     // Text fields: song BPM, speedmod, result
@@ -367,6 +368,7 @@ document.addEventListener('DOMContentLoaded', function initKeypad () {
 
         e.addEventListener('touchend', function () {
             e.classList.remove('active');
+            e.firstElementChild.blur();
             touchEndTime = new Date().getTime();
             if (touchEndTime - interactionStartTime <= LONG_PRESS_MS) {
                 clearTimeout(longPressTimeoutId);
@@ -377,6 +379,7 @@ document.addEventListener('DOMContentLoaded', function initKeypad () {
         // In cases such as locking the phone while holding a key, touchend is never fired
         e.addEventListener('touchcancel', function () {
             e.classList.remove('active');
+            e.firstElementChild.blur();
         }, { passive: true });
 
         e.addEventListener('mousedown', function () {
@@ -389,6 +392,7 @@ document.addEventListener('DOMContentLoaded', function initKeypad () {
         });
 
         e.addEventListener('mouseup', function () {
+            e.firstElementChild.blur(); // mousedown naturally adds focus, so it must be removed without restraint
             const mouseEndTime = new Date().getTime();
             if (mouseEndTime - touchEndTime > SIMULATED_MOUSE_IGNORE_DELAY_MS) {
                 e.classList.remove('active');
