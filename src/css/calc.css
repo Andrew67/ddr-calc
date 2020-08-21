@@ -74,7 +74,7 @@ html, body {
 }
 
 body {
-    font-family: "Roboto", system-ui, -apple-system, sans-serif;
+    font-family: "Roboto", "Ubuntu", system-ui, -apple-system, sans-serif;
     background: var(--color-surface-z0);
     color: var(--color-foreground);
 
@@ -107,6 +107,7 @@ button {
     color: currentColor;
     background: transparent;
     border: 0;
+    cursor: pointer;
 }
 
 button::-moz-focus-inner {
