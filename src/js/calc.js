@@ -278,8 +278,7 @@ function commit () {
 
     // Update keys' disabled state in DOM
     keysForEach(function (key, type, state, el) {
-        el.setAttribute('aria-disabled', state.disabled);
-        el.firstElementChild.disabled = state.disabled;
+        el.disabled = state.disabled;
     });
 
     // Text fields: song BPM, speedmod, result
@@ -316,8 +315,8 @@ document.addEventListener('DOMContentLoaded', function initKeypad () {
 
     // Set up keyPress listeners and "register" DOM elements
     // Lots of code here just to handle fast key clicks (< 300ms) and long presses on desktop + mobile
-    document.querySelectorAll('#keypad li').forEach(function (e) {
-        const key = e.textContent.trim(), type = e.getAttribute('data-keytype');
+    document.querySelectorAll('#keypad button').forEach(function (e) {
+        const key = e.textContent.trim(), type = e.dataset.keytype;
 
         // "Register" the key label, initial state, type, and DOM element
         computedState.keys[key] = { };
@@ -368,7 +367,7 @@ document.addEventListener('DOMContentLoaded', function initKeypad () {
 
         e.addEventListener('touchend', function () {
             e.classList.remove('active');
-            e.firstElementChild.blur();
+            e.blur();
             touchEndTime = new Date().getTime();
             if (touchEndTime - interactionStartTime <= LONG_PRESS_MS) {
                 clearTimeout(longPressTimeoutId);
@@ -379,7 +378,7 @@ document.addEventListener('DOMContentLoaded', function initKeypad () {
         // In cases such as locking the phone while holding a key, touchend is never fired
         e.addEventListener('touchcancel', function () {
             e.classList.remove('active');
-            e.firstElementChild.blur();
+            e.blur();
         }, { passive: true });
 
         e.addEventListener('mousedown', function () {
@@ -392,15 +391,22 @@ document.addEventListener('DOMContentLoaded', function initKeypad () {
         });
 
         e.addEventListener('mouseup', function () {
-            e.firstElementChild.blur(); // mousedown naturally adds focus, so it must be removed without restraint
+            e.blur(); // mousedown naturally adds focus, so it must be removed without restraint
             const mouseEndTime = new Date().getTime();
-            if (mouseEndTime - touchEndTime > SIMULATED_MOUSE_IGNORE_DELAY_MS) {
+            if (mouseEndTime - interactionStartTime <= LONG_PRESS_MS &&
+                mouseEndTime - touchEndTime > SIMULATED_MOUSE_IGNORE_DELAY_MS) {
                 e.classList.remove('active');
                 if (touchEndTime - interactionStartTime <= LONG_PRESS_MS) {
                     clearTimeout(longPressTimeoutId);
                     keyPress();
                 }
             }
+        });
+
+        e.addEventListener('mouseleave', function () {
+            e.classList.remove('active');
+            e.blur();
+            clearTimeout(longPressTimeoutId);
         });
     });
 

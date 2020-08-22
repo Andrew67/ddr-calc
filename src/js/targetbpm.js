@@ -46,8 +46,8 @@ Promise.all([
             '<span id="songbpm"></span>' +
         '</span>' +
         '</div>' +
-        '<div><span id="high-result">x 2.5 = 450</span></div>' +
-        '<div><span id="low-result">x 2.25 = 425</span></div>' +
+        '<div><span id="high-result">× 2.5 = 450</span></div>' +
+        '<div><span id="low-result">× 2.25 = 425</span></div>' +
         '<style id="suppress-targetbpm-animation">' +
             '#display > div { transition: none !important; } ' +
             '#keypad li > * { transition: none !important } ' +
@@ -131,10 +131,10 @@ Promise.all([
 
             // Don't show a result if it failed to resolve
             if (highSpeedMod === HIGH_START) computedState.highResult = '';
-            else computedState.highResult = 'x ' + highSpeedMod + ' = ' + Math.round(state.songBpm * highSpeedMod);
+            else computedState.highResult = '× ' + highSpeedMod + ' = ' + Math.round(state.songBpm * highSpeedMod);
             // Avoid duplicate information when the mods happen to resolve to the same number
             if (lowSpeedMod === highSpeedMod || lowSpeedMod === LOW_START) computedState.lowResult = '';
-            else computedState.lowResult = 'x ' + lowSpeedMod + ' = ' + Math.round(state.songBpm * lowSpeedMod);
+            else computedState.lowResult = '× ' + lowSpeedMod + ' = ' + Math.round(state.songBpm * lowSpeedMod);
 
             // Hint to bold the higher speed mod when both resolved and it's the closest
             computedState.bothResultsResolved = Boolean(computedState.highResult && computedState.lowResult);
