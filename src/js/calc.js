@@ -13,7 +13,7 @@ const isMobileSafari = 'standalone' in navigator || location.hash.includes('saf'
  * The sessionStorage method is used to preserve Google Play mode across reloads,
  * which change the referrer (namely Apply Update button in About), but only within the session that triggers it.
  */
-const isGPlay = document.referrer === 'android-app://com.andrew67.ddrcalc' ||
+const isGPlay = document.referrer.startsWith('android-app://com.andrew67.ddrcalc') ||
     document.referrer.includes('play.google.com') ||
     sessionStorage.getItem('gplay') === 'true' ||
     location.hash.includes('gplay');
@@ -359,6 +359,8 @@ document.addEventListener('DOMContentLoaded', function initKeypad () {
             // touch-action: manipulation, iOS Safari (and only Safari; iOS Chrome lacks this issue),
             // Safari can delay or not even fire touchstart events (sometimes showing you a magnifier instead)
             if (isMobileSafari) evt.preventDefault();
+            // Workaround for GNOME Web which still fires touchstart on disabled / pointer-events: none buttons
+            if (e.disabled) return;
 
             e.classList.add('active');
             interactionStartTime = new Date().getTime();

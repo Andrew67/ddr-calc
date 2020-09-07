@@ -15,7 +15,8 @@ if (localStorage.getItem('dark-mode') === 'true' || window.matchMedia('(prefers-
 }
 
 // In-line Android OS version check, to pull in Roboto from Google Fonts
-if (navigator.userAgent.includes('Android 4.')) {
+// Workaround added for Ubuntu Touch Morph Browser which pretends to be Android 4.4
+if (navigator.userAgent.includes('Android 4.') && !navigator.userAgent.includes('Ubuntu')) {
     const stylesheet = document.createElement('link');
     stylesheet.rel = 'stylesheet';
     stylesheet.href = 'https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap';
