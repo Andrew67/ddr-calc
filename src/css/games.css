@@ -132,8 +132,11 @@
     white-space: nowrap;
 }
 
-#game-settings label {
+label {
     position: relative;
+}
+
+#game-settings label {
     font-size: 16px; /* Material Body 1 */
     line-height: 48px;
 }
@@ -176,19 +179,19 @@ input:checked + span svg .checked {
 }
 
 /* Enables focus effect with color change when state changes */
-input + span.svg-icon::before {
+input + span::before {
     content: '';
     position: absolute;
     top: 0;
-    left: -16px;
+    left: 0;
     right: 0;
     bottom: 0;
 }
 
-input:focus + span.svg-icon::before {
+input:focus + span::before {
     background: var(--color-foreground-focus);
 }
 
-input:checked:focus + span.svg-icon::before {
+input:checked:focus + span::before {
     background: var(--color-accent-focus);
 }

@@ -405,6 +405,7 @@ document.addEventListener('DOMContentLoaded', function initKeypad () {
             }
         });
 
+        // Unlike touchend, mouseup will not fire on the same element if mouse goes away
         e.addEventListener('mouseleave', function () {
             e.classList.remove('active');
             e.blur();

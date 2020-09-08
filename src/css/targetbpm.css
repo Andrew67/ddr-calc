@@ -5,42 +5,31 @@
     opacity: 1;
 }
 
-#mode-switcher span {
+#mode-switcher label {
     display: inline-block;
-    width: 50%;
+    flex: 1;
     text-transform: uppercase;
     text-align: center;
     animation-name: fade-in;
     animation-duration: var(--duration-fade-in-extra);
-}
-
-#switch-speedmod {
-    color: var(--color-accent);
-}
-
-#switch-targetbpm {
     color: var(--color-foreground-medium);
 }
 
-#switch-underline {
-    height: 2px;
+#mode-switcher input:checked + span {
+    color: var(--color-accent);
+}
+
+#mode-switcher hr {
     width: 50%;
-    background-color: var(--color-accent);
+    border: none;
+    border-bottom: 2px solid var(--color-accent);
     position: absolute;
     bottom: 0;
     left: 0;
     transition: transform .2s;
 }
 
-.targetbpm #switch-speedmod {
-    color: var(--color-foreground-medium);
-}
-
-.targetbpm #switch-targetbpm {
-    color: var(--color-accent);
-}
-
-.targetbpm #switch-underline {
+.targetbpm #mode-switcher hr {
     transform: translateX(100%);
 }
 

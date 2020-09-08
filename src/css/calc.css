@@ -108,7 +108,7 @@ button {
     border: 0;
 }
 
-button:not(:disabled) {
+button:not(:disabled), label {
     cursor: pointer;
 }
 
@@ -249,7 +249,7 @@ button::-moz-focus-inner {
 /* Mode switcher visible only on displays where it occupies 8% or less of total height */
 @media (min-height: 600px) {
     #mode-switcher {
-        display: block;
+        display: flex;
     }
 }
 

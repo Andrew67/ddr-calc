@@ -15,17 +15,14 @@ Promise.all([
         targetIcon = '<span class="svg-icon">' + data[1] + '</span>';
 
     // Set up mode switcher tabs HTML
-    document.getElementById('mode-switcher').innerHTML =
-        '<span id="switch-speedmod">Speed Mod</span>' +
-        '<span id="switch-targetbpm">Target BPM</span>' +
-        '<div id="switch-underline"></div>';
-    document.getElementById('switch-speedmod').addEventListener('click', function () {
-        action.setMode(MODE.SPEEDMOD);
+    dom.modeSwitcher = document.getElementById('mode-switcher');
+    dom.modeSwitcher.innerHTML =
+        `<label><input type="radio" name="mode" value="${MODE.SPEEDMOD}" checked><span>Speed Mod</span></label>
+         <label><input type="radio" name="mode" value="${MODE.TARGETBPM}"><span>Target BPM</span></label>
+         <hr>`;
+    dom.modeSwitcher.addEventListener('change', function () {
+        action.setMode(dom.modeSwitcher.elements['mode'].value);
         toggleTargetBpmMode(); // direct call in order to avoid a commit() cycle
-    });
-    document.getElementById('switch-targetbpm').addEventListener('click', function () {
-        action.setMode(MODE.TARGETBPM);
-        toggleTargetBpmMode();
     });
 
     // Set up menu entry for smaller devices where the tabs won't show
@@ -147,6 +144,7 @@ Promise.all([
     function toggleTargetBpmMode () {
         if (state.mode !== previousMode) {
             previousMode = state.mode;
+            dom.modeSwitcher.elements['mode'].value = state.mode;
             dom.app.classList.toggle('targetbpm', state.mode === MODE.TARGETBPM);
             if (!location.hash.includes('target-bpm')) localStorage.setAllowingLoss(KEY_MODE, state.mode);
 
