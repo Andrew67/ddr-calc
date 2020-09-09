@@ -3,11 +3,6 @@
   "name": "DDR Speed Calculator",
   "icons": [
     {
-      "src": "./favicon.png",
-      "type": "image/png",
-      "sizes": "48x48"
-    },
-    {
       "src": "./img/icon-192.png",
       "type": "image/png",
       "sizes": "192x192"

@@ -39,6 +39,7 @@ and disabling input of unavailable speed modifiers
 * App icon:
   * Calculator base: GPL-3 (see `LICENSE`)
   * DDR Arrow: sourced from https://inkjuse.deviantart.com/art/DDR-Arrow-111309080
+  * Mini-calculator favicon (`icon/bi-calculator-fill.svg`): MIT (from [Bootstrap Icons](https://icons.getbootstrap.com/icons/calculator-fill/))
 * Other icons:
   * "[Target](https://thenounproject.com/search/?q=target&i=32462)" icon (`src/img/np-target.svg`) by Chris Kerr from [the Noun Project](https://thenounproject.com/).
   * FontAwesome (all `src/img/fa-*.svg` files): CC BY 4.0 License (see: https://fontawesome.com/license/free)
