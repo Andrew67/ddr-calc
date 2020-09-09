@@ -4,6 +4,8 @@
     display: block;
     top: 16px;
     left: 8px;
+    /*noinspection CssInvalidFunction*/
+    left: max(8px, env(safe-area-inset-left));
     /* Increase the touch target */
     text-align: left;
     width: 56px;
@@ -41,6 +43,8 @@ a {
     position: relative;
     top: 16px;
     left: 12px;
+    /*noinspection CssInvalidFunction*/
+    left: max(12px, env(safe-area-inset-left) + 4px);
     /* Expand animation from top-left corner */
     transform: scale(.5, .5);
     transform-origin: top left;

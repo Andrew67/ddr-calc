@@ -195,10 +195,14 @@ button::-moz-focus-inner {
     width: 100%;
     height: 100%;
     color: var(--color-foreground-medium-lg);
+    padding-right: 3vw;
+    /*noinspection CssInvalidFunction*/
+    padding-left: env(safe-area-inset-left);
+    /*noinspection CssInvalidFunction*/
+    padding-right: max(3vw, env(safe-area-inset-right));
 }
 
 #surface-speedmod div {
-    margin-right: 3vw;
     height: 50%;
 }
 
@@ -253,6 +257,13 @@ button::-moz-focus-inner {
     }
 }
 
+/* Cap font size on wide landscape displays, otherwise elements begin to clash and go off screen */
+@media (min-aspect-ratio: 16/9) {
+    #display, #keypad {
+        font-size: calc(3vh + 3vw);
+    }
+}
+
 #display div, #keypad {
     font-weight: 300; /* Light */
 }
@@ -266,16 +277,22 @@ button::-moz-focus-inner {
 #keypad > div {
     display: flex;
     flex-wrap: wrap;
+    /*noinspection CssInvalidFunction*/
+    padding-bottom: env(safe-area-inset-bottom);
 }
 
 #keypad-main {
     flex: 3;
     background: var(--color-keypad-bg);
+    /*noinspection CssInvalidFunction*/
+    padding-left: env(safe-area-inset-left);
 }
 
 #keypad-ext {
     flex: 1;
     background: var(--color-keypad-ext-bg);
+    /*noinspection CssInvalidFunction*/
+    padding-right: env(safe-area-inset-right);
 }
 
 #keypad button {

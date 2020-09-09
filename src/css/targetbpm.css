@@ -46,13 +46,19 @@
 
 #surface-targetbpm > div {
     height: 25%;
-    margin-right: 3vw;
     font-size: calc(3.5vw + 3.5vh);
 }
 
 #surface-targetbpm > #bpms {
     height: 50%;
     font-size: calc(4vw + 4vh);
+}
+
+/* Cap font size on wide landscape displays, otherwise elements begin to clash and go off screen */
+@media (min-aspect-ratio: 16/9) {
+    #surface-targetbpm > div, #surface-targetbpm > #bpms {
+        font-size: calc(3vh + 3vw);
+    }
 }
 
 #targetbpm, #songbpm {
