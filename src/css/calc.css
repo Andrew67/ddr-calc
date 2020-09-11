@@ -185,15 +185,16 @@ button::-moz-focus-inner {
 
 /* Calculator */
 #display {
-    width: 100%;
+    width: 200%;
     height: 30%;
     font-size: calc(5vh + 5vw);
     position: relative;
+    display: flex;
+    overflow: hidden;
 }
 
 #display > div {
-    width: 100%;
-    height: 100%;
+    flex: 1;
     color: var(--color-foreground-medium-lg);
     padding-right: 3vw;
     /*noinspection CssInvalidFunction*/
@@ -204,12 +205,6 @@ button::-moz-focus-inner {
 
 #surface-speedmod div {
     height: 50%;
-}
-
-#surface-targetbpm {
-    position: absolute;
-    top: 0;
-    left: 100%;
 }
 
 .overlay {
