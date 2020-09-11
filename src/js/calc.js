@@ -115,6 +115,9 @@ const computedState = {
 /** Map of key labels to key types. Populated as DOM is loaded from the HTML data-keytype. */
 const keyTypes = {};
 
+/** Map of shortcuts to key labels. Populated as DOM is loaded from the HTML aria-keyshortcuts. */
+const keyShortcuts = {};
+
 /**
  * Helper method that iterates over all calculator keys (in no particular order) into the given callback function,
  * providing the following parameters: key, type, keyState, el (label, key type, key state, DOM element).
@@ -316,12 +319,14 @@ document.addEventListener('DOMContentLoaded', function initKeypad () {
     // Set up keyPress listeners and "register" DOM elements
     // Lots of code here just to handle fast key clicks (< 300ms) and long presses on desktop + mobile
     document.querySelectorAll('#keypad button').forEach(function (e) {
-        const key = e.textContent.trim(), type = e.dataset.keytype;
+        const key = e.textContent.trim(), type = e.dataset.keytype,
+            shortcuts = e.getAttribute('aria-keyshortcuts').split(' ');
 
-        // "Register" the key label, initial state, type, and DOM element
+        // "Register" the key label, initial state, type, DOM element, and keyboard shortcuts
         computedState.keys[key] = { };
         keyTypes[key] = type;
         dom.keys[key] = e;
+        shortcuts.forEach(s => keyShortcuts[s] = key);
 
         const keyPress = function () {
             action.keyPress(key, type);
@@ -411,6 +416,43 @@ document.addEventListener('DOMContentLoaded', function initKeypad () {
             e.blur();
             clearTimeout(longPressTimeoutId);
         });
+
+        e.addEventListener('keydown', function (evt) {
+            if (evt.key === ' ' || evt.key === 'Enter') e.classList.add('active');
+        });
+
+        e.addEventListener('keyup', function (evt) {
+            if (evt.key === ' ' || evt.key === 'Enter') {
+                e.classList.remove('active');
+                keyPress();
+            }
+        });
+    });
+
+    // Register document-level keyboard listeners for triggering keys based on defined keyboard shortcuts
+    const getKeyFromKeyboardEvent = evt => {
+        let evtKey = (evt.key.length === 1) ? evt.key.toLocaleLowerCase('en-US') : evt.key;
+        if (evt.ctrlKey) evtKey = `Control+${evtKey}`;
+        if (keyShortcuts.hasOwnProperty(evtKey)) {
+            const key = keyShortcuts[evtKey];
+            return { key: key, type: keyTypes[key], dom: dom.keys[key], state: computedState.keys[key] };
+        }
+        return false;
+    };
+
+    document.addEventListener('keydown', evt => {
+        const key = getKeyFromKeyboardEvent(evt);
+        // TODO: Ignore keys when keypad is obscured / add global dialog dismiss key
+        if (key && !key.state.disabled) key.dom.classList.add('active');
+    });
+
+    document.addEventListener('keyup', evt => {
+        const key = getKeyFromKeyboardEvent(evt);
+        if (key && !key.state.disabled) {
+            key.dom.classList.remove('active');
+            action.keyPress(key.key, key.type);
+            commit();
+        }
     });
 
     // Workaround for Safari which does not support touch-action: none CSS to block pinch-to-zoom

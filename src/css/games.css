@@ -33,7 +33,7 @@
     left: max(16px, env(safe-area-inset-left) + 8px);
     text-transform: uppercase;
     /* Increases the touch target for shorter game names, overflows long game names to next line */
-    width: 45%;
+    width: 24%;
     word-break: break-all;
     animation-name: fade-in;
     animation-duration: var(--duration-fade-in-extra);
