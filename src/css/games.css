@@ -33,10 +33,25 @@
     left: max(16px, env(safe-area-inset-left) + 8px);
     text-transform: uppercase;
     /* Increases the touch target for shorter game names, overflows long game names to next line */
-    width: 24%;
+    min-width: 44px;
+    max-width: 24%;
+    min-height: 44px;
+    text-align: left;
     word-break: break-all;
     animation-name: fade-in;
     animation-duration: var(--duration-fade-in-extra);
+}
+
+#game-btn:focus::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -8px;
+    bottom: 0;
+    right: -8px;
+    background-color: var(--color-foreground-focus);
+    border-radius: 8px;
+    z-index: -1;
 }
 
 /* Set the game button a little higher on devices showing the tab bar, to further avoid touching calculations */
@@ -48,10 +63,6 @@
 
 #game-premium-enabled {
     display: block;
-}
-
-#game-name {
-    margin-left: 4px;
 }
 
 /* Inspired by alignment trick from
@@ -163,6 +174,7 @@ input[type=radio], input[type=checkbox] {
     opacity: 0;
 }
 
+/* TODO: Below rules should only apply to the above 2 input types; not an issue until others pop up */
 input + span.svg-icon svg {
     top: 6px;
     margin-right: 24px;
@@ -195,6 +207,7 @@ input + span::before {
 
 input:focus + span::before {
     background: var(--color-foreground-focus);
+    outline: 3px solid transparent;
 }
 
 input:checked:focus + span::before {

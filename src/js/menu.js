@@ -12,7 +12,7 @@ fetch('img/md-more_vert.svg')
 }).then(function initMenuModule (menuBtn) {
     // Load HTML for the menu button
     const container = document.createElement('div');
-    container.innerHTML = '<span id="menu-btn" class="overlay">' + menuBtn + '</span>';
+    container.innerHTML = `<button id="menu-btn" class="overlay" title="Menu">${menuBtn}</button>`;
     document.getElementById('display').appendChild(container.firstChild);
 
     // Load HTML for the pop-up menu

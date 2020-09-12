@@ -87,17 +87,13 @@ body {
     touch-action: none;
 }
 
-* {
+*, *::before, *::after {
     /* Recommended CSS reset from https://internetingishard.com/html-and-css/css-box-model/ */
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 
     -webkit-tap-highlight-color: rgba(0,0,0,0); /* Cancel iOS highlighting of buttons since we have our own */
-    transition: background-color .1s; /* Default fade across states (focused, active, etc) and theme switches */
-}
-
-*::before {
     transition: background-color .1s; /* Default fade across states (focused, active, etc) and theme switches */
 }
 
@@ -306,8 +302,8 @@ button::-moz-focus-inner {
     transition: transform .1s;
 }
 
-#keypad button:focus {
-    outline: none;
+#keypad button:focus, #game-btn:focus, #menu-btn:focus {
+    outline: 3px solid transparent; /* Visible in High Contrast Mode: https://sarahmhigley.com/writing/whcm-quick-tips/ */
 }
 
 /* Background color transition performed using opacity on a pseudo-element for performance */

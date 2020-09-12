@@ -2,16 +2,28 @@
 /* Menu CSS */
 #menu-btn {
     display: block;
-    top: 16px;
+    top: 8px;
     left: 8px;
     /*noinspection CssInvalidFunction*/
     left: max(8px, env(safe-area-inset-left));
     /* Increase the touch target */
     text-align: left;
     width: 56px;
-    height: 40px;
+    height: 44px;
     animation-name: fade-in;
     animation-duration: var(--duration-fade-in-extra);
+}
+
+#menu-btn:focus::before {
+    content: '';
+    position: absolute;
+    top: 4px;
+    left: -4px;
+    background-color: var(--color-foreground-focus);
+    border-radius: 32px;
+    width: 32px;
+    height: 32px;
+    z-index: -1;
 }
 
 #menu, #about {

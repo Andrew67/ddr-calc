@@ -12,9 +12,9 @@ Promise.all([
     return Promise.all([r[0].json(), r[1].text(), r[2].text(), r[3].text()]);
 }).then(function initGamesModule (data) {
     const gameData = data[0],
-        gamepad = '<span class="svg-icon">' + data[1] + '</span>',
-        checkbox = '<span class="svg-icon">' + data[2] + '</span>',
-        radioBtn = '<span class="svg-icon">' + data[3] + '</span>';
+        gamepad = `<span class="svg-icon">${data[1]}</span>`,
+        checkbox = `<span class="svg-icon">${data[2]}</span>`,
+        radioBtn = `<span class="svg-icon">${data[3]}</span>`;
 
     // Map game data by ID for easier retrieval without walking the array
     // Furthermore, convert the mods and premiumPlayMods into their respective Map forms
@@ -37,10 +37,10 @@ Promise.all([
 
     // Load HTML for the game button
     const container = document.createElement('div');
-    container.innerHTML = '<span id="game-btn" class="overlay">' +
-        '<span id="game-premium-enabled"></span>' +
-        gamepad + '<span id="game-name">&nbsp;</span>' +
-        '</span>';
+    container.innerHTML = `<button id="game-btn" class="overlay" title="Select Game">
+                               <span id="game-premium-enabled"></span>
+                               ${gamepad} <span id="game-name">&nbsp;</span>
+                           </button>`;
     document.getElementById('display').appendChild(container.firstChild);
 
     // Load HTML for the game settings
