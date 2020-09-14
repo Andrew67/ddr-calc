@@ -27,14 +27,16 @@
 }
 
 #menu, #about {
+    visibility: hidden;
     opacity: 0;
-    transition: transform 0s .1s, opacity .1s; /* Delay transition to let dismissal effects show */
+    transition: transform 0s .1s, opacity .1s, visibility 0s linear .1s;
 }
 
 #menu.show, #about.show {
     transform: translateX(100%);
+    visibility: visible;
     opacity: 1;
-    transition: opacity .1s;
+    transition: visibility 0s linear 0s, opacity .1s;
 }
 
 a {

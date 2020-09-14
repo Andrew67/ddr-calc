@@ -116,7 +116,7 @@ fetch('img/md-more_vert.svg')
         '<div class="scrim"></div>' +
         '<div id="about-box">' +
             '<div id="app-logo">' +
-                '<img src="img/logo-192.png" width="64" height="64" alt="App Icon">' +
+                '<img src="img/logo-192.png" width="64" height="64" alt="" loading="lazy">' +
                 '<h1>DDR Calc <span id="app-version">Version 3.3.0' +
                     (isGPlay ? 'g' : '') + (isMobileSafari ? 's' : '') + '</span></h1>' +
                 '<h2>&copy; 2018&ndash;2020 Andrés Cordero</h2>' +
