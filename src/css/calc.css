@@ -302,7 +302,7 @@ button::-moz-focus-inner {
     transition: transform .1s;
 }
 
-#keypad button:focus, #game-btn:focus, #menu-btn:focus {
+#keypad button:focus, #game-btn:focus, #menu-btn:focus, #targetbpm-icon:focus, #songbpm-icon:focus {
     outline: 3px solid transparent; /* Visible in High Contrast Mode: https://sarahmhigley.com/writing/whcm-quick-tips/ */
 }
 

@@ -11,8 +11,8 @@ Promise.all([
 ]).then(function (r) {
     return Promise.all([r[0].text(), r[1].text()]);
 }).then(function initTargetBpmModule (data) {
-    const songIcon = '<span class="svg-icon">' + data[0] + '</span>',
-        targetIcon = '<span class="svg-icon">' + data[1] + '</span>';
+    const songIcon = '<span class="svg-icon" aria-hidden="true">' + data[0] + '</span>',
+        targetIcon = '<span class="svg-icon" aria-hidden="true">' + data[1] + '</span>';
 
     // Set up mode switcher tabs HTML
     dom.modeSwitcher = document.getElementById('mode-switcher');
@@ -37,9 +37,9 @@ Promise.all([
     // Set up display HTML
     document.getElementById('surface-targetbpm').innerHTML = '<div id="bpms">' +
         '<span>' +
-            '<span id="targetbpm-icon">' + targetIcon + '</span>' +
+            '<button id="targetbpm-icon" title="Target BPM">' + targetIcon + '</button>' +
             '<span id="targetbpm"></span>' +
-            '<span id="songbpm-icon">' + songIcon + '</span>' +
+            '<button id="songbpm-icon" title="Song BPM">' + songIcon + '</button>' +
             '<span id="songbpm"></span>' +
         '</span>' +
         '</div>' +

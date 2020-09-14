@@ -76,6 +76,15 @@
 #targetbpm-icon svg, #songbpm-icon svg {
     width: 1em;
     height: 1em;
+    border-radius: 8px;
+}
+
+#targetbpm-icon:focus svg, #songbpm-icon:focus svg {
+    background: var(--color-foreground-focus);
+}
+
+#targetbpm-icon.active:focus svg, #songbpm-icon.active:focus svg {
+    background: var(--color-accent-focus);
 }
 
 #surface-targetbpm > div > .ideal {
