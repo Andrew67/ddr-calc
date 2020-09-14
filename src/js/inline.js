@@ -4,9 +4,10 @@
 'use strict';
 
 // In-line browser compatibility check, so that the incompatibility dialog is dismissed ASAP
-if ('fetch' in window &&
-    'forEach' in NodeList.prototype &&
-    'padStart' in String.prototype) document.getElementById('browser-dialog').remove();
+if ('fetch' in window) document.getElementById('browser-dialog').remove();
+if (!('forEach' in NodeList.prototype)) { // noinspection JSValidateTypes
+    NodeList.prototype.forEach = Array.prototype.forEach;
+}
 
 // In-line dark mode check, so that dark mode is applied flicker-free
 if (localStorage.getItem('dark-mode') === 'true' || window.matchMedia('(prefers-color-scheme: dark)').matches) {
