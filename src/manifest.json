@@ -2,22 +2,9 @@
   "short_name": "DDR Calc",
   "name": "DDR Speed Calculator",
   "icons": [
-    {
-      "src": "./img/icon-192.png",
-      "type": "image/png",
-      "sizes": "192x192"
-    },
-    {
-      "src": "./img/icon-432.png",
-      "type": "image/png",
-      "sizes": "432x432",
-      "purpose": "maskable"
-    },
-    {
-      "src": "./img/icon-512.png",
-      "type": "image/png",
-      "sizes": "512x512"
-    }
+    { "src": "./img/icon-192.png", "type": "image/png", "sizes": "192x192" },
+    { "src": "./img/icon-432.png", "type": "image/png", "sizes": "432x432", "purpose": "maskable" },
+    { "src": "./img/icon-512.png", "type": "image/png", "sizes": "512x512" }
   ],
   "start_url": "./",
   "background_color": "#263238",
@@ -25,9 +12,28 @@
   "orientation": "portrait",
   "scope": "./",
   "theme_color": "#263238",
+  "shortcuts": [
+    {
+      "name": "Speed Mod",
+      "url": "./#speed-mod",
+      "icons": [
+        { "src": "./img/icon-speedmod-192.png", "type": "image/png", "sizes": "192x192" },
+        { "src": "./img/icon-speedmod-288.png", "type": "image/png", "sizes": "288x288", "purpose": "maskable" }
+      ]
+    },
+    {
+      "name": "Target BPM",
+      "url": "./#target-bpm",
+      "icons": [
+        { "src": "./img/icon-targetbpm-192.png", "type": "image/png", "sizes": "192x192" },
+        { "src": "./img/icon-targetbpm-288.png", "type": "image/png", "sizes": "288x288", "purpose": "maskable" }
+      ]
+    }
+  ],
   "related_applications": [
     {
       "platform": "play",
+      "url": "https://play.google.com/store/apps/details?id=com.andrew67.ddrcalc",
       "id": "com.andrew67.ddrcalc"
     }
   ],
