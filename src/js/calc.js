@@ -7,6 +7,7 @@
 
 /** Detect Mobile Safari via presence of non-standard navigator.standalone field */
 const isMobileSafari = 'standalone' in navigator || location.hash.includes('saf');
+const isIOS12 = isMobileSafari && /OS 12_/.test(navigator.userAgent);
 
 /**
  * Detect app loaded via Google Play (for compliance with Google Play developer policies).
