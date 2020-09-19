@@ -10,7 +10,6 @@ self.addEventListener('install', event => {
     event.waitUntil(
         caches.open(swCacheName).then(cache => cache.addAll([
             './',
-            'js/inline.js',
             'manifest.json',
             'favicon.png',
             'img/icon-192.png',

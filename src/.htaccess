@@ -9,7 +9,6 @@ ExpiresActive Off
 <Files "index.html">
 # Preload assets for app shell/core functionality
 # Note: only works when deployed on server at root level
-Header add Link "</js/inline.js>; rel=preload; as=script"
 Header add Link "</css/calc.css>; rel=preload; as=style"
 Header add Link "</js/calc.js>; rel=preload; as=script"
 # "Non-core" but expected to load with any request-features below
@@ -39,11 +38,10 @@ Header add Link "</img/np-target.svg>; rel=preload; as=fetch; crossorigin"
 Header always set Content-Security-Policy "\
 default-src 'none'; \
 connect-src 'self'; \
-font-src https://fonts.gstatic.com; \
 img-src 'self'; \
 manifest-src 'self'; \
-script-src 'self'; \
-style-src 'self' 'sha256-nMc1pJn0ceZrXu1/AseDqpkZXDXIFbK3DPdspz3f+6c=' https://fonts.googleapis.com; \
+script-src 'self' 'sha256-ZfGbruOMiTVDQsMYNRKH+oHAqKWeKFRAVrMHuztGnQo='; \
+style-src 'self' 'sha256-nMc1pJn0ceZrXu1/AseDqpkZXDXIFbK3DPdspz3f+6c='; \
 "
 
 Header always set X-Frame-Options "SAMEORIGIN"
