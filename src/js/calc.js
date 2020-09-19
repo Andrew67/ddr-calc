@@ -263,7 +263,7 @@ function commit () {
         case INPUT.SONGBPM:
             dom.bpm.classList.add('active');
 
-            if (!state.speedModInt && !state.speedModDec) dom.multSign.style.display = 'none';
+            if (!state.speedModInt && !state.speedModDec) dom.multSign.hidden = true;
             dom.multSign.classList.remove('active');
 
             dom.speedMod.classList.remove('active');
@@ -271,7 +271,7 @@ function commit () {
         case INPUT.SPEEDMOD:
             dom.bpm.classList.remove('active');
 
-            dom.multSign.style.display = 'inline';
+            dom.multSign.hidden = false;
             dom.multSign.classList.add('active');
 
             dom.speedMod.classList.add('active');

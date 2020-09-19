@@ -35,13 +35,24 @@
 
 /* Limit display switching animation to devices that show the tab bar */
 @media (min-height: 600px) {
-    #display > div {
-        transition: transform .2s;
+    #surface-speedmod, .targetbpm #surface-targetbpm { /* Enter view */
+        transition: transform .2s, visibility 0s linear 0s;
+    }
+    .targetbpm #surface-speedmod, #surface-targetbpm { /* Exit view */
+        transition: transform .2s, visibility 0s linear .2s;
     }
 }
 
 .targetbpm #display > div {
     transform: translateX(-100%);
+}
+
+.targetbpm #surface-speedmod, #surface-targetbpm {
+    visibility: hidden;
+}
+
+.targetbpm #surface-targetbpm {
+    visibility: visible;
 }
 
 #surface-targetbpm > div {

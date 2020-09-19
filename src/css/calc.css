@@ -21,6 +21,7 @@
     --color-accent-focus: rgba(25,118,210,.12); /* Variant of Material Blue 700 for selected focused elements on surface */
 
     --color-result: #00600f; /* Material Green 700 Dark */
+    --color-result-focus: rgba(0, 96, 15, .12); /* Variant of Material Green 700 Dark for selected focused elements on surface */
 
     --color-keypad-bg: #263238; /* Material Blue Grey 900 */
     --color-keypad-ext-bg: #455a64; /* Material Blue Grey 700 */
@@ -57,6 +58,7 @@ body.theme-dark {
     --color-accent-focus: rgba(144,202,249,.12); /* Variant of Material Blue 200 for focused elements on surface */
 
     --color-result: #c8e6c9; /* Material Green 100 */
+    --color-result-focus: rgba(200, 230, 201, .12); /* Variant of Material Green 100 for focused elements on surface */
 
     --color-keypad-bg: #102027; /* Material Blue Grey 800 Dark */
     --color-keypad-ext-bg: #1c313a; /* Material Blue Grey 700 Dark */
@@ -302,7 +304,8 @@ button::-moz-focus-inner {
     transition: transform .1s;
 }
 
-#keypad button:focus, #game-btn:focus, #menu-btn:focus, #targetbpm-icon:focus, #songbpm-icon:focus {
+/* TODO: Split off into separate CSS files */
+#keypad button:focus, #game-btn:focus, #menu-btn:focus, #targetbpm-icon:focus, #songbpm-icon:focus, #apply-update:focus {
     outline: 3px solid transparent; /* Visible in High Contrast Mode: https://sarahmhigley.com/writing/whcm-quick-tips/ */
 }
 

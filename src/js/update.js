@@ -7,7 +7,7 @@
 addStylesheet('update');
 try {
     const container = document.createElement('div');
-    container.innerHTML = '<div id="update-box"><span id="apply-update">Apply Update</span></div>';
+    container.innerHTML = '<div id="update-box" hidden><button id="apply-update">Apply Update</button></div>';
     document.getElementById('app-logo').appendChild(container.firstChild);
 
     computedState.updateAvailable = false;
@@ -52,7 +52,7 @@ try {
     });
 
     postCommitHooks.push(function showApplyUpdate () {
-        dom.updateBox.classList.toggle('show', computedState.updateAvailable);
+        dom.updateBox.hidden = !computedState.updateAvailable;
     });
 
     // Check for Service Worker update when opening the About screen if 24 hours have elapsed since the previous check
