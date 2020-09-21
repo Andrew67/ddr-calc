@@ -63,6 +63,7 @@ a {
     transform: scale(.5, .5);
     transform-origin: top left;
     transition: transform .1s;
+    overflow: hidden; /* Clip the corners of the focused item backgrounds */
 }
 
 #menu.show #menu-popup {
@@ -70,11 +71,22 @@ a {
 }
 
 #menu li {
-    padding: 0 16px 0 16px;
     line-height: 48px;
+    display: flex;
 }
 
-#menu-popup [aria-disabled="true"] {
+#menu li button {
+    flex: 1;
+    text-align: left;
+    padding: 0 16px;
+}
+
+#menu li button:focus {
+    outline: 3px solid transparent;
+    background: var(--color-foreground-focus);
+}
+
+#menu button:disabled {
     opacity: .38;
 }
 

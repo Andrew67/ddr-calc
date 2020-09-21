@@ -47,7 +47,7 @@ try {
         dom.themeColor.content = state.darkModeEnabled ? '#121212' : '#ffffff';
     });
 
-    // No commit required, as toggleDarkMode above must match the flicker-free block that already ran in index.html
+    commit();
     loadNextModule();
 } catch(err) {
     console.error("Error in dark.js:", err, "\nModule loading has been halted");

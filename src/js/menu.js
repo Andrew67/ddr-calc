@@ -30,13 +30,20 @@ fetch('img/md-more_vert.svg')
     state.menuOpen = Boolean(history.state && history.state.menuOpen);
     const menuItems = [];
 
+    // Dismiss the menu with keyboard
+    // TODO: Common dialog code
+    dom.menu.addEventListener('keyup', function (e) {
+        if (state.menuOpen && e.key === 'Escape') history.back();
+    });
+
     /** Builds the menu DOM based on the items currently added in state.menuItems */
     const buildMenu = function buildMenu () {
         menuItems.sort(function (a, b) { return a.idx - b.idx; });
         dom.menuList.innerHTML = '';
         dom.menuListItems = [];
         menuItems.forEach(function (menuItem) {
-            const menuItemDOM = document.createElement('li');
+            const menuListItemContainer = document.createElement('li'),
+                  menuItemDOM = document.createElement('button');
             menuItemDOM.addEventListener('click', function menuItemAction (evt) {
                 let preventPropagation = menuItem.options.disabled();
 
@@ -50,7 +57,8 @@ fetch('img/md-more_vert.svg')
                 // Prevent propagation that would result in unwanted history pop
                 if (preventPropagation) evt.stopPropagation();
             });
-            dom.menuList.appendChild(menuItemDOM);
+            menuListItemContainer.appendChild(menuItemDOM);
+            dom.menuList.appendChild(menuListItemContainer);
             dom.menuListItems.push(menuItemDOM);
         });
     };
@@ -81,9 +89,8 @@ fetch('img/md-more_vert.svg')
         menuItems.forEach(function (menuItem, idx) {
             const el = dom.menuListItems[idx];
             el.textContent = menuItem.options.title();
-            el.setAttribute('aria-disabled', menuItem.options.disabled());
-            if (menuItem.options.hidden()) el.setAttribute('hidden', '');
-            else el.removeAttribute('hidden');
+            el.disabled = menuItem.options.disabled();
+            el.hidden = menuItem.options.hidden();
         });
     };
 
@@ -142,6 +149,11 @@ fetch('img/md-more_vert.svg')
     // Set up About screen
     dom.about = document.getElementById('about');
     state.aboutOpen = Boolean(history.state && history.state.aboutOpen);
+
+    // Dismiss the menu with keyboard
+    dom.about.addEventListener('keyup', function (e) {
+        if (state.aboutOpen && e.key === 'Escape') history.back();
+    });
 
     // Show/hide code
     addMenuItem(100, 'About', function openAbout () {
