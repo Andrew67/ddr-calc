@@ -98,9 +98,11 @@ fetch('img/md-more_vert.svg')
     // Using history.pushState and onpopstate so that browser/Android back button can dismiss the settings
     // Based on code from games module
     document.getElementById('menu-btn').addEventListener('click', function openMenu () {
-        state.menuOpen = true;
-        commit();
-        history.pushState({ menuOpen: true }, "", "");
+        if (!state.menuOpen) {
+            state.menuOpen = true;
+            commit();
+            history.pushState({ menuOpen: true }, "", "");
+        }
     });
     document.getElementById('menu').addEventListener('click', function () {
         history.back();

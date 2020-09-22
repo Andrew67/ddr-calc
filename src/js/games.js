@@ -120,9 +120,11 @@ Promise.all([
     // Show the game settings when the name is clicked, hide when the scrim is clicked
     // Using history.pushState and onpopstate so that browser/Android back button can dismiss the settings
     document.getElementById('game-btn').addEventListener('click', function showGameSettings () {
-        state.gameSettingsOpen = true;
-        commit();
-        history.pushState({ gameSettingsOpen: true }, "", "");
+        if (!state.gameSettingsOpen) { // In case it remains focused by keyboard when overlay is open
+            state.gameSettingsOpen = true;
+            commit();
+            history.pushState({ gameSettingsOpen: true }, "", "");
+        }
     });
     document.querySelectorAll('#game-settings .scrim, #game-settings label').forEach(function (e) {
         // Using mouseup as original click event would trigger the dismissal when keyboarding through the radio group

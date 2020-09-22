@@ -42,7 +42,7 @@
     animation-duration: var(--duration-fade-in-extra);
 }
 
-#game-btn:focus::before {
+#game-btn::before {
     content: '';
     position: absolute;
     top: 0;
@@ -52,6 +52,12 @@
     background-color: var(--color-foreground-focus);
     border-radius: 8px;
     z-index: -1;
+    opacity: 0;
+    transition: opacity .1s;
+}
+
+#game-btn:focus::before {
+    opacity: 1;
 }
 
 /* Set the game button a little higher on devices showing the tab bar, to further avoid touching calculations */
