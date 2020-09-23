@@ -243,8 +243,10 @@ button::-moz-focus-inner {
     touch-action: manipulation;
 }
 
-/* Mode switcher visible only on displays where it occupies 8% or less of total height */
-@media (min-height: 600px) {
+/* Mode switcher visible only on displays where it occupies 9.375% or less of total height.
+   Used to be 8%/600px, slight adjustments were made so it can fit on
+   Moto G4 with Chrome UI (512px) / iPhone SE standalone (548px) / iPhone 7 with Safari UI (553px) */
+@media (min-height: 510px) {
     #mode-switcher {
         display: flex;
     }

@@ -11,7 +11,6 @@ ExpiresActive Off
 # Note: only works when deployed on server at root level
 Header add Link "</css/calc.css>; rel=preload; as=style"
 Header add Link "</js/calc.js>; rel=preload; as=script"
-# "Non-core" but expected to load with any request-features below
 # Game selector
 Header add Link "</js/games.js>; rel=preload; as=script"
 Header add Link "</css/games.css>; rel=preload; as=style"
@@ -19,18 +18,15 @@ Header add Link "</games.json>; rel=preload; as=fetch; crossorigin"
 Header add Link "</img/fa-gamepad.svg>; rel=preload; as=fetch; crossorigin"
 Header add Link "</img/md-check_box.svg>; rel=preload; as=fetch; crossorigin"
 Header add Link "</img/md-radio_button.svg>; rel=preload; as=fetch; crossorigin"
-# Menu
-Header add Link "</js/menu.js>; rel=preload; as=script"
-Header add Link "</css/menu.css>; rel=preload; as=style"
-Header add Link "</img/md-more_vert.svg>; rel=preload; as=fetch; crossorigin"
-# Lack of About dialog app icon is intentional
 # Target BPM
 Header add Link "</js/targetbpm.js>; rel=preload; as=script"
 Header add Link "</css/targetbpm.css>; rel=preload; as=style"
 Header add Link "</img/md-music_note.svg>; rel=preload; as=fetch; crossorigin"
 Header add Link "</img/np-target.svg>; rel=preload; as=fetch; crossorigin"
-# Lack of dark mode toggle script is intentional
-# Lack of update checker script is intentional
+# Intentionally non-preloaded functionality
+# Menu / About dialog
+# Dark mode toggle
+# Update checker
 </Files>
 
 <FilesMatch "\.html$">

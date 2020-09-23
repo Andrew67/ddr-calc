@@ -60,7 +60,8 @@
     opacity: 1;
 }
 
-/* Set the game button a little higher on devices showing the tab bar, to further avoid touching calculations */
+/* Set the game button a little higher on taller devices, to further avoid touching calculations.
+   Used to match mode switcher bar trigger height, but it looks too high on those shorter devices */
 @media (min-height: 600px) {
     #game-btn {
         bottom: 32px;

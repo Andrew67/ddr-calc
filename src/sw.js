@@ -1,7 +1,7 @@
 /*! DDR Calc | https://github.com/Andrew67/ddr-calc */
 
 /** Bump this number to force the creation of a new cache for deployment of next version */
-const swCacheName = 'ddrcalc-static-v12';
+const swCacheName = 'ddrcalc-static-v13';
 
 // Cache all paths required for app's offline operation
 // See: https://developers.google.com/web/fundamentals/instant-and-offline/offline-cookbook/
@@ -22,13 +22,13 @@ self.addEventListener('install', event => {
             'img/md-radio_button.svg',
             'css/games.css',
             'games.json',
-            'js/menu.js',
-            'img/md-more_vert.svg',
-            'css/menu.css',
             'js/targetbpm.js',
             'css/targetbpm.css',
             'img/md-music_note.svg',
             'img/np-target.svg',
+            'js/menu.js',
+            'img/md-more_vert.svg',
+            'css/menu.css',
             'js/dark.js',
             'js/update.js',
             'css/update.css'

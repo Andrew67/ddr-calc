@@ -25,15 +25,6 @@ Promise.all([
         toggleTargetBpmMode(); // direct call in order to avoid a commit() cycle
     });
 
-    // Set up menu entry for smaller devices where the tabs won't show
-    addMenuItem(0, 'Switch to/from Target BPM', function () {
-        action.setMode((state.mode === MODE.SPEEDMOD) ? MODE.TARGETBPM : MODE.SPEEDMOD);
-        commit();
-    }, {
-        title: function () { return (state.mode === MODE.TARGETBPM) ? 'Switch to Speed Mod' : 'Switch to Target BPM' },
-        hidden: function () { return window.innerHeight >= 600; }
-    });
-
     // Set up display HTML
     document.getElementById('surface-targetbpm').innerHTML = '<div id="bpms">' +
         '<span>' +

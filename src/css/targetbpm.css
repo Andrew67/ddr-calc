@@ -34,7 +34,7 @@
 }
 
 /* Limit display switching animation to devices that show the tab bar */
-@media (min-height: 600px) {
+@media (min-height: 510px) {
     #surface-speedmod, .targetbpm #surface-targetbpm { /* Enter view */
         transition: transform .2s, visibility 0s linear 0s;
     }

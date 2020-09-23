@@ -35,8 +35,8 @@ Storage.prototype.setAllowingLoss = function (key, value) {
  */
 const asyncModules = [
     'games',
-    'menu',
     'targetbpm',
+    'menu',
     'dark'
 ];
 
@@ -297,7 +297,7 @@ function commit () {
     postCommitHooks.forEach(function (hook) { hook(); });
 }
 
-document.addEventListener('DOMContentLoaded', function initKeypad () {
+(function initKeypad () {
     // Init DOM
     dom.app = document.getElementById('app');
     dom.bpm = document.getElementById('bpm');
@@ -468,4 +468,4 @@ document.addEventListener('DOMContentLoaded', function initKeypad () {
     commit();
 
     loadNextModule();
-});
+})();

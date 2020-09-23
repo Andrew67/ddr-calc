@@ -120,13 +120,24 @@ fetch('img/md-more_vert.svg')
         dom.menu.classList.toggle('show', state.menuOpen);
     });
 
+    // Set up menu entry for smaller devices where the Target BPM mode-switcher tabs won't show.
+    // Previously, this code was in targetbpm.js, and this menu module loaded first, however the mode switcher tabs
+    // were added to more screen sizes in order to prioritize loading the Target BPM module first
+    addMenuItem(0, 'Switch to/from Target BPM', function () {
+        action.setMode((state.mode === MODE.SPEEDMOD) ? MODE.TARGETBPM : MODE.SPEEDMOD);
+        commit();
+    }, {
+        title: function () { return (state.mode === MODE.TARGETBPM) ? 'Switch to Speed Mod' : 'Switch to Target BPM' },
+        hidden: function () { return window.innerHeight >= 510; }
+    });
+
     // Load HTML for the about screen
     container.innerHTML = '<div id="about" class="full-screen-overlay">' +
         '<div class="scrim"></div>' +
         '<div id="about-box">' +
             '<div id="app-logo">' +
                 '<img src="img/logo-192.png" width="64" height="64" alt="" loading="lazy">' +
-                '<h1>DDR Calc <span id="app-version">Version 3.3.0' +
+                '<h1>DDR Calc <span id="app-version">Version 4.0.0' +
                     (isGPlay ? 'g' : '') + (isMobileSafari ? 's' : '') + (isIOS12 ? 'e' : '') + '</span></h1>' +
                 '<h2>&copy; 2018&ndash;2020 Andrés Cordero</h2>' +
             '</div>' +
@@ -152,12 +163,6 @@ fetch('img/md-more_vert.svg')
     dom.about = document.getElementById('about');
     state.aboutOpen = Boolean(history.state && history.state.aboutOpen);
 
-    // Dismiss the menu with keyboard
-    dom.about.addEventListener('keyup', function (e) {
-        if (state.aboutOpen && e.key === 'Escape') history.back();
-    });
-
-    // Show/hide code
     addMenuItem(100, 'About', function openAbout () {
         state.aboutOpen = true;
         commit();
@@ -165,6 +170,9 @@ fetch('img/md-more_vert.svg')
     });
     document.querySelector('#about .scrim')
         .addEventListener('click', function () { history.back(); });
+    dom.about.addEventListener('keyup', function (e) {
+        if (state.aboutOpen && e.key === 'Escape') history.back();
+    });
     window.addEventListener('popstate', function handleAboutStateChange (event) {
         const newAboutOpen = Boolean(event.state && event.state.aboutOpen);
         if (state.aboutOpen !== newAboutOpen) {
