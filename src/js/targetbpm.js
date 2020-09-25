@@ -5,14 +5,13 @@
 // Start loading CSS asynchronously
 // Note: some elements in this module (overflow alternative switcher) depend on the menu module loading first
 addStylesheet('targetbpm');
-// Kick off after target/song BPM icons loaded
-Promise.all([
-    fetch('img/md-music_note.svg'), fetch('img/np-target.svg')
-]).then(function (r) {
-    return Promise.all([r[0].text(), r[1].text()]);
-}).then(function initTargetBpmModule (data) {
-    const songIcon = '<span class="svg-icon" aria-hidden="true">' + data[0] + '</span>',
-        targetIcon = '<span class="svg-icon" aria-hidden="true">' + data[1] + '</span>';
+(function initTargetBpmModule () {
+    const songIcon = `<span class="svg-icon" aria-hidden="true">
+              <svg width="24" height="24"><use xlink:href="img/md-music_note.svg#music_note"/></svg>
+          </span>`,
+          targetIcon = `<span class="svg-icon" aria-hidden="true">
+              <svg width="24" height="24"><use xlink:href="img/np-target.svg#target"/></svg>
+          </span>`;
 
     // Set up mode switcher tabs HTML
     dom.modeSwitcher = document.getElementById('mode-switcher');
@@ -187,6 +186,4 @@ Promise.all([
     // At this point, all main UI elements have loaded
     // We can reduce the init fade-in animation time and be confident we avoided flicker effects
     document.documentElement.style.setProperty('--duration-fade-in-delayed-init', '.25s');
-}).catch(function (err) {
-    console.error("Error in targetbpm.js:", err, "\nModule loading has been halted");
-});
+})();

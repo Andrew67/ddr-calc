@@ -184,28 +184,22 @@ input[type=radio], input[type=checkbox] {
     opacity: 0;
 }
 
-/* TODO: Below rules should only apply to the above 2 input types; not an issue until others pop up */
-input + span.svg-icon svg {
+input[type=radio] + span.svg-icon svg, input[type=checkbox] + span.svg-icon svg {
     top: 6px;
     margin-right: 24px;
 }
 
-input + span svg .unchecked {
-    color: var(--color-foreground-medium);
-}
-
-input + span svg .checked {
-    opacity: 0;
+input[type=radio] + span.svg-icon, input[type=checkbox] + span.svg-icon {
+    --opacity-checked: 0;
     transition: opacity .1s;
-    color: var(--color-accent);
 }
 
-input:checked + span svg .checked {
-    opacity: 1;
+input[type=radio]:checked + span.svg-icon, input[type=checkbox]:checked + span.svg-icon {
+    --opacity-checked: 1;
 }
 
 /* Enables focus effect with color change when state changes */
-input + span::before {
+input[type=radio] + span::before, input[type=checkbox] + span::before {
     content: '';
     position: absolute;
     top: 0;
@@ -215,11 +209,11 @@ input + span::before {
     z-index: -1;
 }
 
-input:focus + span::before {
+input[type=radio]:focus + span::before, input[type=checkbox]:focus + span::before {
     background: var(--color-foreground-focus);
     outline: 3px solid transparent;
 }
 
-input:checked:focus + span::before {
+input[type=radio]:checked:focus + span::before, input[type=checkbox]:checked:focus + span::before {
     background: var(--color-accent-focus);
 }

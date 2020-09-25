@@ -5,14 +5,12 @@
 // Start loading CSS asynchronously
 // Note: some elements in this module (overlay, scrim) depend on the games module loading first
 addStylesheet('menu');
-// Kick off after icon loaded
-fetch('img/md-more_vert.svg')
-.then(function (img) {
-    return img.text();
-}).then(function initMenuModule (menuBtn) {
+(function initMenuModule () {
     // Load HTML for the menu button
     const container = document.createElement('div');
-    container.innerHTML = `<button id="menu-btn" class="overlay" title="Menu">${menuBtn}</button>`;
+    container.innerHTML = `<button id="menu-btn" class="overlay" title="Menu">
+        <svg width="24" height="24" aria-hidden="true"><use xlink:href="img/md-more_vert.svg#more_vert"/></svg>
+    </button>`;
     document.getElementById('display').appendChild(container.firstChild);
 
     // Load HTML for the pop-up menu
@@ -205,6 +203,4 @@ fetch('img/md-more_vert.svg')
 
     commit();
     loadNextModule();
-}).catch(function (err) {
-    console.error("Error in menu.js:", err, "\nModule loading has been halted");
-});
+})();

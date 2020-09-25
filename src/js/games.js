@@ -4,17 +4,21 @@
 
 // Start loading CSS asynchronously
 addStylesheet('games');
-// Kick off after game data and icons loaded
-Promise.all([
-    fetch('games.json'),
-    fetch('img/fa-gamepad.svg'), fetch('img/md-check_box.svg'), fetch('img/md-radio_button.svg')
-]).then(function (r) {
-    return Promise.all([r[0].json(), r[1].text(), r[2].text(), r[3].text()]);
-}).then(function initGamesModule (data) {
-    const gameData = data[0],
-        gamepad = `<span class="svg-icon">${data[1]}</span>`,
-        checkbox = `<span class="svg-icon">${data[2]}</span>`,
-        radioBtn = `<span class="svg-icon">${data[3]}</span>`;
+// Kick off after game data loaded
+fetch('games.json')
+.then(r => r.json())
+.then(function initGamesModule (gameData) {
+    const gamepad = `<span class="svg-icon" aria-hidden="true">
+              <svg width="18" height="14.4"><use xlink:href="img/fa-gamepad.svg#gamepad"/></svg>
+          </span>`,
+          checkbox = `<span class="svg-icon" aria-hidden="true"><svg width="24" height="24">
+              <use xlink:href="img/md-check_box.svg#check_box-unchecked" color="var(--color-foreground-medium)"/>
+              <use xlink:href="img/md-check_box.svg#check_box-checked" color="var(--color-accent)" opacity="var(--opacity-checked)"/>
+          </svg></span>`,
+          radioBtn = `<span class="svg-icon" aria-hidden="true"><svg width="24" height="24">
+              <use xlink:href="img/md-radio_button.svg#radio_button-unchecked" color="var(--color-foreground-medium)"/>
+              <use xlink:href="img/md-radio_button.svg#radio_button-checked" color="var(--color-accent)" opacity="var(--opacity-checked)"/>
+          </svg></span>`;
 
     // Map game data by ID for easier retrieval without walking the array
     // Furthermore, convert the mods and premiumPlayMods into their respective Map forms

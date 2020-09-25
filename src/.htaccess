@@ -15,15 +15,11 @@ Header add Link "</js/calc.js>; rel=preload; as=script"
 Header add Link "</js/games.js>; rel=preload; as=script"
 Header add Link "</css/games.css>; rel=preload; as=style"
 Header add Link "</games.json>; rel=preload; as=fetch; crossorigin"
-Header add Link "</img/fa-gamepad.svg>; rel=preload; as=fetch; crossorigin"
-Header add Link "</img/md-check_box.svg>; rel=preload; as=fetch; crossorigin"
-Header add Link "</img/md-radio_button.svg>; rel=preload; as=fetch; crossorigin"
 # Target BPM
 Header add Link "</js/targetbpm.js>; rel=preload; as=script"
 Header add Link "</css/targetbpm.css>; rel=preload; as=style"
-Header add Link "</img/md-music_note.svg>; rel=preload; as=fetch; crossorigin"
-Header add Link "</img/np-target.svg>; rel=preload; as=fetch; crossorigin"
 # Intentionally non-preloaded functionality
+# SVGs
 # Menu / About dialog
 # Dark mode toggle
 # Update checker
@@ -32,10 +28,7 @@ Header add Link "</img/np-target.svg>; rel=preload; as=fetch; crossorigin"
 <FilesMatch "\.html$">
 # Security headers as recommended by securityheaders.com
 Header always set Content-Security-Policy "\
-default-src 'none'; \
-connect-src 'self'; \
-img-src 'self'; \
-manifest-src 'self'; \
+default-src 'self'; \
 script-src 'self' 'sha256-ZfGbruOMiTVDQsMYNRKH+oHAqKWeKFRAVrMHuztGnQo='; \
 style-src 'self' 'sha256-nMc1pJn0ceZrXu1/AseDqpkZXDXIFbK3DPdspz3f+6c='; \
 "
