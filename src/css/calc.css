@@ -36,6 +36,16 @@
     --shadow-surface-z8: 0 5px 5px -3px rgba(0,0,0,.2),0 8px 10px 1px rgba(0,0,0,.14),0 3px 14px 2px rgba(0,0,0,.12);
     --shadow-surface-z16: 0 8px 10px -5px rgba(0,0,0,.2),0 16px 24px 2px rgba(0,0,0,.14),0 6px 30px 5px rgba(0,0,0,.12);
     --shadow-surface-z24: 0 11px 15px -7px rgba(0,0,0,.2),0 24px 38px 3px rgba(0,0,0,.14),0 9px 46px 8px rgba(0,0,0,.12);
+
+    /* Safe area insets (iPhoneX notch); set as variables for easier debugging */
+    /*noinspection CssInvalidFunction*/
+    --safe-area-inset-top: env(safe-area-inset-top);
+    /*noinspection CssInvalidFunction*/
+    --safe-area-inset-right: env(safe-area-inset-right);
+    /*noinspection CssInvalidFunction*/
+    --safe-area-inset-bottom: env(safe-area-inset-bottom);
+    /*noinspection CssInvalidFunction*/
+    --safe-area-inset-left: env(safe-area-inset-left);
 }
 
 /* Dark theme; added here to load ASAP for flicker-free UI purposes for returning users */
@@ -196,9 +206,9 @@ button::-moz-focus-inner {
     color: var(--color-foreground-medium-lg);
     padding-right: 3vw;
     /*noinspection CssInvalidFunction*/
-    padding-left: env(safe-area-inset-left);
+    padding-left: var(--safe-area-inset-left);
     /*noinspection CssInvalidFunction*/
-    padding-right: max(3vw, env(safe-area-inset-right));
+    padding-right: max(3vw, var(--safe-area-inset-right));
 }
 
 #surface-speedmod div {
@@ -273,21 +283,21 @@ button::-moz-focus-inner {
     display: flex;
     flex-wrap: wrap;
     /*noinspection CssInvalidFunction*/
-    padding-bottom: env(safe-area-inset-bottom);
+    padding-bottom: var(--safe-area-inset-bottom);
 }
 
 #keypad-main {
     flex: 3;
     background: var(--color-keypad-bg);
     /*noinspection CssInvalidFunction*/
-    padding-left: env(safe-area-inset-left);
+    padding-left: var(--safe-area-inset-left);
 }
 
 #keypad-ext {
     flex: 1;
     background: var(--color-keypad-ext-bg);
     /*noinspection CssInvalidFunction*/
-    padding-right: env(safe-area-inset-right);
+    padding-right: var(--safe-area-inset-right);
 }
 
 #keypad button {
