@@ -4,14 +4,19 @@
     display: block;
     top: 8px;
     left: 8px;
-    /*noinspection CssInvalidFunction*/
-    left: max(8px, var(--safe-area-inset-left));
     /* Increase the touch target */
     text-align: left;
     width: 56px;
     height: 44px;
     animation-name: fade-in;
     animation-duration: var(--duration-fade-in-extra);
+}
+
+@supports (left: max(8px, 0px)) {
+    #menu-btn {
+        top: max(8px, var(--safe-area-inset-top));
+        left: max(8px, var(--safe-area-inset-left));
+    }
 }
 
 #menu-btn::before {
@@ -63,13 +68,18 @@ a {
     position: relative;
     top: 16px;
     left: 12px;
-    /*noinspection CssInvalidFunction*/
-    left: max(12px, var(--safe-area-inset-left) + 4px);
     /* Expand animation from top-left corner */
     transform: scale(.5, .5);
     transform-origin: top left;
     transition: transform .1s;
     overflow: hidden; /* Clip the corners of the focused item backgrounds */
+}
+
+@supports (left: max(12px, 0px)) {
+    #menu-popup {
+        top: max(16px, var(--safe-area-inset-top) + 8px);
+        left: max(12px, var(--safe-area-inset-left) + 4px);
+    }
 }
 
 #menu.show #menu-popup {

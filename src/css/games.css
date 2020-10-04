@@ -29,8 +29,6 @@
     display: block;
     bottom: 16px;
     left: 16px;
-    /*noinspection CssInvalidFunction*/
-    left: max(16px, var(--safe-area-inset-left) + 8px);
     text-transform: uppercase;
     /* Increases the touch target for shorter game names, overflows long game names to next line */
     min-width: 44px;
@@ -40,6 +38,12 @@
     word-break: break-all;
     animation-name: fade-in;
     animation-duration: var(--duration-fade-in-extra);
+}
+
+@supports (left: max(16px, 0px)) {
+    #game-btn {
+        left: max(16px, var(--safe-area-inset-left) + 8px);
+    }
 }
 
 #game-btn::before {
@@ -122,8 +126,7 @@
     /* For slim screens, leave some space for dismissal scrim, and add scrollbars */
     max-width: calc(100% - 44px);
     overflow: auto;
-    /*noinspection CssInvalidFunction*/
-    padding-right: var(--safe-area-inset-right);
+    padding: var(--safe-area-inset-top) var(--safe-area-inset-right) var(--safe-area-inset-bottom) 0;
     /* Material Design Accelerate/exit easing: https://material.io/design/motion/speed.html#easing */
     transition: transform .2s cubic-bezier(0.4, 0.0, 1, 1);
 }
