@@ -130,11 +130,23 @@ fetch('games.json')
             history.pushState({ gameSettingsOpen: true }, "", "");
         }
     });
-    document.querySelectorAll('#game-settings .scrim, #game-settings label').forEach(function (e) {
-        // Using mouseup as original click event would trigger the dismissal when keyboarding through the radio group
-        e.addEventListener('mouseup', function () { history.back(); });
+    document.querySelector('#game-settings .scrim')
+        .addEventListener('click', () =>  history.back());
+
+    // Using mouseup as original click event would trigger the dismissal when keyboarding through the radio group
+    // Requiring mouseup -> change chain due to Firefox 68 triggering mouseup before DOM form values updated,
+    // causing the *previous* selection to end up committed
+    let mouseUpFired = false;
+    document.querySelectorAll('#game-settings label').forEach(function (e) {
+        e.addEventListener('mouseup', () => mouseUpFired = true);
     });
-    document.querySelector('#game-settings form').addEventListener('keyup', function (e) {
+    dom.gameSettingsForm.addEventListener('change', function () {
+        if (mouseUpFired) {
+            mouseUpFired = false;
+            history.back();
+        }
+    });
+    dom.gameSettingsForm.addEventListener('keyup', function (e) {
         if (state.gameSettingsOpen && (e.key === 'Enter' || e.key === 'Escape')) history.back();
     });
     window.addEventListener('popstate', function handleGameSettingsStateChange (event) {
