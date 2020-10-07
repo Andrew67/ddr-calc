@@ -362,8 +362,8 @@ function commit () {
 
         e.addEventListener('touchstart', function (evt) {
             // This preventDefault is used to recover key fast-tapping, as otherwise even with
-            // touch-action: manipulation, iOS Safari (and only Safari; iOS Chrome lacks this issue),
-            // Safari can delay or not even fire touchstart events (sometimes showing you a magnifier instead)
+            // touch-action: manipulation, iOS Safari (and only Safari; iOS Chrome lacks this issue)
+            // can delay or not even fire touchstart events (sometimes showing you a magnifier instead)
             if (isMobileSafari) evt.preventDefault();
             // Workaround for GNOME Web which still fires touchstart on disabled / pointer-events: none buttons
             if (e.disabled) return;
@@ -371,6 +371,8 @@ function commit () {
             e.classList.add('active');
             interactionStartTime = new Date().getTime();
             longPressTimeoutId = setTimeout(longKeyPress, LONG_PRESS_MS);
+            // 10ms from SwiftKey default, follow-up starts early to coincide with visual result of long press action
+            if ('vibrate' in navigator) navigator.vibrate([10, LONG_PRESS_MS - 22.50, 25]);
         }, { passive: !isMobileSafari });
 
         e.addEventListener('touchend', function () {
@@ -379,6 +381,7 @@ function commit () {
             touchEndTime = new Date().getTime();
             if (touchEndTime - interactionStartTime <= LONG_PRESS_MS) {
                 clearTimeout(longPressTimeoutId);
+                if ('vibrate' in navigator) navigator.vibrate(0);
                 keyPress();
             }
         }, { passive: true });
@@ -386,6 +389,7 @@ function commit () {
         // In cases such as locking the phone while holding a key, touchend is never fired
         e.addEventListener('touchcancel', function () {
             e.classList.remove('active');
+            if ('vibrate' in navigator) navigator.vibrate(0);
             e.blur();
         }, { passive: true });
 
