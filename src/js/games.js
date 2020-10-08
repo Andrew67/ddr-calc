@@ -49,8 +49,7 @@ fetch('games.json')
 
     // Load HTML for the game settings
     // SVG for the checkbox and radio buttons must be in-lined for CSS to work properly
-    container.innerHTML = '<div id="game-settings" class="full-screen-overlay">' +
-        '<div class="scrim"></div>' +
+    container.innerHTML = '<div id="game-settings" class="full-screen-overlay scrim">' +
         '<div class="side-sheet">' +
             '<form name="game-settings-form">' +
             '<fieldset>' +
@@ -130,8 +129,9 @@ fetch('games.json')
             history.pushState({ gameSettingsOpen: true }, "", "");
         }
     });
-    document.querySelector('#game-settings .scrim')
-        .addEventListener('click', () =>  history.back());
+    dom.gameSettings.addEventListener('click', function (e) {
+        if (e.target === this) history.back();
+    });
 
     // Using mouseup as original click event would trigger the dismissal when keyboarding through the radio group
     // Requiring mouseup -> change chain due to Firefox 68 triggering mouseup before DOM form values updated,

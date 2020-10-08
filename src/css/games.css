@@ -108,12 +108,17 @@
     transition: transform 0s .2s, visibility 0s linear .2s;
 }
 
-.scrim {
+.scrim::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     background-color: black;
     opacity: 0;
     transition: opacity .2s;
-    width: 100%;
-    height: 100%;
+    z-index: -1;
 }
 
 .side-sheet {
@@ -138,7 +143,7 @@
     transition-delay: 0s;
 }
 
-.show .scrim {
+.show.scrim::before {
     opacity: 0.32;
     transition: opacity .25s;
 }
