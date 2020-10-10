@@ -32,7 +32,7 @@ Header add Link "</css/targetbpm.css>; rel=preload; as=style"
 # Security headers as recommended by securityheaders.com
 Header always set Content-Security-Policy "\
 default-src 'self'; \
-script-src 'self' 'sha256-ZfGbruOMiTVDQsMYNRKH+oHAqKWeKFRAVrMHuztGnQo='; \
+script-src 'self' 'sha256-ouZpqh80SFkdm6/bVlt6Nb0WiWzAeX+tRKMX7ufI5yo='; \
 style-src 'self' 'sha256-nMc1pJn0ceZrXu1/AseDqpkZXDXIFbK3DPdspz3f+6c='; \
 "
 

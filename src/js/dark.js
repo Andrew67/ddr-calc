@@ -17,6 +17,7 @@ try {
 
     state.darkModeEnabled = isDarkModePreferred();
     dom.themeColor = document.querySelector('meta[name=theme-color]');
+    dom.colorScheme = document.querySelector('meta[name=color-scheme]');
 
     // Manual toggle
     addMenuItem(5, 'Dark Theme On/Off', () => {
@@ -45,6 +46,7 @@ try {
     postCommitHooks.push(function toggleDarkMode () {
         document.body.classList.toggle('theme-dark', state.darkModeEnabled);
         dom.themeColor.content = state.darkModeEnabled ? '#121212' : '#ffffff';
+        dom.colorScheme.content = state.darkModeEnabled ? 'dark' : 'light';
     });
 
     commit();

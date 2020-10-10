@@ -7,6 +7,7 @@
     <title>DDR Calc</title>
     <meta name="application-name" content="DDR Calc">
     <meta name="theme-color" content="#ffffff">
+    <meta name="color-scheme" content="light">
     <meta name="description" content="Calculator for DDR speed modifiers">
     <link rel="stylesheet" href="css/calc.css">
     <script src="js/calc.js" defer></script>
@@ -70,6 +71,7 @@
         if (localStorage.getItem('dark-mode') === 'true' || window.matchMedia('(prefers-color-scheme: dark)').matches) {
             document.body.classList.add('theme-dark');
             document.querySelector('meta[name=theme-color]').content = '#121212';
+            document.querySelector('meta[name=color-scheme]').content = 'dark';
         }
     </script>
 
