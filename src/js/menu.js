@@ -11,7 +11,7 @@ addStylesheet('menu');
     container.innerHTML = `<button id="menu-btn" class="overlay" title="Menu">
         <svg width="24" height="24" aria-hidden="true"><use xlink:href="img/md-more_vert.svg#more_vert"/></svg>
     </button>`;
-    document.getElementById('display').appendChild(container.firstChild);
+    document.getElementById('display').insertAdjacentElement('afterbegin', container.firstElementChild);
 
     // Load HTML for the pop-up menu
     container.innerHTML = '<div id="menu" class="full-screen-overlay">' +
