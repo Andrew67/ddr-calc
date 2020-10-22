@@ -26,8 +26,8 @@
 
     <!-- iOS-specific tags -->
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default"><!-- default = white bar, black text -->
-    <meta name="apple-mobile-web-app-capable" content="yes"><!-- required for splash screens to work even on iOS 12.2 -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-capable" content="yes"><!-- required for splash screens to work even on iOS 11.3+ -->
     <!-- iPhone 5 (640px x 1136px, 20px status bar) -->
     <link rel="apple-touch-startup-image" href="img/apple-splash-640-1136-fs8.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
     <!-- iPhone 8, 7, 6s, 6 (750px x 1334px, 20px status bar) -->
@@ -75,6 +75,7 @@
         }
     </script>
 
+    <div id="status-bar"></div>
     <!-- Calculator UI -->
     <div id="calculator">
         <div id="display">

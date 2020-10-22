@@ -14,7 +14,7 @@
 
 @supports (left: max(8px, 0px)) {
     #menu-btn {
-        top: max(8px, var(--safe-area-inset-top));
+        top: calc(var(--safe-area-inset-top) + 8px);
         left: max(8px, var(--safe-area-inset-left));
     }
 }
@@ -77,7 +77,7 @@ a {
 
 @supports (left: max(12px, 0px)) {
     #menu-popup {
-        top: max(16px, var(--safe-area-inset-top) + 8px);
+        top: calc(var(--safe-area-inset-top) + 16px);
         left: max(12px, var(--safe-area-inset-left) + 4px);
     }
 }

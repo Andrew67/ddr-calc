@@ -78,16 +78,21 @@ body.theme-dark {
 html, body {
     width: 100%;
     height: 100%;
+}
 
-    /* Prevents bounce scroll on iOS */
-    position: fixed;
-    overflow: hidden;
+/* Required for iOS standalone mode, otherwise full screen height is not used */
+@media (display-mode: standalone) {
+    html, body {
+        height: 100vh;
+    }
 }
 
 body {
     font-family: "Roboto", "Ubuntu", "Cantarell", system-ui, -apple-system, sans-serif;
     background: var(--color-surface-z0);
     color: var(--color-foreground);
+    position: fixed; /* Prevents bounce scroll on iOS */
+    overflow: hidden;
 
     /* Block text selection for app-like experience */
     user-select: none;
@@ -191,10 +196,21 @@ button::-moz-focus-inner {
     margin: 4px;
 }
 
+/* Status bar underlay for insets (basically for iOS standalone mode) */
+#status-bar {
+    background: rgba(0,0,0,.6);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--safe-area-inset-top);
+    z-index: 99999;
+}
+
 /* Calculator */
 #display {
     width: 200%;
-    height: 30%;
+    height: calc(30% + var(--safe-area-inset-top));
     font-size: calc(5vh + 5vw);
     position: relative;
     display: flex;
