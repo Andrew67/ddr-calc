@@ -134,6 +134,7 @@
     padding: var(--safe-area-inset-top) var(--safe-area-inset-right) var(--safe-area-inset-bottom) 0;
     /* Material Design Accelerate/exit easing: https://material.io/design/motion/speed.html#easing */
     transition: transform .2s cubic-bezier(0.4, 0.0, 1, 1);
+    touch-action: pan-y pinch-zoom;
 }
 
 #game-settings.show {
@@ -141,6 +142,7 @@
     visibility: visible;
     /* Entry: Don't delay the transform so that animations can be seen */
     transition-delay: 0s;
+    --drag-delta-x: 0px;
 }
 
 .show.scrim::before {
@@ -148,10 +150,16 @@
     transition: opacity .25s;
 }
 
-#game-settings.show .side-sheet {
+.show .side-sheet {
     transform: translateX(-100%);
     /* Material Design Decelerate/enter easing: https://material.io/design/motion/speed.html#easing */
     transition: transform .25s cubic-bezier(0.0, 0.0, 0.2, 1);
+}
+
+.show.dragging .side-sheet {
+    /* Dragging state; set and unset with JS pointer events; disables animation for instant feedback */
+    transform: translateX(calc(-100% + var(--drag-delta-x)));
+    transition: none;
 }
 
 #game-settings form {

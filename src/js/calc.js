@@ -20,6 +20,9 @@ const isGPlay = document.referrer.startsWith('android-app://com.andrew67.ddrcalc
     location.hash.includes('gplay');
 if (isGPlay) sessionStorage.setItem('gplay', 'true');
 
+/** Detect pointer events compatibility for bonus features (Chrome 55, Firefox 59, iOS 13.1) */
+const arePointerEventsSupported = 'PointerEvent' in window;
+
 /**
  * Works like setItem, but silently catches all exceptions (most likely QuotaExceededException)
  * Most likely to happen on Safari (iOS <= 10.3) incognito mode and users with full storage on their phones

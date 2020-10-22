@@ -135,7 +135,9 @@ addStylesheet('menu');
         '<div id="app-logo">' +
             '<img src="img/logo-192.png" width="64" height="64" alt="" loading="lazy">' +
             '<h1>DDR Calc <span id="app-version">Version 4.0.0' +
-                (isGPlay ? 'g' : '') + (isMobileSafari ? 's' : '') + (isIOS12 ? 'e' : '') + '</span></h1>' +
+                (isGPlay ? 'g' : '') + (arePointerEventsSupported ? '' : 'p') +
+                (isMobileSafari ? 's' : '') + (isIOS12 ? 't' : '') +
+            '</span></h1>' +
             '<h2>&copy; 2018&ndash;2020 Andrés Cordero</h2>' +
         '</div>' +
         '<ul>' +

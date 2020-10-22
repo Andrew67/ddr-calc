@@ -129,9 +129,11 @@ fetch('games.json')
             history.pushState({ gameSettingsOpen: true }, "", "");
         }
     });
-    dom.gameSettings.addEventListener('click', function (e) {
-        if (e.target === this) history.back();
-    });
+    if (!arePointerEventsSupported) { // if pointer events supported, handled below
+        dom.gameSettings.addEventListener('click', function (e) {
+            if (e.target === this) history.back();
+        });
+    }
 
     // Using mouseup as original click event would trigger the dismissal when keyboarding through the radio group
     // Requiring mouseup -> change chain due to Firefox 68 triggering mouseup before DOM form values updated,
@@ -170,7 +172,65 @@ fetch('games.json')
     });
     postCommitHooks.push( function showHideGameSettings () {
         dom.gameSettings.classList.toggle('show', state.gameSettingsOpen);
+        if (!state.gameSettingsOpen) dom.gameSettings.classList.remove('dragging');
     });
+
+    // Bonus for browsers with pointer events: side sheet can be swiped away
+    if (arePointerEventsSupported) {
+        let startTimeMs, startPageX, deltaX, totalDeltaX, startedOnScrim, sideSheetWidth, dragging = false;
+        const applyDeltaX = () => {
+            dom.gameSettings.style.setProperty('--drag-delta-x', `${deltaX}px`);
+        };
+        const sideSheet = dom.gameSettings.querySelector('.side-sheet');
+        dom.gameSettings.addEventListener('pointerdown', function (e) {
+            if (e.isPrimary) {
+                startTimeMs = new Date().getTime();
+                startPageX = e.pageX;
+                totalDeltaX = deltaX = 0;
+                startedOnScrim = e.target === this;
+                sideSheetWidth = sideSheet.getBoundingClientRect().width;
+                dragging = true;
+                applyDeltaX();
+                dom.gameSettings.classList.add('dragging');
+            }
+        }, { passive: true });
+        dom.gameSettings.addEventListener('pointermove', (e) => {
+            if (e.isPrimary && dragging) {
+                deltaX = Math.max(0, e.pageX - startPageX);
+                totalDeltaX += Math.abs(e.pageX - startPageX);
+                // Resets start of drag reference if further left than before
+                if (deltaX === 0) startPageX = e.pageX;
+                applyDeltaX();
+            }
+        }, { passive: true });
+        dom.gameSettings.addEventListener('pointerup', (e) => {
+            if (e.isPrimary && dragging) {
+                dragging = false;
+                const endTimeMs = new Date().getTime();
+                // Trigger dismissal when:
+                //  - Dragging beyond a tenth of the side sheet width within 300ms
+                //  - Dragging beyond half the side sheet width (no time limit)
+                //  - Touch started on scrim and moved less than 44px (basically a tap). Replacement for old click event
+                // Removing the dragging class is delayed otherwise there's an ugly bounce-back just before dismissal
+                if ((deltaX >= sideSheetWidth/10 && endTimeMs - startTimeMs <= 300) ||
+                    deltaX >= sideSheetWidth/2 ||
+                    (startedOnScrim && totalDeltaX < 44)) history.back();
+                else dom.gameSettings.classList.remove('dragging');
+            }
+        });
+        dom.gameSettings.addEventListener('pointercancel', (e) => {
+            if (e.isPrimary && dragging) {
+                // Always bounce back on cancellation (browser is taking over for scroll etc)
+                dragging = false;
+                dom.gameSettings.classList.remove('dragging');
+            }
+        });
+        if (isMobileSafari) {
+            dom.gameSettings.addEventListener('touchstart', function (e) {
+                if (e.target === this) e.preventDefault();
+            }, { passive: false });
+        }
+    }
 
     // Sync game settings form with initial state
     dom.gameSettingsForm.elements['premiumPlay'].checked = state.premiumPlayEnabled;
