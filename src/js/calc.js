@@ -451,8 +451,12 @@ function commit () {
     document.addEventListener('keydown', evt => {
         const key = getKeyFromKeyboardEvent(evt);
         // TODO: Ignore keys when keypad is obscured / add global dialog dismiss key
-        if (key && !key.state.disabled) key.dom.classList.add('active');
-    });
+        if (key && !key.state.disabled) {
+            key.dom.classList.add('active');
+            // Disable browser's shortcut for this keypress (if browser honors it; Samsung ignores for Backspace...)
+            evt.preventDefault();
+        }
+    }, { passive: false });
 
     document.addEventListener('keyup', evt => {
         const key = getKeyFromKeyboardEvent(evt);
