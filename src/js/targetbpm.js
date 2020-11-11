@@ -77,10 +77,10 @@ addStylesheet('targetbpm');
     dom.targetBpmIcon.addEventListener('click', focusTargetBpm);
 
     // Computed state hook to disable multiplication and song BPM keys in Target BPM mode (they don't apply here)
-    computedState.hooks.push(function disableFuncKeysInTargetBpmMode () {
-        keysForEach(function (key, type, keyState) {
-            if (type === KEYTYPE.FUNC && key !== KEY.DEL) keyState.disabled = (state.mode === MODE.TARGETBPM);
-        });
+    const keysToDisableInTargetBpmMode = [KEY.MULT, KEY.BPM];
+    computedState.hooks.push(function disableKeysInTargetBpmMode () {
+        const disable = (state.mode === MODE.TARGETBPM);
+        keysToDisableInTargetBpmMode.forEach(key => computedState.keys[key].disabled = disable);
     });
 
     // Computed state hook to recalculate speed mod results

@@ -27,7 +27,7 @@
 
 #game-btn {
     display: block;
-    bottom: 16px;
+    bottom: 8px;
     left: 16px;
     text-transform: uppercase;
     /* Increases the touch target for shorter game names, overflows long game names to next line */
@@ -64,9 +64,8 @@
     opacity: 1;
 }
 
-/* Set the game button a little higher on taller devices, to further avoid touching calculations.
-   Used to match mode switcher bar trigger height, but it looks too high on those shorter devices */
-@media (min-height: 600px) {
+/* Set the game button a little higher on taller devices, to further avoid touching calculations */
+@media (max-aspect-ratio: 9/18) {
     #game-btn {
         bottom: 32px;
     }
