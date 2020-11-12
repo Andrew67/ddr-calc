@@ -302,7 +302,6 @@ button::-moz-focus-inner {
 
 #keypad > div {
     display: flex;
-    flex-wrap: wrap;
     padding-bottom: var(--safe-area-inset-bottom);
 }
 
@@ -314,18 +313,23 @@ button::-moz-focus-inner {
 
 #keypad-ext {
     flex: 1;
+    flex-direction: column;
     background: var(--color-keypad-ext-bg);
     padding-right: var(--safe-area-inset-right);
 }
 
 #keypad button {
-    width: 33.3333%;
+    flex: 1;
     position: relative;
     z-index: 0;
 }
 
+#keypad-main button {
+    flex-basis: 33.3333%;
+}
+
 /* Reduce font size for BPM key */
-#keypad button:last-of-type {
+#keypad-main button:last-of-type {
     font-size: calc(3vh + 3vw);
 }
 
@@ -371,7 +375,6 @@ button::-moz-focus-inner {
 }
 
 #keypad-ext button {
-    width: 100%;
     font-size: calc(3vh + 3vw);
 }
 
