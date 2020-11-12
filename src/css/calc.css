@@ -210,7 +210,8 @@ button::-moz-focus-inner {
 /* Calculator */
 #display {
     width: 200%;
-    height: calc(30% + var(--safe-area-inset-top));
+    height: 30%;
+    margin-top: var(--safe-area-inset-top);
     font-size: calc(5vh + 5vw);
     position: relative;
     display: flex;
@@ -220,7 +221,6 @@ button::-moz-focus-inner {
 #display > div {
     flex: 1;
     color: var(--color-foreground-medium-lg);
-    padding-top: var(--safe-area-inset-top);
     padding-left: var(--safe-area-inset-left);
     padding-right: 3vw;
 }

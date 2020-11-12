@@ -14,7 +14,6 @@
 
 @supports (left: max(8px, 0px)) {
     #menu-btn {
-        top: calc(var(--safe-area-inset-top) + 8px);
         left: max(8px, var(--safe-area-inset-left));
     }
 }
