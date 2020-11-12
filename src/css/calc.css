@@ -268,7 +268,6 @@ button::-moz-focus-inner {
     color: var(--color-keypad-fg);
     font-size: calc(5vh + 5vw);
     display: flex;
-    flex-wrap: wrap;
 
     /* Blocks double-tap-zoom (the only touch-action supported by iOS, does not block scroll or zoom) */
     touch-action: manipulation;
@@ -307,6 +306,7 @@ button::-moz-focus-inner {
 
 #keypad-main {
     flex: 3;
+    flex-wrap: wrap;
     background: var(--color-keypad-bg);
     padding-left: var(--safe-area-inset-left);
 }
