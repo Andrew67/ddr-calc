@@ -88,8 +88,8 @@ if ('serviceWorker' in navigator) {
 /** State constants */
 const MODE = { SPEEDMOD: 'm-speedmod', TARGETBPM: 'm-targetbpm' };
 const INPUT = { SONGBPM: 'songbpm', SPEEDMOD: 'speedmod', TARGETBPM: 'targetbpm' };
-const KEY = { MULT: '×', BPM: 'BPM', DEL: 'DEL' };
-const KEYTYPE = { INT: 'int', FUNC: 'func', DEC: 'dec' };
+const KEY = { MULT: '×', BPM: 'BPM', DEL: 'DEL', ADDSUB: '+ / −', SWITCH: '⇄', DEC: '−', INC: '+' };
+const KEYTYPE = { INT: 'int', FUNC: 'func', DEC: 'dec', ADD: 'add', MOD: 'mod' };
 const LONG_PRESS_MS = 450, SIMULATED_MOUSE_IGNORE_DELAY_MS = 500, SAVE_DEBOUNCE_MS = 700;
 const LS_KEY = { SONGBPM: 'songbpm', SPEEDMOD_INT: 'speedModInt', SPEEDMOD_DEC: 'speedModDec' };
 
@@ -99,7 +99,8 @@ const state = {
     input: INPUT.SONGBPM,
     songBpm: localStorage.getItem(LS_KEY.SONGBPM) || '',
     speedModInt: localStorage.getItem(LS_KEY.SPEEDMOD_INT) || '',
-    speedModDec: localStorage.getItem(LS_KEY.SPEEDMOD_DEC) || ''
+    speedModDec: localStorage.getItem(LS_KEY.SPEEDMOD_DEC) || '',
+    ohmSubtract: false
 };
 
 /** App computed state object (state that's derived from {@link state} */
@@ -148,12 +149,32 @@ const action = {
         computedState.update();
     },
 
+    swapActiveInput: function () {
+        const inputOppositeSongBpm = (state.mode === MODE.TARGETBPM) ? INPUT.TARGETBPM : INPUT.SPEEDMOD;
+        this.setActiveInput(state.input === INPUT.SONGBPM ? inputOppositeSongBpm : INPUT.SONGBPM);
+    },
+
+    /** Helper function for assignigng out speedModInt and speedModDec given a full speedMod string */
+    setFullSpeedMod: function (speedMod) {
+        if (speedMod.includes('.')) {
+            const speedModStrings = speedMod.split('.');
+            state.speedModInt = speedModStrings[0];
+            speedModStrings[1] = speedModStrings[1].replace(/0/g, '');
+            state.speedModDec = (!speedModStrings[1].length) ? '' : '.' + speedModStrings[1];
+        } else {
+            state.speedModInt = speedMod;
+            state.speedModDec = '';
+        }
+    },
+
     keyPress: function (key, type) {
         if (type === KEYTYPE.FUNC) {
             // Function keys switch song BPM/speedmod input OR perform "special" backspace behavior
             if (key === KEY.MULT) this.setActiveInput(INPUT.SPEEDMOD);
             else if (key === KEY.BPM) this.setActiveInput(INPUT.SONGBPM);
             else if (key === KEY.DEL) this.backspace();
+            else if (key === KEY.ADDSUB) state.ohmSubtract = !state.ohmSubtract;
+            else if (key === KEY.SWITCH) this.swapActiveInput();
         } else if (type === KEYTYPE.INT) {
             // Integer keys in BPM input will:
             // - If input was already 3 digits, start a new BPM
@@ -176,8 +197,23 @@ const action = {
         } else if (type === KEYTYPE.DEC && state.input === INPUT.SPEEDMOD) {
             // Decimal keys (speedmod input only) replace the previously input decimal
             state.speedModDec = key;
+        } else if (type === KEYTYPE.ADD) {
+            const bpm = (state.input === INPUT.TARGETBPM) ? 'targetBpm' : 'songBpm';
+            // One-handed mode BPM keys add/subtract a fixed amount in-place
+            if (!state.ohmSubtract) state[bpm] = String(Math.min(999, Number(state[bpm]) + Number(key)));
+            else state[bpm] = String(Math.max(0, Number(state[bpm]) - Number(key)));
+            state[bpm] = state[bpm].padStart(3, '0');
+        } else if (type === KEYTYPE.MOD) {
+            // modKeyPress is added in later by the games module, and is aware of which speed mods are available,
+            // and skips over the unavailable ones. Otherwise, we do a simple +/- .25
+            if (computedState.availableSpeedModList && computedState.availableSpeedModList.length) this.modKeyPress(key);
+            else if (key === KEY.INC || key === KEY.DEC) {
+                let speedMod = Number(state.speedModInt + state.speedModDec);
+                if (key === KEY.INC) speedMod = Math.min(9.75, speedMod + .25);
+                else if (key === KEY.DEC) speedMod = Math.max(0, speedMod - .25);
+                this.setFullSpeedMod(speedMod.toFixed(2));
+            }
         }
-
         computedState.update();
     },
 
@@ -265,18 +301,14 @@ function commit () {
     switch (state.input) {
         case INPUT.SONGBPM:
             dom.bpm.classList.add('active');
-
             if (!state.speedModInt && !state.speedModDec) dom.multSign.hidden = true;
             dom.multSign.classList.remove('active');
-
             dom.speedMod.classList.remove('active');
             break;
         case INPUT.SPEEDMOD:
             dom.bpm.classList.remove('active');
-
             dom.multSign.hidden = false;
             dom.multSign.classList.add('active');
-
             dom.speedMod.classList.add('active');
             break;
         default:
@@ -291,10 +323,11 @@ function commit () {
     // Text fields: song BPM, speedmod, result
     dom.bpm.textContent = state.songBpm;
     dom.speedMod.textContent = state.speedModInt + state.speedModDec;
-
-    // Until recently, we hid the result when it was 0
-    // Unfortunately, that loses us the implication that the calculator is ready to crunch some numbers
     dom.result.textContent = computedState.result;
+
+    // One-handed mode keypads
+    dom.app.classList.toggle('subtract', state.ohmSubtract); // Show a minus sign via CSS when +/- switched
+    dom.app.classList.toggle('speedmod', state.input === INPUT.SPEEDMOD); // Pop open the speed mod keypad
 
     // Run post-commit hooks
     postCommitHooks.forEach(function (hook) { hook(); });
@@ -323,7 +356,9 @@ function commit () {
     // Set up keyPress listeners and "register" DOM elements
     // Lots of code here just to handle fast key clicks (< 300ms) and long presses on desktop + mobile
     document.querySelectorAll('#keypad button').forEach(function (e) {
-        const key = e.textContent.trim(), type = e.dataset.keytype,
+        // Add a decimal (which gets parsed out later) to the add keys to avoid label-based conflicts
+        const type = e.dataset.keytype,
+            key = e.textContent.trim() + (type === KEYTYPE.ADD ? '.0' : ''),
             shortcuts = e.getAttribute('aria-keyshortcuts').split(' ');
 
         // "Register" the key label, initial state, type, DOM element, and keyboard shortcuts

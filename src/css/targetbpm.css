@@ -33,14 +33,11 @@
     transform: translateX(100%);
 }
 
-/* Limit display switching animation to devices that show the tab bar */
-@media (min-height: 510px) {
-    #surface-speedmod, .targetbpm #surface-targetbpm { /* Enter view */
-        transition: transform .2s, visibility 0s linear 0s;
-    }
-    .targetbpm #surface-speedmod, #surface-targetbpm { /* Exit view */
-        transition: transform .2s, visibility 0s linear .2s;
-    }
+#surface-speedmod, .targetbpm #surface-targetbpm { /* Enter view */
+    transition: transform .2s, visibility 0s linear 0s;
+}
+.targetbpm #surface-speedmod, #surface-targetbpm { /* Exit view */
+    transition: transform .2s, visibility 0s linear .2s;
 }
 
 .targetbpm #display > div {

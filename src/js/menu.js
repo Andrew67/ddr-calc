@@ -118,17 +118,6 @@ addStylesheet('menu');
         dom.menu.classList.toggle('show', state.menuOpen);
     });
 
-    // Set up menu entry for smaller devices where the Target BPM mode-switcher tabs won't show.
-    // Previously, this code was in targetbpm.js, and this menu module loaded first, however the mode switcher tabs
-    // were added to more screen sizes in order to prioritize loading the Target BPM module first
-    addMenuItem(0, 'Switch to/from Target BPM', function () {
-        action.setMode((state.mode === MODE.SPEEDMOD) ? MODE.TARGETBPM : MODE.SPEEDMOD);
-        commit();
-    }, {
-        title: function () { return (state.mode === MODE.TARGETBPM) ? 'Switch to Speed Mod' : 'Switch to Target BPM' },
-        hidden: function () { return window.innerHeight >= 510; }
-    });
-
     // Load HTML for the about screen
     container.innerHTML = '<div id="about" class="full-screen-overlay scrim">' +
     '<div id="about-box">' +

@@ -6,7 +6,7 @@
 
     /* Material Design text button: https://material.io/design/components/buttons.html#specs */
     font-size: 14px;
-    line-height: 14px;
+    line-height: 1;
     color: var(--color-foreground-medium);
     font-weight: 500; /* Medium */
 }
@@ -43,6 +43,16 @@
 @supports (left: max(16px, 0px)) {
     #game-btn {
         left: max(16px, var(--safe-area-inset-left) + 8px);
+    }
+}
+
+/* Additional tweaks for small height screens (see calc.css "One-Handed Mode") */
+@media (max-height: 320px) {
+    #display .overlay {
+        font-size: 12px;
+    }
+    #game-btn {
+        bottom: 0;
     }
 }
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
     <!-- DDR Calc | https://github.com/Andrew67/ddr-calc -->
     <meta charset="utf-8">
@@ -28,17 +28,17 @@
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-capable" content="yes"><!-- required for splash screens to work even on iOS 11.3+ -->
-    <!-- iPhone 5 (640px x 1136px, 20px status bar) -->
+    <!-- iPhone SE, 5s, 5 (640px x 1136px, 20px status bar) -->
     <link rel="apple-touch-startup-image" href="img/apple-splash-640-1136-fs8.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
-    <!-- iPhone 8, 7, 6s, 6 (750px x 1334px, 20px status bar) -->
+    <!-- iPhone SE 2, 8, 7, 6s, 6 (750px x 1334px, 20px status bar) -->
     <link rel="apple-touch-startup-image" href="img/apple-splash-750-1334-fs8.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
     <!-- iPhone 8 Plus, 7 Plus, 6s Plus, 6 Plus (1242px x 2208px, 20px status bar) -->
     <link rel="apple-touch-startup-image" href="img/apple-splash-1242-2208-fs8.png" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
-    <!-- iPhone X, XS, 11 Pro (1125px x 2436px, 44px status bar) -->
+    <!-- iPhone 11 Pro, XS, X (1125px x 2436px, 44px status bar) -->
     <link rel="apple-touch-startup-image" href="img/apple-splash-1125-2436-fs8.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
-    <!-- iPhone XR, 11 (828px x 1792px, 44px status bar) -->
+    <!-- iPhone 11, XR (828px x 1792px, 44px status bar) -->
     <link rel="apple-touch-startup-image" href="img/apple-splash-828-1792-fs8.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
-    <!-- iPhone XS Max, 11 Pro Max (1242px x 2688px, 44px status bar) -->
+    <!-- iPhone 11 Pro Max, XS Max (1242px x 2688px, 44px status bar) -->
     <link rel="apple-touch-startup-image" href="img/apple-splash-1242-2688-fs8.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
 </head>
 <body>
@@ -112,13 +112,24 @@
                 <button data-keytype="int" aria-keyshortcuts="3"><span>3</span></button>
                 <button data-keytype="func" aria-keyshortcuts="* x"><span>×</span></button>
                 <button data-keytype="int" aria-keyshortcuts="0"><span>0</span></button>
-                <button data-keytype="func" aria-keyshortcuts="# b"><span>BPM</span></button>
+                <button data-keytype="func" aria-keyshortcuts="# b ="><span>BPM</span></button>
             </div>
             <div id="keypad-ext">
                 <button data-keytype="func" aria-keyshortcuts="Backspace Delete"><span>DEL</span></button>
-                <button data-keytype="dec" aria-keyshortcuts="@ Control+2"><span>.25</span></button>
-                <button data-keytype="dec" aria-keyshortcuts="% Control+5"><span>.5</span></button>
-                <button data-keytype="dec" aria-keyshortcuts="& Control+7"><span>.75</span></button>
+                <button data-keytype="dec" aria-keyshortcuts="@ Control+2 p ["><span>.25</span></button>
+                <button data-keytype="dec" aria-keyshortcuts="% Control+5 ; ]"><span>.5</span></button>
+                <button data-keytype="dec" aria-keyshortcuts="& Control+7 / \"><span>.75</span></button>
+            </div>
+            <div id="keypad-ohm">
+                <button data-keytype="func" aria-keyshortcuts="q a - +"><span>+ / −</span></button>
+                <button data-keytype="add" aria-keyshortcuts="w z"><span>100</span></button>
+                <button data-keytype="add" aria-keyshortcuts="e"><span>10</span></button>
+                <button data-keytype="add" aria-keyshortcuts="r"><span>1</span></button>
+                <button data-keytype="func" aria-keyshortcuts="t ` f v"><span>⇄</span></button>
+            </div>
+            <div id="keypad-ohm-mod">
+                <button data-keytype="mod" aria-keyshortcuts="s d"><span>−</span></button>
+                <button data-keytype="mod" aria-keyshortcuts="x i u"><span>+</span></button>
             </div>
         </div>
     </div>

@@ -25,19 +25,24 @@ fetch('games.json')
     const gameDataById = new Map(gameData.map(function (game) {
         return [game.id, Object.assign({}, game, {
             mods: new Map(game.mods),
-            premiumPlayMods: new Map(game.premiumPlayMods),
-            // Contains a merger of mods and premiumPlayMods, which are all available mods in premium play mode
-            allMods: (function() {
-                const m = new Map(game.mods);
-                game.premiumPlayMods.forEach(function (pM) {
-                    const key = pM[0], values = pM[1];
-                    if (m.has(key)) m.set(key, m.get(key).concat(values));
-                    else m.set(key, values);
-                });
-                return m;
-            })()
+            premiumPlayMods: new Map(game.premiumPlayMods)
         })];
     }));
+
+    // Helper method for merging (and caching merged) mods and premiumPlayMods for all available mods in premium play
+    // Pre-4.0.0 code-base performed this calculation for all games even before selected by the user
+    const getAllModsForGameId = (gameId) => {
+        const game = gameDataById.get(gameId);
+        if (!game.allMods) {
+            const m = new Map(game.mods);
+            game.premiumPlayMods.forEach((values, key) => {
+                if (m.has(key)) m.set(key, m.get(key).concat(values));
+                else m.set(key, values);
+            });
+            game.allMods = m;
+        }
+        return game.allMods;
+    };
 
     // Load HTML for the game button
     const container = document.createElement('div');
@@ -77,21 +82,34 @@ fetch('games.json')
         true : localStorage.getItem(KEY_PREMIUMPLAY) === 'true';
     state.gameSettingsOpen = Boolean(history.state && history.state.gameSettingsOpen);
     computedState.gameName = '';
-    computedState.availableSpeedMods = [];
+    computedState.availableSpeedMods = new Map();
+    computedState.availableSpeedModList = [];
     dom.gameName = document.getElementById('game-name');
     dom.premiumPlayEnabled = document.getElementById('game-premium-enabled');
     dom.gameSettings = document.getElementById('game-settings');
     dom.gameSettingsForm = document.forms['game-settings-form'];
 
     // Set the game name and available speed mods based on the selected game ID and premium play
+    let prevGameId = null, prevPremiumPlayEnabled = null;
     computedState.hooks.push(function setGameNameAndAvailableMods () {
-        if (state.gameId === 0 || !gameDataById.has(state.gameId)) {
-            computedState.gameName = 'Select game';
-            computedState.availableSpeedMods = [];
-        } else {
-            computedState.gameName = gameDataById.get(state.gameId).name;
-            computedState.availableSpeedMods = state.premiumPlayEnabled ?
-                gameDataById.get(state.gameId).allMods : gameDataById.get(state.gameId).mods;
+        if (state.gameId !== prevGameId || state.premiumPlayEnabled !== prevPremiumPlayEnabled) {
+            if (state.gameId === 0 || !gameDataById.has(state.gameId)) {
+                computedState.gameName = 'Select game';
+                computedState.availableSpeedMods = new Map();
+                computedState.availableSpeedModList = [];
+            } else {
+                computedState.gameName = gameDataById.get(state.gameId).name;
+                computedState.availableSpeedMods = state.premiumPlayEnabled ?
+                    getAllModsForGameId(state.gameId) : gameDataById.get(state.gameId).mods;
+
+                computedState.availableSpeedModList = [];
+                computedState.availableSpeedMods.forEach((decList, int) => {
+                    computedState.availableSpeedModList.push(int);
+                    decList.forEach(dec => computedState.availableSpeedModList.push(int + dec));
+                });
+                computedState.availableSpeedModList.sort();
+            }
+            prevGameId = state.gameId;
         }
     });
     postCommitHooks.push(function updateGameNameAndPremiumPlay () {
@@ -119,6 +137,32 @@ fetch('games.json')
             });
         }
     });
+
+    // "One-handed mode" / compact keyboard speedmod +/- support, which considers the available mods per game
+    action.modKeyPress = function (key) {
+        if (key === KEY.DEC || key === KEY.INC) {
+            let speedMod = state.speedModInt + state.speedModDec,
+                idx = computedState.availableSpeedModList.indexOf(speedMod);
+
+            // User may have switched to a game that no longer contains the current speedmod; find closest
+            if (idx === -1) {
+                let smallestDiff = 9;
+                computedState.availableSpeedModList.forEach((mod, currIdx) => {
+                    const diff = Math.abs(Number(speedMod) - Number(mod));
+                    if (diff < smallestDiff) {
+                        smallestDiff = diff;
+                        idx = currIdx;
+                    }
+                });
+            }
+
+            if (key === KEY.INC) speedMod = computedState.availableSpeedModList[idx + 1] ||
+                computedState.availableSpeedModList[computedState.availableSpeedModList.length - 1];
+            else speedMod = computedState.availableSpeedModList[idx - 1] ||
+                computedState.availableSpeedModList[0];
+            this.setFullSpeedMod(speedMod);
+        }
+    };
 
     // Show the game settings when the name is clicked, hide when the scrim is clicked
     // Using history.pushState and onpopstate so that browser/Android back button can dismiss the settings

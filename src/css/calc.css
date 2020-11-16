@@ -210,7 +210,7 @@ button::-moz-focus-inner {
 /* Calculator */
 #display {
     width: 200%;
-    height: 30%;
+    flex: 0 0 30%;
     margin-top: var(--safe-area-inset-top);
     font-size: calc(5vh + 5vw);
     position: relative;
@@ -252,7 +252,7 @@ button::-moz-focus-inner {
     position: relative;
     height: 48px;
     line-height: 48px;
-    display: none;
+    display: flex;
     font-size: 14px;
     font-weight: 500;
     opacity: 0;
@@ -266,25 +266,22 @@ button::-moz-focus-inner {
 #keypad {
     flex: 1;
     color: var(--color-keypad-fg);
-    font-size: calc(5vh + 5vw);
+    font-size: calc(3vh + 3vw);
     display: flex;
+    position: relative;
 
     /* Blocks double-tap-zoom (the only touch-action supported by iOS, does not block scroll or zoom) */
     touch-action: manipulation;
 }
 
-/* Mode switcher visible only on displays where it occupies 9.375% or less of total height.
-   Used to be 8%/600px, slight adjustments were made so it can fit on
-   Moto G4 with Chrome UI (512px) / iPhone SE standalone (548px) / iPhone 7 with Safari UI (553px) */
-@media (min-height: 510px) {
-    #mode-switcher {
-        display: flex;
-    }
+/* Increase font size for number keys (BPM key is last) and speed mod +/- */
+#keypad-main button:not(:last-of-type), #keypad-ohm-mod {
+    font-size: calc(5vh + 5vw);
 }
 
 /* Cap font size on wide landscape displays, otherwise elements begin to clash and go off screen */
 @media (min-aspect-ratio: 16/9) {
-    #display, #keypad {
+    #display, #keypad-main button:not(:last-of-type) {
         font-size: calc(3vh + 3vw);
     }
 }
@@ -318,6 +315,10 @@ button::-moz-focus-inner {
     padding-right: var(--safe-area-inset-right);
 }
 
+#keypad-ohm#keypad-ohm, #keypad-ohm-mod#keypad-ohm-mod {
+    display: none;
+}
+
 #keypad button {
     flex: 1;
     position: relative;
@@ -326,11 +327,6 @@ button::-moz-focus-inner {
 
 #keypad-main button {
     flex-basis: 33.3333%;
-}
-
-/* Reduce font size for BPM key */
-#keypad-main button:last-of-type {
-    font-size: calc(3vh + 3vw);
 }
 
 #keypad button > * {
@@ -374,11 +370,50 @@ button::-moz-focus-inner {
     transition: opacity .1s;
 }
 
-#keypad-ext button {
-    font-size: calc(3vh + 3vw);
+.subtract button[data-keytype=add] span::before {
+    content: '-';
 }
 
 #display, #mode-switcher, #keypad button {
     animation-name: fade-in-delayed;
     animation-duration: var(--duration-fade-in-delayed-init);
+}
+
+/* "One-handed mode" compact keyboard automatically takes over on small-height screens.
+   (For the manual bonus feature, see ohm.css) */
+@media (max-height: 320px) {
+    #mode-switcher {
+        height: 44px;
+        line-height: 44px;
+        font-size: 12px;
+    }
+    #keypad > #keypad-main, #keypad > #keypad-ext {
+        display: none;
+    }
+    #display {
+        flex: 1;
+    }
+    #keypad > #keypad-ohm, #keypad > #keypad-ohm-mod {
+        display: flex;
+        flex: 1;
+        background: var(--color-keypad-bg);
+    }
+    #keypad-ohm button:last-of-type {
+        background: var(--color-keypad-ext-bg);
+    }
+    #keypad-ohm-mod {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 80%;
+        height: 100%;
+        visibility: hidden;
+    }
+    .speedmod #keypad-ohm-mod {
+        transform: translateY(-100%);
+        visibility: visible;
+    }
+    .speedmod #keypad-ohm button:not(:last-of-type) {
+        visibility: hidden;
+    }
 }
