@@ -102,17 +102,14 @@ addStylesheet('targetbpm');
             let lowSpeedMod = LOW_START;
             let /*(number|string)*/ highSpeedMod = HIGH_START;
 
-            if (computedState.availableSpeedMods.length === 0) {
+            if (computedState.availableSpeedModList.length === 0) {
                 highSpeedMod = idealSpeedMod;
             } else {
-                computedState.availableSpeedMods.forEach(function (decimals, int) {
-                    ['.0'].concat(decimals).forEach(function (dec) {
-                        const currentSpeedMod = Number(int + dec);
-                        if (currentSpeedMod <= idealSpeedMod && currentSpeedMod > lowSpeedMod)
-                            lowSpeedMod = currentSpeedMod;
-                        if (currentSpeedMod >= idealSpeedMod && currentSpeedMod < highSpeedMod)
-                            highSpeedMod = currentSpeedMod;
-                    });
+                computedState.availableSpeedModList.forEach((currentSpeedMod) => {
+                    if (currentSpeedMod <= idealSpeedMod && currentSpeedMod > lowSpeedMod)
+                        lowSpeedMod = currentSpeedMod;
+                    if (currentSpeedMod >= idealSpeedMod && currentSpeedMod < highSpeedMod)
+                        highSpeedMod = currentSpeedMod;
                 });
             }
 
