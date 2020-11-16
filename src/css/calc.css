@@ -265,6 +265,7 @@ button::-moz-focus-inner {
 
 #keypad {
     flex: 1;
+    background: var(--color-keypad-bg);
     color: var(--color-keypad-fg);
     font-size: calc(3vh + 3vw);
     display: flex;
@@ -281,7 +282,7 @@ button::-moz-focus-inner {
 
 /* Cap font size on wide landscape displays, otherwise elements begin to clash and go off screen */
 @media (min-aspect-ratio: 16/9) {
-    #display, #keypad-main button:not(:last-of-type) {
+    #display, #keypad-main button:not(:last-of-type), #keypad-ohm-mod {
         font-size: calc(3vh + 3vw);
     }
 }
@@ -304,7 +305,6 @@ button::-moz-focus-inner {
 #keypad-main {
     flex: 3;
     flex-wrap: wrap;
-    background: var(--color-keypad-bg);
     padding-left: var(--safe-area-inset-left);
 }
 
@@ -395,19 +395,27 @@ button::-moz-focus-inner {
     }
     #keypad > #keypad-ohm, #keypad > #keypad-ohm-mod {
         display: flex;
-        flex: 1;
-        background: var(--color-keypad-bg);
     }
-    #keypad-ohm button:last-of-type {
-        background: var(--color-keypad-ext-bg);
+    #keypad-ohm {
+        flex: 1;
+        padding-left: var(--safe-area-inset-left);
+        padding-right: var(--safe-area-inset-right);
     }
     #keypad-ohm-mod {
         position: absolute;
         top: 100%;
         left: 0;
         width: 80%;
+        padding-left: var(--safe-area-inset-left);
         height: 100%;
         visibility: hidden;
+    }
+    /* Using the var() version, some e.g. Firefox 48 think they support it, then choke once the env() is resolved */
+    /*noinspection CssInvalidFunction*/
+    @supports (width: calc(80% - env(safe-area-inset-right))) {
+        #keypad-ohm-mod {
+            width: calc(80% - (var(--safe-area-inset-right) * .8) + (var(--safe-area-inset-left) * .2));
+        }
     }
     .speedmod #keypad-ohm-mod {
         transform: translateY(-100%);
