@@ -20,7 +20,7 @@ try {
     dom.colorScheme = document.querySelector('meta[name=color-scheme]');
 
     // Manual toggle
-    addMenuItem(5, 'Dark Theme On/Off', () => {
+    addMenuItem(5, 'Dark Theme On/Off', function toggleDarkModeState () {
         state.darkModeEnabled = !state.darkModeEnabled;
         localStorage.setAllowingLoss(KEY_DARKMODE, state.darkModeEnabled);
         commit();
