@@ -29,6 +29,8 @@ self.addEventListener('install', event => {
             'js/menu.js',
             'img/md-more_vert.svg',
             'css/menu.css',
+            'js/ohm.js',
+            'css/ohm.css',
             'js/dark.js',
             'js/update.js',
             'css/update.css'

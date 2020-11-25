@@ -40,6 +40,7 @@ const asyncModules = [
     'games',
     'targetbpm',
     'menu',
+    'ohm',
     'dark'
 ];
 
