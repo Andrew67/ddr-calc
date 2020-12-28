@@ -45,8 +45,8 @@ geolocation=(), \
 microphone=(), \
 camera=(), \
 autoplay=(), \
-payment=(), \
-"
+payment=()"
+# Chrome 89 does not like trailing commas in Permissions-Policy
 </FilesMatch>
 
 Header set Cache-Control "public, max-age=600, s-maxage=86400"
