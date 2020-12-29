@@ -65,7 +65,7 @@ a {
     min-width: 112px;
     /* Place on top of menu button */
     position: relative;
-    top: 16px;
+    top: calc(16px + var(--safe-area-inset-top));
     left: 12px;
     /* Expand animation from top-left corner */
     transform: scale(.5, .5);
@@ -76,8 +76,7 @@ a {
 
 @supports (left: max(12px, 0px)) {
     #menu-popup {
-        top: calc(var(--safe-area-inset-top) + 16px);
-        left: max(12px, var(--safe-area-inset-left) + 4px);
+        left: max(12px, 4px + var(--safe-area-inset-left));
     }
 }
 

@@ -73,6 +73,13 @@
             document.querySelector('meta[name=theme-color]').content = '#121212';
             document.querySelector('meta[name=color-scheme]').content = 'dark';
         }
+
+        // In-line iOS 10.3 standalone check, so that the status bar padding is applied flicker-free
+        const isIOS10Standalone = location.hash.includes('saf10') ||
+            ('standalone' in navigator && navigator.standalone && /OS 10_/.test(navigator.userAgent));
+        if (isIOS10Standalone) {
+            document.body.classList.add('ios10-standalone');
+        }
     </script>
 
     <div id="status-bar"></div>

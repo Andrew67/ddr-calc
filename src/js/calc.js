@@ -7,7 +7,7 @@
 
 /** Detect Mobile Safari via presence of non-standard navigator.standalone field */
 const isMobileSafari = 'standalone' in navigator || location.hash.includes('saf');
-const isIOS12 = isMobileSafari && /OS 12_/.test(navigator.userAgent);
+const isIOS12 = location.hash.includes('saf12') || (isMobileSafari && /OS 12_/.test(navigator.userAgent));
 
 /**
  * Detect app loaded via Google Play (for compliance with Google Play developer policies).
@@ -21,7 +21,7 @@ const isGPlay = document.referrer.startsWith('android-app://com.andrew67.ddrcalc
 if (isGPlay) sessionStorage.setItem('gplay', 'true');
 
 /** Detect pointer events compatibility for bonus features (Chrome 55, Firefox 59, iOS 13.1) */
-const arePointerEventsSupported = 'PointerEvent' in window;
+const arePointerEventsSupported = 'PointerEvent' in window && !location.hash.includes('nopointer');
 
 /**
  * Works like setItem, but silently catches all exceptions (most likely QuotaExceededException)
