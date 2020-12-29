@@ -53,12 +53,12 @@
 }
 
 #surface-targetbpm > div {
-    height: 25%;
+    flex: 1;
     font-size: calc(3.5vw + 3.5vh);
 }
 
 #surface-targetbpm > #bpms {
-    height: 50%;
+    flex: 2;
     font-size: calc(4vw + 4vh);
 }
 

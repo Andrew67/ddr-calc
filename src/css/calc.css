@@ -235,6 +235,8 @@ button::-moz-focus-inner {
 
 #display > div {
     flex: 1;
+    display: flex;
+    flex-direction: column;
     color: var(--color-foreground-medium-lg);
     padding-left: var(--safe-area-inset-left);
     padding-right: 3vw;
@@ -248,7 +250,7 @@ button::-moz-focus-inner {
 }
 
 #surface-speedmod div {
-    height: 50%;
+    flex: 1;
 }
 
 .overlay {
