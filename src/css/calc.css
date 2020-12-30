@@ -3,6 +3,12 @@
 
 /* Default theme */
 :root {
+    --font-stack: "Roboto", "Ubuntu", "Cantarell", system-ui, -apple-system, sans-serif;
+    /* Separate font stack for manually installed font (e.g. dev) / Android 4.x (exposed only through -light alias) */
+    --font-stack-light: "Roboto Light", sans-serif-light, var(--font-stack);
+    /* Same as above, although Roboto Medium isn't available until Android 5 (and doesn't strictly need -medium alias) */
+    --font-stack-medium: "Roboto Medium", sans-serif-medium, var(--font-stack);
+
     /* Material Design elevation; see https://material.io/design/environment/elevation.html#default-elevations */
     --color-surface-z0: white; /* Lowest level; essentially the display */
     --color-surface-z1: white; /* Card */
@@ -103,7 +109,7 @@ html, body {
 }
 
 body {
-    font-family: "Roboto", "Ubuntu", "Cantarell", system-ui, -apple-system, sans-serif;
+    font-family: var(--font-stack);
     background: var(--color-surface-z0);
     color: var(--color-foreground);
     position: fixed; /* Prevents bounce scroll on iOS */
@@ -169,6 +175,7 @@ button::-moz-focus-inner {
 
 /* Incompatible browser overlay; these should work down to Android 4.4 */
 #browser-dialog {
+    font-family: sans-serif;
     position: absolute;
     z-index: 10;
     background-color: rgba(0, 0, 0, 0.64);
@@ -271,6 +278,7 @@ button::-moz-focus-inner {
     line-height: 48px;
     display: flex;
     font-size: 14px;
+    font-family: var(--font-stack-medium);
     font-weight: 500;
     opacity: 0;
 }
@@ -305,7 +313,8 @@ button::-moz-focus-inner {
 }
 
 #display div, #keypad {
-    font-weight: 300; /* Light */
+    font-family: var(--font-stack-light);
+    font-weight: 300;
 }
 
 #display > div > div {

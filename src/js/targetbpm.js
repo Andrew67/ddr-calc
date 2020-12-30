@@ -105,7 +105,8 @@ addStylesheet('targetbpm');
             if (computedState.availableSpeedModList.length === 0) {
                 highSpeedMod = idealSpeedMod;
             } else {
-                computedState.availableSpeedModList.forEach((currentSpeedMod) => {
+                computedState.availableSpeedModList.forEach((/*string*/ currentSpeedModString) => {
+                    const currentSpeedMod = Number(currentSpeedModString);
                     if (currentSpeedMod <= idealSpeedMod && currentSpeedMod > lowSpeedMod)
                         lowSpeedMod = currentSpeedMod;
                     if (currentSpeedMod >= idealSpeedMod && currentSpeedMod < highSpeedMod)

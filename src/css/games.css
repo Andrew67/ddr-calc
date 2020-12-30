@@ -8,7 +8,8 @@
     font-size: 14px;
     line-height: 1;
     color: var(--color-foreground-medium);
-    font-weight: 500; /* Medium */
+    font-family: var(--font-stack-medium);
+    font-weight: 500;
 }
 
 :root {
