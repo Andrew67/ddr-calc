@@ -214,6 +214,7 @@ fieldset {
 input[type=radio], input[type=checkbox] {
     /* As opposed to display: none, allows keyboard selection */
     position: absolute;
+    top: 16px;
     opacity: 0;
 }
 
