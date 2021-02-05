@@ -5,6 +5,9 @@
 
 // Core app shell functions / hacks and workarounds
 
+/** @namespace window.APP_VERSION */ // Filled in during build process
+const version = window.APP_VERSION || '';
+
 /** Detect Mobile Safari via presence of non-standard navigator.standalone field */
 const isMobileSafari = 'standalone' in navigator || location.hash.includes('saf');
 const isIOS12 = location.hash.includes('saf12') || (isMobileSafari && /OS 12_/.test(navigator.userAgent));
@@ -50,7 +53,7 @@ const asyncModules = [
  */
 function addScript (scriptName) {
     const script = document.createElement('script');
-    script.src = 'js/' + scriptName + '.js';
+    script.src = 'js/' + scriptName + (version ? `.v${version}` : '') + '.js';
     document.head.appendChild(script);
 }
 
@@ -61,7 +64,7 @@ function addScript (scriptName) {
 function addStylesheet (stylesheetName) {
     const stylesheet = document.createElement('link');
     stylesheet.rel = 'stylesheet';
-    stylesheet.href = 'css/' + stylesheetName + '.css';
+    stylesheet.href = 'css/' + stylesheetName + (version ? `.v${version}` : '') + '.css';
     document.head.appendChild(stylesheet);
 }
 

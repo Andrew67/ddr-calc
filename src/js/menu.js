@@ -123,11 +123,11 @@ addStylesheet('menu');
     '<div id="about-box">' +
         '<div id="app-logo">' +
             '<img src="img/logo-192.png" width="64" height="64" alt="" loading="lazy">' +
-            '<h1>DDR Calc <span id="app-version">Version 4.0.0' +
+            '<h1>DDR Calc <span id="app-version">Version ' + (version || '9999') +
                 (isGPlay ? 'g' : '') + (arePointerEventsSupported ? '' : 'p') +
                 (isMobileSafari ? 's' : '') + (isIOS12 ? 't' : '') + (isIOS10Standalone ? 'd' : '') +
             '</span></h1>' +
-            '<h2>&copy; 2018&ndash;2020 Andrés Cordero</h2>' +
+            '<h2>&copy; 2018&ndash;2021 Andrés Cordero</h2>' +
         '</div>' +
         '<ul>' +
             '<li><a href="https://github.com/Andrew67/ddr-calc" target="_blank" rel="noopener">Project Site / Usage Guide</a>' +

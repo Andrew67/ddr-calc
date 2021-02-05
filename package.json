@@ -1,8 +1,16 @@
 {
   "name": "ddr-calc",
-  "version": "1.0.0",
+  "version": "4.0.0",
   "description": "Calculator with DDR speed-modifier specific functionality; fast and offline PWA",
   "scripts": {
+    "clean": "rm -rf build",
+    "copy": "mkdir -p build/img && cp src/*.* src/.htaccess build/ && cp src/img/* build/img/",
+    "prebuild": "npm run clean && npm run copy",
+    "minify:fe": "esbuild src/js/*.js src/css/*.css --outdir=build --minify --target=es6 --sourcemap --out-extension:.js=.v$npm_package_version.js --out-extension:.css=.v$npm_package_version.css --define:window.APP_VERSION=\\\"$npm_package_version\\\"",
+    "minify:sw": "esbuild src/sw.js --outdir=build --minify --target=es6 --define:self.APP_VERSION=\\\"$npm_package_version\\\"",
+    "minify": "npm run minify:fe && npm run minify:sw",
+    "replace": "replace '/([a-z-]+).(js|css)(>|\")' /\\$1.v$npm_package_version.\\$2\\$3 build/index.html build/sw.js build/.htaccess --quiet",
+    "build": "npm run minify && npm run replace",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -21,8 +29,10 @@
   },
   "homepage": "https://github.com/Andrew67/ddr-calc#readme",
   "devDependencies": {
+    "esbuild": "^0.8.39",
     "eslint": "^7.12.0",
     "eslint-plugin-compat": "^3.8.0",
+    "replace": "^1.2.0",
     "stylelint": "^13.7.2",
     "stylelint-no-unsupported-browser-features": "^4.1.0"
   }

@@ -1,7 +1,8 @@
 /*! DDR Calc | https://github.com/Andrew67/ddr-calc */
 
 /** Bump this number to force the creation of a new cache for deployment of next version */
-const swCacheName = 'ddrcalc-static-v13';
+/** @namespace self.APP_VERSION */ // Filled in during build process
+const swCacheName = `ddrcalc-static-v${self.APP_VERSION || '9999'}`;
 
 // Cache all paths required for app's offline operation
 // See: https://developers.google.com/web/fundamentals/instant-and-offline/offline-cookbook/
@@ -9,31 +10,31 @@ self.addEventListener('install', event => {
     console.log("Installing cache: " + swCacheName);
     event.waitUntil(
         caches.open(swCacheName).then(cache => cache.addAll([
-            './',
-            'manifest.json',
-            'favicon.png',
-            'img/icon-192.png',
-            'img/logo-192.png',
-            'css/calc.css',
-            'js/calc.js',
-            'js/games.js',
-            'img/fa-gamepad.svg',
-            'img/md-check_box.svg',
-            'img/md-radio_button.svg',
-            'css/games.css',
-            'games.json',
-            'js/targetbpm.js',
-            'css/targetbpm.css',
-            'img/md-music_note.svg',
-            'img/np-target.svg',
-            'js/menu.js',
-            'img/md-more_vert.svg',
-            'css/menu.css',
-            'js/ohm.js',
-            'css/ohm.css',
-            'js/dark.js',
-            'js/update.js',
-            'css/update.css'
+            "./",
+            "manifest.json",
+            "favicon.png",
+            "img/icon-192.png",
+            "img/logo-192.png",
+            "css/calc.css",
+            "js/calc.js",
+            "js/games.js",
+            "img/fa-gamepad.svg",
+            "img/md-check_box.svg",
+            "img/md-radio_button.svg",
+            "css/games.css",
+            "games.json",
+            "js/targetbpm.js",
+            "css/targetbpm.css",
+            "img/md-music_note.svg",
+            "img/np-target.svg",
+            "js/menu.js",
+            "img/md-more_vert.svg",
+            "css/menu.css",
+            "js/ohm.js",
+            "css/ohm.css",
+            "js/dark.js",
+            "js/update.js",
+            "css/update.css"
         ])).then(() => console.log("Installed cache: " + swCacheName))
     );
 });
