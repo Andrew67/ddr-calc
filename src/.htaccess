@@ -9,6 +9,11 @@ ExpiresActive Off
 # Disable default Vary: User-Agent (prevents proper Service Worker cache matching)
 Header edit Vary "User-Agent" ""
 
+# Enable compression for assets
+<ifmodule mod_deflate.c>
+AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json image/svg+xml
+</ifmodule>
+
 <Files "index.html">
 # Preload assets for app shell/core functionality
 # Note: only works when deployed on server at root level
@@ -49,6 +54,14 @@ payment=()"
 # Chrome 89 does not like trailing commas in Permissions-Policy
 </FilesMatch>
 
+# 10m max-age, 1d s-maxage
 Header set Cache-Control "public, max-age=600, s-maxage=86400"
 Header always set X-Content-Type-Options "nosniff"
+# 1y max-age
 Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+
+# Assets versioned during build process
+<FilesMatch "\.v[0-9.]+\.(js|css|svg)$">
+# 1y max-age
+Header set Cache-Control "public, max-age=31536000, immutable"
+</FilesMatch>

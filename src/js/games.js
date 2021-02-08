@@ -2,6 +2,17 @@
 /* Contains functionality for selecting a game and disabling keys based on valid combinations */
 'use strict';
 
+/**
+ * Generates the URL for the given SVG icon filename.
+ * After the build process, all URLs point to the combined SVG sheet
+ * @param iconName Name of the icon (with no "img/" prefix or ".svg" suffix)
+ * @return A URL suitable for use as the base of a <use xlink:href> or <img src>
+ */
+function getSvgUrl (iconName) {
+    /** @namespace window.SVG_SPRITE_SHEET */
+    return `img/${window.SVG_SPRITE_SHEET || iconName}.svg`;
+}
+
 // Start loading CSS asynchronously
 addStylesheet('games');
 // Kick off after game data loaded
@@ -9,15 +20,15 @@ fetch('games.json')
 .then(r => r.json())
 .then(function initGamesModule (gameData) {
     const gamepad = `<span class="svg-icon" aria-hidden="true">
-              <svg width="18" height="14.4"><use xlink:href="img/fa-gamepad.svg#gamepad"/></svg>
+              <svg width="18" height="14.4"><use xlink:href="${getSvgUrl('fa-gamepad')}#gamepad"/></svg>
           </span>`,
           checkbox = `<span class="svg-icon" aria-hidden="true"><svg width="24" height="24">
-              <use xlink:href="img/md-check_box.svg#check_box-unchecked" color="var(--color-foreground-medium)"/>
-              <use xlink:href="img/md-check_box.svg#check_box-checked" color="var(--color-accent)" opacity="var(--opacity-checked)"/>
+              <use xlink:href="${getSvgUrl('md-check_box')}#check_box-unchecked" color="var(--color-foreground-medium)"/>
+              <use xlink:href="${getSvgUrl('md-check_box')}#check_box-checked" color="var(--color-accent)" opacity="var(--opacity-checked)"/>
           </svg></span>`,
           radioBtn = `<span class="svg-icon" aria-hidden="true"><svg width="24" height="24">
-              <use xlink:href="img/md-radio_button.svg#radio_button-unchecked" color="var(--color-foreground-medium)"/>
-              <use xlink:href="img/md-radio_button.svg#radio_button-checked" color="var(--color-accent)" opacity="var(--opacity-checked)"/>
+              <use xlink:href="${getSvgUrl('md-radio_button')}#radio_button-unchecked" color="var(--color-foreground-medium)"/>
+              <use xlink:href="${getSvgUrl('md-radio_button')}#radio_button-checked" color="var(--color-accent)" opacity="var(--opacity-checked)"/>
           </svg></span>`;
 
     // Map game data by ID for easier retrieval without walking the array

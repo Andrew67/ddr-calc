@@ -1,13 +1,44 @@
 /*! DDR Calc | https://github.com/Andrew67/ddr-calc */
 
+// Filled in during build process
+/** @namespace self.APP_VERSION */
+/** @namespace self.SVG_SPRITE_SHEET */
+
 /** Bump this number to force the creation of a new cache for deployment of next version */
-/** @namespace self.APP_VERSION */ // Filled in during build process
 const swCacheName = `ddrcalc-static-v${self.APP_VERSION || '9999'}`;
 
 // Cache all paths required for app's offline operation
 // See: https://developers.google.com/web/fundamentals/instant-and-offline/offline-cookbook/
 self.addEventListener('install', event => {
     console.log("Installing cache: " + swCacheName);
+
+    /** List of assets that get version numbers added to them as part of the build process */
+    const versionedAssets = [
+        ["css/calc", "css"],
+        ["js/calc", "js"],
+        ["js/games", "js"],
+        ["css/games", "css"],
+        ["js/targetbpm", "js"],
+        ["css/targetbpm", "css"],
+        ["js/menu", "js"],
+        ["css/menu", "css"],
+        ["js/ohm", "js"],
+        ["css/ohm", "css"],
+        ["js/dark", "js"],
+        ["js/update", "js"],
+        ["css/update", "css"]
+    ].map(f => f[0] + (self.APP_VERSION ? `.v${self.APP_VERSION}` : '') + `.${f[1]}`);
+
+    /** List of app icons in SVG to cache. During build a single sheet is generated and used instead */
+    const appIcons = self.SVG_SPRITE_SHEET ? [`img/${self.SVG_SPRITE_SHEET}.svg`] : [
+        "img/fa-gamepad.svg",
+        "img/md-check_box.svg",
+        "img/md-radio_button.svg",
+        "img/md-music_note.svg",
+        "img/np-target.svg",
+        "img/md-more_vert.svg"
+    ];
+
     event.waitUntil(
         caches.open(swCacheName).then(cache => cache.addAll([
             "./",
@@ -15,26 +46,9 @@ self.addEventListener('install', event => {
             "favicon.png",
             "img/icon-192.png",
             "img/logo-192.png",
-            "css/calc.css",
-            "js/calc.js",
-            "js/games.js",
-            "img/fa-gamepad.svg",
-            "img/md-check_box.svg",
-            "img/md-radio_button.svg",
-            "css/games.css",
             "games.json",
-            "js/targetbpm.js",
-            "css/targetbpm.css",
-            "img/md-music_note.svg",
-            "img/np-target.svg",
-            "js/menu.js",
-            "img/md-more_vert.svg",
-            "css/menu.css",
-            "js/ohm.js",
-            "css/ohm.css",
-            "js/dark.js",
-            "js/update.js",
-            "css/update.css"
+            ...versionedAssets,
+            ...appIcons
         ])).then(() => console.log("Installed cache: " + swCacheName))
     );
 });

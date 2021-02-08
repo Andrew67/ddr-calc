@@ -7,10 +7,10 @@
 addStylesheet('targetbpm');
 (function initTargetBpmModule () {
     const songIcon = `<span class="svg-icon" aria-hidden="true">
-              <svg width="24" height="24"><use xlink:href="img/md-music_note.svg#music_note"/></svg>
+              <svg width="24" height="24"><use xlink:href="${getSvgUrl('md-music_note')}#music_note"/></svg>
           </span>`,
           targetIcon = `<span class="svg-icon" aria-hidden="true">
-              <svg width="24" height="24"><use xlink:href="img/np-target.svg#target"/></svg>
+              <svg width="24" height="24"><use xlink:href="${getSvgUrl('np-target')}#target"/></svg>
           </span>`;
 
     // Set up mode switcher tabs HTML

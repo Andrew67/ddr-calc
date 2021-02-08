@@ -9,7 +9,7 @@ addStylesheet('menu');
     // Load HTML for the menu button
     const container = document.createElement('div');
     container.innerHTML = `<button id="menu-btn" class="overlay" title="Menu">
-        <svg width="24" height="24" aria-hidden="true"><use xlink:href="img/md-more_vert.svg#more_vert"/></svg>
+        <svg width="24" height="24" aria-hidden="true"><use xlink:href="${getSvgUrl('md-more_vert')}#more_vert"/></svg>
     </button>`;
     document.getElementById('display').appendChild(container.firstElementChild);
 
