@@ -61,7 +61,7 @@ Header always set X-Content-Type-Options "nosniff"
 Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
 
 # Assets versioned during build process
-<FilesMatch "\.v[0-9.]+\.(js|css|svg)$">
+<FilesMatch "\.v[0-9.]+\.(js|css|json|svg)$">
 # 1y max-age
 Header set Cache-Control "public, max-age=31536000, immutable"
 </FilesMatch>

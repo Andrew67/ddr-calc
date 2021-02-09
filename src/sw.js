@@ -18,6 +18,7 @@ self.addEventListener('install', event => {
         ["js/calc", "js"],
         ["js/games", "js"],
         ["css/games", "css"],
+        ["games", "json"],
         ["js/targetbpm", "js"],
         ["css/targetbpm", "css"],
         ["js/menu", "js"],
@@ -46,7 +47,6 @@ self.addEventListener('install', event => {
             "favicon.png",
             "img/icon-192.png",
             "img/logo-192.png",
-            "games.json",
             ...versionedAssets,
             ...appIcons
         ])).then(() => console.log("Installed cache: " + swCacheName))

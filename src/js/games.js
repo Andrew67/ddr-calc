@@ -16,7 +16,7 @@ function getSvgUrl (iconName) {
 // Start loading CSS asynchronously
 addStylesheet('games');
 // Kick off after game data loaded
-fetch('games.json')
+fetch(`games${extPrefix}.json`)
 .then(r => r.json())
 .then(function initGamesModule (gameData) {
     const gamepad = `<span class="svg-icon" aria-hidden="true">

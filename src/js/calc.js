@@ -6,7 +6,10 @@
 // Core app shell functions / hacks and workarounds
 
 /** @namespace window.APP_VERSION */ // Filled in during build process
+/** App version number string, filled in during build process, otherwise empty */
 const version = window.APP_VERSION || '';
+/** Extension prefix for versioned assets when built, otherwise empty (e.g. ".v.4.0.0.js" built, ".js" during dev */
+const extPrefix = version ? `.v${version}` : '';
 
 /** Detect Mobile Safari via presence of non-standard navigator.standalone field */
 const isMobileSafari = 'standalone' in navigator || location.hash.includes('saf');
@@ -53,7 +56,7 @@ const asyncModules = [
  */
 function addScript (scriptName) {
     const script = document.createElement('script');
-    script.src = 'js/' + scriptName + (version ? `.v${version}` : '') + '.js';
+    script.src = `js/${scriptName}${extPrefix}.js`;
     document.head.appendChild(script);
 }
 
@@ -64,7 +67,7 @@ function addScript (scriptName) {
 function addStylesheet (stylesheetName) {
     const stylesheet = document.createElement('link');
     stylesheet.rel = 'stylesheet';
-    stylesheet.href = 'css/' + stylesheetName + (version ? `.v${version}` : '') + '.css';
+    stylesheet.href = `css/${stylesheetName}${extPrefix}.css`;
     document.head.appendChild(stylesheet);
 }
 
