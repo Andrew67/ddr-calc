@@ -10,7 +10,7 @@
     "minify:fe": "esbuild src/js/*.js src/css/*.css --outdir=build --minify --target=es6 --sourcemap --out-extension:.js=.v$npm_package_version.js --out-extension:.css=.v$npm_package_version.css --define:window.APP_VERSION=\\\"$npm_package_version\\\" --define:window.SVG_SPRITE_SHEET=\\\"icons.v$npm_package_version\\\"",
     "minify:sw": "esbuild src/sw.js --outdir=build --minify --target=es6 --sourcemap --define:self.APP_VERSION=\\\"$npm_package_version\\\" --define:self.SVG_SPRITE_SHEET=\\\"icons.v$npm_package_version\\\"",
     "minify": "npm run minify:fe && npm run minify:sw",
-    "replace": "replace '/([a-z-]+).(js|css|json)(>|\")' /\\$1.v$npm_package_version.\\$2\\$3 build/index.html build/.htaccess --quiet",
+    "replace": "replace '/([a-z-]+).(js|css|json)(>|\")' /\\$1.v$npm_package_version.\\$2\\$3 build/index.html --quiet",
     "build": "npm run minify && npm run replace",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

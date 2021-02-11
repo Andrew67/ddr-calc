@@ -2,9 +2,6 @@
 /* Contains functionality for Target BPM mode */
 'use strict';
 
-// Start loading CSS asynchronously
-// Note: some elements in this module (overflow alternative switcher) depend on the menu module loading first
-addStylesheet('targetbpm');
 (function initTargetBpmModule () {
     const songIcon = `<span class="svg-icon" aria-hidden="true">
               <svg width="24" height="24"><use xlink:href="${getSvgUrl('md-music_note')}#music_note"/></svg>

@@ -9,8 +9,17 @@
     <meta name="theme-color" content="#ffffff">
     <meta name="color-scheme" content="light">
     <meta name="description" content="Calculator for DDR speed modifiers">
+
+    <!-- Core app UI is loaded ASAP; features up to Target BPM pre-loaded -->
     <link rel="stylesheet" href="css/calc.css">
+    <link rel="preload" href="js/calc.js" as="script">
     <script src="js/calc.js" defer></script>
+    <link rel="preload" href="js/games.js" as="script">
+    <link rel="preload" href="css/games.css" as="style">
+    <link rel="preload" href="./games.json" as="fetch" crossorigin>
+    <link rel="preload" href="js/targetbpm.js" as="script">
+    <link rel="preload" href="css/targetbpm.css" as="style">
+
     <link rel="icon" sizes="32x32" href="favicon.png">
     <link rel="manifest" href="manifest.json">
 

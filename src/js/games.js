@@ -13,8 +13,6 @@ function getSvgUrl (iconName) {
     return `img/${window.SVG_SPRITE_SHEET || iconName}.svg`;
 }
 
-// Start loading CSS asynchronously
-addStylesheet('games');
 // Kick off after game data loaded
 fetch(`games${extPrefix}.json`)
 .then(r => r.json())

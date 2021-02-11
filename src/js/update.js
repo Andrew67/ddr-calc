@@ -4,7 +4,6 @@
 
 // Note: this module depends on the menu module loading first
 // Also, this module is only loaded if navigator.serviceWorker is available
-addStylesheet('update');
 try {
     const container = document.createElement('div');
     container.innerHTML = '<div id="update-box" hidden><button id="apply-update">Apply Update</button></div>';

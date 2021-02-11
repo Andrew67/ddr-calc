@@ -2,9 +2,7 @@
 /* Contains functionality for showing a pop-up menu in the top-left corner / About screen */
 'use strict';
 
-// Start loading CSS asynchronously
 // Note: some elements in this module (overlay, scrim) depend on the games module loading first
-addStylesheet('menu');
 (function initMenuModule () {
     // Load HTML for the menu button
     const container = document.createElement('div');

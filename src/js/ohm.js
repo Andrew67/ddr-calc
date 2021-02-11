@@ -6,7 +6,6 @@
 // Most of the functionality is already implemented by calc.js and games.js since this keyboard is available by default
 // on devices with a viewport height of 320px or less,
 // so this code is mainly concerned with offering the manual toggle for the keyboard on tall phones
-addStylesheet('ohm');
 try {
     const KEY_OHM = 'force-ohm', KEY_OHM_LEFTHANDED = 'ohm-lefthanded';
     state.forceOhm = localStorage.getItem(KEY_OHM) === 'true' || false;

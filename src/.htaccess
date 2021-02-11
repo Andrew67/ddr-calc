@@ -14,25 +14,6 @@ Header edit Vary "User-Agent" ""
 AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json image/svg+xml
 </ifmodule>
 
-<Files "index.html">
-# Preload assets for app shell/core functionality
-# Note: only works when deployed on server at root level
-Header add Link "</css/calc.css>; rel=preload; as=style"
-Header add Link "</js/calc.js>; rel=preload; as=script"
-# Game selector
-Header add Link "</js/games.js>; rel=preload; as=script"
-Header add Link "</css/games.css>; rel=preload; as=style"
-Header add Link "</games.json>; rel=preload; as=fetch; crossorigin"
-# Target BPM
-Header add Link "</js/targetbpm.js>; rel=preload; as=script"
-Header add Link "</css/targetbpm.css>; rel=preload; as=style"
-# Intentionally non-preloaded functionality
-# SVGs
-# Menu / About dialog
-# Dark mode toggle
-# Update checker
-</Files>
-
 <FilesMatch "\.html$">
 # Security headers as recommended by securityheaders.com
 Header always set Content-Security-Policy "\

@@ -40,14 +40,15 @@ Storage.prototype.setAllowingLoss = function (key, value) {
 };
 
 /**
- * List of additional scripts to lazy-load after this one loads core app shell and calculator functionality
+ * List of additional scripts to lazy-load after this one loads core app shell and calculator functionality.
+ * The filenames are assumed to be js/name.js, with a css/name.css pair if hasCSS is set to true
  */
 const asyncModules = [
-    'games',
-    'targetbpm',
-    'menu',
-    'ohm',
-    'dark'
+    { name: 'games', hasCSS: true /* preloads via index.html */ },
+    { name: 'targetbpm', hasCSS: true /* preloads via index.html */ },
+    { name: 'menu', hasCSS: true, shouldPreload: true },
+    { name: 'ohm', hasCSS: true, shouldPreload: true },
+    { name: 'dark', hasCSS: false }
 ];
 
 /**
@@ -76,18 +77,42 @@ function addStylesheet (stylesheetName) {
  * Should be called at the end of each module's initialization method, unless execution order doesn't matter.
  */
 function loadNextModule () {
-    if (asyncModules.length > 0) addScript(asyncModules.shift());
+    if (asyncModules.length > 0) {
+        const nextModule = asyncModules.shift();
+        addScript(nextModule.name);
+        if (nextModule.hasCSS) addStylesheet(nextModule.name);
+    }
 }
 
 // See: https://developers.google.com/web/fundamentals/primers/service-workers/
 let lastUpdateCheck = Date.now();
 if ('serviceWorker' in navigator) {
-    asyncModules.push('update');
+    asyncModules.push({ name: 'update', hasCSS: true });
     window.addEventListener('load', function() {
         // noinspection JSIgnoredPromiseFromCall
         navigator.serviceWorker.register('./sw.js');
     });
 }
+
+/**
+ * Adds an asset to pre-load on the page. This lets us signal to the browser incoming dependencies before they're needed
+ */
+function preloadAsset (href, as, crossOrigin) {
+    const link = document.createElement('link');
+    link.rel = 'preload';
+    link.href = href;
+    link.as = as;
+    if (crossOrigin !== undefined) link.crossOrigin = crossOrigin;
+    document.head.appendChild(link);
+}
+asyncModules.forEach(module => {
+    if (module.shouldPreload) {
+        preloadAsset(`js/${module.name}${extPrefix}.js`, 'script');
+        if (module.hasCSS) {
+            preloadAsset(`css/${module.name}${extPrefix}.css`, 'style');
+        }
+    }
+});
 
 
 // Core calculator functions
