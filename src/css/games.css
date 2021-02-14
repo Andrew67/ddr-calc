@@ -118,6 +118,11 @@
     transition: transform 0s .2s, visibility 0s linear .2s;
 }
 
+.full-screen-overlay.show {
+    transform: translateX(100%);
+    visibility: visible;
+}
+
 .scrim::before {
     content: '';
     position: absolute;
@@ -155,8 +160,6 @@
 }
 
 #game-settings.show {
-    transform: translateX(100%);
-    visibility: visible;
     /* Entry: Don't delay the transform so that animations can be seen */
     transition-delay: 0s;
     --drag-delta-x: 0px;

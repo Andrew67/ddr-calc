@@ -36,15 +36,12 @@
     opacity: 1;
 }
 
-#menu, #about {
-    visibility: hidden;
+#menu, .dialog-container {
     opacity: 0;
     transition: transform 0s .1s, opacity .1s, visibility 0s linear .1s;
 }
 
-#menu.show, #about.show {
-    transform: translateX(100%);
-    visibility: visible;
+#menu.show, .dialog-container.show {
     opacity: 1;
     transition: visibility 0s linear 0s, opacity .1s;
 }
@@ -104,27 +101,30 @@ a {
     opacity: .38;
 }
 
-#about-box {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 300px;
+/* Re-usable dialog component: container presumed to also be a .full-screen-overlay, with one child dialog <div> */
+.dialog-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--safe-area-inset-top) var(--safe-area-inset-right) var(--safe-area-inset-bottom) var(--safe-area-inset-left);
+}
+
+.dialog-container > div {
     max-height: calc(100% - 88px);
     max-width: calc(100% - 88px);
-    overflow: auto;
-    transform: translate(-50%, -50%);
     background-color: var(--color-surface-z24);
     box-shadow: var(--shadow-surface-z24);
     border-radius: 15px;
     padding: 8px;
+    overflow: auto;
 }
 
-#about-box ul {
+#about ul {
     margin: 16px 8px 8px 25px;
     padding: 0;
 }
 
-#about-box li {
+#about li {
     line-height: 32px;
 }
 

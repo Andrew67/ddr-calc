@@ -117,8 +117,8 @@
     });
 
     // Load HTML for the about screen
-    container.innerHTML = '<div id="about" class="full-screen-overlay scrim">' +
-    '<div id="about-box">' +
+    container.innerHTML = '<div id="about" class="full-screen-overlay dialog-container scrim">' +
+    '<div>' +
         '<div id="app-logo">' +
             '<img src="img/logo-192.png" width="64" height="64" alt="" loading="lazy">' +
             '<h1>DDR Calc <span id="app-version">Version ' + (version || '9999') +
