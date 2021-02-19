@@ -72,8 +72,11 @@
 #targetbpm, #songbpm {
     display: inline-block;
     min-width: calc(3ch + 2px); /* Prevents shift of other UI elements when typing */
-    min-height: 1em; /* Keeps the area clickable when there's no input */
     text-align: right;
+}
+
+#surface-targetbpm span:empty::before {
+    content: '\200b'; /* Zero width space; ensures empty inputs/outputs maintain height to prevent UI element shift */
 }
 
 #targetbpm-icon, #songbpm-icon {
