@@ -354,7 +354,8 @@ function commit () {
 
     // Text fields: song BPM, speedmod, result
     dom.bpm.textContent = state.songBpm;
-    dom.speedMod.textContent = state.speedModInt + state.speedModDec;
+    // space is injected into the content so that the underline flows from the × to the speedmod, otherwise it has a gap
+    dom.speedMod.textContent = ' ' + state.speedModInt + state.speedModDec;
     dom.result.textContent = computedState.result;
 
     // One-handed mode keypads

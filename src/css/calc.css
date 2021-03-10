@@ -116,10 +116,10 @@ body {
     overflow: hidden;
 
     /* Block text selection for app-like experience */
-    user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     -webkit-user-select: none;
+    user-select: none;
 
     /* Blocks scrolling, zooming, and pull-to-refresh (does not work on iOS) */
     touch-action: none;
@@ -194,8 +194,8 @@ button::-moz-focus-inner {
     position: relative;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
     -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 }
 
 #browser-dialog h1 {
@@ -266,6 +266,9 @@ button::-moz-focus-inner {
 
 #display .active {
     color: var(--color-accent-lg);
+    text-decoration: underline;
+    text-underline-offset: .1em;
+    text-decoration-thickness: from-font;
 }
 
 #result, #high-result, #low-result {
