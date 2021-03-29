@@ -11,9 +11,11 @@
     <meta name="description" content="Calculator for DDR speed modifiers">
 
     <!-- Core app UI is loaded ASAP; features up to Target BPM pre-loaded -->
-    <link rel="stylesheet" href="css/calc.css">
+    <link rel="preload" href="css/calc.css" as="style">
     <link rel="preload" href="js/calc.js" as="script">
+    <link rel="stylesheet" href="css/calc.css">
     <script src="js/calc.js" defer></script>
+
     <link rel="preload" href="js/games.js" as="script">
     <link rel="preload" href="css/games.css" as="style">
     <link rel="preload" href="./games.json" as="fetch" crossorigin>
