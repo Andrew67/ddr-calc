@@ -530,7 +530,9 @@ function commit () {
         const key = getKeyFromKeyboardEvent(evt);
         if (key && !key.state.disabled) {
             key.dom.classList.remove('active');
-            action.keyPress(key.key, key.type);
+            // Clear key is special case which triggers DEL long-press action
+            if (evt.key === 'Clear') action.longKeyPress(key.key, key.type);
+            else action.keyPress(key.key, key.type);
             commit();
         }
     });

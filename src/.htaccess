@@ -41,8 +41,8 @@ payment=()"
 # Chrome 89 does not like trailing commas in Permissions-Policy
 </FilesMatch>
 
-# 10m max-age, 1d s-maxage
-Header set Cache-Control "public, max-age=600, s-maxage=86400"
+# 3m max-age (recommended by webhint.io), 1w s-maxage (for CDN)
+Header set Cache-Control "public, max-age=180, s-maxage=604800"
 Header always set X-Content-Type-Options "nosniff"
 # 1y max-age
 Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
