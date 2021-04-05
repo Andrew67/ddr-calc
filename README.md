@@ -19,14 +19,18 @@ or delete keys
 * Your preferred speed is saved automatically for future use
 * You can continue to type new song BPMs without having to use the delete key, as the field resets once 3 digits are
 keyed in
-* Note: 3 digits must be entered on both sides in order to obtain a calculation (leading 0s are allowed, e.g. 084)
 
 ## App-like Installation
 * Keep this calculator in your pocket by adding it to your homescreen!
 * Works fully offline
 * On iOS: Open in Safari, tap on the Share icon, then select "Add to Homescreen"
 * On Android: Open in Chrome, Firefox, Samsung Internet, or another compatible browser and
-select "Add to Homescreen" or equivalent
+select "Install", "Add to Homescreen" or equivalent
+
+## Compact / One-Handed Mode
+* On small screens, a compact keypad inspired by PIU's Auto Velocity menu is available, with full input functionality
+* This includes cases such as using your phone's split screen functionality
+* It can also be manually activated via the menu, including support for left-handed use
 
 ## Roadmap
 * [DONE] Support for selecting which version of the game you're playing (and whether you're playing in premium mode)
