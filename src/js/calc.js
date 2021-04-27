@@ -79,8 +79,8 @@ function addStylesheet (stylesheetName) {
 function loadNextModule () {
     if (asyncModules.length > 0) {
         const nextModule = asyncModules.shift();
-        addScript(nextModule.name);
         if (nextModule.hasCSS) addStylesheet(nextModule.name);
+        addScript(nextModule.name);
     }
 }
 
@@ -107,10 +107,8 @@ function preloadAsset (href, as, crossOrigin) {
 }
 asyncModules.forEach(module => {
     if (module.shouldPreload) {
+        if (module.hasCSS) preloadAsset(`css/${module.name}${extPrefix}.css`, 'style');
         preloadAsset(`js/${module.name}${extPrefix}.js`, 'script');
-        if (module.hasCSS) {
-            preloadAsset(`css/${module.name}${extPrefix}.css`, 'style');
-        }
     }
 });
 
