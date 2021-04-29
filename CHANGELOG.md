@@ -1,5 +1,13 @@
 # Changelog
 
+## 4.0.1 (Unreleased)
+### Bug fixes
+- Fixed an issue where plain keyboard shortcuts (no Meta/Alt/Ctrl required) were conflicting with browser shortcuts.
+### Features
+### UI enhancements
+### Other
+- (Pre-)Load module dependencies (such as CSS) before the JS.
+
 ## 4.0.0 (2021-04-04)
 ### Bug fixes
 - Fixed bugs that caused the app to fail to load when offline or on a slow connection.
