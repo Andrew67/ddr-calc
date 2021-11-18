@@ -123,7 +123,7 @@
             '<img src="img/logo-192.png" width="64" height="64" alt="" loading="lazy">' +
             '<h1>DDR Calc <span id="app-version">Version ' + (version || '9999') +
                 (isGPlay ? 'g' : '') + (arePointerEventsSupported ? '' : 'p') +
-                (isMobileSafari ? 's' : '') + (isIOS12 ? 't' : '') + (isIOS10Standalone ? 'd' : '') +
+                (isMobileSafari ? 's' : '') + (isIOS12 ? 't' : '') +
             '</span></h1>' +
             '<h2>&copy; 2018&ndash;2021 Andrés Cordero</h2>' +
         '</div>' +

@@ -60,11 +60,11 @@
             <h1>Browser upgrade needed</h1>
             <p>In order to use DDR Calc, one of the following minimum browser/OS versions is required:</p>
             <ul>
-                <li>iOS version 10.3
+                <li>iOS 12.2
                 <li>Android System WebView 81
-                <li>Chrome 71
+                <li>Chrome 81
                 <li>Firefox 68
-                <li>Samsung Internet 11.1
+                <li>Samsung Internet 14
                 <li>GNOME Web 3.34.1
             </ul>
             <noscript><p>JavaScript must also be enabled</p></noscript>
@@ -83,13 +83,6 @@
             document.body.classList.add('theme-dark');
             document.querySelector('meta[name=theme-color]').content = '#121212';
             document.querySelector('meta[name=color-scheme]').content = 'dark';
-        }
-
-        // In-line iOS 10.3 standalone check, so that the status bar padding is applied flicker-free
-        const isIOS10Standalone = location.hash.includes('saf10') ||
-            ('standalone' in navigator && navigator.standalone && /OS 10_/.test(navigator.userAgent));
-        if (isIOS10Standalone) {
-            document.body.classList.add('ios10-standalone');
         }
     </script>
 

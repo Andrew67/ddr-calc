@@ -1,12 +1,14 @@
 # Changelog
 
-## 4.0.1 (Unreleased)
+## 5.0.0 (Unreleased)
 ### Bug fixes
 - Fixed an issue where plain keyboard shortcuts (no Meta/Alt/Ctrl required) were conflicting with browser shortcuts.
 ### Features
 ### UI enhancements
 ### Other
 - (Pre-)Load module dependencies (such as CSS) before the JS.
+- Increased minimum browser requirements to Chrome 81 (Android 4.4+) Samsung Internet 14, and iOS 12.2.
+- Removed CSS status bar code specifically for iOS 10.3.
 
 ## 4.0.0 (2021-04-04)
 ### Bug fixes

@@ -101,13 +101,6 @@ html, body {
     }
 }
 
-/* Used only for iOS 10.3 (set by JS), as it lacks both (display-mode: standalone) and env() */
-@media (orientation: portrait) {
-    body.ios10-standalone {
-        --safe-area-inset-top: 20px;
-    }
-}
-
 body {
     font-family: var(--font-stack);
     background: var(--color-surface-z0);
