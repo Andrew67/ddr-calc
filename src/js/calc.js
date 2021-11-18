@@ -20,7 +20,7 @@ const isIOS12 = location.hash.includes('saf12') || (isMobileSafari && /OS 12_/.t
  * The sessionStorage method is used to preserve Google Play mode across reloads,
  * which change the referrer (namely Apply Update button in About), but only within the session that triggers it.
  */
-const isGPlay = document.referrer.startsWith('android-app://com.andrew67.ddrcalc') ||
+const isGPlay = document.referrer.startsWith('android-app://com.andrew67.ddrcalc/') ||
     document.referrer.includes('play.google.com') ||
     sessionStorage.getItem('gplay') === 'true' ||
     location.hash.includes('gplay');
