@@ -505,11 +505,17 @@ function commit () {
 
     // Register document-level keyboard listeners for triggering keys based on defined keyboard shortcuts
     const getKeyFromKeyboardEvent = evt => {
-        // Ignore Shift, but include Meta/Control/Alt to prevent overriding e.g. browser shortcuts by accident
+        // Include Meta/Control/Alt to prevent overriding e.g. browser shortcuts by accident
         let evtKey = (evt.key.length === 1) ? evt.key.toLocaleLowerCase('en-US') : evt.key;
         if (evt.metaKey) evtKey = `Meta+${evtKey}`;
         if (evt.ctrlKey) evtKey = `Control+${evtKey}`;
         if (evt.altKey) evtKey = `Alt+${evtKey}`;
+
+        // Shift is a special case; normally we want to ignore it and have case insensitive shortcuts, or in the number
+        // case use the symbols that get produced. However, cases such as Shift+2 on a numeric keypad were missed
+        const evtKeyShifted = `Shift+${evtKey}`;
+        if (evt.shiftKey && keyShortcuts.hasOwnProperty(evtKeyShifted)) evtKey = evtKeyShifted;
+
         if (keyShortcuts.hasOwnProperty(evtKey)) {
             const key = keyShortcuts[evtKey];
             return { key: key, type: keyTypes[key], dom: dom.keys[key], state: computedState.keys[key] };

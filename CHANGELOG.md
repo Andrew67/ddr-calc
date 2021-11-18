@@ -3,6 +3,7 @@
 ## 5.0.0 (Unreleased)
 ### Bug fixes
 - Fixed an issue where plain keyboard shortcuts (no Meta/Alt/Ctrl required) were conflicting with browser shortcuts.
+- Fixed an issue where Shift+2/5/7 keyboard shortcuts were not working when using numeric keypad keys.
 ### Features
 ### UI enhancements
 ### Other
