@@ -6,7 +6,7 @@
 // Also, this module is only loaded if navigator.serviceWorker is available
 try {
     const container = document.createElement('div');
-    container.innerHTML = '<div id="update-box" hidden><button id="apply-update">Apply Update</button></div>';
+    container.innerHTML = '<div id="update-box" hidden><button type="button" id="apply-update">Apply Update</button></div>';
     document.getElementById('app-logo').appendChild(container.firstChild);
 
     computedState.updateAvailable = false;

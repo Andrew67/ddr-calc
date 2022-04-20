@@ -6,7 +6,7 @@
 (function initMenuModule () {
     // Load HTML for the menu button
     const container = document.createElement('div');
-    container.innerHTML = `<button id="menu-btn" class="overlay" title="Menu">
+    container.innerHTML = `<button type="button" id="menu-btn" class="overlay" title="Menu">
         <svg width="24" height="24" aria-hidden="true"><use xlink:href="${getSvgUrl('md-more_vert')}#more_vert"/></svg>
     </button>`;
     document.getElementById('display').appendChild(container.firstElementChild);
@@ -40,6 +40,7 @@
         menuItems.forEach(function (menuItem) {
             const menuListItemContainer = document.createElement('li'),
                   menuItemDOM = document.createElement('button');
+            menuItemDOM.setAttribute('type', 'button');
             menuItemDOM.addEventListener('click', function menuItemAction (evt) {
                 let preventPropagation = menuItem.options.disabled();
 

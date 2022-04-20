@@ -55,7 +55,7 @@ fetch(`games${extPrefix}.json`)
 
     // Load HTML for the game button
     const container = document.createElement('div');
-    container.innerHTML = `<button id="game-btn" class="overlay" title="Select Game">
+    container.innerHTML = `<button type="button" id="game-btn" class="overlay" title="Select Game">
                                <span id="game-premium-enabled"></span>
                                ${gamepad} <span id="game-name">&nbsp;</span>
                            </button>`;

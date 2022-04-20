@@ -5,11 +5,15 @@
 - Fixed an issue where plain keyboard shortcuts (no Meta/Alt/Ctrl required) were conflicting with browser shortcuts.
 - Fixed an issue where Shift+2/5/7 keyboard shortcuts were not working when using numeric keypad keys.
 ### Features
+- Added support for DDR A3 (same speed mods as A, A20, and A20 PLUS).
 ### UI enhancements
 ### Other
 - (Pre-)Load module dependencies (such as CSS) before the JS.
 - Increased minimum browser requirements to Chrome 81 (Android 4.4+) Samsung Internet 14, and iOS 12.2.
 - Removed CSS status bar code specifically for iOS 10.3.
+- Updated buttons to use `type="button"`
+  (see: https://lea.verou.me/2018/05/never-forget-typebutton-on-generated-buttons/).
+- Updated PWA manifest to set the `id` field (see: https://developer.chrome.com/blog/pwa-manifest-id/).
 
 ## 4.0.0 (2021-04-04)
 ### Bug fixes

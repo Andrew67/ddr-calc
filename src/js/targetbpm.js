@@ -24,9 +24,9 @@
     // Set up display HTML
     document.getElementById('surface-targetbpm').innerHTML = '<div id="bpms">' +
         '<span>' +
-            '<button id="targetbpm-icon" title="Target BPM">' + targetIcon + '</button>' +
+            '<button type="button" id="targetbpm-icon" title="Target BPM">' + targetIcon + '</button>' +
             '<span id="targetbpm"></span>' +
-            '<button id="songbpm-icon" title="Song BPM">' + songIcon + '</button>' +
+            '<button type="button" id="songbpm-icon" title="Song BPM">' + songIcon + '</button>' +
             '<span id="songbpm"></span>' +
         '</span>' +
         '</div>' +
