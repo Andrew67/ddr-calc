@@ -173,14 +173,6 @@
         dom.about.classList.toggle('show', state.aboutOpen);
     });
 
-    // Set up top-level Privacy Policy shortcut for Google Play users
-    if (isGPlay) {
-        addMenuItem(200, 'Privacy Policy', function () {
-            // The original code with no timeout began to fail starting in Chrome 76
-            setTimeout(() => location.assign('privacy-policy.html'), 300);
-        });
-    }
-
     // Set up "Force Reload" shortcut for iOS 12 home-screen app users
     // iOS 12.2-12.4 introduced behavior where the page state is always frozen, which also causes updates to get stuck
     // Resolved in iOS 13

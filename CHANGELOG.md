@@ -14,6 +14,7 @@
 - Updated buttons to use `type="button"`
   (see: https://lea.verou.me/2018/05/never-forget-typebutton-on-generated-buttons/).
 - Updated PWA manifest to set the `id` field (see: https://developer.chrome.com/blog/pwa-manifest-id/).
+- Removed the menu "Privacy Policy" link in Google Play mode due to bugs (it's still accessible via the About dialog).
 
 ## 4.0.0 (2021-04-04)
 ### Bug fixes
