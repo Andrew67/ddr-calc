@@ -24,7 +24,7 @@ AddCharset utf-8 .css .js .json .map .svg
 # Security headers as recommended by securityheaders.com
 Header always set Content-Security-Policy "\
 default-src 'self'; \
-script-src 'self' 'sha256-ouZpqh80SFkdm6/bVlt6Nb0WiWzAeX+tRKMX7ufI5yo='; \
+script-src 'self' 'sha256-h/1mvacqzb05RzH4aRUAkpb37Xktbvii3cjhJ4GXdxM='; \
 style-src 'self' 'sha256-nMc1pJn0ceZrXu1/AseDqpkZXDXIFbK3DPdspz3f+6c='; \
 frame-ancestors 'self'; \
 "
