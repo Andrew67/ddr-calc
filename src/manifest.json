@@ -40,5 +40,24 @@
       "id": "com.andrew67.ddrcalc"
     }
   ],
-  "prefer_related_applications": false
+  "prefer_related_applications": false,
+  "categories": ["fitness", "games", "utilities"],
+  "description": "Speed mod calculator for dance gamers in a hurry",
+  "screenshots": [
+    {
+      "src": "./img/screenshot-1.png",
+      "sizes": "720x1440",
+      "label": "Fast speed mod calculations"
+    },
+    {
+      "src": "./img/screenshot-2.png",
+      "sizes": "720x1440",
+      "label": "Target BPM Mode which supports all arcade versions"
+    },
+    {
+      "src": "./img/screenshot-3.png",
+      "sizes": "720x1440",
+      "label": "Dark theme to save your phone battery for those new high score pics"
+    }
+  ]
 }
