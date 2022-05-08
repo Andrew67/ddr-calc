@@ -31,10 +31,10 @@
   "homepage": "https://github.com/Andrew67/ddr-calc#readme",
   "devDependencies": {
     "esbuild": "^0.8.39",
-    "eslint": "^7.12.0",
-    "eslint-plugin-compat": "^3.9.0",
+    "eslint": "^8.15.0",
+    "eslint-plugin-compat": "^4.0.2",
     "replace": "^1.2.0",
-    "stylelint": "^13.13.1",
-    "stylelint-no-unsupported-browser-features": "^5.0.1"
+    "stylelint": "^14.8.2",
+    "stylelint-no-unsupported-browser-features": "^5.0.3"
   }
 }

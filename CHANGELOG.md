@@ -11,10 +11,13 @@
 - (Pre-)Load module dependencies (such as CSS) before the JS.
 - Increased minimum browser requirements to Chrome 81 (Android 4.4+) Samsung Internet 14, and iOS 12.2.
 - Removed CSS status bar code specifically for iOS 10.3.
+- Removed `NodeList.forEach` polyfill specifically for Firefox 48.
 - Updated buttons to use `type="button"`
   (see: https://lea.verou.me/2018/05/never-forget-typebutton-on-generated-buttons/).
 - Updated PWA manifest to set the `id` field (see: https://developer.chrome.com/blog/pwa-manifest-id/).
 - Removed the menu "Privacy Policy" link in Google Play mode due to bugs (it's still accessible via the About dialog).
+- Updated maskable icon to include standard 192x192 and 512x512 sizes.
+- Updated `node`, `eslint`, and `stylelist` dependencies.
 
 ## 4.0.0 (2021-04-04)
 ### Bug fixes
