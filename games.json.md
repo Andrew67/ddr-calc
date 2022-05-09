@@ -6,6 +6,7 @@ Thanks to RemyWiki for the speedmod information.
 Fields:
 * id - game ID (internal use)
 * name - name to display in UI (some games share speedmods and are combined)
+* shortName (optional) - name to display in parts of the UI where the combined name is too long
 * mods - speed mods in regular play
 * hasPremiumPlay - whether this game version offers premium play
 * premiumPlayMods - additional speed mods available in regular play

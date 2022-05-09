@@ -7,6 +7,7 @@
 ### Features
 - Added support for DDR A3 (same speed mods as A, A20, and A20 PLUS).
 ### UI enhancements
+- Shortened various combined game names to avoid UI overlap in the calculator view (e.g. A/A20/A20 PLUS/A3 became A–A3).
 ### Other
 - (Pre-)Load module dependencies (such as CSS) before the JS.
 - Increased minimum browser requirements to Chrome 81 (Android 4.4+) Samsung Internet 14, and iOS 12.2.
@@ -17,7 +18,8 @@
 - Updated PWA manifest to set the `id` field (see: https://developer.chrome.com/blog/pwa-manifest-id/).
 - Removed the menu "Privacy Policy" link in Google Play mode due to bugs (it's still accessible via the About dialog).
 - Updated maskable icon to include standard 192x192 and 512x512 sizes.
-- Updated `node`, `eslint`, and `stylelist` dependencies.
+- Updated `node`, `eslint`, `stylelist`, and `esbuild` dependencies.
+- Created type declarations for the game speedmod data.
 
 ## 4.0.0 (2021-04-04)
 ### Bug fixes

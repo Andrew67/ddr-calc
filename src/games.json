@@ -2,6 +2,7 @@
   {
     "id": 6,
     "name": "MAX/MAX2/EXTREME/SN",
+    "shortName": "MAX–SuperNOVA",
     "mods": [
       ["1", [".5"]],
       ["2", []],
@@ -83,6 +84,7 @@
   {
     "id": 16,
     "name": "A/A20/A20 PLUS/A3",
+    "shortName": "A–A3",
     "mods": [
       ["1", [".5"]],
       ["2", [".5"]],

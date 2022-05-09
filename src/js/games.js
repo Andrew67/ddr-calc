@@ -31,6 +31,7 @@ fetch(`games${extPrefix}.json`)
 
     // Map game data by ID for easier retrieval without walking the array
     // Furthermore, convert the mods and premiumPlayMods into their respective Map forms
+    /** @type {Map<number, Game>} */
     const gameDataById = new Map(gameData.map(function (game) {
         return [game.id, Object.assign({}, game, {
             mods: new Map(game.mods),
@@ -108,6 +109,7 @@ fetch(`games${extPrefix}.json`)
                 computedState.availableSpeedModList = [];
             } else {
                 computedState.gameName = gameDataById.get(state.gameId).name;
+                computedState.gameShortName = gameDataById.get(state.gameId).shortName || computedState.gameName;
                 computedState.availableSpeedMods = state.premiumPlayEnabled ?
                     getAllModsForGameId(state.gameId) : gameDataById.get(state.gameId).mods;
 
@@ -122,7 +124,7 @@ fetch(`games${extPrefix}.json`)
         }
     });
     postCommitHooks.push(function updateGameNameAndPremiumPlay () {
-        dom.gameName.textContent = computedState.gameName;
+        dom.gameName.textContent = computedState.gameShortName;
         dom.premiumPlayEnabled.textContent = (!state.gameId || !gameDataById.get(state.gameId)['hasPremiumPlay']) ? '' : (
             state.premiumPlayEnabled ? 'Premium Play On' : 'Premium Play Off'
         );
