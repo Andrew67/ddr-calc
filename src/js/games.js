@@ -84,10 +84,12 @@ fetch(`games${extPrefix}.json`)
     dom.app.appendChild(container.firstChild);
 
     // localStorage keys
+    // Change version if IDs ever change in games.json
     const KEY_GAMEID = 'gameid-v1', KEY_PREMIUMPLAY = 'premiumPlayEnabled';
 
     // Set up calc variables
-    state.gameId = Number(localStorage.getItem(KEY_GAMEID)) || 0; // Change version if IDs ever change in games.json
+    state.gameId = localStorage.getItem(KEY_GAMEID) === null ?
+        gameData[gameData.length - 1].id : Number(localStorage.getItem(KEY_GAMEID));
     state.premiumPlayEnabled = localStorage.getItem(KEY_PREMIUMPLAY) === null ?
         true : localStorage.getItem(KEY_PREMIUMPLAY) === 'true';
     state.gameSettingsOpen = Boolean(history.state && history.state.gameSettingsOpen);
@@ -109,7 +111,7 @@ fetch(`games${extPrefix}.json`)
                 computedState.availableSpeedModList = [];
             } else {
                 computedState.gameName = gameDataById.get(state.gameId).name;
-                computedState.gameShortName = gameDataById.get(state.gameId).shortName || computedState.gameName;
+                computedState.gameShortName = gameDataById.get(state.gameId).shortName;
                 computedState.availableSpeedMods = state.premiumPlayEnabled ?
                     getAllModsForGameId(state.gameId) : gameDataById.get(state.gameId).mods;
 
@@ -124,8 +126,8 @@ fetch(`games${extPrefix}.json`)
         }
     });
     postCommitHooks.push(function updateGameNameAndPremiumPlay () {
-        dom.gameName.textContent = computedState.gameShortName;
-        dom.premiumPlayEnabled.textContent = (!state.gameId || !gameDataById.get(state.gameId)['hasPremiumPlay']) ? '' : (
+        dom.gameName.textContent = computedState.gameShortName || computedState.gameName;
+        dom.premiumPlayEnabled.textContent = (!state.gameId || !gameDataById.get(state.gameId).hasPremiumPlay) ? '' : (
             state.premiumPlayEnabled ? 'Premium Play On' : 'Premium Play Off'
         );
     });

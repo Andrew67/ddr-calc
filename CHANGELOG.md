@@ -6,6 +6,8 @@
 - Fixed an issue where Shift+2/5/7 keyboard shortcuts were not working when using numeric keypad keys.
 ### Features
 - Added support for DDR A3 (same speed mods as A, A20, and A20 PLUS).
+- The selected game for new users will now default to the latest available version (currently A/A20/A20 PLUS/A3).
+  Before this change, the default was N/A.
 ### UI enhancements
 - Shortened various combined game names to avoid UI overlap in the calculator view (e.g. A/A20/A20 PLUS/A3 became A–A3).
 ### Other
