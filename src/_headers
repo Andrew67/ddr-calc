@@ -1,0 +1,6 @@
+# Avoid search engine indexing of deployment URLs
+https://ddrcalc.pages.dev/*
+  X-Robots-Tag: noindex
+
+https://:githash.ddrcalc.pages.dev/*
+  X-Robots-Tag: noindex
