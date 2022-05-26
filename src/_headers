@@ -3,8 +3,7 @@
   Strict-Transport-Security: max-age=31536000; includeSubDomains
 
 /*.html
-  Content-Security-Policy: default-src 'self'; \
-                           script-src 'self' 'sha256-h/1mvacqzb05RzH4aRUAkpb37Xktbvii3cjhJ4GXdxM='; style-src 'self' 'sha256-nMc1pJn0ceZrXu1/AseDqpkZXDXIFbK3DPdspz3f+6c='; frame-ancestors 'self';
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-h/1mvacqzb05RzH4aRUAkpb37Xktbvii3cjhJ4GXdxM='; style-src 'self' 'sha256-nMc1pJn0ceZrXu1/AseDqpkZXDXIFbK3DPdspz3f+6c='; frame-ancestors 'self';
   Permissions-Policy: geolocation=(), microphone=(), camera=(), autoplay=(), payment=()
 
 # Avoid search engine indexing of deployment URLs
