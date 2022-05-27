@@ -33,6 +33,7 @@ Header always set X-XSS-Protection "1; mode=block"
 Header always set Referrer-Policy "strict-origin"
 
 Header always set Permissions-Policy "\
+document-domain=(), \
 geolocation=(), \
 microphone=(), \
 camera=(), \
