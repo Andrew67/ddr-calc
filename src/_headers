@@ -1,8 +1,11 @@
 # Security headers as recommended by securityheaders.com
+# Cache headers as recommended by webhint.io (default max-age=0 causes 304 revalidations for Service Worker setup)
 /*
-  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  Cache-Control: public, max-age=180, must-revalidate
   Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-h/1mvacqzb05RzH4aRUAkpb37Xktbvii3cjhJ4GXdxM='; style-src 'self' 'sha256-nMc1pJn0ceZrXu1/AseDqpkZXDXIFbK3DPdspz3f+6c='; frame-ancestors 'self';
   Permissions-Policy: document-domain=(), geolocation=(), microphone=(), camera=(), autoplay=(), payment=()
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  X-Content-Type-Options: nosniff
   ! Access-Control-Allow-Origin
 
 # Avoid search engine indexing of deployment URLs
