@@ -22,6 +22,8 @@
 - Updated maskable icon to include standard 192x192 and 512x512 sizes.
 - Updated `node`, `eslint`, `stylelist`, and `esbuild` dependencies.
 - Created type declarations for the game speedmod data.
+- Ported over many headers from `.htaccess` to `_headers` and set up `wrangler` commands locally for Cloudflare Pages.
+- Added `.gitpod.yml` for use with Gitpod.
 
 ## 4.0.0 (2021-04-04)
 ### Bug fixes

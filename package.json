@@ -12,8 +12,8 @@
     "minify": "npm run minify:fe && npm run minify:sw",
     "replace": "replace '/([a-z-]+).(js|css|json)(>|\")' /\\$1.v$npm_package_version.\\$2\\$3 build/index.html --quiet",
     "build": "npm run minify && npm run replace",
-    "serve:src": "wrangler pages dev ./src",
-    "serve:build": "wrangler pages dev ./build",
+    "serve:src": "wrangler pages dev ./src --port 8788",
+    "serve:build": "wrangler pages dev ./build --port 8789",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
