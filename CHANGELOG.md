@@ -24,6 +24,7 @@
 - Created type declarations for the game speedmod data.
 - Ported over many headers from `.htaccess` to `_headers` and set up `wrangler` commands locally for Cloudflare Pages.
 - Added `.gitpod.yml` for use with Gitpod.
+- Added a version suffix at runtime within the About box to show the current Cloudflare Pages staging deployment ID.
 
 ## 4.0.0 (2021-04-04)
 ### Bug fixes

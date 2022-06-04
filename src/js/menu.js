@@ -117,6 +117,11 @@
         dom.menu.classList.toggle('show', state.menuOpen);
     });
 
+    // Identify at runtime whether we're in a Cloudflare Pages staging environment,
+    // helpful when running the app in full screen to double-check which deployment we're looking at
+    const cfStagingEnvId = /[a-f\d]{8}\..*\.pages\.dev/.test(location.host) ?
+        '-' + location.host.split('.')[0] : '';
+
     // Load HTML for the about screen
     container.innerHTML = '<div id="about" class="full-screen-overlay dialog-container scrim">' +
     '<div>' +
@@ -125,6 +130,7 @@
             '<h1>DDR Calc <span id="app-version">Version ' + (version || '9999') +
                 (isGPlay ? 'g' : '') + (arePointerEventsSupported ? '' : 'p') +
                 (isMobileSafari ? 's' : '') + (isIOS12 ? 't' : '') +
+                cfStagingEnvId +
             '</span></h1>' +
             '<h2>&copy; 2018&ndash;2021 Andrés Cordero</h2>' +
         '</div>' +
@@ -133,9 +139,7 @@
             '<li><a href="privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a>' +
             '<li>Available speed modifiers per mix compiled from ' +
                 (!isGPlay ? '<a href="https://remywiki.com/" target="_blank" rel="noopener">RemyWiki</a>' : 'RemyWiki') +
-            '<li>DDR Arrow by ' +
-                (!isGPlay ? '<a href="https://inkjuse.deviantart.com/art/DDR-Arrow-111309080" target="_blank" rel="noopener">inkjuse</a>' :
-                    'inkjuse on DeviantArt') +
+            '<li>DDR Arrow by inkjuse on DeviantArt' +
             '<li>Mini-calculator icon from <a href="https://icons.getbootstrap.com/" target="_blank" rel="noopener">Bootstrap Icons</a>' +
             '<li>“<a href="https://thenounproject.com/search/?q=target&i=32462" target="_blank" rel="noopener">Target</a>” ' +
                 'icon by Chris Kerr from <a href="https://thenounproject.com/" target="_blank" rel="noopener">the Noun Project</a>.' +
