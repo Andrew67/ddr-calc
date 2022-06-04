@@ -94,6 +94,7 @@ fetch(`games${extPrefix}.json`)
         true : localStorage.getItem(KEY_PREMIUMPLAY) === 'true';
     state.gameSettingsOpen = Boolean(history.state && history.state.gameSettingsOpen);
     computedState.gameName = '';
+    computedState.gameShortName = undefined;
     computedState.availableSpeedMods = new Map();
     computedState.availableSpeedModList = [];
     dom.gameName = document.getElementById('game-name');
@@ -107,6 +108,7 @@ fetch(`games${extPrefix}.json`)
         if (state.gameId !== prevGameId || state.premiumPlayEnabled !== prevPremiumPlayEnabled) {
             if (state.gameId === 0 || !gameDataById.has(state.gameId)) {
                 computedState.gameName = 'Select game';
+                computedState.gameShortName = undefined;
                 computedState.availableSpeedMods = new Map();
                 computedState.availableSpeedModList = [];
             } else {
