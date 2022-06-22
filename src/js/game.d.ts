@@ -1,12 +1,13 @@
 export type GameMods = Map<string, string[]>;
+export type GameModsJSON = Array<[string, string[]]>;
 
 export interface GameJSON {
     id: number;
     name: string;
     shortName?: string;
-    mods: Array<Array<string|Array<string>>>;
+    mods: GameModsJSON;
     hasPremiumPlay: boolean;
-    premiumPlayMods: Array<Array<string|Array<string>>>;
+    premiumPlayMods: GameModsJSON;
 }
 
 export interface Game {
