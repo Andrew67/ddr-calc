@@ -13,8 +13,9 @@
 ### Other
 - (Pre-)Load module dependencies (such as CSS) before the JS.
 - Increased minimum browser requirements to Chrome 81 (Android 4.4+) Samsung Internet 14, and iOS 12.2.
+- Removed GNOME Web 3.34.1 on PinePhone support due to odd touch event issues.
 - Removed CSS status bar code specifically for iOS 10.3.
-- Removed `NodeList.forEach` polyfill specifically for Firefox 48.
+- Removed `NodeList.forEach` polyfill specifically for unofficial Firefox 48 support.
 - Updated buttons to use `type="button"`
   (see: https://lea.verou.me/2018/05/never-forget-typebutton-on-generated-buttons/).
 - Updated PWA manifest to set the `id` field (see: https://developer.chrome.com/blog/pwa-manifest-id/).
