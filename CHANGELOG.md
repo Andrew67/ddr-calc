@@ -1,6 +1,6 @@
 # Changelog
 
-## 5.0.0 (Unreleased)
+## 5.0.0 (2022-06-25)
 ### Bug fixes
 - Fixed an issue where plain keyboard shortcuts (no Meta/Alt/Ctrl required) were conflicting with browser shortcuts.
 - Fixed an issue where Shift+2/5/7 keyboard shortcuts were not working when using numeric keypad keys.
