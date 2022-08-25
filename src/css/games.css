@@ -64,7 +64,7 @@
     left: -8px;
     bottom: 0;
     right: -8px;
-    background-color: var(--color-foreground-focus);
+    background-color: var(--color-foreground);
     border-radius: 8px;
     z-index: -1;
     opacity: 0;
@@ -72,7 +72,7 @@
 }
 
 #game-btn:focus::before {
-    opacity: 1;
+    opacity: var(--opacity-focused);
 }
 
 /* Set the game button a little higher on taller devices, to further avoid touching calculations */

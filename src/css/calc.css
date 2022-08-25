@@ -11,6 +11,7 @@
 
     --opacity-focused: .12;
     --opacity-active: .24;
+    --opacity-disabled: .38;
 
     /* Material Design elevation; see https://material.io/design/environment/elevation.html#default-elevations */
     --color-surface-z0: white; /* Lowest level; essentially the display */
@@ -22,12 +23,9 @@
     --color-foreground: rgba(0,0,0,.87);
     --color-foreground-medium: rgba(0,0,0,.6);
     --color-foreground-medium-lg: rgba(0,0,0,.7); /* Variant for larger UI elements */
-    --color-foreground-disabled: rgba(0,0,0,.38);
-    --color-foreground-focus: rgba(0,0,0,.12); /* Variant for non-selected focused elements on surface */
 
     --color-accent: #1976d2; /* Material Blue 700; same as DDR Finder primary color */
     --color-accent-lg: #004ba0; /* Material Blue 700 Dark; variant for larger UI elements */
-    --color-accent-focus: rgba(25,118,210,.12); /* Variant of Material Blue 700 for selected focused elements on surface */
 
     --color-result: #00600f; /* Material Green 700 Dark */
 
@@ -55,7 +53,6 @@
     --safe-area-inset-left: 0px;
 }
 
-/*noinspection CssInvalidFunction*/
 @supports (width: calc(80% - env(safe-area-inset-right))) {
     :root {
         --safe-area-inset-top: env(safe-area-inset-top);
@@ -77,19 +74,15 @@ body.theme-dark {
     --color-foreground: rgba(255,255,255,.87);
     --color-foreground-medium: rgba(255,255,255,.6);
     --color-foreground-medium-lg: rgba(255,255,255,.7);
-    --color-foreground-disabled: rgba(255,255,255,.38);
-    --color-foreground-focus: rgba(255,255,255,.12);
 
     --color-accent: #90caf9; /* Material Blue 200 */
     --color-accent-lg: #bbdefb; /* Material Blue 100 */
-    --color-accent-focus: rgba(144,202,249,.12); /* Variant of Material Blue 200 for focused elements on surface */
 
     --color-result: #c8e6c9; /* Material Green 100 */
-    --color-result-focus: rgba(200, 230, 201, .12); /* Variant of Material Green 100 for focused elements on surface */
 
     --color-keypad-bg: #102027; /* Material Blue Grey 800 Dark */
     --color-keypad-ext-bg: #1c313a; /* Material Blue Grey 700 Dark */
-    --color-keypad-bg-active: #29434e; /* Material Blue Grey 600 Dark */
+    --color-keypad-bg-active: rgba(200,200,200,var(--opacity-active));
 }
 
 html, body {
@@ -359,7 +352,13 @@ button::-moz-focus-inner {
 }
 
 /* TODO: Split off into separate CSS files */
-#keypad button:focus, #game-btn:focus, #menu-btn:focus, #targetbpm-icon:focus, #songbpm-icon:focus, #apply-update:focus {
+#keypad button:focus,
+#game-btn:focus,
+#menu-btn:focus,
+#targetbpm-icon:focus,
+#songbpm-icon:focus,
+#menu li button:focus,
+#apply-update:focus {
     outline: 3px solid transparent; /* Visible in High Contrast Mode: https://sarahmhigley.com/writing/whcm-quick-tips/ */
 }
 
@@ -390,7 +389,7 @@ button::-moz-focus-inner {
 }
 
 #keypad button:disabled {
-    opacity: .19;
+    opacity: var(--opacity-disabled);
     transition: opacity .1s;
 }
 

@@ -1,5 +1,13 @@
 # Changelog
 
+## X.X.X (Unreleased)
+### Bug fixes
+### Features
+### UI enhancements
+### Other
+- Used `::before` placeholder elements more in order to reduce amount of color CSS variables (for future theme support).
+- Cleared out security headers for sub-resources in `_headers` (for performance).
+
 ## 5.0.0 (2022-06-25)
 ### Bug fixes
 - Fixed an issue where plain keyboard shortcuts (no Meta/Alt/Ctrl required) were conflicting with browser shortcuts.

@@ -80,22 +80,35 @@
 }
 
 #targetbpm-icon, #songbpm-icon {
+    position: relative;
     margin-right: 3vw;
     margin-left: 7vw;
+}
+
+#targetbpm-icon::before, #songbpm-icon::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    border-radius: 8px;
+    background-color: var(--color-foreground);
+    opacity: 0;
+    transition: opacity .1s;
+}
+
+#targetbpm-icon:focus::before, #songbpm-icon:focus::before {
+    opacity: var(--opacity-focused);
+}
+
+#targetbpm-icon.active::before, #songbpm-icon.active::before {
+    background: var(--color-accent);
 }
 
 #targetbpm-icon svg, #songbpm-icon svg {
     width: 1em;
     height: 1em;
-    border-radius: 8px;
-}
-
-#targetbpm-icon:focus svg, #songbpm-icon:focus svg {
-    background: var(--color-foreground-focus);
-}
-
-#targetbpm-icon.active:focus svg, #songbpm-icon.active:focus svg {
-    background: var(--color-accent-focus);
 }
 
 #surface-targetbpm > div > .ideal {

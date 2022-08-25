@@ -1,5 +1,6 @@
 # Security headers as recommended by securityheaders.com
 # Cache headers as recommended by webhint.io (default max-age=0 causes 304 revalidations for Service Worker setup)
+# Undo default open CORS policy
 /*
   Cache-Control: public, max-age=180, must-revalidate
   Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-h/1mvacqzb05RzH4aRUAkpb37Xktbvii3cjhJ4GXdxM='; style-src 'self' 'sha256-nMc1pJn0ceZrXu1/AseDqpkZXDXIFbK3DPdspz3f+6c='; frame-ancestors 'self';
@@ -8,8 +9,20 @@
   X-Content-Type-Options: nosniff
   ! Access-Control-Allow-Origin
 
+# Remove unnecessary security headers from sub-resources (trims response size)
+/*.css
+  ! Content-Security-Policy
+  ! Permissions-Policy
+
+/*.js
+  ! Content-Security-Policy
+  ! Permissions-Policy
+
+/*.json
+  ! Content-Security-Policy
+  ! Permissions-Policy
+
 # Avoid search engine indexing of deployment URLs
-# Undo default open CORS policy
 https://ddrcalc.pages.dev/*
   X-Robots-Tag: noindex
 
