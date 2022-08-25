@@ -9,6 +9,9 @@
     /* Same as above, although Roboto Medium isn't available until Android 5 (and doesn't strictly need -medium alias) */
     --font-stack-medium: "Roboto Medium", sans-serif-medium, var(--font-stack);
 
+    --opacity-focused: .12;
+    --opacity-active: .24;
+
     /* Material Design elevation; see https://material.io/design/environment/elevation.html#default-elevations */
     --color-surface-z0: white; /* Lowest level; essentially the display */
     --color-surface-z1: white; /* Card */
@@ -27,13 +30,13 @@
     --color-accent-focus: rgba(25,118,210,.12); /* Variant of Material Blue 700 for selected focused elements on surface */
 
     --color-result: #00600f; /* Material Green 700 Dark */
-    --color-result-focus: rgba(0, 96, 15, .12); /* Variant of Material Green 700 Dark for selected focused elements on surface */
 
     --color-keypad-bg: #263238; /* Material Blue Grey 900 */
     --color-keypad-ext-bg: #455a64; /* Material Blue Grey 700 */
-    --color-keypad-bg-active: #546e7a; /* Material Blue Grey 600 */
+    --color-keypad-bg-active: rgba(255,255,255,var(--opacity-active));
 
     --color-keypad-fg: rgba(255,255,255,.87);
+    --color-keypad-ext-fg: rgba(255,255,255,.87);
 
     --duration-fade-in-delayed-init: .6s; /* Duration of fade-in-delayed animation during init */
 
@@ -125,7 +128,6 @@ body {
     box-sizing: border-box;
 
     -webkit-tap-highlight-color: rgba(0,0,0,0); /* Cancel iOS highlighting of buttons since we have our own */
-    transition: background-color .1s; /* Default fade across states (focused, active, etc) and theme switches */
 }
 
 button {
@@ -187,7 +189,6 @@ button::-moz-focus-inner {
     position: relative;
     top: 50%;
     left: 50%;
-    -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
 }
 
@@ -334,6 +335,7 @@ button::-moz-focus-inner {
     flex: 1;
     flex-direction: column;
     background: var(--color-keypad-ext-bg);
+    color: var(--color-keypad-ext-fg);
     padding-right: var(--safe-area-inset-right);
 }
 

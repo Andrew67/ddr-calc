@@ -243,14 +243,16 @@ input[type=radio] + span::before, input[type=checkbox] + span::before {
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: -1;
+    opacity: 0;
+    transition: opacity .1s;
 }
 
 input[type=radio]:focus + span::before, input[type=checkbox]:focus + span::before {
-    background: var(--color-foreground-focus);
+    background: var(--color-foreground);
+    opacity: var(--opacity-focused);
     outline: 3px solid transparent;
 }
 
 input[type=radio]:checked:focus + span::before, input[type=checkbox]:checked:focus + span::before {
-    background: var(--color-accent-focus);
+    background: var(--color-accent);
 }

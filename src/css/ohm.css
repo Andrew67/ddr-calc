@@ -10,6 +10,7 @@
         width: calc(25% + (var(--safe-area-inset-right) * .75) - (var(--safe-area-inset-left) * .25));
         padding-right: var(--safe-area-inset-right);
         background: var(--color-keypad-ext-bg);
+        color: var(--color-keypad-ext-fg);
     }
 
     #keypad-ohm {
