@@ -52,7 +52,8 @@
     <!-- iPhone 11 Pro Max, XS Max (1242px x 2688px, 44px status bar) -->
     <link rel="apple-touch-startup-image" href="img/apple-splash-1242-2688-fs8.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
 </head>
-<body>
+<!-- TODO: Temporary BITE theme -->
+<body class="theme-bite">
 <div id="app">
     <!-- Incompatible browser overlay -->
     <div id="browser-dialog">
@@ -100,6 +101,10 @@
                 <!-- Target BPM display UI gets inserted here -->
             </div>
             <!-- Display overlays get inserted here -->
+            <!-- Temporary BITE logo -->
+            <a class="overlay" id="bite-btn" href="https://www.bitebadges.com/" target="_blank" rel="noopener">
+                <img width="125" src="img/bite-logo-2022.png" alt="BITE 5">
+            </a>
         </div>
         <form id="mode-switcher">
             <!-- Speed mod / Target BPM switcher tabs get inserted here -->

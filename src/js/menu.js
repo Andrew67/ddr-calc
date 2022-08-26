@@ -177,6 +177,9 @@
         dom.about.classList.toggle('show', state.aboutOpen);
     });
 
+    // TODO: Temporary relocation of game settings during BITE
+    addMenuItem(1, 'Game Settings', window.showGameSettings(history.replaceState.bind(history)));
+
     // Set up "Force Reload" shortcut for iOS 12 home-screen app users
     // iOS 12.2-12.4 introduced behavior where the page state is always frozen, which also causes updates to get stuck
     // Resolved in iOS 13

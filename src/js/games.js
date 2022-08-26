@@ -181,13 +181,18 @@ fetch(`games${extPrefix}.json`)
 
     // Show the game settings when the name is clicked, hide when the scrim is clicked
     // Using history.pushState and onpopstate so that browser/Android back button can dismiss the settings
-    document.getElementById('game-btn').addEventListener('click', function showGameSettings () {
-        if (!state.gameSettingsOpen) { // In case it remains focused by keyboard when overlay is open
-            state.gameSettingsOpen = true;
-            commit();
-            history.pushState({ gameSettingsOpen: true }, "", "");
+    // TODO: Re-localize this function (global is temporary for BITE)
+    window.showGameSettings = function (historyFn) {
+        return function () {
+            if (!state.gameSettingsOpen) { // In case it remains focused by keyboard when overlay is open
+                state.gameSettingsOpen = true;
+                commit();
+                historyFn({ gameSettingsOpen: true }, "", "");
+            }
         }
-    });
+    }
+    document.getElementById('game-btn')
+        .addEventListener('click', window.showGameSettings(history.pushState.bind(history)));
     if (!arePointerEventsSupported) { // if pointer events supported, handled below
         dom.gameSettings.addEventListener('click', function (e) {
             if (e.target === this) history.back();

@@ -83,6 +83,43 @@ body.theme-dark {
     --color-keypad-bg-active: rgba(200,200,200,var(--opacity-active));
 }
 
+/* TODO: Temporary BITE colors */
+body.theme-bite {
+    --color-surface-z0: #fef7fb;
+
+    --color-foreground: #723955;
+    --color-foreground-medium: var(--color-foreground);
+
+    --color-accent: #bf3201;
+    --color-result: #6f6900;
+
+    --color-keypad-bg: #2b1235;
+    --color-keypad-ext-bg: #543162;
+    --color-keypad-fg: var(--color-surface-z0);
+    --color-keypad-ext-fg: var(--color-keypad-fg);
+}
+
+body.theme-bite.theme-dark {
+    --color-surface-z0: #2d1621;
+
+    --color-foreground: #fef7fb;
+
+    --color-accent: #ff4605;
+    --color-result: #fffe00;
+
+    --color-keypad-fg: var(--color-foreground);
+}
+
+body.theme-bite #bite-btn {
+    display: block;
+    left: 8px;
+    bottom: 8px;
+}
+
+body.theme-bite #game-btn {
+    display: none;
+}
+
 html, body {
     width: 100%;
     height: 100%;
