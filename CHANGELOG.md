@@ -6,6 +6,8 @@
 ### UI enhancements
 ### Other
 - Used `::before` placeholder elements more in order to reduce amount of color CSS variables (for future theme support).
+- Defined `--color-surface-zXX` variables in terms of `z0` defaulting to a white overlay using single-color gradients,
+  which further reduces the amount of color CSS variables while allowing overrides (transitions not supported).
 - Cleared out security headers for sub-resources in `_headers` (for performance).
 
 ## 5.0.0 (2022-06-25)

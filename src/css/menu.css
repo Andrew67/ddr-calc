@@ -56,7 +56,7 @@ a {
 */
 #menu-popup {
     display: inline-block;
-    background-color: var(--color-surface-z8);
+    background: var(--color-surface-z8);
     box-shadow: var(--shadow-surface-z8);
     border-radius: 8px;
     min-width: 112px;
@@ -124,7 +124,7 @@ a {
 .dialog-container > div {
     max-height: calc(100% - 88px);
     max-width: calc(100% - 88px);
-    background-color: var(--color-surface-z24);
+    background: var(--color-surface-z24);
     box-shadow: var(--shadow-surface-z24);
     border-radius: 15px;
     padding: 8px;

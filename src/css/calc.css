@@ -15,10 +15,10 @@
 
     /* Material Design elevation; see https://material.io/design/environment/elevation.html#default-elevations */
     --color-surface-z0: white; /* Lowest level; essentially the display */
-    --color-surface-z1: white; /* Card */
-    --color-surface-z8: white; /* Menu */
-    --color-surface-z16: white; /* Modal side sheet */
-    --color-surface-z24: white; /* Dialog */
+    --color-surface-z1: var(--color-surface-z0); /* Card */
+    --color-surface-z8: var(--color-surface-z0); /* Menu */
+    --color-surface-z16: var(--color-surface-z0); /* Modal side sheet */
+    --color-surface-z24: var(--color-surface-z0); /* Dialog */
 
     --color-foreground: rgba(0,0,0,.87);
     --color-foreground-medium: rgba(0,0,0,.6);
@@ -66,10 +66,14 @@
 body.theme-dark {
     /* Dark theme overlay-based elevations; see https://material.io/design/color/dark-theme.html#properties */
     --color-surface-z0: #121212;
-    --color-surface-z1: #1d1d1d; /* 5% white overlay */
-    --color-surface-z8: #2d2d2d; /* 12% white overlay */
-    --color-surface-z16: #353535; /* 15% white overlay */
-    --color-surface-z24: #373737; /* 16% white overlay */
+    /* 5% white overlay */
+    --color-surface-z1: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.5)), var(--color-surface-z0);
+    /* 12% white overlay */
+    --color-surface-z8: linear-gradient(rgba(255,255,255,.12), rgba(255,255,255,.12)), var(--color-surface-z0);
+    /* 15% white overlay */
+    --color-surface-z16: linear-gradient(rgba(255,255,255,.15), rgba(255,255,255,.15)), var(--color-surface-z0);
+    /* 16% white overlay */
+    --color-surface-z24: linear-gradient(rgba(255,255,255,.16), rgba(255,255,255,.16)), var(--color-surface-z0);
 
     --color-foreground: rgba(255,255,255,.87);
     --color-foreground-medium: rgba(255,255,255,.6);

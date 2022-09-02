@@ -138,7 +138,7 @@
 
 .side-sheet {
     position: absolute;
-    background-color: var(--color-surface-z16);
+    background: var(--color-surface-z16);
     box-shadow: var(--shadow-surface-z16);
     top: 0;
     left: 100%;
