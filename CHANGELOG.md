@@ -1,6 +1,6 @@
 # Changelog
 
-## X.X.X (Unreleased)
+## 5.0.3 (2022-09-08)
 ### Bug fixes
 ### Features
 ### UI enhancements
