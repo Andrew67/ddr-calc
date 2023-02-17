@@ -1,19 +1,19 @@
 {
   "name": "ddr-calc",
-  "version": "5.0.3",
+  "version": "5.1.0",
   "description": "Calculator with DDR speed-modifier specific functionality; fast and offline PWA",
   "scripts": {
     "clean": "rm -rf build",
     "copy": "mkdir -p build/img && cp -R src/*.* src/.well-known src/.htaccess src/_headers build/ && cp src/img/*.png build/img/ && cp src/games.json build/games.v$npm_package_version.json",
     "merge-svg": "echo '<svg xmlns=\"http://www.w3.org/2000/svg\">' > build/img/icons.v$npm_package_version.svg && sed -e 's/<\\/svg>//' -e 's/<svg[^>]*>//' src/img/*.svg >> build/img/icons.v$npm_package_version.svg && echo '</svg>' >> build/img/icons.v$npm_package_version.svg",
-    "prebuild": "npm run clean && npm run copy && npm run merge-svg",
+    "prebuild": "yarn run clean && yarn run copy && yarn run merge-svg",
     "minify:fe": "esbuild src/js/*.js src/css/*.css --outdir=build --minify --target=es6 --sourcemap --out-extension:.js=.v$npm_package_version.js --out-extension:.css=.v$npm_package_version.css --define:window.APP_VERSION=\\\"$npm_package_version\\\" --define:window.SVG_SPRITE_SHEET=\\\"icons.v$npm_package_version\\\"",
     "minify:sw": "esbuild src/sw.js --outdir=build --minify --target=es6 --sourcemap --define:self.APP_VERSION=\\\"$npm_package_version\\\" --define:self.SVG_SPRITE_SHEET=\\\"icons.v$npm_package_version\\\"",
-    "minify": "npm run minify:fe && npm run minify:sw",
+    "minify": "yarn run minify:fe && yarn run minify:sw",
     "replace": "replace '/([a-z-]+).(js|css|json)(>|\")' /\\$1.v$npm_package_version.\\$2\\$3 build/index.html --quiet",
-    "build": "npm run minify && npm run replace",
-    "serve:src": "wrangler pages dev ./src --port 8788",
-    "serve:build": "wrangler pages dev ./build --port 8789",
+    "build": "yarn run minify && yarn run replace",
+    "serve:src": "wrangler pages dev ./src --port=8788 --compatibility-date=2023-02-17",
+    "serve:build": "wrangler pages dev ./build --port=8789 --compatibility-date=2023-02-17",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -34,10 +34,11 @@
   "devDependencies": {
     "esbuild": "0.17.8",
     "eslint": "8.34.0",
-    "eslint-plugin-compat": "4.1.1",
+    "eslint-plugin-compat": "4.1.2",
     "replace": "1.2.2",
     "stylelint": "15.1.0",
     "stylelint-no-unsupported-browser-features": "6.1.0",
     "wrangler": "2.10.0"
-  }
+  },
+  "packageManager": "yarn@3.4.1"
 }

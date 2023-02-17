@@ -6,6 +6,7 @@
 ### UI enhancements
 ### Other
 - Updated Node 16 LTS and library dependencies.
+- Migrated from `npm` to Yarn using PnP loose mode (no more `node_modules`!).
 
 ## 5.0.3 (2022-09-08)
 ### Bug fixes
