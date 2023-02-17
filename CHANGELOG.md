@@ -1,5 +1,12 @@
 # Changelog
 
+## 5.1.0 (2023-XX-XX)
+### Bug fixes
+### Features
+### UI enhancements
+### Other
+- Updated Node 16 LTS and library dependencies.
+
 ## 5.0.3 (2022-09-08)
 ### Bug fixes
 ### Features
