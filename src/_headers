@@ -22,6 +22,23 @@
   ! Content-Security-Policy
   ! Permissions-Policy
 
+# Cache headers for static assets that have versioned filenames (e.g. games.v5.1.0.json); 1 year
+/*.v:version.css
+  ! Cache-Control
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.v:version.js
+  ! Cache-Control
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.v:version.json
+  ! Cache-Control
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.v:version.svg
+  ! Cache-Control
+  Cache-Control: public, max-age=31536000, immutable
+
 # Avoid search engine indexing of deployment URLs
 https://ddrcalc.pages.dev/*
   X-Robots-Tag: noindex

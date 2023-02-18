@@ -7,6 +7,7 @@
 ### Other
 - Updated Node 16 LTS and library dependencies.
 - Migrated from `npm` to Yarn using PnP loose mode (no more `node_modules`!).
+- Finally carried over the `Cache-Control` 1-year rule for static versioned assets into `_headers`.
 
 ## 5.0.3 (2022-09-08)
 ### Bug fixes
