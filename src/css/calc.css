@@ -88,13 +88,6 @@ html, body {
     height: 100%;
 }
 
-/* Required for iOS standalone mode, otherwise full screen height is not used */
-@media (display-mode: standalone) {
-    html, body {
-        height: 100vh;
-    }
-}
-
 body {
     font-family: var(--font-stack);
     background: var(--color-surface-z0);
@@ -201,17 +194,6 @@ button::-moz-focus-inner {
 #browser-dialog p.footer {
     text-align: center;
     margin: 4px;
-}
-
-/* Status bar underlay for insets (basically for iOS standalone mode) */
-#status-bar {
-    background: rgba(0,0,0,.6);
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: var(--safe-area-inset-top);
-    z-index: 99999;
 }
 
 /* Calculator */
