@@ -2,6 +2,7 @@
 
 ## 5.1.0 (2023-XX-XX)
 ### Bug fixes
+- Fixed an issue where Android users with swipe gestures enabled could accidentally insert a "0" while swiping away.
 ### Features
 ### UI enhancements
 ### Other

@@ -455,11 +455,12 @@ function commit () {
             }
         }, { passive: true });
 
-        // In cases such as locking the phone while holding a key, touchend is never fired
+        // In cases such as locking the phone while holding a key or accidentally holding "0" while swiping up to home
         e.addEventListener('touchcancel', function () {
             e.classList.remove('active');
             if ('vibrate' in navigator) navigator.vibrate(0);
             e.blur();
+            clearTimeout(longPressTimeoutId);
         }, { passive: true });
 
         e.addEventListener('mousedown', function () {
