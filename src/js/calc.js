@@ -48,8 +48,18 @@ const asyncModules = [
     { name: 'targetbpm', hasCSS: true /* preloads via index.html */ },
     { name: 'menu', hasCSS: true, shouldPreload: true },
     { name: 'ohm', hasCSS: true, shouldPreload: true },
-    { name: 'dark', hasCSS: false }
+    { name: 'dark', hasCSS: false, shouldPreload: true },
 ];
+
+// See: https://developers.google.com/web/fundamentals/primers/service-workers/
+let lastUpdateCheck = Date.now();
+if ('serviceWorker' in navigator) {
+    asyncModules.push({ name: 'update', hasCSS: true, shouldPreload: true });
+    window.addEventListener('load', function() {
+        // noinspection JSIgnoredPromiseFromCall
+        navigator.serviceWorker.register('./sw.js');
+    });
+}
 
 /**
  * Adds the given script to the page asynchronously
@@ -72,6 +82,16 @@ function addStylesheet (stylesheetName) {
     document.head.appendChild(stylesheet);
 }
 
+/** Inserts the performance analytics snippet at the bottom of the page asynchronously */
+function addAnalytics () {
+    const script = document.createElement('script');
+    script.defer = true;
+    script.src = 'https://static.cloudflareinsights.com/beacon.min.js';
+    script.dataset.cfBeacon = '{"token": "4270981fe18b48e79bf83db29097de3a", "spa": false}';
+    document.body.appendChild(script);
+}
+asyncModules.push({ name: 'analytics', hasCSS: false });
+
 /**
  * If available, loads the next module from {@link asyncModules} into the current page.
  * Should be called at the end of each module's initialization method, unless execution order doesn't matter.
@@ -79,23 +99,16 @@ function addStylesheet (stylesheetName) {
 function loadNextModule () {
     if (asyncModules.length > 0) {
         const nextModule = asyncModules.shift();
-        if (nextModule.hasCSS) addStylesheet(nextModule.name);
-        addScript(nextModule.name);
+        if (nextModule.name === 'analytics') addAnalytics()
+        else {
+            if (nextModule.hasCSS) addStylesheet(nextModule.name);
+            addScript(nextModule.name);
+        }
     }
 }
 
-// See: https://developers.google.com/web/fundamentals/primers/service-workers/
-let lastUpdateCheck = Date.now();
-if ('serviceWorker' in navigator) {
-    asyncModules.push({ name: 'update', hasCSS: true });
-    window.addEventListener('load', function() {
-        // noinspection JSIgnoredPromiseFromCall
-        navigator.serviceWorker.register('./sw.js');
-    });
-}
-
 /**
- * Adds an asset to pre-load on the page. This lets us signal to the browser incoming dependencies before they're needed
+ * Adds an asset to preload on the page. This lets us signal to the browser incoming dependencies before they're needed
  */
 function preloadAsset (href, as, crossOrigin) {
     const link = document.createElement('link');

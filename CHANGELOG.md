@@ -11,6 +11,7 @@
 - Finally carried over the `Cache-Control` 1-year rule for static versioned assets into `_headers`.
 - Removed the `apple-mobile-web-app-status-bar-style` iOS-specific tag now that iOS 15+ uses the `theme-color` meta.
 - Added new iOS splash screens with updated instructions, but above change may have indirectly broken them.
+- Added Cloudflare Web Analytics to track performance measurements.
 
 ## 5.0.3 (2022-09-08)
 ### Bug fixes
