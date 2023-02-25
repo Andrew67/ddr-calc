@@ -1,6 +1,6 @@
 # Changelog
 
-## 5.1.0 (2023-XX-XX)
+## 5.1.0 (2023-02-25)
 ### Bug fixes
 - Fixed an issue where Android users with swipe gestures enabled could accidentally insert a "0" while swiping away.
 ### Features
@@ -10,6 +10,7 @@
 - Migrated from `npm` to Yarn using PnP loose mode (no more `node_modules`!).
 - Finally carried over the `Cache-Control` 1-year rule for static versioned assets into `_headers`.
 - Removed the `apple-mobile-web-app-status-bar-style` iOS-specific tag now that iOS 15+ uses the `theme-color` meta.
+- Added new iOS splash screens with updated instructions, but above change may have indirectly broken them.
 
 ## 5.0.3 (2022-09-08)
 ### Bug fixes
