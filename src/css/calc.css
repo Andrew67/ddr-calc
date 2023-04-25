@@ -83,6 +83,24 @@ body.theme-dark {
     --color-keypad-bg-active: rgba(200,200,200,var(--opacity-active));
 }
 
+/* Matching theme extracted from DDR Finder (Android) */
+body.theme-ddrfinder {
+    --color-keypad-bg: #D4E3FF; /* Primary Container */
+    --color-keypad-fg: #001C3A; /* On Primary Container */
+    --color-keypad-ext-bg: #FFD6FE; /* Secondary Container */
+    --color-keypad-ext-fg: #35003F; /* On Secondary Container */
+    --color-result: #6a0080; /* Material Purple 500 Dark */
+    --color-keypad-bg-active: rgba(128,128,128,var(--opacity-active));
+}
+body.theme-ddrfinder.theme-dark {
+    --color-keypad-bg: #004786; /* Primary Container */
+    --color-keypad-fg: #D4E3FF; /* On Primary Container */
+    --color-keypad-ext-bg: #7B008F; /* Secondary Container */
+    --color-keypad-ext-fg: #FFD6FE; /* On Secondary Container */
+    --color-result: #F9ABFF; /* Secondary */
+    --color-keypad-bg-active: rgba(200,200,200,var(--opacity-active));
+}
+
 html, body {
     width: 100%;
     height: 100%;

@@ -1,5 +1,14 @@
 # Changelog
 
+## 5.2.0 (2023-04-25)
+### Bug fixes
+### Features
+- Added matching theme for DDR Finder with blue/purple duotone colors,
+  unlocked when the referrer is the upcoming DDR Finder app update. Can be turned off after unlocking.
+### UI enhancements
+### Other
+- Updated Node 16 LTS.
+
 ## 5.1.0 (2023-02-25)
 ### Bug fixes
 - Fixed an issue where Android users with swipe gestures enabled could accidentally insert a "0" while swiping away.

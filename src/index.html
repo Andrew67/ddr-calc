@@ -82,6 +82,13 @@
             document.querySelector('meta[name=theme-color]').content = '#121212';
             document.querySelector('meta[name=color-scheme]').content = 'dark';
         }
+
+        // In-line DDR Finder theme check
+        if ((localStorage.getItem('ddrfinder-theme-unlocked') === 'true' ||
+            document.referrer.startsWith('android-app://com.andrew67.ddrfinder/')) &&
+            localStorage.getItem('ddrfinder-theme-enabled') !== 'false') {
+            document.body.classList.add('theme-ddrfinder');
+        }
     </script>
 
     <!-- Calculator UI -->

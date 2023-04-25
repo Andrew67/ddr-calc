@@ -26,6 +26,7 @@ self.addEventListener('install', event => {
         ["js/ohm", "js"],
         ["css/ohm", "css"],
         ["js/dark", "js"],
+        ["js/theme", "js"],
         ["js/update", "js"],
         ["css/update", "css"]
     ].map(f => f[0] + (self.APP_VERSION ? `.v${self.APP_VERSION}` : '') + `.${f[1]}`);

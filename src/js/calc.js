@@ -16,11 +16,19 @@ const isMobileSafari = 'standalone' in navigator || location.hash.includes('saf'
 const isIOS12 = location.hash.includes('saf12') || (isMobileSafari && /OS 12_/.test(navigator.userAgent));
 
 /**
+ * Detect app loaded via DDR Finder (Android), to unlock an exclusive theme
+ */
+const isDdrFinderReferral = document.referrer.startsWith('android-app://com.andrew67.ddrfinder/') ||
+    sessionStorage.getItem('ddrfinder') === 'true';
+if (isDdrFinderReferral) sessionStorage.setItem('ddrfinder', 'true');
+
+/**
  * Detect app loaded via Google Play (for compliance with Google Play developer policies).
  * The sessionStorage method is used to preserve Google Play mode across reloads,
  * which change the referrer (namely Apply Update button in About), but only within the session that triggers it.
  */
 const isGPlay = document.referrer.startsWith('android-app://com.andrew67.ddrcalc/') ||
+    isDdrFinderReferral ||
     document.referrer.includes('play.google.com') ||
     sessionStorage.getItem('gplay') === 'true' ||
     location.hash.includes('gplay');
@@ -49,6 +57,7 @@ const asyncModules = [
     { name: 'menu', hasCSS: true, shouldPreload: true },
     { name: 'ohm', hasCSS: true, shouldPreload: true },
     { name: 'dark', hasCSS: false, shouldPreload: true },
+    { name: 'theme', hasCSS: false, shouldPreload: true },
 ];
 
 // See: https://developers.google.com/web/fundamentals/primers/service-workers/
