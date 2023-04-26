@@ -1,25 +1,26 @@
 # Changelog
 
-## 5.2.0 (2023-04-25)
+## 5.2.0 (2023-04-26)
 ### Bug fixes
+- Fixed file path error that was blocking the iOS splash screens.
 ### Features
+### UI enhancements
 - Added matching theme for DDR Finder with blue/purple duotone colors,
   unlocked when the referrer is the upcoming DDR Finder app update. Can be turned off after unlocking.
-### UI enhancements
 ### Other
-- Updated Node 16 LTS.
+- Updated Node 16 LTS, Yarn, and library dependencies.
 
 ## 5.1.0 (2023-02-25)
 ### Bug fixes
 - Fixed an issue where Android users with swipe gestures enabled could accidentally insert a "0" while swiping away.
 ### Features
 ### UI enhancements
+- Added new iOS splash screens with updated instructions, but file path error broke them in this release.
 ### Other
 - Updated Node 16 LTS and library dependencies.
 - Migrated from `npm` to Yarn using PnP loose mode (no more `node_modules`!).
 - Finally carried over the `Cache-Control` 1-year rule for static versioned assets into `_headers`.
 - Removed the `apple-mobile-web-app-status-bar-style` iOS-specific tag now that iOS 15+ uses the `theme-color` meta.
-- Added new iOS splash screens with updated instructions, but above change may have indirectly broken them.
 - Added Cloudflare Web Analytics to track performance measurements.
 
 ## 5.0.3 (2022-09-08)
