@@ -30,13 +30,8 @@
             '<span id="songbpm"></span>' +
         '</span>' +
         '</div>' +
-        '<div><span id="high-result">× 2.5 = 450</span></div>' +
-        '<div><span id="low-result">× 2.25 = 425</span></div>' +
-        '<style id="suppress-targetbpm-animation">' +
-            '#display > div { transition: none !important; } ' +
-            '#keypad li > * { transition: none !important } ' +
-            '#switch-underline { transition: none !important } ' +
-        '</style>';
+        '<div><span id="high-result"></span></div>' +
+        '<div><span id="low-result"></span></div>';
 
     // localStorage keys
     const KEY_MODE = 'mode-v1', KEY_TARGETBPM = 'targetbpm';
@@ -170,15 +165,10 @@
     commit();
     loadNextModule();
 
-    // Remove mode switch animation suppression after init, and cancel the mode switcher fade-in
-    // This suppression reduces the chance that the slide happens during the initial fade-in
-    // Canceling the mode switcher fade-in eliminates it fading in during window resize after initial load
-    setTimeout(function () {
-        document.getElementById('suppress-targetbpm-animation').remove();
-        document.getElementById('mode-switcher').style.animationDuration = '0s';
-    }, 600);
-
-    // At this point, all main UI elements have loaded
-    // We can reduce the init fade-in animation time and be confident we avoided flicker effects
-    document.documentElement.style.setProperty('--duration-fade-in-delayed-init', '.25s');
+    // At this point, all main UI elements have loaded, so we can dismiss the splash screen early here
+    document.getElementById('loading-overlay').style.setProperty('--fade-out-duration', '.2s');
+    // We can also enable the sliding animation for the mode switcher after the fade-out
+    setTimeout(() =>
+        document.getElementById('app').style.setProperty('--targetbpm-slide-duration', '.2s')
+        , 300);
 })();

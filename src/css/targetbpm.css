@@ -1,6 +1,11 @@
 /*! DDR Calc | https://github.com/Andrew67/ddr-calc */
 /* Target BPM CSS */
 
+#app {
+    /* Set to .2s after feature is loaded */
+    --targetbpm-slide-duration: 0s;
+}
+
 #mode-switcher#mode-switcher {
     opacity: 1;
 }
@@ -10,8 +15,6 @@
     flex: 1;
     text-transform: uppercase;
     text-align: center;
-    animation-name: fade-in;
-    animation-duration: var(--duration-fade-in-extra);
     color: var(--color-foreground-medium);
 }
 
@@ -26,7 +29,7 @@
     position: absolute;
     bottom: 0;
     left: 0;
-    transition: transform .2s;
+    transition: transform var(--targetbpm-slide-duration);
 }
 
 .targetbpm #mode-switcher hr {
@@ -34,10 +37,10 @@
 }
 
 #surface-speedmod, .targetbpm #surface-targetbpm { /* Enter view */
-    transition: transform .2s, visibility 0s linear 0s;
+    transition: transform var(--targetbpm-slide-duration), visibility 0s linear 0s;
 }
 .targetbpm #surface-speedmod, #surface-targetbpm { /* Exit view */
-    transition: transform .2s, visibility 0s linear .2s;
+    transition: transform var(--targetbpm-slide-duration), visibility 0s linear var(--targetbpm-slide-duration);
 }
 
 .targetbpm #display > div {

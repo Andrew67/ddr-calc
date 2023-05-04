@@ -25,7 +25,6 @@ AddCharset utf-8 .css .js .json .map .svg
 Header always set Content-Security-Policy "\
 default-src 'self'; \
 script-src 'self' 'sha256-ldbjw32GDvzrPJy8UApY/maoPseqvZemgYjn0a1t67k=' https://static.cloudflareinsights.com; \
-style-src 'self' 'sha256-nMc1pJn0ceZrXu1/AseDqpkZXDXIFbK3DPdspz3f+6c='; \
 connect-src 'self' https://cloudflareinsights.com; \
 frame-ancestors 'self'; \
 "

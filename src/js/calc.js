@@ -353,7 +353,7 @@ function commit () {
     switch (state.input) {
         case INPUT.SONGBPM:
             dom.bpm.classList.add('active');
-            if (!state.speedModInt && !state.speedModDec) dom.multSign.hidden = true;
+            dom.multSign.hidden = !state.speedModInt && !state.speedModDec;
             dom.multSign.classList.remove('active');
             dom.speedMod.classList.remove('active');
             break;

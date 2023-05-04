@@ -56,6 +56,7 @@
 </head>
 <body>
 <div id="app">
+    <div id="loading-overlay"></div>
     <!-- Incompatible browser overlay -->
     <div id="browser-dialog">
         <div>
@@ -97,11 +98,11 @@
             <div id="surface-speedmod">
                 <div id="calculation">
                     <span>
-                        <span id="bpm">191</span> <span id="multsign">×</span><span id="speedmod"> 3</span>
+                        <span id="bpm"></span> <span id="multsign" hidden>×</span><span id="speedmod"></span>
                     </span>
                 </div>
                 <div>
-                    <span id="result">573</span>
+                    <span id="result"></span>
                 </div>
             </div>
             <div id="surface-targetbpm">

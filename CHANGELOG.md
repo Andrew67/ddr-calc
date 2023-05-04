@@ -1,5 +1,14 @@
 # Changelog
 
+## X.X.X (Unreleased)
+### Bug fixes
+### Features
+### UI enhancements
+- Added keypad/theme-color background loading screen that fades out after 600ms (or faster if Target BPM loads),
+  to replace previous buggy code spread out all over the place to fade in various UI elements.
+### Other
+- Simplified CSP rules by removing need for inline CSS for Target BPM slide animation control.
+
 ## 5.2.0 (2023-04-26)
 ### Bug fixes
 - Fixed file path error that was blocking the iOS splash screens.
