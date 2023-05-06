@@ -19,7 +19,7 @@
   "shortcuts": [
     {
       "name": "Speed Mod",
-      "url": "./#speed-mod",
+      "url": "./?mode=speed-mod",
       "icons": [
         { "src": "./img/icon-speedmod-192.png", "type": "image/png", "sizes": "192x192" },
         { "src": "./img/icon-speedmod-288.png", "type": "image/png", "sizes": "288x288", "purpose": "maskable" }
@@ -27,7 +27,7 @@
     },
     {
       "name": "Target BPM",
-      "url": "./#target-bpm",
+      "url": "./?mode=target-bpm",
       "icons": [
         { "src": "./img/icon-targetbpm-192.png", "type": "image/png", "sizes": "192x192" },
         { "src": "./img/icon-targetbpm-288.png", "type": "image/png", "sizes": "288x288", "purpose": "maskable" }

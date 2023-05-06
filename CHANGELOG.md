@@ -1,13 +1,19 @@
 # Changelog
 
-## X.X.X (Unreleased)
+## 6.0.0 (2023-05-06)
 ### Bug fixes
+- Launches by TWA, DDR Finder etc. will be detected reliably via addition of new query string parameters.
 ### Features
 ### UI enhancements
 - Added keypad/theme-color background loading screen that fades out after 600ms (or faster if Target BPM loads),
   to replace previous buggy code spread out all over the place to fade in various UI elements.
 ### Other
 - Simplified CSP rules by removing need for inline CSS for Target BPM slide animation control.
+- Extending `Storage.prototype` by using a `Symbol` instance instead of a regular property.
+- Deprecated `location.hash` flags, using query string parameters to detect unreliable referrers + test feature flags,
+  while using `history.replaceState` immediately to clean them off the URL for proper sharing.
+  The deprecated flags will be supported through at least 2025-05-01.
+- Service Worker cache set to ignore query string and vary headers in order to support above use-case.
 
 ## 5.2.0 (2023-04-26)
 ### Bug fixes

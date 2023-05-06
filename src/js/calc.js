@@ -12,15 +12,8 @@ const version = window.APP_VERSION || '';
 const extPrefix = version ? `.v${version}` : '';
 
 /** Detect Mobile Safari via presence of non-standard navigator.standalone field */
-const isMobileSafari = 'standalone' in navigator || location.hash.includes('saf');
-const isIOS12 = location.hash.includes('saf12') || (isMobileSafari && /OS 12_/.test(navigator.userAgent));
-
-/**
- * Detect app loaded via DDR Finder (Android), to unlock an exclusive theme
- */
-const isDdrFinderReferral = document.referrer.startsWith('android-app://com.andrew67.ddrfinder/') ||
-    sessionStorage.getItem('ddrfinder') === 'true';
-if (isDdrFinderReferral) sessionStorage.setItem('ddrfinder', 'true');
+const isMobileSafari = 'standalone' in navigator || urlParams.has('sf');
+const isIOS12 = urlParams.get('sf') === '12' || (isMobileSafari && /OS 12_/.test(navigator.userAgent));
 
 /**
  * Detect app loaded via Google Play (for compliance with Google Play developer policies).
@@ -28,20 +21,24 @@ if (isDdrFinderReferral) sessionStorage.setItem('ddrfinder', 'true');
  * which change the referrer (namely Apply Update button in About), but only within the session that triggers it.
  */
 const isGPlay = document.referrer.startsWith('android-app://com.andrew67.ddrcalc/') ||
-    isDdrFinderReferral ||
     document.referrer.includes('play.google.com') ||
     sessionStorage.getItem('gplay') === 'true' ||
+    urlParams.has('gp') ||
     location.hash.includes('gplay');
 if (isGPlay) sessionStorage.setItem('gplay', 'true');
 
+// Preserve DDR Finder referral status in session storage
+if (isDdrFinderReferral) sessionStorage.setItem('ddrfinder', 'true');
+
 /** Detect pointer events compatibility for bonus features (Chrome 55, Firefox 59, iOS 13.1) */
-const arePointerEventsSupported = 'PointerEvent' in window && !location.hash.includes('nopointer');
+const arePointerEventsSupported = 'PointerEvent' in window && !urlParams.has('np');
 
 /**
  * Works like setItem, but silently catches all exceptions (most likely QuotaExceededException)
  * Most likely to happen on Safari (iOS <= 10.3) incognito mode and users with full storage on their phones
  */
-Storage.prototype.setAllowingLoss = function (key, value) {
+const setAllowingLoss = Symbol('setAllowingLoss');
+Storage.prototype[setAllowingLoss] = function setAllowingLoss(key, value) {
     try {
         this.setItem(key, value);
     } catch (e) { }
@@ -324,15 +321,15 @@ computedState.hooks.push((function () {
         debounceTimer = setTimeout(function saveAfterDelay () {
             if (state.songBpm !== previousSongBpm) {
                 previousSongBpm = state.songBpm;
-                localStorage.setAllowingLoss(LS_KEY.SONGBPM, previousSongBpm);
+                localStorage[setAllowingLoss](LS_KEY.SONGBPM, previousSongBpm);
             }
             if (state.speedModInt !== previousSpeedModInt) {
                 previousSpeedModInt = state.speedModInt;
-                localStorage.setAllowingLoss(LS_KEY.SPEEDMOD_INT, previousSpeedModInt);
+                localStorage[setAllowingLoss](LS_KEY.SPEEDMOD_INT, previousSpeedModInt);
             }
             if (state.speedModDec !== previousSpeedModDec) {
                 previousSpeedModDec = state.speedModDec;
-                localStorage.setAllowingLoss(LS_KEY.SPEEDMOD_DEC, previousSpeedModDec);
+                localStorage[setAllowingLoss](LS_KEY.SPEEDMOD_DEC, previousSpeedModDec);
             }
         }, SAVE_DEBOUNCE_MS);
     }
@@ -534,7 +531,7 @@ function commit () {
         if (evt.ctrlKey) evtKey = `Control+${evtKey}`;
         if (evt.altKey) evtKey = `Alt+${evtKey}`;
 
-        // Shift is a special case; normally we want to ignore it and have case insensitive shortcuts, or in the number
+        // Shift is a special case; normally we want to ignore it and have case-insensitive shortcuts, or in the number
         // case use the symbols that get produced. However, cases such as Shift+2 on a numeric keypad were missed
         const evtKeyShifted = `Shift+${evtKey}`;
         if (evt.shiftKey && keyShortcuts.hasOwnProperty(evtKeyShifted)) evtKey = evtKeyShifted;

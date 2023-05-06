@@ -9,12 +9,7 @@ try {
     // Therefore, behavior will be as follows:
     // - If prefers-color-scheme is unsupported or reports light, show and use the manual toggle
     // - If prefers-color-scheme is supported and reports dark, auto-toggle and "force" dark mode
-    // Any changes to this behavior need to be mirrored in the synchronous flicker-free block in index.html
-
-    const KEY_DARKMODE = 'dark-mode';
-    const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    const isDarkModePreferred = () => localStorage.getItem(KEY_DARKMODE) === 'true' || darkModeMediaQuery.matches;
-
+    // Any changes to this behavior need to be applied in the synchronous flicker-free block in index.html
     state.darkModeEnabled = isDarkModePreferred();
     dom.themeColor = document.querySelector('meta[name=theme-color]');
     dom.colorScheme = document.querySelector('meta[name=color-scheme]');
@@ -22,7 +17,7 @@ try {
     // Manual toggle
     addMenuItem(5, 'Dark Theme On/Off', function toggleDarkModeState () {
         state.darkModeEnabled = !state.darkModeEnabled;
-        localStorage.setAllowingLoss(KEY_DARKMODE, state.darkModeEnabled);
+        localStorage[setAllowingLoss](KEY_DARKMODE, state.darkModeEnabled);
         commit();
     }, {
         title: () => state.darkModeEnabled ? 'Light Theme' : 'Dark Theme',

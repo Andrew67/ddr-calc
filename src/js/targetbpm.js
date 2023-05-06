@@ -50,9 +50,9 @@
     dom.highResult = document.getElementById('high-result');
     dom.lowResult = document.getElementById('low-result');
 
-    // Enable hash-based shortcuts to override the mode selection
-    if (location.hash.includes('target-bpm')) state.mode = MODE.TARGETBPM;
-    else if (location.hash.includes('speed-mod')) state.mode = MODE.SPEEDMOD;
+    // Enable query-based shortcuts to override the mode selection
+    if (urlParams.get('mode') === 'target-bpm' || location.hash.includes('target-bpm')) state.mode = MODE.TARGETBPM;
+    else if (urlParams.get('mode') === 'speed-mod' || location.hash.includes('speed-mod')) state.mode = MODE.SPEEDMOD;
 
     // Click events to switch BPM input focus
     const focusSongBpm = function () {
@@ -126,7 +126,8 @@
             previousMode = state.mode;
             dom.modeSwitcher.elements['mode'].value = state.mode;
             dom.app.classList.toggle('targetbpm', state.mode === MODE.TARGETBPM);
-            if (!location.hash.includes('target-bpm')) localStorage.setAllowingLoss(KEY_MODE, state.mode);
+            if (!(urlParams.get('mode') === 'target-bpm' || location.hash.includes('target-bpm')))
+                localStorage[setAllowingLoss](KEY_MODE, state.mode);
 
             // Switching to target BPM? Set active input to song BPM
             // Otherwise, set to speedmod if song bpm is full and switching to that mode
@@ -157,7 +158,7 @@
         if (state.targetBpm.length !== previousTargetBpmLength) {
             previousTargetBpmLength = state.targetBpm.length;
             if (state.targetBpm.length === 3) {
-                localStorage.setAllowingLoss(KEY_TARGETBPM, state.targetBpm);
+                localStorage[setAllowingLoss](KEY_TARGETBPM, state.targetBpm);
             }
         }
     });

@@ -13,7 +13,7 @@ try {
 
     addMenuItem(3, 'One-Handed Mode On/Off', function toggleOneHandedMode () {
         state.forceOhm = !state.forceOhm;
-        localStorage.setAllowingLoss(KEY_OHM, state.forceOhm);
+        localStorage[setAllowingLoss](KEY_OHM, state.forceOhm);
         commit();
     }, {
         title: () => state.forceOhm ? 'Close One-Handed Mode' : 'One-Handed Mode',
@@ -22,7 +22,7 @@ try {
 
     addMenuItem(4, 'Left-Handed On/Off', function toggleLeftHandedMode () {
         state.ohmLeftHanded = !state.ohmLeftHanded;
-        localStorage.setAllowingLoss(KEY_OHM_LEFTHANDED, state.ohmLeftHanded);
+        localStorage[setAllowingLoss](KEY_OHM_LEFTHANDED, state.ohmLeftHanded);
         commit();
     }, {
         title: () => state.ohmLeftHanded ? 'Right-Handed Mode' : 'Left-Handed Mode',

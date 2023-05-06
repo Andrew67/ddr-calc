@@ -219,8 +219,8 @@ fetch(`games${extPrefix}.json`)
             state.gameId = Number(dom.gameSettingsForm.elements['gameid'].value);
             computedState.update();
 
-            localStorage.setAllowingLoss(KEY_GAMEID, state.gameId);
-            localStorage.setAllowingLoss(KEY_PREMIUMPLAY, state.premiumPlayEnabled);
+            localStorage[setAllowingLoss](KEY_GAMEID, state.gameId);
+            localStorage[setAllowingLoss](KEY_PREMIUMPLAY, state.premiumPlayEnabled);
         }
 
         // Commit state change upon actual change (avoids running a postCommit hook on every browser navigation)

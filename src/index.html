@@ -74,20 +74,45 @@
         </div>
     </div>
     <script>
-        // In-line browser compatibility check, so that the incompatibility dialog is dismissed ASAP
+        // In-line checks, for a flicker-free experience on page load
+        // Obtain URL query params and remove them (see URLs.md)
+        const urlParams = new URLSearchParams(location.search);
+        history.replaceState(history.state, '', location.pathname);
+
+        // Browser compatibility check, to dismiss the incompatibility dialog
         if ('fetch' in window && 'forEach' in NodeList.prototype) document.getElementById('browser-dialog').remove();
 
-        // In-line dark mode check, so that dark mode is applied flicker-free
-        if (localStorage.getItem('dark-mode') === 'true' || window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        // Dark mode check
+        /** This key is set to "true" when the user has requested dark mode */
+        const KEY_DARKMODE = 'dark-mode';
+        const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+        const isDarkModePreferred = () => localStorage.getItem(KEY_DARKMODE) === 'true' || darkModeMediaQuery.matches;
+        if (isDarkModePreferred()) {
             document.body.classList.add('theme-dark');
             document.querySelector('meta[name=theme-color]').content = '#121212';
             document.querySelector('meta[name=color-scheme]').content = 'dark';
         }
 
-        // In-line DDR Finder theme check
-        if ((localStorage.getItem('ddrfinder-theme-unlocked') === 'true' ||
-            document.referrer.startsWith('android-app://com.andrew67.ddrfinder/')) &&
-            localStorage.getItem('ddrfinder-theme-enabled') !== 'false') {
+        /**
+         * Detect app loaded via DDR Finder (Android), to unlock an exclusive theme
+         */
+        const isDdrFinderReferral = urlParams.has('df') ||
+            document.referrer.startsWith('android-app://com.andrew67.ddrfinder/') ||
+            sessionStorage.getItem('ddrfinder') === 'true';
+        /**
+         * This key is set to "true" once the user has opened DDR Calc through DDR Finder at least once.
+         * DDR Calc will switch to the DDR Finder theme at that moment, even on subsequent launches.
+         */
+        const KEY_DDRFINDER_THEME_UNLOCKED = 'ddrfinder-theme-unlocked';
+        /**
+         * This key provides the user with the ability to opt out of the DDR Finder theme after it's unlocked.
+         */
+        const KEY_DDRFINDER_THEME_ENABLED = 'ddrfinder-theme-enabled';
+        const isDdrFinderThemeUnlocked = isDdrFinderReferral ||
+            localStorage.getItem(KEY_DDRFINDER_THEME_UNLOCKED) === 'true';
+        const isDdrFinderThemeEnabled = () => isDdrFinderThemeUnlocked &&
+            localStorage.getItem(KEY_DDRFINDER_THEME_ENABLED) !== 'false';
+        if (isDdrFinderThemeEnabled()) {
             document.body.classList.add('theme-ddrfinder');
         }
     </script>
