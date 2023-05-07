@@ -1,6 +1,6 @@
 {
   "name": "ddr-calc",
-  "version": "6.0.0",
+  "version": "6.0.1",
   "description": "Calculator with DDR speed-modifier specific functionality; fast and offline PWA",
   "scripts": {
     "clean": "rm -rf build",
@@ -12,8 +12,8 @@
     "minify": "yarn run minify:fe && yarn run minify:sw",
     "replace": "replace '/([a-z-]+).(js|css|json)(>|\")' /\\$1.v$npm_package_version.\\$2\\$3 build/index.html --quiet",
     "build": "yarn run minify && yarn run replace",
-    "serve:src": "wrangler pages dev ./src --port=8788 --compatibility-date=2023-02-17",
-    "serve:build": "wrangler pages dev ./build --port=8789 --compatibility-date=2023-02-17",
+    "serve:src": "wrangler pages dev ./src --port=3000 --compatibility-date=2023-02-17",
+    "serve:build": "wrangler pages dev ./build --port=3000 --compatibility-date=2023-02-17",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -33,15 +33,16 @@
   "homepage": "https://github.com/Andrew67/ddr-calc#readme",
   "devDependencies": {
     "esbuild": "0.17.18",
-    "eslint": "8.39.0",
+    "eslint": "8.40.0",
     "eslint-plugin-compat": "4.1.4",
+    "js-yaml": "*",
     "replace": "1.2.2",
-    "stylelint": "15.6.0",
+    "stylelint": "15.6.1",
     "stylelint-no-unsupported-browser-features": "6.1.0",
-    "wrangler": "2.17.0"
+    "wrangler": "2.19.0"
   },
   "resolutions": {
     "js-yaml": "4.1.0"
   },
-  "packageManager": "yarn@3.5.0"
+  "packageManager": "yarn@3.5.1"
 }

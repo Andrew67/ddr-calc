@@ -24,7 +24,7 @@ const isGPlay = document.referrer.startsWith('android-app://com.andrew67.ddrcalc
     document.referrer.includes('play.google.com') ||
     sessionStorage.getItem('gplay') === 'true' ||
     urlParams.has('gp') ||
-    location.hash.includes('gplay');
+    urlHash.includes('gplay');
 if (isGPlay) sessionStorage.setItem('gplay', 'true');
 
 // Preserve DDR Finder referral status in session storage

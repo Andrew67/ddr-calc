@@ -1,5 +1,14 @@
 # Changelog
 
+## 6.0.1 (2023-05-07)
+### Bug fixes
+- Fixed bug in preservation of deprecated `location.hash`-based flags due to changes in version 6.0.0.
+### Features
+### UI enhancements
+### Other
+- Various dependency upgrades.
+- Changed `yarn serve` port to the ever-popular 3000.
+
 ## 6.0.0 (2023-05-06)
 ### Bug fixes
 - Launches by TWA, DDR Finder etc. will be detected reliably via addition of new query string parameters.

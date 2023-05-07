@@ -51,8 +51,8 @@
     dom.lowResult = document.getElementById('low-result');
 
     // Enable query-based shortcuts to override the mode selection
-    if (urlParams.get('mode') === 'target-bpm' || location.hash.includes('target-bpm')) state.mode = MODE.TARGETBPM;
-    else if (urlParams.get('mode') === 'speed-mod' || location.hash.includes('speed-mod')) state.mode = MODE.SPEEDMOD;
+    if (urlParams.get('mode') === 'target-bpm' || urlHash.includes('target-bpm')) state.mode = MODE.TARGETBPM;
+    else if (urlParams.get('mode') === 'speed-mod' || urlHash.includes('speed-mod')) state.mode = MODE.SPEEDMOD;
 
     // Click events to switch BPM input focus
     const focusSongBpm = function () {
@@ -126,7 +126,7 @@
             previousMode = state.mode;
             dom.modeSwitcher.elements['mode'].value = state.mode;
             dom.app.classList.toggle('targetbpm', state.mode === MODE.TARGETBPM);
-            if (!(urlParams.get('mode') === 'target-bpm' || location.hash.includes('target-bpm')))
+            if (!(urlParams.get('mode') === 'target-bpm' || urlHash.includes('target-bpm')))
                 localStorage[setAllowingLoss](KEY_MODE, state.mode);
 
             // Switching to target BPM? Set active input to song BPM
