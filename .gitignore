@@ -22,6 +22,9 @@ node_modules/
 .idea/**/deployment.xml
 .idea/**/sshConfigs.xml
 
+# Not a PHP project
+.idea/php.xml
+
 # File-based project format
 *.iws
 
