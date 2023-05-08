@@ -17,4 +17,5 @@ It's a fast, offline-friendly, optimized-for-slow-connections calculator for all
 Run simple calculations in Speed Mod mode or switch to Target BPM mode once you know your reading speed.
 All without hitting irrelevant keys or having to constantly use the delete key like in your default calculator app!
 
-This is a Progressive Web App which requires Chrome (if you do not wish to use Chrome, visit https://ddrcalc.andrew67.com/#gplay in your browser).
+This is a Progressive Web App which requires Chrome
+(if you do not wish to use Chrome, visit https://ddrcalc.andrew67.com/?gp=1 in your browser).

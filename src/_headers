@@ -9,6 +9,10 @@
   X-Content-Type-Options: nosniff
   ! Access-Control-Allow-Origin
 
+/privacy-policy
+  ! Content-Security-Policy
+  Content-Security-Policy: default-src 'self'; script-src 'sha256-UWjuy5vTq9RMcmJMzbiDHeSEbZZJVe/IhS5lMRRPxp4='; style-src 'sha256-Uv4rvPImZP99cM7sNo2YS9/Tt4nt8DYajeqJiZYDNqE='; frame-ancestors 'self';
+
 # Remove unnecessary security headers from sub-resources (trims response size)
 /*.css
   ! Content-Security-Policy

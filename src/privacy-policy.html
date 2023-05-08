@@ -5,18 +5,71 @@
     <meta name='viewport' content='width=device-width'>
     <meta name="theme-color" content="#263238">
     <title>Privacy Policy</title>
-    <link rel="stylesheet" href="css/privacy-policy.css">
     <link rel="icon" sizes="48x48" href="favicon.png">
+    <style>
+        body {
+            font-family: "Roboto", system-ui, sans-serif;
+            padding: 1em;
+            background-color: white;
+            color: rgba(0,0,0,.87);
+        }
+        #toolbar {
+            width: 100%;
+            height: 48px;
+            background-color: #263238;
+            color: white;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: none;
+        }
+        body.show-toolbar {
+            padding-top: calc(1em + 56px);
+        }
+        .show-toolbar #toolbar {
+            display: block;
+        }
+        #back-button {
+            cursor: pointer;
+            background: transparent;
+            font: inherit;
+            color: currentColor;
+            border: 0;
+            padding: 0;
+            width: 48px;
+            height: 48px;
+        }
+        body.dark {
+            background-color: black;
+            color: rgba(255,255,255,.87);
+        }
+        body.dark a {
+            color: #90caf9;
+        }
+    </style>
 </head>
 <body>
 
 <!-- Tool to provide pseudo-browser UI for TWA -->
 <div id="toolbar">
-    <svg id="i-arrow-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-        <path d="M10 6 L2 16 10 26 M2 16 L30 16"></path>
-    </svg>
+    <button type="button" id="back-button" aria-label="Back">
+        <svg aria-hidden="true" height="24" viewBox="0 96 960 960" width="24" fill="currentcolor">
+            <path d="M480 896 160 576l320-320 42 42-248 248h526v60H274l248 248-42 42Z"/>
+        </svg>
+    </button>
+
 </div>
-<script src="js/privacy-policy.js"></script>
+<script>
+    if (history.length > 1 && !('standalone' in navigator)) {
+        document.body.classList.add('show-toolbar');
+        document.getElementById('back-button').addEventListener('click', function () {
+            history.back();
+        });
+    }
+    if (localStorage.getItem('dark-mode') === 'true' || window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+</script>
 
 <h2>Privacy Policy</h2>
 <p> Andrew67 Software built the DDR Calc app as an Open Source app. This SERVICE is provided by Andrew67 Software at

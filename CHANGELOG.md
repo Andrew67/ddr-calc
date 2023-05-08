@@ -1,5 +1,13 @@
 # Changelog
 
+## 6.0.1b (2023-05-08)
+### Bug fixes
+- Fixed visual bugs in Privacy Policy page.
+  Does not require version number / service worker / cached assets bump.
+### Features
+### UI enhancements
+### Other
+
 ## 6.0.1 (2023-05-07)
 ### Bug fixes
 - Fixed bug in preservation of deprecated `location.hash`-based flags due to changes in version 6.0.0.
