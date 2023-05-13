@@ -1,5 +1,12 @@
 # Changelog
 
+## X.X.X (Unreleased)
+### Bug fixes
+### Features
+### UI enhancements
+### Other
+- Added generic `robots.txt` to keep that path from 404ing with `index.html` all the time.
+
 ## 6.0.1b (2023-05-08)
 ### Bug fixes
 - Fixed visual bugs in Privacy Policy page.
