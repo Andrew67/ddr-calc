@@ -39,7 +39,7 @@
     "replace": "1.2.2",
     "stylelint": "15.6.1",
     "stylelint-no-unsupported-browser-features": "6.1.0",
-    "wrangler": "2.19.0"
+    "wrangler": "3.1.1"
   },
   "resolutions": {
     "js-yaml": "4.1.0"
