@@ -4,9 +4,6 @@ not ie 11
 not ie_mob 11
 not op_mini all         # interactive app
 
-# these entries appear to be stagnant (and also lack String.padStart support)
-not baidu 7.12          # Baidu as of July 2020 is 4.18 (yep, lower number) which uses platform WebView
-
-chrome 81               # last release supporting Android 4.4 (2013), 82+ requires Android 5 (2014)
-firefox 68              # last release supporting Android 4.4 (2013), 79+ (Fenix) requires Android 5 (2014)
-ios_saf 12.2            # last version available for iPhone 5s/6 (2013/2014), iPhone 5 ended with iOS 10.3
+chrome 106              # last release supporting Android 6 (2015)
+firefox 102             # supports Android 5+
+ios_saf 15.6            # last version available for iPhone 6s/7 (2015)

@@ -178,6 +178,64 @@
         dom.about.classList.toggle('show', state.aboutOpen);
     });
 
+    // Load HTML for the share screen
+    container.innerHTML = `<div id="share" class="full-screen-overlay dialog-container scrim">
+        <div>
+            <h2>Scan QR code</h2>
+            <div role="img" aria-label="Scannable QR code" id="share-img">
+                <svg width="256" height="256" aria-hidden="true">
+                    <use xlink:href="${getSvgUrl('qr')}#qr"/>
+                </svg>
+            </div>
+            <p id="share-url">${window.location.href}</p>
+            <div id="share-actions">
+                <button type="button" id="share-link">Share link</button>
+                <button type="button" id="copy-link">Copy link</button>
+            </div>
+        </div>
+    </div>`;
+    dom.app.appendChild(container.firstChild);
+    document.getElementById('share-link').addEventListener('click', (e) => {
+        const button = e.currentTarget;
+        navigator
+            .share({ title: document.title, url: window.location.href })
+            .catch(() => button.textContent = 'Error');
+    });
+    document.getElementById('copy-link').addEventListener('click', (e) => {
+        const button = e.currentTarget;
+        navigator.clipboard
+            .writeText(window.location.href)
+            .then(() => button.textContent = 'Copied')
+            .catch(() => button.textContent = 'Error');
+    });
+
+    // Set up Share screen
+    dom.share = document.getElementById('share');
+    state.shareOpen = Boolean(history.state && history.state.shareOpen);
+
+    addMenuItem(90, 'Share App', function openShare () {
+        state.shareOpen = true;
+        commit();
+        history.replaceState({ shareOpen: true }, "", "");
+    });
+    dom.share.addEventListener('click', function (e) {
+        if (e.target === this) history.back();
+    });
+    dom.share.addEventListener('keyup', function (e) {
+        if (state.aboutOpen && e.key === 'Escape') history.back();
+    });
+    window.addEventListener('popstate', function handleShareStateChange (event) {
+        const newShareOpen = Boolean(event.state && event.state.shareOpen);
+        if (state.shareOpen !== newShareOpen) {
+            state.shareOpen = newShareOpen;
+            commit();
+        }
+    });
+
+    postCommitHooks.push( function showHideShare () {
+        dom.share.classList.toggle('show', state.shareOpen);
+    });
+
     // Set up "Force Reload" shortcut for iOS 12 home-screen app users
     // iOS 12.2-12.4 introduced behavior where the page state is always frozen, which also causes updates to get stuck
     // Resolved in iOS 13

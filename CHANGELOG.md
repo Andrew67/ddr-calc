@@ -1,11 +1,13 @@
 # Changelog
 
-## X.X.X (Unreleased)
+## 7.0.0 (Unreleased)
 ### Bug fixes
 ### Features
+- Added "Share App" section with QR code, link sharing and link copying options.
 ### UI enhancements
 ### Other
 - Added generic `robots.txt` to keep that path from 404ing with `index.html` all the time.
+- Bumped iOS minimum version to 15.6 and Android browsers to OS 6+ browsers.
 
 ## 6.0.1b (2023-05-08)
 ### Bug fixes
