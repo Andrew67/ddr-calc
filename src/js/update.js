@@ -20,14 +20,12 @@ try {
     // Don't do auto-refresh without user interaction
     // This lets us have the first service worker that loads claim control of the app when it loads without refreshing
     let shouldRefresh = false;
-    // eslint-disable-next-line compat/compat
     navigator.serviceWorker.addEventListener('controllerchange', function () {
         if (refreshing || !shouldRefresh) return;
         refreshing = true;
         window.location.reload();
     });
 
-    // eslint-disable-next-line compat/compat
     navigator.serviceWorker.getRegistration().then(function (reg) {
         const callback = function () {
             computedState.updateAvailable = true;
@@ -54,14 +52,12 @@ try {
         dom.updateBox.hidden = !computedState.updateAvailable;
     });
 
-    // Check for Service Worker update when opening the About screen if 24 hours have elapsed since the previous check
-    // Useful for long-lived instances (such as in iOS 12 where state is persisted and the page is never reloaded)
-    const ONE_DAY_MS = 24 * 60 * 60 * 1000;
+    // Check for Service Worker update when opening the About screen if 4 hours have elapsed since the previous check
+    const UPDATE_CHECK_INTERVAL_MS = 4 * 60 * 60 * 1000;
     postCommitHooks.push(function checkForUpdates () {
         const now = Date.now();
-        if (state.aboutOpen && now - lastUpdateCheck >= ONE_DAY_MS) {
+        if (state.aboutOpen && now - lastUpdateCheck >= UPDATE_CHECK_INTERVAL_MS) {
             lastUpdateCheck = now;
-            // eslint-disable-next-line compat/compat
             navigator.serviceWorker.getRegistration().then(reg => reg.update());
         }
     });

@@ -130,7 +130,7 @@
             '<h1>DDR Calc <span id="app-version">Version ' + (version || '9999') +
                 (isDdrFinderReferral ? 'n' : '') + (isGPlay ? 'g' : '') +
                 (arePointerEventsSupported ? '' : 'p') +
-                (isMobileSafari ? 's' : '') + (isIOS12 ? 't' : '') +
+                (isMobileSafari ? 's' : '') +
                 cfStagingEnvId +
             '</span></h1>' +
             '<h2>&copy; 2018&ndash;2023 Andrés Cordero</h2>' +
@@ -235,16 +235,6 @@
     postCommitHooks.push( function showHideShare () {
         dom.share.classList.toggle('show', state.shareOpen);
     });
-
-    // Set up "Force Reload" shortcut for iOS 12 home-screen app users
-    // iOS 12.2-12.4 introduced behavior where the page state is always frozen, which also causes updates to get stuck
-    // Resolved in iOS 13
-    if (isIOS12) {
-        addMenuItem(99, 'Force Reload', function () {
-            history.replaceState({}, '', '');
-            location.reload();
-        });
-    }
 
     commit();
     loadNextModule();

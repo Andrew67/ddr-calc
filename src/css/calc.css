@@ -39,9 +39,7 @@
     --shadow-surface-z16: 0 8px 10px -5px rgba(0,0,0,.2),0 16px 24px 2px rgba(0,0,0,.14),0 6px 30px 5px rgba(0,0,0,.12);
     --shadow-surface-z24: 0 11px 15px -7px rgba(0,0,0,.2),0 24px 38px 3px rgba(0,0,0,.14),0 9px 46px 8px rgba(0,0,0,.12);
 
-    /* Safe area insets (iPhoneX notch); set as variables for easier debugging.
-       Start at 0px so that browsers that don't support env() such as iOS 10.3 and Firefox 48 don't choke and invalidate
-       entire declarations that involve calc() */
+    /* Safe area insets (iPhoneX notch); set as variables for easier debugging */
     --safe-area-inset-top: 0px;
     --safe-area-inset-right: 0px;
     --safe-area-inset-bottom: 0px;
@@ -377,10 +375,7 @@ button::-moz-focus-inner {
 #keypad button::before {
     content: '';
     position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
+    inset: 0;
     opacity: 0;
     transition: opacity .1s;
     background: var(--color-keypad-bg-active);

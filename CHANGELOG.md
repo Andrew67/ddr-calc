@@ -8,6 +8,8 @@
 ### Other
 - Added generic `robots.txt` to keep that path from 404ing with `index.html` all the time.
 - Bumped iOS minimum version to 15.6 and Android browsers to OS 6+ browsers.
+- Removed iOS 12-specific workarounds.
+- Changed update check interval to 4 hours.
 
 ## 6.0.1b (2023-05-08)
 ### Bug fixes

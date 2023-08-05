@@ -11,9 +11,8 @@ const version = window.APP_VERSION || '';
 /** Extension prefix for versioned assets when built, otherwise empty (e.g. ".v.4.0.0.js" built, ".js" during dev */
 const extPrefix = version ? `.v${version}` : '';
 
-/** Detect Mobile Safari via presence of non-standard navigator.standalone field */
+/** Detect Mobile Safari via presence of non-standard `navigator.standalone` field */
 const isMobileSafari = 'standalone' in navigator || urlParams.has('sf');
-const isIOS12 = urlParams.get('sf') === '12' || (isMobileSafari && /OS 12_/.test(navigator.userAgent));
 
 /**
  * Detect app loaded via Google Play (for compliance with Google Play developer policies).

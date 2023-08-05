@@ -44,10 +44,7 @@
 #game-btn::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: -8px;
-    bottom: 0;
-    right: -8px;
+    inset: 0 -8px;
     background-color: var(--color-foreground);
     border-radius: 8px;
     z-index: -1;
@@ -223,10 +220,7 @@ input[type=radio]:checked + span.svg-icon, input[type=checkbox]:checked + span.s
 input[type=radio] + span::before, input[type=checkbox] + span::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    inset: 0;
     opacity: 0;
     transition: opacity .1s;
 }
