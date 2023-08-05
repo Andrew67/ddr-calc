@@ -129,7 +129,6 @@
             '<img src="img/logo-192.png" width="64" height="64" alt="" loading="lazy">' +
             '<h1>DDR Calc <span id="app-version">Version ' + (version || '9999') +
                 (isDdrFinderReferral ? 'n' : '') + (isGPlay ? 'g' : '') +
-                (arePointerEventsSupported ? '' : 'p') +
                 (isMobileSafari ? 's' : '') +
                 cfStagingEnvId +
             '</span></h1>' +
