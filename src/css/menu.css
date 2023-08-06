@@ -162,8 +162,8 @@ a {
     text-align: center;
 }
 
-#share h2 {
-    margin-top: 1rem;
+#share > div {
+    padding: 1.5rem;
 }
 
 #share-img > svg {
@@ -172,13 +172,14 @@ a {
 }
 
 #share-url {
+    -webkit-user-select: auto;
     user-select: all;
 }
 
 #share-actions {
     display: flex;
     justify-content: space-between;
-    margin: 1rem;
+    margin-top: 1rem;
 }
 
 #share-actions > button {

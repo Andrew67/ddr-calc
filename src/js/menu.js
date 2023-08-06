@@ -196,9 +196,13 @@
     dom.app.appendChild(container.firstChild);
     document.getElementById('share-link').addEventListener('click', (e) => {
         const button = e.currentTarget;
-        navigator
-            .share({ title: document.title, url: window.location.href })
-            .catch(() => button.textContent = 'Error');
+        if ('share' in navigator) {
+            navigator
+                .share({title: document.title, url: window.location.href})
+                .catch(() => true);
+        } else {
+            button.textContent = 'Error';
+        }
     });
     document.getElementById('copy-link').addEventListener('click', (e) => {
         const button = e.currentTarget;
