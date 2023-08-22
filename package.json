@@ -4,7 +4,7 @@
   "description": "Calculator with DDR speed-modifier specific functionality; fast and offline PWA",
   "scripts": {
     "clean": "rm -rf build",
-    "copy": "mkdir -p build/img && cp -R src/*.* src/.well-known src/.htaccess src/_headers src/robots.txt build/ && cp src/img/*.png build/img/ && cp src/games.json build/games.v$npm_package_version.json",
+    "copy": "mkdir -p build/img && cp -R src/*.* src/.well-known src/.htaccess src/_headers build/ && cp src/img/*.png build/img/ && cp src/games.json build/games.v$npm_package_version.json",
     "merge-svg": "echo '<svg xmlns=\"http://www.w3.org/2000/svg\">' > build/img/icons.v$npm_package_version.svg && sed -e 's/<\\/svg>//' -e 's/<svg[^>]*>//' src/img/*.svg >> build/img/icons.v$npm_package_version.svg && echo '</svg>' >> build/img/icons.v$npm_package_version.svg",
     "prebuild": "yarn run clean && yarn run copy && yarn run merge-svg",
     "minify:fe": "esbuild src/js/*.js src/css/*.css --outdir=build --minify --target=es6 --sourcemap --out-extension:.js=.v$npm_package_version.js --out-extension:.css=.v$npm_package_version.css --define:window.APP_VERSION=\\\"$npm_package_version\\\" --define:window.SVG_SPRITE_SHEET=\\\"icons.v$npm_package_version\\\"",

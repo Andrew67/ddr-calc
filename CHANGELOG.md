@@ -10,6 +10,7 @@
 - Bumped iOS minimum version to 15.6 and Android browsers to OS 6+ browsers (Chrome 106, Firefox 102).
 - Removed iOS 12-specific workarounds.
 - Changed update check interval to 4 hours.
+- Android: updated build from PWABuilder to include Target SDK Android 13.
 
 ## 6.0.1b (2023-05-08)
 ### Bug fixes
