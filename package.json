@@ -38,7 +38,7 @@
     "replace": "1.2.2",
     "stylelint": "15.10.2",
     "stylelint-no-unsupported-browser-features": "7.0.0",
-    "wrangler": "3.4.0"
+    "wrangler": "3.19.0"
   },
   "packageManager": "yarn@3.6.1"
 }
