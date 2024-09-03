@@ -132,7 +132,7 @@
                 (isMobileSafari ? 's' : '') +
                 cfStagingEnvId +
             '</span></h1>' +
-            '<h2>&copy; 2018&ndash;2023 Andrés Cordero</h2>' +
+            '<h2>&copy; 2018&ndash;2024 Andrés Cordero</h2>' +
         '</div>' +
         '<ul>' +
             '<li><a href="https://github.com/Andrew67/ddr-calc" target="_blank" rel="noopener">Project Site / Usage Guide</a>' +
