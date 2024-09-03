@@ -42,3 +42,6 @@ node_modules/
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+
+# Wrangler
+.wrangler/tmp

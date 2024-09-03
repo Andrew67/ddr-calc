@@ -1,6 +1,6 @@
 {
   "name": "ddr-calc",
-  "version": "7.0.0",
+  "version": "7.0.1",
   "description": "Calculator with DDR speed-modifier specific functionality; fast and offline PWA",
   "scripts": {
     "clean": "rm -rf build",
@@ -38,7 +38,7 @@
     "replace": "1.2.2",
     "stylelint": "15.10.2",
     "stylelint-no-unsupported-browser-features": "7.0.0",
-    "wrangler": "3.4.0"
+    "wrangler": "3.73.0"
   },
-  "packageManager": "yarn@3.6.1"
+  "packageManager": "yarn@4.4.1"
 }

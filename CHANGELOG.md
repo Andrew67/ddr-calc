@@ -7,6 +7,7 @@
 ### Features
 ### UI enhancements
 ### Other
+- Upgraded to Node 22 LTS, Yarn 4.4, and Wrangler 3.73 for security.
 
 ## 7.0.0 (2023-08-09)
 ### Bug fixes
