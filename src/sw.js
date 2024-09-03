@@ -78,9 +78,15 @@ self.addEventListener('activate', event => {
 
 // Strategy: Cache, falling back to network
 self.addEventListener('fetch', event => {
+    // Ignore query string parameters when opening a page, both for intentional cases
+    // (legacy ?gp=2 for Google Play links) and unintentional (?fbclid= from Facebook),
+    // otherwise full offline mode doesn't work and it makes an unnecessary request
     event.respondWith(
         caches.open(swCacheName)
-            .then(cache => cache.match(event.request))
+            .then(cache => cache.match(event.request,
+                event.request.destination === 'document' ?
+                    { ignoreSearch: true, ignoreVary: true } :
+            {}))
             .then(response => response || fetch(event.request))
     );
 });

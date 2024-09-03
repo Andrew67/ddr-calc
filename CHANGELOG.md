@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.0.1 (2024-09-03)
+### Bug fixes
+- Fixed bug where calculator page wouldn't load offline if it had URL query string parameters attached.
+  Whether intentional (e.g. `?gp=2`) or otherwise (e.g. `?fbclid=`).
+### Features
+### UI enhancements
+### Other
+
 ## 7.0.0 (2023-08-09)
 ### Bug fixes
 ### Features
