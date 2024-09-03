@@ -40,5 +40,11 @@
     "stylelint-no-unsupported-browser-features": "7.0.0",
     "wrangler": "3.73.0"
   },
+  "resolutions": {
+    "braces": "^3.0.3",
+    "micromatch": "^4.0.8",
+    "postcss": "^8.4.31",
+    "tar": "^6.2.1"
+  },
   "packageManager": "yarn@4.4.1"
 }
