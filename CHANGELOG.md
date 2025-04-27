@@ -1,5 +1,12 @@
 # Changelog
 
+## 7.0.2 (Unreleased)
+### Bug fixes
+### Features
+### UI enhancements
+### Other
+- Upgraded to Yarn 4.9, exchanged "replace" dependency for "rexreplace".
+
 ## 7.0.1 (2024-09-03)
 ### Bug fixes
 - Fixed bug where calculator page wouldn't load offline if it had URL query string parameters attached.

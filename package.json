@@ -10,7 +10,7 @@
     "minify:fe": "esbuild src/js/*.js src/css/*.css --outdir=build --minify --target=es6 --sourcemap --out-extension:.js=.v$npm_package_version.js --out-extension:.css=.v$npm_package_version.css --define:window.APP_VERSION=\\\"$npm_package_version\\\" --define:window.SVG_SPRITE_SHEET=\\\"icons.v$npm_package_version\\\"",
     "minify:sw": "esbuild src/sw.js --outdir=build --minify --target=es6 --sourcemap --define:self.APP_VERSION=\\\"$npm_package_version\\\" --define:self.SVG_SPRITE_SHEET=\\\"icons.v$npm_package_version\\\"",
     "minify": "yarn run minify:fe && yarn run minify:sw",
-    "replace": "replace '/([a-z-]+).(js|css|json)(>|\")' /\\$1.v$npm_package_version.\\$2\\$3 build/index.html --quiet",
+    "replace": "rexreplace '/([a-z-]+).(js|css|json)(>|\")' /\\$1.v$npm_package_version.\\$2\\$3 build/index.html",
     "build": "yarn run minify && yarn run replace",
     "serve:src": "wrangler pages dev ./src --port=3000 --compatibility-date=2023-02-17",
     "serve:build": "wrangler pages dev ./build --port=3000 --compatibility-date=2023-02-17",
@@ -35,7 +35,7 @@
     "esbuild": "0.25.0",
     "eslint": "8.46.0",
     "eslint-plugin-compat": "4.1.4",
-    "replace": "1.2.2",
+    "rexreplace": "7.1.12",
     "stylelint": "15.10.2",
     "stylelint-no-unsupported-browser-features": "7.0.0",
     "wrangler": "3.73.0"
