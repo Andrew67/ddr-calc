@@ -12,8 +12,8 @@
     "minify": "yarn run minify:fe && yarn run minify:sw",
     "replace": "rexreplace '/([a-z-]+).(js|css|json)(>|\")' /\\$1.v$npm_package_version.\\$2\\$3 build/index.html",
     "build": "yarn run minify && yarn run replace",
-    "serve:src": "wrangler pages dev ./src --port=3000 --compatibility-date=2023-02-17",
-    "serve:build": "wrangler pages dev ./build --port=3000 --compatibility-date=2023-02-17",
+    "serve:src": "yarn dlx wrangler@3.73.0 pages dev ./src --port=3000 --compatibility-date=2023-02-17",
+    "serve:build": "yarn dlx wrangler@3.73.0 pages dev ./build --port=3000 --compatibility-date=2023-02-17",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -37,14 +37,7 @@
     "eslint-plugin-compat": "6.0.2",
     "rexreplace": "7.1.12",
     "stylelint": "16.19.1",
-    "stylelint-no-unsupported-browser-features": "8.0.4",
-    "wrangler": "3.73.0"
-  },
-  "resolutions": {
-    "braces": "^3.0.3",
-    "micromatch": "^4.0.8",
-    "postcss": "^8.4.31",
-    "tar": "^6.2.1"
+    "stylelint-no-unsupported-browser-features": "8.0.4"
   },
   "packageManager": "yarn@4.9.1"
 }

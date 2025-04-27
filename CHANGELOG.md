@@ -1,12 +1,13 @@
 # Changelog
 
-## 7.0.2 (Unreleased)
+## 7.0.2 (2025-04-27)
 ### Bug fixes
 ### Features
 ### UI enhancements
 ### Other
 - Upgraded to Yarn 4.9, exchanged "replace" dependency for "rexreplace".
 - Upgraded ESLint and Stylelint.
+- Removed wrangler dependency in favor of running it via `yarn dlx`.
 
 ## 7.0.1 (2024-09-03)
 ### Bug fixes
