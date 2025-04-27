@@ -92,9 +92,9 @@ body.theme-ddrfinder {
 }
 @media screen and (prefers-color-scheme: dark) {
     body.theme-ddrfinder {
-        --color-keypad-bg: #004786; /* Primary Container */
+        --color-keypad-bg: #113153; /* Primary Container */
         --color-keypad-fg: #D4E3FF; /* On Primary Container */
-        --color-keypad-ext-bg: #7B008F; /* Secondary Container */
+        --color-keypad-ext-bg: #4e2b55; /* Secondary Container */
         --color-keypad-ext-fg: #FFD6FE; /* On Secondary Container */
         --color-result: #F9ABFF; /* Secondary */
         --color-keypad-bg-active: rgba(200,200,200,var(--opacity-active));

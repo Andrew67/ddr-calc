@@ -4,6 +4,7 @@
 ### Bug fixes
 ### Features
 ### UI enhancements
+- The DDR Finder Theme is now darker in dark mode.
 ### Other
 - Simplification: use browser/OS dark mode toggle, remove ours.
 - Removed iOS Splash screens. They rely on deprecated meta tags and require one
