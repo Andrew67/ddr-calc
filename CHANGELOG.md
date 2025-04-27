@@ -6,6 +6,7 @@
 ### UI enhancements
 ### Other
 - Upgraded to Yarn 4.9, exchanged "replace" dependency for "rexreplace".
+- Upgraded ESLint and Stylelint.
 
 ## 7.0.1 (2024-09-03)
 ### Bug fixes
