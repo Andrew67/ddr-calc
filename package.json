@@ -1,6 +1,6 @@
 {
   "name": "ddr-calc",
-  "version": "7.0.2",
+  "version": "8.0.0",
   "description": "Calculator with DDR speed-modifier specific functionality; fast and offline PWA",
   "scripts": {
     "clean": "rm -rf build",

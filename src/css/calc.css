@@ -55,28 +55,30 @@
     }
 }
 
-/* Dark theme; added here to load ASAP for flicker-free UI purposes for returning users */
-body.theme-dark {
-    /* Dark theme overlay-based elevations; see https://material.io/design/color/dark-theme.html#properties */
-    --color-surface-z0: #121212;
-    /* 5% white overlay */
-    --color-surface-z1: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.5)), var(--color-surface-z0);
-    /* 12% white overlay */
-    --color-surface-z8: linear-gradient(rgba(255,255,255,.12), rgba(255,255,255,.12)), var(--color-surface-z0);
-    /* 15% white overlay */
-    --color-surface-z16: linear-gradient(rgba(255,255,255,.15), rgba(255,255,255,.15)), var(--color-surface-z0);
-    /* 16% white overlay */
-    --color-surface-z24: linear-gradient(rgba(255,255,255,.16), rgba(255,255,255,.16)), var(--color-surface-z0);
+/* Dark theme */
+@media screen and (prefers-color-scheme: dark) {
+    body {
+        /* Dark theme overlay-based elevations; see https://material.io/design/color/dark-theme.html#properties */
+        --color-surface-z0: #121212;
+        /* 5% white overlay */
+        --color-surface-z1: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.5)), var(--color-surface-z0);
+        /* 12% white overlay */
+        --color-surface-z8: linear-gradient(rgba(255,255,255,.12), rgba(255,255,255,.12)), var(--color-surface-z0);
+        /* 15% white overlay */
+        --color-surface-z16: linear-gradient(rgba(255,255,255,.15), rgba(255,255,255,.15)), var(--color-surface-z0);
+        /* 16% white overlay */
+        --color-surface-z24: linear-gradient(rgba(255,255,255,.16), rgba(255,255,255,.16)), var(--color-surface-z0);
 
-    --color-foreground: rgba(255,255,255,.87);
-    --color-foreground-medium: rgba(255,255,255,.6);
+        --color-foreground: rgba(255,255,255,.87);
+        --color-foreground-medium: rgba(255,255,255,.6);
 
-    --color-accent: #90caf9; /* Material Blue 200 */
-    --color-result: #c8e6c9; /* Material Green 100 */
+        --color-accent: #90caf9; /* Material Blue 200 */
+        --color-result: #c8e6c9; /* Material Green 100 */
 
-    --color-keypad-bg: #102027; /* Material Blue Grey 800 Dark */
-    --color-keypad-ext-bg: #1c313a; /* Material Blue Grey 700 Dark */
-    --color-keypad-bg-active: rgba(200,200,200,var(--opacity-active));
+        --color-keypad-bg: #102027; /* Material Blue Grey 800 Dark */
+        --color-keypad-ext-bg: #1c313a; /* Material Blue Grey 700 Dark */
+        --color-keypad-bg-active: rgba(200,200,200,var(--opacity-active));
+    }
 }
 
 /* Matching theme extracted from DDR Finder (Android) */
@@ -88,13 +90,15 @@ body.theme-ddrfinder {
     --color-result: #6a0080; /* Material Purple 500 Dark */
     --color-keypad-bg-active: rgba(128,128,128,var(--opacity-active));
 }
-body.theme-ddrfinder.theme-dark {
-    --color-keypad-bg: #004786; /* Primary Container */
-    --color-keypad-fg: #D4E3FF; /* On Primary Container */
-    --color-keypad-ext-bg: #7B008F; /* Secondary Container */
-    --color-keypad-ext-fg: #FFD6FE; /* On Secondary Container */
-    --color-result: #F9ABFF; /* Secondary */
-    --color-keypad-bg-active: rgba(200,200,200,var(--opacity-active));
+@media screen and (prefers-color-scheme: dark) {
+    body.theme-ddrfinder {
+        --color-keypad-bg: #004786; /* Primary Container */
+        --color-keypad-fg: #D4E3FF; /* On Primary Container */
+        --color-keypad-ext-bg: #7B008F; /* Secondary Container */
+        --color-keypad-ext-fg: #FFD6FE; /* On Secondary Container */
+        --color-result: #F9ABFF; /* Secondary */
+        --color-keypad-bg-active: rgba(200,200,200,var(--opacity-active));
+    }
 }
 
 html, body {
@@ -115,7 +119,7 @@ body {
     -webkit-user-select: none;
     user-select: none;
 
-    /* Blocks scrolling, zooming, and pull-to-refresh (does not work on iOS) */
+    /* Blocks scrolling, zooming, and pull-to-refresh (does not work on iOS < 13) */
     touch-action: none;
 }
 

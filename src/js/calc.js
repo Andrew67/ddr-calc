@@ -49,7 +49,6 @@ const asyncModules = [
     { name: 'targetbpm', hasCSS: true /* preloads via index.html */ },
     { name: 'menu', hasCSS: true, shouldPreload: true },
     { name: 'ohm', hasCSS: true, shouldPreload: true },
-    { name: 'dark', hasCSS: false, shouldPreload: true },
     { name: 'theme', hasCSS: false, shouldPreload: true },
 ];
 

@@ -6,8 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>DDR Calc</title>
     <meta name="application-name" content="DDR Calc">
-    <meta name="theme-color" content="#ffffff">
-    <meta name="color-scheme" content="light">
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121212">
+    <meta name="color-scheme" content="light dark">
     <meta name="description" content="Calculator for DDR speed modifiers">
 
     <!-- Core app UI is loaded ASAP; features up to Target BPM preloaded -->
@@ -23,6 +24,7 @@
     <link rel="preload" href="js/targetbpm.js" as="script">
 
     <link rel="icon" sizes="32x32" href="favicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     <link rel="manifest" href="manifest.json">
 
     <!-- Open Graph -->
@@ -34,25 +36,6 @@
     <meta property="og:image:width" content="640">
     <meta property="og:image:height" content="640">
     <meta property="og:image:alt" content="DDR Calc Preview">
-
-    <!-- iOS-specific tags -->
-    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-    <meta name="apple-mobile-web-app-capable" content="yes"><!-- required for splash screens -->
-    <link rel="apple-touch-startup-image" href="img/apple-splash-2048-2732-fs8.png" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
-    <link rel="apple-touch-startup-image" href="img/apple-splash-1668-2388-fs8.png" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
-    <link rel="apple-touch-startup-image" href="img/apple-splash-1536-2048-fs8.png" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
-    <link rel="apple-touch-startup-image" href="img/apple-splash-1668-2224-fs8.png" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
-    <link rel="apple-touch-startup-image" href="img/apple-splash-1620-2160-fs8.png" media="(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
-    <link rel="apple-touch-startup-image" href="img/apple-splash-1290-2796-fs8.png" media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
-    <link rel="apple-touch-startup-image" href="img/apple-splash-1179-2556-fs8.png" media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
-    <link rel="apple-touch-startup-image" href="img/apple-splash-1284-2778-fs8.png" media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
-    <link rel="apple-touch-startup-image" href="img/apple-splash-1170-2532-fs8.png" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
-    <link rel="apple-touch-startup-image" href="img/apple-splash-1125-2436-fs8.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
-    <link rel="apple-touch-startup-image" href="img/apple-splash-1242-2688-fs8.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
-    <link rel="apple-touch-startup-image" href="img/apple-splash-828-1792-fs8.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
-    <link rel="apple-touch-startup-image" href="img/apple-splash-1242-2208-fs8.png" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
-    <link rel="apple-touch-startup-image" href="img/apple-splash-750-1334-fs8.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
-    <link rel="apple-touch-startup-image" href="img/apple-splash-640-1136-fs8.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
 </head>
 <body>
 <div id="app">
@@ -61,19 +44,19 @@
     <div id="browser-dialog">
         <div>
             <h1>Browser upgrade needed</h1>
-            <p>In order to use DDR Calc, one of the following minimum browser/OS versions is required:</p>
+            <p>To use DDR Calc, one of the following minimum browser/OS versions is required:</p>
             <ul>
                 <li>iOS 15.7
                 <li>Android System WebView 106
                 <li>Chrome 106
                 <li>Firefox 102
-                <li>Samsung Internet 22
+                <li>Samsung Internet 28
             </ul>
             <noscript><p>JavaScript must also be enabled</p></noscript>
             <p class="footer"><a href="https://github.com/Andrew67/ddr-calc">Project Site</a></p>
         </div>
     </div>
-    <script>
+    <script nonce="573">
         // In-line checks, for a flicker-free experience on page load
         // Obtain URL query/hash params and remove them (see URLs.md)
         const urlParams = new URLSearchParams(location.search);
@@ -82,17 +65,6 @@
 
         // Browser compatibility check, to dismiss the incompatibility dialog
         if ('fetch' in window && 'forEach' in NodeList.prototype) document.getElementById('browser-dialog').remove();
-
-        // Dark mode check
-        /** This key is set to "true" when the user has requested dark mode */
-        const KEY_DARKMODE = 'dark-mode';
-        const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-        const isDarkModePreferred = () => localStorage.getItem(KEY_DARKMODE) === 'true' || darkModeMediaQuery.matches;
-        if (isDarkModePreferred()) {
-            document.body.classList.add('theme-dark');
-            document.querySelector('meta[name=theme-color]').content = '#121212';
-            document.querySelector('meta[name=color-scheme]').content = 'dark';
-        }
 
         /**
          * Detect app loaded via DDR Finder (Android), to unlock an exclusive theme
