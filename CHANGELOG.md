@@ -3,6 +3,8 @@
 ## 8.0.0 (Unreleased)
 ### Bug fixes
 ### Features
+- Optional feature for adding 4.25x speed modifier.
+- The DDR Finder Theme now also triggers from web version visits.
 ### UI enhancements
 - The DDR Finder Theme is now darker in dark mode.
 ### Other
@@ -10,6 +12,7 @@
 - Removed iOS Splash screens. They rely on deprecated meta tags and require one
   for every exact screen size and orientation, present and future.
   iOS should instead generate the screen such as Android does.
+- Bumped minimum Firefox to 121 for `:is` support.
 
 ## 7.0.2 (2025-04-27)
 ### Bug fixes

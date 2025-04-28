@@ -49,7 +49,7 @@
                 <li>iOS 15.7
                 <li>Android System WebView 106
                 <li>Chrome 106
-                <li>Firefox 102
+                <li>Firefox 121
                 <li>Samsung Internet 28
             </ul>
             <noscript><p>JavaScript must also be enabled</p></noscript>
@@ -64,13 +64,17 @@
         history.replaceState(history.state, '', location.pathname);
 
         // Browser compatibility check, to dismiss the incompatibility dialog
-        if ('fetch' in window && 'forEach' in NodeList.prototype) document.getElementById('browser-dialog').remove();
+        if ('fetch' in window &&
+            'forEach' in NodeList.prototype &&
+            CSS.supports('selector(:has(:disabled))')
+        ) document.getElementById('browser-dialog').remove();
 
         /**
-         * Detect app loaded via DDR Finder (Android), to unlock an exclusive theme
+         * Detect app loaded via DDR Finder, to unlock an exclusive theme
          */
         const isDdrFinderReferral = urlParams.has('df') ||
             document.referrer.startsWith('android-app://com.andrew67.ddrfinder/') ||
+            document.referrer.startsWith('https://ddrfinder.andrew67.com/') ||
             sessionStorage.getItem('ddrfinder') === 'true';
         /**
          * This key is set to "true" once the user has opened DDR Calc through DDR Finder at least once.

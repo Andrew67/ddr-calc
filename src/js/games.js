@@ -64,34 +64,42 @@ fetch(`games${extPrefix}.json`)
 
     // Load HTML for the game settings
     // SVG for the checkbox and radio buttons must be in-lined for CSS to work properly
-    container.innerHTML = '<div id="game-settings" class="full-screen-overlay scrim">' +
-        '<div class="side-sheet">' +
-            '<form name="game-settings-form">' +
-            '<fieldset>' +
-                '<legend>Game settings</legend>' +
-                '<label><input type="checkbox" name="premiumPlay">' + checkbox + 'Premium Play</label>' +
-            '</fieldset>' +
-            '<fieldset>' +
-                '<legend>Game version</legend>' +
-                [{ id: 0, name: 'N/A' }].concat(gameData).map(function (game) {
-                    return '<label><input type="radio" name="gameid" value="' + game.id + '">'
-                        + radioBtn + game.name + '</label>';
-                }).join('') +
-            '</fieldset>' +
-            '</form>' +
-        '</div>' +
-        '</div>';
+    container.innerHTML = `<div id="game-settings" class="full-screen-overlay scrim">
+        <div class="side-sheet">
+            <form name="game-settings-form">
+                <fieldset>
+                    <legend>Game settings</legend>
+                    <label><input type="checkbox" name="premiumPlay">${checkbox}Premium Play</label>
+                    <label><input type="checkbox" name="add425">${checkbox}Add ×4.25</label>
+                </fieldset>
+                <fieldset>
+                    <legend>Game version</legend>
+                    ${[{
+                        id: 0,
+                        name: 'N/A'
+                    }].concat(gameData).map(function (game) {
+                        return '<label><input type="radio" name="gameid" value="' + game.id + '">'
+                            + radioBtn + game.name + '</label>';
+                    }).join('')}
+                </fieldset>
+            </form>
+        </div>
+        </div>`;
     dom.app.appendChild(container.firstChild);
 
     // localStorage keys
     // Change version if IDs ever change in games.json
-    const KEY_GAMEID = 'gameid-v1', KEY_PREMIUMPLAY = 'premiumPlayEnabled';
+    const KEY_GAMEID = 'gameid-v1',
+        KEY_PREMIUMPLAY = 'premiumPlayEnabled',
+        KEY_ADD425 = 'add425';
 
     // Set up calc variables
     state.gameId = localStorage.getItem(KEY_GAMEID) === null ?
         gameData[gameData.length - 1].id : Number(localStorage.getItem(KEY_GAMEID));
     state.premiumPlayEnabled = localStorage.getItem(KEY_PREMIUMPLAY) === null ?
         true : localStorage.getItem(KEY_PREMIUMPLAY) === 'true';
+    state.add425 = localStorage.getItem(KEY_ADD425) === null ?
+        false : localStorage.getItem(KEY_ADD425) === 'true';
     state.gameSettingsOpen = Boolean(history.state && history.state.gameSettingsOpen);
     computedState.gameName = '';
     computedState.gameShortName = undefined;
@@ -103,9 +111,12 @@ fetch(`games${extPrefix}.json`)
     dom.gameSettingsForm = document.forms['game-settings-form'];
 
     // Set the game name and available speed mods based on the selected game ID and premium play
-    let prevGameId = null, prevPremiumPlayEnabled = null;
+    let prevGameId = null, prevPremiumPlayEnabled = null, prevAdd425 = null;
     computedState.hooks.push(function setGameNameAndAvailableMods () {
-        if (state.gameId !== prevGameId || state.premiumPlayEnabled !== prevPremiumPlayEnabled) {
+        if (state.gameId !== prevGameId ||
+            state.premiumPlayEnabled !== prevPremiumPlayEnabled ||
+            state.add425 !== prevAdd425)
+        {
             if (state.gameId === 0 || !gameDataById.has(state.gameId)) {
                 computedState.gameName = 'Select game';
                 computedState.gameShortName = undefined;
@@ -117,6 +128,15 @@ fetch(`games${extPrefix}.json`)
                 computedState.availableSpeedMods = state.premiumPlayEnabled ?
                     getAllModsForGameId(state.gameId) : gameDataById.get(state.gameId).mods;
 
+                // Deep copy required to avoid permanently pushing the 4.25
+                if (state.premiumPlayEnabled && state.add425) {
+                    computedState.availableSpeedMods = new Map(computedState.availableSpeedMods);
+                    if (computedState.availableSpeedMods.has('4')) {
+                        computedState.availableSpeedMods.set('4',
+                            computedState.availableSpeedMods.get('4').concat(['.25']));
+                    }
+                }
+
                 computedState.availableSpeedModList = [];
                 computedState.availableSpeedMods.forEach((decList, int) => {
                     computedState.availableSpeedModList.push(int);
@@ -125,6 +145,8 @@ fetch(`games${extPrefix}.json`)
                 computedState.availableSpeedModList.sort();
             }
             prevGameId = state.gameId;
+            prevPremiumPlayEnabled = state.premiumPlayEnabled;
+            prevAdd425 = state.add425;
         }
     });
     postCommitHooks.push(function updateGameNameAndPremiumPlay () {
@@ -197,6 +219,7 @@ fetch(`games${extPrefix}.json`)
         e.addEventListener('mouseup', () => mouseUpFired = true);
     });
     dom.gameSettingsForm.addEventListener('change', function () {
+        dom.gameSettingsForm.elements['add425'].disabled = !dom.gameSettingsForm.elements['premiumPlay'].checked;
         if (mouseUpFired) {
             mouseUpFired = false;
             history.back();
@@ -211,11 +234,13 @@ fetch(`games${extPrefix}.json`)
         // Commit settings to state upon dismissal (avoids running a postCommit hook on every keypress)
         if (state.gameSettingsOpen && !newGameSettingsOpen) {
             state.premiumPlayEnabled = dom.gameSettingsForm.elements['premiumPlay'].checked;
+            state.add425 = dom.gameSettingsForm.elements['add425'].checked;
             state.gameId = Number(dom.gameSettingsForm.elements['gameid'].value);
             computedState.update();
 
             localStorage[setAllowingLoss](KEY_GAMEID, state.gameId);
             localStorage[setAllowingLoss](KEY_PREMIUMPLAY, state.premiumPlayEnabled);
+            localStorage[setAllowingLoss](KEY_ADD425, state.add425);
         }
 
         // Commit state change upon actual change (avoids running a postCommit hook on every browser navigation)
@@ -286,6 +311,8 @@ fetch(`games${extPrefix}.json`)
 
     // Sync game settings form with initial state
     dom.gameSettingsForm.elements['premiumPlay'].checked = state.premiumPlayEnabled;
+    dom.gameSettingsForm.elements['add425'].checked = state.add425;
+    dom.gameSettingsForm.elements['add425'].disabled = !state.premiumPlayEnabled;
     dom.gameSettingsForm.elements['gameid'].value = state.gameId;
 
     // Init plug-in state into calculator

@@ -167,7 +167,7 @@
     padding-top: 5px;
 }
 
-#game-settings label, #game-settings legend {
+#game-settings :is(label, legend) {
     display: block;
     padding-left: 16px;
     padding-right: 16px;
@@ -202,22 +202,27 @@ input[type=radio], input[type=checkbox] {
     opacity: 0;
 }
 
-input[type=radio] + span.svg-icon svg, input[type=checkbox] + span.svg-icon svg {
+:is(input[type=radio], input[type=checkbox]) + span.svg-icon svg {
     top: 6px;
     margin-right: 24px;
 }
 
-input[type=radio] + span.svg-icon, input[type=checkbox] + span.svg-icon {
+:is(input[type=radio], input[type=checkbox]) + span.svg-icon {
     --opacity-checked: 0;
     transition: opacity .1s;
 }
 
-input[type=radio]:checked + span.svg-icon, input[type=checkbox]:checked + span.svg-icon {
+:is(input[type=radio], input[type=checkbox]):checked + span.svg-icon {
     --opacity-checked: 1;
 }
 
+label:has(input:disabled) {
+    opacity: var(--opacity-disabled);
+    pointer-events: none;
+}
+
 /* Enables focus effect with color change when state changes */
-input[type=radio] + span::before, input[type=checkbox] + span::before {
+:is(input[type=radio], input[type=checkbox]) + span::before {
     content: '';
     position: absolute;
     inset: 0;
@@ -225,12 +230,12 @@ input[type=radio] + span::before, input[type=checkbox] + span::before {
     transition: opacity .1s;
 }
 
-input[type=radio]:focus + span::before, input[type=checkbox]:focus + span::before {
+:is(input[type=radio], input[type=checkbox]):focus + span::before {
     background: var(--color-foreground);
     opacity: var(--opacity-focused);
     outline: 3px solid transparent;
 }
 
-input[type=radio]:checked:focus + span::before, input[type=checkbox]:checked:focus + span::before {
+:is(input[type=radio], input[type=checkbox]):checked:focus + span::before {
     background: var(--color-accent);
 }
