@@ -86,8 +86,8 @@
         const KEY_DDRFINDER_THEME_ENABLED = 'ddrfinder-theme-enabled';
         const isDdrFinderThemeUnlocked = isDdrFinderReferral ||
             localStorage.getItem(KEY_DDRFINDER_THEME_UNLOCKED) === 'true';
-        const isDdrFinderThemeEnabled = () => isDdrFinderThemeUnlocked &&
-            localStorage.getItem(KEY_DDRFINDER_THEME_ENABLED) !== 'false';
+        const isDdrFinderThemeEnabled = () => isDdrFinderReferral ||
+            (isDdrFinderThemeUnlocked && localStorage.getItem(KEY_DDRFINDER_THEME_ENABLED) !== 'false');
         if (isDdrFinderThemeEnabled()) {
             document.body.classList.add('theme-ddrfinder');
         }

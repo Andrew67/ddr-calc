@@ -4,7 +4,8 @@
 ### Bug fixes
 ### Features
 - Optional feature for adding 4.25x speed modifier.
-- The DDR Finder Theme now also triggers from web version visits.
+- The DDR Finder Theme now also triggers from web version visits,
+  and is consistently re-applied when opening through DDR Finder.
 ### UI enhancements
 - The DDR Finder Theme is now darker in dark mode.
 - Reversed game list with latest game on top,
