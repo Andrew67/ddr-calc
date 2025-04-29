@@ -60,7 +60,6 @@
         // In-line checks, for a flicker-free experience on page load
         // Obtain URL query/hash params and remove them (see URLs.md)
         const urlParams = new URLSearchParams(location.search);
-        const urlHash = location.hash;
         history.replaceState(history.state, '', location.pathname);
 
         // Browser compatibility check, to dismiss the incompatibility dialog

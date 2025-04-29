@@ -7,11 +7,14 @@
 - The DDR Finder Theme now also triggers from web version visits.
 ### UI enhancements
 - The DDR Finder Theme is now darker in dark mode.
+- Reversed game list with latest game on top,
+  in case the user has a short screen device.
 ### Other
 - Simplification: use browser/OS dark mode toggle, remove ours.
 - Removed iOS Splash screens. They rely on deprecated meta tags and require one
   for every exact screen size and orientation, present and future.
   iOS should instead generate the screen such as Android does.
+- Removed legacy `location.hash` shortcut flags.
 - Bumped minimum Firefox to 121 for `:is` support.
 
 ## 7.0.2 (2025-04-27)

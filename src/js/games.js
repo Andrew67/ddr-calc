@@ -70,17 +70,16 @@ fetch(`games${extPrefix}.json`)
                 <fieldset>
                     <legend>Game settings</legend>
                     <label><input type="checkbox" name="premiumPlay">${checkbox}Premium Play</label>
-                    <label><input type="checkbox" name="add425">${checkbox}Add ×4.25</label>
+                    <label><input type="checkbox" name="add425">${checkbox}Add ×4.25 (unofficial)</label>
                 </fieldset>
                 <fieldset>
                     <legend>Game version</legend>
                     ${[{
                         id: 0,
                         name: 'N/A'
-                    }].concat(gameData).map(function (game) {
-                        return '<label><input type="radio" name="gameid" value="' + game.id + '">'
-                            + radioBtn + game.name + '</label>';
-                    }).join('')}
+                    }].concat(gameData).reverse().map((game) => 
+                        `<label><input type="radio" name="gameid" value="${game.id}">${radioBtn}${game.name}</label>`
+                    ).join('')}
                 </fieldset>
             </form>
         </div>
@@ -123,13 +122,14 @@ fetch(`games${extPrefix}.json`)
                 computedState.availableSpeedMods = new Map();
                 computedState.availableSpeedModList = [];
             } else {
-                computedState.gameName = gameDataById.get(state.gameId).name;
-                computedState.gameShortName = gameDataById.get(state.gameId).shortName;
+                const gameData = gameDataById.get(state.gameId);
+                computedState.gameName = gameData.name;
+                computedState.gameShortName = gameData.shortName;
                 computedState.availableSpeedMods = state.premiumPlayEnabled ?
-                    getAllModsForGameId(state.gameId) : gameDataById.get(state.gameId).mods;
+                    getAllModsForGameId(state.gameId) : gameData.mods;
 
                 // Deep copy required to avoid permanently pushing the 4.25
-                if (state.premiumPlayEnabled && state.add425) {
+                if (gameData.hasPremiumPlay && state.premiumPlayEnabled && state.add425) {
                     computedState.availableSpeedMods = new Map(computedState.availableSpeedMods);
                     if (computedState.availableSpeedMods.has('4')) {
                         computedState.availableSpeedMods.set('4',
