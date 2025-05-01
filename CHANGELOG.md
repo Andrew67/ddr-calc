@@ -1,6 +1,6 @@
 # Changelog
 
-## 8.0.0 (Unreleased)
+## 8.0.0 (2025-05-01)
 ### Bug fixes
 ### Features
 - Optional feature for adding 4.25x speed modifier.
