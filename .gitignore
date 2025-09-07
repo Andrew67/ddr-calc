@@ -21,6 +21,7 @@ node_modules/
 .idea/**/webServers.xml
 .idea/**/deployment.xml
 .idea/**/sshConfigs.xml
+.idea/**/forwardedPorts.xml
 
 # Not a PHP project
 .idea/php.xml

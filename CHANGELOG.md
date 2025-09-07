@@ -1,5 +1,12 @@
 # Changelog
 
+## 9.0.0 (2025-XX-XX)
+### Bug fixes
+### Features
+### UI enhancements
+### Other
+- Migrated from Yarn to pnpm.
+
 ## 8.0.0 (2025-05-01)
 ### Bug fixes
 ### Features

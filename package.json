@@ -6,14 +6,14 @@
     "clean": "rm -rf build",
     "copy": "mkdir -p build/img && cp -R src/*.* src/.well-known src/.htaccess src/_headers build/ && cp src/img/*.png build/img/ && cp src/games.json build/games.v$npm_package_version.json",
     "merge-svg": "echo '<svg xmlns=\"http://www.w3.org/2000/svg\">' > build/img/icons.v$npm_package_version.svg && sed -e 's/<\\/svg>//' -e 's/<svg[^>]*>//' src/img/*.svg >> build/img/icons.v$npm_package_version.svg && echo '</svg>' >> build/img/icons.v$npm_package_version.svg",
-    "prebuild": "yarn run clean && yarn run copy && yarn run merge-svg",
+    "prebuild": "pnpm run clean && pnpm run copy && pnpm run merge-svg",
     "minify:fe": "esbuild src/js/*.js src/css/*.css --outdir=build --minify --target=es6 --sourcemap --out-extension:.js=.v$npm_package_version.js --out-extension:.css=.v$npm_package_version.css --define:window.APP_VERSION=\\\"$npm_package_version\\\" --define:window.SVG_SPRITE_SHEET=\\\"icons.v$npm_package_version\\\"",
     "minify:sw": "esbuild src/sw.js --outdir=build --minify --target=es6 --sourcemap --define:self.APP_VERSION=\\\"$npm_package_version\\\" --define:self.SVG_SPRITE_SHEET=\\\"icons.v$npm_package_version\\\"",
-    "minify": "yarn run minify:fe && yarn run minify:sw",
+    "minify": "pnpm run minify:fe && pnpm run minify:sw",
     "replace": "rexreplace '/([a-z-]+).(js|css|json)(>|\")' /\\$1.v$npm_package_version.\\$2\\$3 build/index.html",
-    "build": "yarn run minify && yarn run replace",
-    "serve:src": "yarn dlx wrangler@3.73.0 pages dev ./src --port=3000 --compatibility-date=2023-02-17",
-    "serve:build": "yarn dlx wrangler@3.73.0 pages dev ./build --port=3000 --compatibility-date=2023-02-17",
+    "build": "pnpm run minify && pnpm run replace",
+    "serve:src": "pnpm dlx wrangler@3.73.0 pages dev ./src --port=3000 --compatibility-date=2023-02-17",
+    "serve:build": "pnpm dlx wrangler@3.73.0 pages dev ./build --port=3000 --compatibility-date=2023-02-17",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -39,5 +39,5 @@
     "stylelint": "16.19.1",
     "stylelint-no-unsupported-browser-features": "8.0.4"
   },
-  "packageManager": "yarn@4.9.1"
+  "packageManager": "pnpm@10.15.1+sha512.34e538c329b5553014ca8e8f4535997f96180a1d0f614339357449935350d924e22f8614682191264ec33d1462ac21561aff97f6bb18065351c162c7e8f6de67"
 }
