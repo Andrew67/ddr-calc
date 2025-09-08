@@ -2,80 +2,80 @@
 /* Game selector CSS */
 
 #display .overlay {
-    position: absolute;
+  position: absolute;
 
-    /* Material Design text button: https://material.io/design/components/buttons.html#specs */
-    font-size: 14px;
-    line-height: 1;
-    color: var(--color-foreground-medium);
-    font-family: var(--font-stack-medium);
-    font-weight: 500;
+  /* Material Design text button: https://material.io/design/components/buttons.html#specs */
+  font-size: 14px;
+  line-height: 1;
+  color: var(--color-foreground-medium);
+  font-family: var(--font-stack-medium);
+  font-weight: 500;
 }
 
 #game-btn {
-    display: block;
-    bottom: 8px;
-    left: 16px;
-    text-transform: uppercase;
-    /* Increases the touch target for shorter game names, overflows long game names to next line */
-    min-width: 44px;
-    max-width: 24%;
-    min-height: 44px;
-    text-align: left;
-    word-break: break-all;
+  display: block;
+  bottom: 8px;
+  left: 16px;
+  text-transform: uppercase;
+  /* Increases the touch target for shorter game names, overflows long game names to next line */
+  min-width: 44px;
+  max-width: 24%;
+  min-height: 44px;
+  text-align: left;
+  word-break: break-all;
 }
 
 @supports (left: max(16px, 0px)) {
-    #game-btn {
-        left: max(16px, var(--safe-area-inset-left) + 8px);
-    }
+  #game-btn {
+    left: max(16px, var(--safe-area-inset-left) + 8px);
+  }
 }
 
 /* Additional tweaks for small height screens (see calc.css "One-Handed Mode") */
 @media (max-height: 320px) {
-    #display .overlay {
-        font-size: 12px;
-    }
-    #game-btn {
-        bottom: 0;
-    }
+  #display .overlay {
+    font-size: 12px;
+  }
+  #game-btn {
+    bottom: 0;
+  }
 }
 
 #game-btn::before {
-    content: '';
-    position: absolute;
-    inset: 0 -8px;
-    background-color: var(--color-foreground);
-    border-radius: 8px;
-    z-index: -1;
-    opacity: 0;
-    transition: opacity .1s;
+  content: "";
+  position: absolute;
+  inset: 0 -8px;
+  background-color: var(--color-foreground);
+  border-radius: 8px;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.1s;
 }
 
 #game-btn:focus::before {
-    opacity: var(--opacity-focused);
+  opacity: var(--opacity-focused);
 }
 
 /* Set the game button a little higher on taller devices, to further avoid touching calculations */
 @media (max-aspect-ratio: 9/18) {
-    #game-btn {
-        bottom: 32px;
-    }
+  #game-btn {
+    bottom: 32px;
+  }
 }
 
 #game-premium-enabled {
-    display: block;
+  display: block;
 }
 
 /* Inspired by alignment trick from
    https://blog.prototypr.io/align-svg-icons-to-text-and-say-goodbye-to-font-icons-d44b3d7b26b4 */
 .svg-icon {
-    display: inline-block;
+  display: inline-block;
 }
 
 .svg-icon svg {
-    top: 0.125em;
-    position: relative;
+  top: 0.125em;
+  position: relative;
 }
 
 /*
@@ -86,156 +86,160 @@
   toggle of the "show" class on the parent element
 */
 .full-screen-overlay {
-    position: absolute;
-    top: 0;
-    /* Start off screen */
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    visibility: hidden;
-    overflow: hidden;
-    /* Exit: Delay the transform to hide the entire thing for 200ms so that animations can complete */
-    /* Visibility is animated in order to remove from keyboard/accessibility tree: https://css-tricks.com/snippets/css/toggle-visibility-when-hiding-elements/ */
-    transition: transform 0s .2s, visibility 0s linear .2s;
+  position: absolute;
+  top: 0;
+  /* Start off screen */
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  visibility: hidden;
+  overflow: hidden;
+  /* Exit: Delay the transform to hide the entire thing for 200ms so that animations can complete */
+  /* Visibility is animated in order to remove from keyboard/accessibility tree: https://css-tricks.com/snippets/css/toggle-visibility-when-hiding-elements/ */
+  transition:
+    transform 0s 0.2s,
+    visibility 0s linear 0.2s;
 }
 
 .full-screen-overlay.show {
-    transform: translateX(100%);
-    visibility: visible;
+  transform: translateX(100%);
+  visibility: visible;
 }
 
 .scrim::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: black;
-    opacity: 0;
-    transition: opacity .2s;
-    z-index: -1;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 0;
+  transition: opacity 0.2s;
+  z-index: -1;
 }
 
 .side-sheet {
-    position: absolute;
-    background: var(--color-surface-z16);
-    box-shadow: var(--shadow-surface-z16);
-    top: 0;
-    left: 100%;
-    height: 100%;
-    /* For slim screens, leave some space for dismissal scrim, and add scrollbars */
-    max-width: calc(100% - 44px);
-    overflow: auto;
-    padding: var(--safe-area-inset-top) var(--safe-area-inset-right) var(--safe-area-inset-bottom) 0;
-    /* Material Design Accelerate/exit easing: https://material.io/design/motion/speed.html#easing */
-    transition: transform .2s cubic-bezier(0.4, 0.0, 1, 1);
-    touch-action: none; /* Required for iOS standalone otherwise it shadow scrolls and cancels the swipe right */
+  position: absolute;
+  background: var(--color-surface-z16);
+  box-shadow: var(--shadow-surface-z16);
+  top: 0;
+  left: 100%;
+  height: 100%;
+  /* For slim screens, leave some space for dismissal scrim, and add scrollbars */
+  max-width: calc(100% - 44px);
+  overflow: auto;
+  padding: var(--safe-area-inset-top) var(--safe-area-inset-right)
+    var(--safe-area-inset-bottom) 0;
+  /* Material Design Accelerate/exit easing: https://material.io/design/motion/speed.html#easing */
+  transition: transform 0.2s cubic-bezier(0.4, 0, 1, 1);
+  touch-action: none; /* Required for iOS standalone otherwise it shadow scrolls and cancels the swipe right */
 }
 
 /* Requires update if side sheet size changes; JS-based solution required scrolling twice on iOS standalone */
 @media (max-width: 315px), (max-height: 450px) {
-    .side-sheet {
-        touch-action: pan-x pan-y;
-    }
+  .side-sheet {
+    touch-action: pan-x pan-y;
+  }
 }
 
 #game-settings.show {
-    /* Entry: Don't delay the transform so that animations can be seen */
-    transition-delay: 0s;
-    --drag-delta-x: 0px;
+  /* Entry: Don't delay the transform so that animations can be seen */
+  transition-delay: 0s;
+  --drag-delta-x: 0px;
 }
 
 .show.scrim::before {
-    opacity: 0.32;
-    transition: opacity .25s;
+  opacity: 0.32;
+  transition: opacity 0.25s;
 }
 
 .show .side-sheet {
-    transform: translateX(-100%);
-    /* Material Design Decelerate/enter easing: https://material.io/design/motion/speed.html#easing */
-    transition: transform .25s cubic-bezier(0.0, 0.0, 0.2, 1);
+  transform: translateX(-100%);
+  /* Material Design Decelerate/enter easing: https://material.io/design/motion/speed.html#easing */
+  transition: transform 0.25s cubic-bezier(0, 0, 0.2, 1);
 }
 
 .show.dragging .side-sheet {
-    /* Dragging state; set and unset with JS pointer events; disables animation for instant feedback */
-    transform: translateX(calc(-100% + var(--drag-delta-x)));
-    transition: none;
+  /* Dragging state; set and unset with JS pointer events; disables animation for instant feedback */
+  transform: translateX(calc(-100% + var(--drag-delta-x)));
+  transition: none;
 }
 
 #game-settings form {
-    padding-top: 5px;
+  padding-top: 5px;
 }
 
 #game-settings :is(label, legend) {
-    display: block;
-    padding-left: 16px;
-    padding-right: 16px;
-    white-space: nowrap;
+  display: block;
+  padding-left: 16px;
+  padding-right: 16px;
+  white-space: nowrap;
 }
 
 label {
-    position: relative;
+  position: relative;
 }
 
 #game-settings label {
-    font-size: 16px; /* Material Body 1 */
-    line-height: 48px;
+  font-size: 16px; /* Material Body 1 */
+  line-height: 48px;
 }
 
 #game-settings legend {
-    font-size: 12px; /* Material Caption */
-    line-height: 32px;
+  font-size: 12px; /* Material Caption */
+  line-height: 32px;
 }
 
 fieldset {
-    border: 0;
-    margin: 0;
-    padding: 0;
+  border: 0;
+  margin: 0;
+  padding: 0;
 }
 
 /* Enables replacement of platform input with custom SVG with selected state tracked JS-free */
-input[type=radio], input[type=checkbox] {
-    /* As opposed to display: none, allows keyboard selection */
-    position: absolute;
-    top: 16px;
-    opacity: 0;
+input[type="radio"],
+input[type="checkbox"] {
+  /* As opposed to display: none, allows keyboard selection */
+  position: absolute;
+  top: 16px;
+  opacity: 0;
 }
 
-:is(input[type=radio], input[type=checkbox]) + span.svg-icon svg {
-    top: 6px;
-    margin-right: 24px;
+:is(input[type="radio"], input[type="checkbox"]) + span.svg-icon svg {
+  top: 6px;
+  margin-right: 24px;
 }
 
-:is(input[type=radio], input[type=checkbox]) + span.svg-icon {
-    --opacity-checked: 0;
-    transition: opacity .1s;
+:is(input[type="radio"], input[type="checkbox"]) + span.svg-icon {
+  --opacity-checked: 0;
+  transition: opacity 0.1s;
 }
 
-:is(input[type=radio], input[type=checkbox]):checked + span.svg-icon {
-    --opacity-checked: 1;
+:is(input[type="radio"], input[type="checkbox"]):checked + span.svg-icon {
+  --opacity-checked: 1;
 }
 
 label:has(input:disabled) {
-    opacity: var(--opacity-disabled);
-    pointer-events: none;
+  opacity: var(--opacity-disabled);
+  pointer-events: none;
 }
 
 /* Enables focus effect with color change when state changes */
-:is(input[type=radio], input[type=checkbox]) + span::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    transition: opacity .1s;
+:is(input[type="radio"], input[type="checkbox"]) + span::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.1s;
 }
 
-:is(input[type=radio], input[type=checkbox]):focus + span::before {
-    background: var(--color-foreground);
-    opacity: var(--opacity-focused);
-    outline: 3px solid transparent;
+:is(input[type="radio"], input[type="checkbox"]):focus + span::before {
+  background: var(--color-foreground);
+  opacity: var(--opacity-focused);
+  outline: 3px solid transparent;
 }
 
-:is(input[type=radio], input[type=checkbox]):checked:focus + span::before {
-    background: var(--color-accent);
+:is(input[type="radio"], input[type="checkbox"]):checked:focus + span::before {
+  background: var(--color-accent);
 }

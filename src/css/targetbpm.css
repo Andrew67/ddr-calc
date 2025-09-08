@@ -2,116 +2,134 @@
 /* Target BPM CSS */
 
 #app {
-    /* Set to .2s after feature is loaded */
-    --targetbpm-slide-duration: 0s;
+  /* Set to .2s after feature is loaded */
+  --targetbpm-slide-duration: 0s;
 }
 
 #mode-switcher#mode-switcher {
-    opacity: 1;
+  opacity: 1;
 }
 
 #mode-switcher label {
-    display: inline-block;
-    flex: 1;
-    text-transform: uppercase;
-    text-align: center;
-    color: var(--color-foreground-medium);
+  display: inline-block;
+  flex: 1;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--color-foreground-medium);
 }
 
 #mode-switcher input:checked + span {
-    color: var(--color-accent);
+  color: var(--color-accent);
 }
 
 #mode-switcher hr {
-    width: 50%;
-    border: none;
-    border-bottom: 2px solid var(--color-accent);
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    transition: transform var(--targetbpm-slide-duration);
+  width: 50%;
+  border: none;
+  border-bottom: 2px solid var(--color-accent);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transition: transform var(--targetbpm-slide-duration);
 }
 
 .targetbpm #mode-switcher hr {
-    transform: translateX(100%);
+  transform: translateX(100%);
 }
 
-#surface-speedmod, .targetbpm #surface-targetbpm { /* Enter view */
-    transition: transform var(--targetbpm-slide-duration), visibility 0s linear 0s;
+#surface-speedmod,
+.targetbpm #surface-targetbpm {
+  /* Enter view */
+  transition:
+    transform var(--targetbpm-slide-duration),
+    visibility 0s linear 0s;
 }
-.targetbpm #surface-speedmod, #surface-targetbpm { /* Exit view */
-    transition: transform var(--targetbpm-slide-duration), visibility 0s linear var(--targetbpm-slide-duration);
+.targetbpm #surface-speedmod,
+#surface-targetbpm {
+  /* Exit view */
+  transition:
+    transform var(--targetbpm-slide-duration),
+    visibility 0s linear var(--targetbpm-slide-duration);
 }
 
 .targetbpm #display > div {
-    transform: translateX(-100%);
+  transform: translateX(-100%);
 }
 
-.targetbpm #surface-speedmod, #surface-targetbpm {
-    visibility: hidden;
+.targetbpm #surface-speedmod,
+#surface-targetbpm {
+  visibility: hidden;
 }
 
 .targetbpm #surface-targetbpm {
-    visibility: visible;
+  visibility: visible;
 }
 
 #surface-targetbpm > div {
-    flex: 1;
-    font-size: calc(3.5vw + 3.5vh);
+  flex: 1;
+  font-size: calc(3.5vw + 3.5vh);
 }
 
 #surface-targetbpm > #bpms {
-    flex: 2;
-    font-size: calc(4vw + 4vh);
+  flex: 2;
+  font-size: calc(4vw + 4vh);
 }
 
 /* Cap font size on wide landscape displays, otherwise elements begin to clash and go off screen */
 @media (min-aspect-ratio: 16/9) {
-    #surface-targetbpm > div, #surface-targetbpm > #bpms {
-        font-size: calc(3vh + 3vw);
-    }
+  #surface-targetbpm > div,
+  #surface-targetbpm > #bpms {
+    font-size: calc(3vh + 3vw);
+  }
 }
 
-#targetbpm, #songbpm {
-    display: inline-block;
-    min-width: calc(3ch + 2px); /* Prevents shift of other UI elements when typing */
-    text-align: right;
+#targetbpm,
+#songbpm {
+  display: inline-block;
+  min-width: calc(
+    3ch + 2px
+  ); /* Prevents shift of other UI elements when typing */
+  text-align: right;
 }
 
 #surface-targetbpm span:empty::before {
-    content: '\200b'; /* Zero width space; ensures empty inputs/outputs maintain height to prevent UI element shift */
+  content: "\200b"; /* Zero width space; ensures empty inputs/outputs maintain height to prevent UI element shift */
 }
 
-#targetbpm-icon, #songbpm-icon {
-    position: relative;
-    margin-right: 3vw;
-    margin-left: 7vw;
+#targetbpm-icon,
+#songbpm-icon {
+  position: relative;
+  margin-right: 3vw;
+  margin-left: 7vw;
 }
 
-#targetbpm-icon::before, #songbpm-icon::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: 8px;
-    background-color: var(--color-foreground);
-    opacity: 0;
-    transition: opacity .1s;
+#targetbpm-icon::before,
+#songbpm-icon::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+  background-color: var(--color-foreground);
+  opacity: 0;
+  transition: opacity 0.1s;
 }
 
-#targetbpm-icon:focus::before, #songbpm-icon:focus::before {
-    opacity: var(--opacity-focused);
+#targetbpm-icon:focus::before,
+#songbpm-icon:focus::before {
+  opacity: var(--opacity-focused);
 }
 
-#targetbpm-icon.active::before, #songbpm-icon.active::before {
-    background: var(--color-accent);
+#targetbpm-icon.active::before,
+#songbpm-icon.active::before {
+  background: var(--color-accent);
 }
 
-#targetbpm-icon svg, #songbpm-icon svg {
-    width: 1em;
-    height: 1em;
+#targetbpm-icon svg,
+#songbpm-icon svg {
+  width: 1em;
+  height: 1em;
 }
 
 #surface-targetbpm > div > .ideal {
-    font-family: var(--font-stack);
-    font-weight: 400;
+  font-family: var(--font-stack);
+  font-weight: 400;
 }

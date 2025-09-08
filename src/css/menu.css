@@ -1,51 +1,58 @@
 /*! DDR Calc | https://github.com/Andrew67/ddr-calc */
 /* Menu CSS */
 #menu-btn {
-    display: block;
-    top: 8px;
-    left: 8px;
-    /* Increase the touch target */
-    text-align: left;
-    width: 56px;
-    height: 44px;
+  display: block;
+  top: 8px;
+  left: 8px;
+  /* Increase the touch target */
+  text-align: left;
+  width: 56px;
+  height: 44px;
 }
 
 @supports (left: max(8px, 0px)) {
-    #menu-btn {
-        left: max(8px, var(--safe-area-inset-left));
-    }
+  #menu-btn {
+    left: max(8px, var(--safe-area-inset-left));
+  }
 }
 
 #menu-btn::before {
-    content: '';
-    position: absolute;
-    top: 4px;
-    left: -4px;
-    background: var(--color-foreground);
-    border-radius: 32px;
-    width: 32px;
-    height: 32px;
-    z-index: -1;
-    opacity: 0;
-    transition: opacity .1s;
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: -4px;
+  background: var(--color-foreground);
+  border-radius: 32px;
+  width: 32px;
+  height: 32px;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.1s;
 }
 
 #menu-btn:focus::before {
-    opacity: var(--opacity-focused);
+  opacity: var(--opacity-focused);
 }
 
-#menu, .dialog-container {
-    opacity: 0;
-    transition: transform 0s .1s, opacity .1s, visibility 0s linear .1s;
+#menu,
+.dialog-container {
+  opacity: 0;
+  transition:
+    transform 0s 0.1s,
+    opacity 0.1s,
+    visibility 0s linear 0.1s;
 }
 
-#menu.show, .dialog-container.show {
-    opacity: 1;
-    transition: visibility 0s linear 0s, opacity .1s;
+#menu.show,
+.dialog-container.show {
+  opacity: 1;
+  transition:
+    visibility 0s linear 0s,
+    opacity 0.1s;
 }
 
 a {
-    color: var(--color-accent);
+  color: var(--color-accent);
 }
 
 /*
@@ -53,140 +60,141 @@ a {
   https://material.io/design/components/menus.html
 */
 #menu-popup {
-    display: inline-block;
-    background: var(--color-surface-z8);
-    box-shadow: var(--shadow-surface-z8);
-    border-radius: 8px;
-    min-width: 112px;
-    /* Place on top of menu button */
-    position: relative;
-    top: calc(16px + var(--safe-area-inset-top));
-    left: 12px;
-    /* Expand animation from top-left corner */
-    transform: scale(.5, .5);
-    transform-origin: top left;
-    transition: transform .1s;
-    overflow: hidden; /* Clip the corners of the focused item backgrounds */
+  display: inline-block;
+  background: var(--color-surface-z8);
+  box-shadow: var(--shadow-surface-z8);
+  border-radius: 8px;
+  min-width: 112px;
+  /* Place on top of menu button */
+  position: relative;
+  top: calc(16px + var(--safe-area-inset-top));
+  left: 12px;
+  /* Expand animation from top-left corner */
+  transform: scale(0.5, 0.5);
+  transform-origin: top left;
+  transition: transform 0.1s;
+  overflow: hidden; /* Clip the corners of the focused item backgrounds */
 }
 
 @supports (left: max(12px, 0px)) {
-    #menu-popup {
-        left: max(12px, 4px + var(--safe-area-inset-left));
-    }
+  #menu-popup {
+    left: max(12px, 4px + var(--safe-area-inset-left));
+  }
 }
 
 #menu.show #menu-popup {
-    transform: scale(1, 1);
+  transform: scale(1, 1);
 }
 
 #menu li {
-    line-height: 48px;
-    display: flex;
+  line-height: 48px;
+  display: flex;
 }
 
 #menu li button {
-    flex: 1;
-    text-align: left;
-    padding: 0 16px;
-    position: relative;
+  flex: 1;
+  text-align: left;
+  padding: 0 16px;
+  position: relative;
 }
 
 #menu li button::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-color: var(--color-foreground);
-    opacity: 0;
-    transition: opacity .1s;
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: var(--color-foreground);
+  opacity: 0;
+  transition: opacity 0.1s;
 }
 
 #menu li button:focus::before {
-    opacity: var(--opacity-focused);
+  opacity: var(--opacity-focused);
 }
 
 #menu button:disabled {
-    opacity: var(--opacity-disabled);
+  opacity: var(--opacity-disabled);
 }
 
 /* Re-usable dialog component: container presumed to also be a .full-screen-overlay, with one child dialog <div> */
 .dialog-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: var(--safe-area-inset-top) var(--safe-area-inset-right) var(--safe-area-inset-bottom) var(--safe-area-inset-left);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--safe-area-inset-top) var(--safe-area-inset-right)
+    var(--safe-area-inset-bottom) var(--safe-area-inset-left);
 }
 
 .dialog-container > div {
-    max-height: calc(100% - 88px);
-    max-width: calc(100% - 88px);
-    background: var(--color-surface-z24);
-    box-shadow: var(--shadow-surface-z24);
-    border-radius: 15px;
-    padding: 8px;
-    overflow: auto;
+  max-height: calc(100% - 88px);
+  max-width: calc(100% - 88px);
+  background: var(--color-surface-z24);
+  box-shadow: var(--shadow-surface-z24);
+  border-radius: 15px;
+  padding: 8px;
+  overflow: auto;
 }
 
 #about ul {
-    margin: 16px 8px 8px 25px;
-    padding: 0;
+  margin: 16px 8px 8px 25px;
+  padding: 0;
 }
 
 #about li {
-    line-height: 32px;
+  line-height: 32px;
 }
 
 #app-logo * {
-    margin: 4px 0;
-    text-align: center;
+  margin: 4px 0;
+  text-align: center;
 }
 
 #app-logo img {
-    display: block;
-    margin: 8px auto;
+  display: block;
+  margin: 8px auto;
 }
 
 #app-logo h1 {
-    font-size: 16px;
+  font-size: 16px;
 }
 
 #app-version {
-    font-weight: normal;
+  font-weight: normal;
 }
 
 #app-logo h2 {
-    font-size: 14px;
-    font-weight: normal;
+  font-size: 14px;
+  font-weight: normal;
 }
 
 #share {
-    text-align: center;
+  text-align: center;
 }
 
 #share > div {
-    padding: 1.5rem;
+  padding: 1.5rem;
 }
 
 #share-img > svg {
-    width: 60vmin;
-    height: 60vmin;
+  width: 60vmin;
+  height: 60vmin;
 }
 
 #share-url {
-    -webkit-user-select: auto;
-    user-select: all;
+  -webkit-user-select: auto;
+  user-select: all;
 }
 
 #share-actions {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
 }
 
 #share-actions > button {
-    font-size: 14px;
-    line-height: 1;
-    color: var(--color-accent);
-    font-family: var(--font-stack-medium);
-    font-weight: 500;
-    text-transform: uppercase;
+  font-size: 14px;
+  line-height: 1;
+  color: var(--color-accent);
+  font-family: var(--font-stack-medium);
+  font-weight: 500;
+  text-transform: uppercase;
 }

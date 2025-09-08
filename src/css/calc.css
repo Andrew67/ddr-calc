@@ -3,365 +3,401 @@
 
 /* Default theme */
 :root {
-    --font-stack: "Roboto", "Ubuntu", "Cantarell", system-ui, -apple-system, sans-serif;
-    /* Separate font stack for manually installed font (e.g. dev) / Android 4.x (exposed only through -light alias) */
-    --font-stack-light: "Roboto Light", sans-serif-light, var(--font-stack);
-    /* Same as above, although Roboto Medium isn't available until Android 5 (and doesn't strictly need -medium alias) */
-    --font-stack-medium: "Roboto Medium", sans-serif-medium, var(--font-stack);
+  --font-stack:
+    "Roboto", "Ubuntu", "Cantarell", system-ui, -apple-system, sans-serif;
+  /* Separate font stack for manually installed font (e.g. dev) / Android 4.x (exposed only through -light alias) */
+  --font-stack-light: "Roboto Light", sans-serif-light, var(--font-stack);
+  /* Same as above, although Roboto Medium isn't available until Android 5 (and doesn't strictly need -medium alias) */
+  --font-stack-medium: "Roboto Medium", sans-serif-medium, var(--font-stack);
 
-    --opacity-focused: .12;
-    --opacity-active: .24;
-    --opacity-disabled: .38;
+  --opacity-focused: 0.12;
+  --opacity-active: 0.24;
+  --opacity-disabled: 0.38;
 
-    /* Material Design elevation; see https://material.io/design/environment/elevation.html#default-elevations */
-    --color-surface-z0: white; /* Lowest level; essentially the display */
-    --color-surface-z1: var(--color-surface-z0); /* Card */
-    --color-surface-z8: var(--color-surface-z0); /* Menu */
-    --color-surface-z16: var(--color-surface-z0); /* Modal side sheet */
-    --color-surface-z24: var(--color-surface-z0); /* Dialog */
+  /* Material Design elevation; see https://material.io/design/environment/elevation.html#default-elevations */
+  --color-surface-z0: white; /* Lowest level; essentially the display */
+  --color-surface-z1: var(--color-surface-z0); /* Card */
+  --color-surface-z8: var(--color-surface-z0); /* Menu */
+  --color-surface-z16: var(--color-surface-z0); /* Modal side sheet */
+  --color-surface-z24: var(--color-surface-z0); /* Dialog */
 
-    --color-foreground: rgba(0,0,0,.87);
-    --color-foreground-medium: rgba(0,0,0,.6);
+  --color-foreground: rgba(0, 0, 0, 0.87);
+  --color-foreground-medium: rgba(0, 0, 0, 0.6);
 
-    --color-accent: #004ba0; /* Material Blue 700 Dark */
-    --color-result: #00600f; /* Material Green 700 Dark */
+  --color-accent: #004ba0; /* Material Blue 700 Dark */
+  --color-result: #00600f; /* Material Green 700 Dark */
 
-    --color-keypad-bg: #263238; /* Material Blue Grey 900 */
-    --color-keypad-ext-bg: #455a64; /* Material Blue Grey 700 */
-    --color-keypad-bg-active: rgba(255,255,255,var(--opacity-active));
+  --color-keypad-bg: #263238; /* Material Blue Grey 900 */
+  --color-keypad-ext-bg: #455a64; /* Material Blue Grey 700 */
+  --color-keypad-bg-active: rgba(255, 255, 255, var(--opacity-active));
 
-    --color-keypad-fg: rgba(255,255,255,.87);
-    --color-keypad-ext-fg: rgba(255,255,255,.87);
+  --color-keypad-fg: rgba(255, 255, 255, 0.87);
+  --color-keypad-ext-fg: rgba(255, 255, 255, 0.87);
 
-    /* Shadows; sourced from https://material-components.github.io/material-components-web-catalog/#/component/elevation */
-    --shadow-surface-z1: 0 2px 1px -1px rgba(0,0,0,.2),0 1px 1px 0 rgba(0,0,0,.14),0 1px 3px 0 rgba(0,0,0,.12);
-    --shadow-surface-z8: 0 5px 5px -3px rgba(0,0,0,.2),0 8px 10px 1px rgba(0,0,0,.14),0 3px 14px 2px rgba(0,0,0,.12);
-    --shadow-surface-z16: 0 8px 10px -5px rgba(0,0,0,.2),0 16px 24px 2px rgba(0,0,0,.14),0 6px 30px 5px rgba(0,0,0,.12);
-    --shadow-surface-z24: 0 11px 15px -7px rgba(0,0,0,.2),0 24px 38px 3px rgba(0,0,0,.14),0 9px 46px 8px rgba(0,0,0,.12);
+  /* Shadows; sourced from https://material-components.github.io/material-components-web-catalog/#/component/elevation */
+  --shadow-surface-z1:
+    0 2px 1px -1px rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14),
+    0 1px 3px 0 rgba(0, 0, 0, 0.12);
+  --shadow-surface-z8:
+    0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14),
+    0 3px 14px 2px rgba(0, 0, 0, 0.12);
+  --shadow-surface-z16:
+    0 8px 10px -5px rgba(0, 0, 0, 0.2), 0 16px 24px 2px rgba(0, 0, 0, 0.14),
+    0 6px 30px 5px rgba(0, 0, 0, 0.12);
+  --shadow-surface-z24:
+    0 11px 15px -7px rgba(0, 0, 0, 0.2), 0 24px 38px 3px rgba(0, 0, 0, 0.14),
+    0 9px 46px 8px rgba(0, 0, 0, 0.12);
 
-    /* Safe area insets (iPhoneX notch); set as variables for easier debugging */
-    --safe-area-inset-top: 0px;
-    --safe-area-inset-right: 0px;
-    --safe-area-inset-bottom: 0px;
-    --safe-area-inset-left: 0px;
+  /* Safe area insets (iPhoneX notch); set as variables for easier debugging */
+  --safe-area-inset-top: 0px;
+  --safe-area-inset-right: 0px;
+  --safe-area-inset-bottom: 0px;
+  --safe-area-inset-left: 0px;
 }
 
 @supports (width: calc(80% - env(safe-area-inset-right))) {
-    :root {
-        --safe-area-inset-top: env(safe-area-inset-top);
-        --safe-area-inset-right: env(safe-area-inset-right);
-        --safe-area-inset-bottom: env(safe-area-inset-bottom);
-        --safe-area-inset-left: env(safe-area-inset-left);
-    }
+  :root {
+    --safe-area-inset-top: env(safe-area-inset-top);
+    --safe-area-inset-right: env(safe-area-inset-right);
+    --safe-area-inset-bottom: env(safe-area-inset-bottom);
+    --safe-area-inset-left: env(safe-area-inset-left);
+  }
 }
 
 /* Dark theme */
 @media screen and (prefers-color-scheme: dark) {
-    body {
-        /* Dark theme overlay-based elevations; see https://material.io/design/color/dark-theme.html#properties */
-        --color-surface-z0: #121212;
-        /* 5% white overlay */
-        --color-surface-z1: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.5)), var(--color-surface-z0);
-        /* 12% white overlay */
-        --color-surface-z8: linear-gradient(rgba(255,255,255,.12), rgba(255,255,255,.12)), var(--color-surface-z0);
-        /* 15% white overlay */
-        --color-surface-z16: linear-gradient(rgba(255,255,255,.15), rgba(255,255,255,.15)), var(--color-surface-z0);
-        /* 16% white overlay */
-        --color-surface-z24: linear-gradient(rgba(255,255,255,.16), rgba(255,255,255,.16)), var(--color-surface-z0);
+  body {
+    /* Dark theme overlay-based elevations; see https://material.io/design/color/dark-theme.html#properties */
+    --color-surface-z0: #121212;
+    /* 5% white overlay */
+    --color-surface-z1:
+      linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)),
+      var(--color-surface-z0);
+    /* 12% white overlay */
+    --color-surface-z8:
+      linear-gradient(rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.12)),
+      var(--color-surface-z0);
+    /* 15% white overlay */
+    --color-surface-z16:
+      linear-gradient(rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.15)),
+      var(--color-surface-z0);
+    /* 16% white overlay */
+    --color-surface-z24:
+      linear-gradient(rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.16)),
+      var(--color-surface-z0);
 
-        --color-foreground: rgba(255,255,255,.87);
-        --color-foreground-medium: rgba(255,255,255,.6);
+    --color-foreground: rgba(255, 255, 255, 0.87);
+    --color-foreground-medium: rgba(255, 255, 255, 0.6);
 
-        --color-accent: #90caf9; /* Material Blue 200 */
-        --color-result: #c8e6c9; /* Material Green 100 */
+    --color-accent: #90caf9; /* Material Blue 200 */
+    --color-result: #c8e6c9; /* Material Green 100 */
 
-        --color-keypad-bg: #102027; /* Material Blue Grey 800 Dark */
-        --color-keypad-ext-bg: #1c313a; /* Material Blue Grey 700 Dark */
-        --color-keypad-bg-active: rgba(200,200,200,var(--opacity-active));
-    }
+    --color-keypad-bg: #102027; /* Material Blue Grey 800 Dark */
+    --color-keypad-ext-bg: #1c313a; /* Material Blue Grey 700 Dark */
+    --color-keypad-bg-active: rgba(200, 200, 200, var(--opacity-active));
+  }
 }
 
 /* Matching theme extracted from DDR Finder (Android) */
 body.theme-ddrfinder {
-    --color-keypad-bg: #D4E3FF; /* Primary Container */
-    --color-keypad-fg: #001C3A; /* On Primary Container */
-    --color-keypad-ext-bg: #FFD6FE; /* Secondary Container */
-    --color-keypad-ext-fg: #35003F; /* On Secondary Container */
-    --color-result: #6a0080; /* Material Purple 500 Dark */
-    --color-keypad-bg-active: rgba(128,128,128,var(--opacity-active));
+  --color-keypad-bg: #d4e3ff; /* Primary Container */
+  --color-keypad-fg: #001c3a; /* On Primary Container */
+  --color-keypad-ext-bg: #ffd6fe; /* Secondary Container */
+  --color-keypad-ext-fg: #35003f; /* On Secondary Container */
+  --color-result: #6a0080; /* Material Purple 500 Dark */
+  --color-keypad-bg-active: rgba(128, 128, 128, var(--opacity-active));
 }
 @media screen and (prefers-color-scheme: dark) {
-    body.theme-ddrfinder {
-        --color-keypad-bg: #113153; /* Primary Container */
-        --color-keypad-fg: #D4E3FF; /* On Primary Container */
-        --color-keypad-ext-bg: #4e2b55; /* Secondary Container */
-        --color-keypad-ext-fg: #FFD6FE; /* On Secondary Container */
-        --color-result: #F9ABFF; /* Secondary */
-        --color-keypad-bg-active: rgba(200,200,200,var(--opacity-active));
-    }
+  body.theme-ddrfinder {
+    --color-keypad-bg: #113153; /* Primary Container */
+    --color-keypad-fg: #d4e3ff; /* On Primary Container */
+    --color-keypad-ext-bg: #4e2b55; /* Secondary Container */
+    --color-keypad-ext-fg: #ffd6fe; /* On Secondary Container */
+    --color-result: #f9abff; /* Secondary */
+    --color-keypad-bg-active: rgba(200, 200, 200, var(--opacity-active));
+  }
 }
 
-html, body {
-    width: 100%;
-    height: 100%;
+html,
+body {
+  width: 100%;
+  height: 100%;
 }
 
 body {
-    font-family: var(--font-stack);
-    background: var(--color-surface-z0);
-    color: var(--color-foreground);
-    position: fixed; /* Prevents bounce scroll on iOS */
-    overflow: hidden;
+  font-family: var(--font-stack);
+  background: var(--color-surface-z0);
+  color: var(--color-foreground);
+  position: fixed; /* Prevents bounce scroll on iOS */
+  overflow: hidden;
 
-    /* Block text selection for app-like experience */
-    -moz-user-select: none;
-    -ms-user-select: none;
-    -webkit-user-select: none;
-    user-select: none;
+  /* Block text selection for app-like experience */
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
 
-    /* Blocks scrolling, zooming, and pull-to-refresh (does not work on iOS < 13) */
-    touch-action: none;
+  /* Blocks scrolling, zooming, and pull-to-refresh (does not work on iOS < 13) */
+  touch-action: none;
 }
 
-*, *::before, *::after {
-    /* Recommended CSS reset from https://internetingishard.com/html-and-css/css-box-model/ */
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+*,
+*::before,
+*::after {
+  /* Recommended CSS reset from https://internetingishard.com/html-and-css/css-box-model/ */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 
-    -webkit-tap-highlight-color: rgba(0,0,0,0); /* Cancel iOS highlighting of buttons since we have our own */
+  -webkit-tap-highlight-color: rgba(
+    0,
+    0,
+    0,
+    0
+  ); /* Cancel iOS highlighting of buttons since we have our own */
 }
 
 button {
-    font: inherit;
-    color: currentColor;
-    background: transparent;
-    border: 0;
+  font: inherit;
+  color: currentColor;
+  background: transparent;
+  border: 0;
 }
 
-button:not(:disabled), label {
-    cursor: pointer;
+button:not(:disabled),
+label {
+  cursor: pointer;
 }
 
 button::-moz-focus-inner {
-    border: 0;
+  border: 0;
 }
 
 @keyframes fade-out-delayed {
-    from {
-        opacity: 1;
-        visibility: visible;
-    }
+  from {
+    opacity: 1;
+    visibility: visible;
+  }
 
-    80% {
-        opacity: 1;
-        visibility: visible;
-    }
+  80% {
+    opacity: 1;
+    visibility: visible;
+  }
 
-    to {
-        opacity: 0;
-        visibility: hidden;
-    }
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
 }
 
-#calculator li, #menu li, #song-list li {
-    list-style: none;
+#calculator li,
+#menu li,
+#song-list li {
+  list-style: none;
 }
 
-#app, #calculator {
-    width: 100%;
-    height: 100%;
+#app,
+#calculator {
+  width: 100%;
+  height: 100%;
 }
 
 /* Loading overlay; solid background color and delay while UI elements settle */
 #loading-overlay {
-    position: absolute;
-    z-index: 100;
-    background: var(--color-keypad-bg);
-    width: 100%;
-    height: 100%;
-    animation-name: fade-out-delayed;
-    --fade-out-duration: .6s;
-    animation-duration: var(--fade-out-duration);
-    opacity: 0;
-    visibility: hidden;
+  position: absolute;
+  z-index: 100;
+  background: var(--color-keypad-bg);
+  width: 100%;
+  height: 100%;
+  animation-name: fade-out-delayed;
+  --fade-out-duration: 0.6s;
+  animation-duration: var(--fade-out-duration);
+  opacity: 0;
+  visibility: hidden;
 }
 
 /* Incompatible browser overlay; these should work down to Android 4.4 */
 #browser-dialog {
-    font-family: sans-serif;
-    position: absolute;
-    z-index: 10;
-    background-color: rgba(0, 0, 0, 0.64);
-    width: 100%;
-    height: 100%;
+  font-family: sans-serif;
+  position: absolute;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.64);
+  width: 100%;
+  height: 100%;
 }
 
 #browser-dialog > div {
-    background: white;
-    background: var(--color-surface-z24);
-    border-radius: 15px;
-    padding: 8px;
-    width: 80%;
-    position: relative;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  background: white;
+  background: var(--color-surface-z24);
+  border-radius: 15px;
+  padding: 8px;
+  width: 80%;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 #browser-dialog h1 {
-    font-size: 18px;
-    margin: 0;
-    text-align: center;
+  font-size: 18px;
+  margin: 0;
+  text-align: center;
 }
 
 #browser-dialog p {
-    margin: 8px 8px 0;
+  margin: 8px 8px 0;
 }
 
 #browser-dialog ul {
-    padding-left: 25px;
-    margin: 8px 0;
+  padding-left: 25px;
+  margin: 8px 0;
 }
 
 #browser-dialog p.footer {
-    text-align: center;
-    margin: 4px;
+  text-align: center;
+  margin: 4px;
 }
 
 /* Calculator */
 #display {
-    width: 200%;
-    flex: 0 0 30%;
-    margin-top: var(--safe-area-inset-top);
-    font-size: calc(5vh + 5vw);
-    position: relative;
-    display: flex;
-    overflow: hidden;
+  width: 200%;
+  flex: 0 0 30%;
+  margin-top: var(--safe-area-inset-top);
+  font-size: calc(5vh + 5vw);
+  position: relative;
+  display: flex;
+  overflow: hidden;
 }
 
 #display > div {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    color: var(--color-foreground-medium);
-    padding-left: var(--safe-area-inset-left);
-    padding-right: 3vw;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  color: var(--color-foreground-medium);
+  padding-left: var(--safe-area-inset-left);
+  padding-right: 3vw;
 }
 
 /* Firefox 68 doesn't realize it lacks max() support when supplied as max(..., env()), so plain overrides are a no-go */
 @supports (padding-right: max(3vw, 0px)) {
-    #display > div {
-        padding-right: max(3vw, var(--safe-area-inset-right));
-    }
+  #display > div {
+    padding-right: max(3vw, var(--safe-area-inset-right));
+  }
 }
 
 #surface-speedmod div {
-    flex: 1;
+  flex: 1;
 }
 
 .overlay {
-    display: none;
+  display: none;
 }
 
 #display .active {
-    color: var(--color-accent);
-    text-decoration: underline;
-    text-underline-offset: .1em;
-    text-decoration-thickness: from-font;
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-underline-offset: 0.1em;
+  text-decoration-thickness: from-font;
 }
 
-#result, #high-result, #low-result {
-    color: var(--color-result);
+#result,
+#high-result,
+#low-result {
+  color: var(--color-result);
 }
 
 #mode-switcher {
-    position: relative;
-    height: 48px;
-    line-height: 48px;
-    display: flex;
-    font-size: 14px;
-    font-family: var(--font-stack-medium);
-    font-weight: 500;
-    opacity: 0;
+  position: relative;
+  height: 48px;
+  line-height: 48px;
+  display: flex;
+  font-size: 14px;
+  font-family: var(--font-stack-medium);
+  font-weight: 500;
+  opacity: 0;
 }
 
 #calculator {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 #keypad {
-    flex: 1;
-    background: var(--color-keypad-bg);
-    color: var(--color-keypad-fg);
-    font-size: calc(3vh + 3vw);
-    display: flex;
-    position: relative;
+  flex: 1;
+  background: var(--color-keypad-bg);
+  color: var(--color-keypad-fg);
+  font-size: calc(3vh + 3vw);
+  display: flex;
+  position: relative;
 
-    /* Blocks double-tap-zoom (the only touch-action supported by iOS, does not block scroll or zoom) */
-    touch-action: manipulation;
+  /* Blocks double-tap-zoom (the only touch-action supported by iOS, does not block scroll or zoom) */
+  touch-action: manipulation;
 }
 
 /* Increase font size for number keys (BPM key is last) and speed mod +/- */
-#keypad-main button:not(:last-of-type), #keypad-ohm-mod {
-    font-size: calc(5vh + 5vw);
+#keypad-main button:not(:last-of-type),
+#keypad-ohm-mod {
+  font-size: calc(5vh + 5vw);
 }
 
 /* Cap font size on wide landscape displays, otherwise elements begin to clash and go off screen */
 @media (min-aspect-ratio: 16/9) {
-    #display, #keypad-main button:not(:last-of-type), #keypad-ohm-mod {
-        font-size: calc(3vh + 3vw);
-    }
+  #display,
+  #keypad-main button:not(:last-of-type),
+  #keypad-ohm-mod {
+    font-size: calc(3vh + 3vw);
+  }
 }
 
-#display div, #keypad {
-    font-family: var(--font-stack-light);
-    font-weight: 300;
+#display div,
+#keypad {
+  font-family: var(--font-stack-light);
+  font-weight: 300;
 }
 
 #display > div > div {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 #keypad > div {
-    display: flex;
-    padding-bottom: var(--safe-area-inset-bottom);
+  display: flex;
+  padding-bottom: var(--safe-area-inset-bottom);
 }
 
 #keypad-main {
-    flex: 3;
-    flex-wrap: wrap;
-    padding-left: var(--safe-area-inset-left);
+  flex: 3;
+  flex-wrap: wrap;
+  padding-left: var(--safe-area-inset-left);
 }
 
 #keypad-ext {
-    flex: 1;
-    flex-direction: column;
-    background: var(--color-keypad-ext-bg);
-    color: var(--color-keypad-ext-fg);
-    padding-right: var(--safe-area-inset-right);
+  flex: 1;
+  flex-direction: column;
+  background: var(--color-keypad-ext-bg);
+  color: var(--color-keypad-ext-fg);
+  padding-right: var(--safe-area-inset-right);
 }
 
-#keypad-ohm#keypad-ohm, #keypad-ohm-mod#keypad-ohm-mod {
-    display: none;
+#keypad-ohm#keypad-ohm,
+#keypad-ohm-mod#keypad-ohm-mod {
+  display: none;
 }
 
 #keypad button {
-    flex: 1;
-    position: relative;
-    z-index: 0;
+  flex: 1;
+  position: relative;
+  z-index: 0;
 }
 
 #keypad-main button {
-    flex-basis: 33.3333%;
+  flex-basis: 33.3333%;
 }
 
 #keypad button > * {
-    display: inline-block;
-    transition: transform .1s;
+  display: inline-block;
+  transition: transform 0.1s;
 }
 
 /* TODO: Split off into separate CSS files */
@@ -372,77 +408,82 @@ button::-moz-focus-inner {
 #songbpm-icon:focus,
 #menu li button:focus,
 #apply-update:focus {
-    outline: 3px solid transparent; /* Visible in High Contrast Mode: https://sarahmhigley.com/writing/whcm-quick-tips/ */
+  outline: 3px solid transparent; /* Visible in High Contrast Mode: https://sarahmhigley.com/writing/whcm-quick-tips/ */
 }
 
 /* Background color transition performed using opacity on a pseudo-element for performance */
 #keypad button::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    transition: opacity .1s;
-    background: var(--color-keypad-bg-active);
-    z-index: -1;
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.1s;
+  background: var(--color-keypad-bg-active);
+  z-index: -1;
 }
 
 #keypad button:focus::before {
-    opacity: .5;
+  opacity: 0.5;
 }
 
 #keypad button.active::before {
-    opacity: 1;
+  opacity: 1;
 }
 
 #keypad button.active > * {
-    transform: scale(0.95, 0.95);
+  transform: scale(0.95, 0.95);
 }
 
 #keypad button:disabled {
-    opacity: var(--opacity-disabled);
-    transition: opacity .1s;
+  opacity: var(--opacity-disabled);
+  transition: opacity 0.1s;
 }
 
-.subtract button[data-keytype=add] span::before {
-    content: '-';
+.subtract button[data-keytype="add"] span::before {
+  content: "-";
 }
 
 /* "One-handed mode" compact keyboard automatically takes over on small-height screens.
    (For the manual bonus feature, see ohm.css) */
 @media (max-height: 320px) {
-    #mode-switcher {
-        height: 44px;
-        line-height: 44px;
-        font-size: 12px;
-    }
-    #keypad > #keypad-main, #keypad > #keypad-ext {
-        display: none;
-    }
-    #display {
-        flex: 1;
-    }
-    #keypad > #keypad-ohm, #keypad > #keypad-ohm-mod {
-        display: flex;
-    }
-    #keypad-ohm {
-        flex: 1;
-        padding-left: var(--safe-area-inset-left);
-        padding-right: var(--safe-area-inset-right);
-    }
-    #keypad-ohm-mod {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: calc(80% - (var(--safe-area-inset-right) * .8) + (var(--safe-area-inset-left) * .2));
-        padding-left: var(--safe-area-inset-left);
-        height: 100%;
-        visibility: hidden;
-    }
-    .speedmod #keypad-ohm-mod {
-        transform: translateY(-100%);
-        visibility: visible;
-    }
-    .speedmod #keypad-ohm button:not(:last-of-type) {
-        visibility: hidden;
-    }
+  #mode-switcher {
+    height: 44px;
+    line-height: 44px;
+    font-size: 12px;
+  }
+  #keypad > #keypad-main,
+  #keypad > #keypad-ext {
+    display: none;
+  }
+  #display {
+    flex: 1;
+  }
+  #keypad > #keypad-ohm,
+  #keypad > #keypad-ohm-mod {
+    display: flex;
+  }
+  #keypad-ohm {
+    flex: 1;
+    padding-left: var(--safe-area-inset-left);
+    padding-right: var(--safe-area-inset-right);
+  }
+  #keypad-ohm-mod {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: calc(
+      80% - (var(--safe-area-inset-right) * 0.8) +
+        (var(--safe-area-inset-left) * 0.2)
+    );
+    padding-left: var(--safe-area-inset-left);
+    height: 100%;
+    visibility: hidden;
+  }
+  .speedmod #keypad-ohm-mod {
+    transform: translateY(-100%);
+    visibility: visible;
+  }
+  .speedmod #keypad-ohm button:not(:last-of-type) {
+    visibility: hidden;
+  }
 }

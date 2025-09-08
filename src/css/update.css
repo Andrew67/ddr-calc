@@ -1,28 +1,28 @@
 /*! DDR Calc | https://github.com/Andrew67/ddr-calc */
 /* Update CSS */
 #apply-update {
-    color: var(--color-result);
-    border: 1px solid var(--color-result);
-    border-radius: 4px;
-    padding: 0 16px;
-    font-size: 14px;
-    font-family: var(--font-stack-medium);
-    font-weight: 500;
-    text-transform: uppercase;
-    line-height: 34px;
-    display: inline-block;
-    position: relative;
+  color: var(--color-result);
+  border: 1px solid var(--color-result);
+  border-radius: 4px;
+  padding: 0 16px;
+  font-size: 14px;
+  font-family: var(--font-stack-medium);
+  font-weight: 500;
+  text-transform: uppercase;
+  line-height: 34px;
+  display: inline-block;
+  position: relative;
 }
 
 #apply-update::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-color: var(--color-result);
-    opacity: 0;
-    transition: opacity .1s;
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: var(--color-result);
+  opacity: 0;
+  transition: opacity 0.1s;
 }
 
 #apply-update:focus::before {
-    opacity: var(--opacity-focused);
+  opacity: var(--opacity-focused);
 }

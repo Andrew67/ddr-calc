@@ -1,5 +1,12 @@
-[{
-  "relation": ["delegate_permission/common.handle_all_urls"],
-  "target" : { "namespace": "android_app", "package_name": "com.andrew67.ddrcalc",
-    "sha256_cert_fingerprints": ["47:65:20:64:7B:07:45:E2:B0:39:45:93:8C:7C:16:CE:99:DF:CF:1D:97:D7:7D:DC:28:96:86:6B:72:73:DE:94"] }
-}]
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.andrew67.ddrcalc",
+      "sha256_cert_fingerprints": [
+        "47:65:20:64:7B:07:45:E2:B0:39:45:93:8C:7C:16:CE:99:DF:CF:1D:97:D7:7D:DC:28:96:86:6B:72:73:DE:94"
+      ]
+    }
+  }
+]

@@ -2,44 +2,59 @@
 /* One-handed mode CSS */
 
 @media (min-height: 321px) {
-    #keypad-ohm#keypad-ohm, #keypad-ohm-mod#keypad-ohm-mod {
-        display: flex;
-        position: absolute;
-        top: 0;
-        left: 100%;
-        width: calc(25% + (var(--safe-area-inset-right) * .75) - (var(--safe-area-inset-left) * .25));
-        padding-right: var(--safe-area-inset-right);
-        background: var(--color-keypad-ext-bg);
-        color: var(--color-keypad-ext-fg);
-    }
+  #keypad-ohm#keypad-ohm,
+  #keypad-ohm-mod#keypad-ohm-mod {
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 100%;
+    width: calc(
+      25% + (var(--safe-area-inset-right) * 0.75) -
+        (var(--safe-area-inset-left) * 0.25)
+    );
+    padding-right: var(--safe-area-inset-right);
+    background: var(--color-keypad-ext-bg);
+    color: var(--color-keypad-ext-fg);
+  }
 
-    #keypad-ohm {
-        height: 100%;
-        flex-direction: column;
-    }
+  #keypad-ohm {
+    height: 100%;
+    flex-direction: column;
+  }
 
-    #keypad > #keypad-ohm-mod {
-        padding-bottom: 0; /* Cancels default bottom inset since it doesn't reach the bottom */
-        height: calc(80% - (var(--safe-area-inset-bottom) * .8));
-        flex-direction: column-reverse;
-    }
+  #keypad > #keypad-ohm-mod {
+    padding-bottom: 0; /* Cancels default bottom inset since it doesn't reach the bottom */
+    height: calc(80% - (var(--safe-area-inset-bottom) * 0.8));
+    flex-direction: column-reverse;
+  }
 
-    .force-ohm #keypad-ohm, .force-ohm.speedmod #keypad-ohm-mod {
-        transform: translateX(-100%);
-    }
+  .force-ohm #keypad-ohm,
+  .force-ohm.speedmod #keypad-ohm-mod {
+    transform: translateX(-100%);
+  }
 
-    .force-ohm.left-handed #keypad-ohm#keypad-ohm, .force-ohm.speedmod.left-handed #keypad-ohm-mod#keypad-ohm-mod {
-        transform: translateX(calc(-400% + (var(--safe-area-inset-left) * 3) - var(--safe-area-inset-right)));
-        width: calc(25% + (var(--safe-area-inset-left) * .75) - (var(--safe-area-inset-right) * .25));
-        padding-right: 0;
-        padding-left: var(--safe-area-inset-left);
-    }
+  .force-ohm.left-handed #keypad-ohm#keypad-ohm,
+  .force-ohm.speedmod.left-handed #keypad-ohm-mod#keypad-ohm-mod {
+    transform: translateX(
+      calc(
+        -400% + (var(--safe-area-inset-left) * 3) - var(--safe-area-inset-right)
+      )
+    );
+    width: calc(
+      25% + (var(--safe-area-inset-left) * 0.75) -
+        (var(--safe-area-inset-right) * 0.25)
+    );
+    padding-right: 0;
+    padding-left: var(--safe-area-inset-left);
+  }
 
-    .force-ohm.left-handed #keypad-main {
-        transform: translateX(calc(33.3333% - (var(--safe-area-inset-left) * .3333)));
-    }
+  .force-ohm.left-handed #keypad-main {
+    transform: translateX(
+      calc(33.3333% - (var(--safe-area-inset-left) * 0.3333))
+    );
+  }
 
-    .force-ohm.left-handed #keypad-ext {
-        transform: translateX(100%);
-    }
+  .force-ohm.left-handed #keypad-ext {
+    transform: translateX(100%);
+  }
 }

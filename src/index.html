@@ -1,154 +1,346 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" dir="ltr">
-<head>
-    <meta charset="utf-8">
+  <head>
+    <meta charset="utf-8" />
     <!-- DDR Calc | https://github.com/Andrew67/ddr-calc -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
     <title>DDR Calc</title>
-    <meta name="application-name" content="DDR Calc">
-    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
-    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121212">
-    <meta name="color-scheme" content="light dark">
-    <meta name="description" content="Calculator for DDR speed modifiers">
+    <meta name="application-name" content="DDR Calc" />
+    <meta
+      name="theme-color"
+      media="(prefers-color-scheme: light)"
+      content="#ffffff"
+    />
+    <meta
+      name="theme-color"
+      media="(prefers-color-scheme: dark)"
+      content="#121212"
+    />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="description" content="Calculator for DDR speed modifiers" />
 
     <!-- Core app UI is loaded ASAP; features up to Target BPM preloaded -->
-    <link rel="preload" href="css/calc.css" as="style">
-    <link rel="preload" href="js/calc.js" as="script">
-    <link rel="stylesheet" href="css/calc.css">
+    <link rel="preload" href="css/calc.css" as="style" />
+    <link rel="preload" href="js/calc.js" as="script" />
+    <link rel="stylesheet" href="css/calc.css" />
     <script src="js/calc.js" defer></script>
 
-    <link rel="preload" href="css/games.css" as="style">
-    <link rel="preload" href="./games.json" as="fetch" crossorigin>
-    <link rel="preload" href="js/games.js" as="script">
-    <link rel="preload" href="css/targetbpm.css" as="style">
-    <link rel="preload" href="js/targetbpm.js" as="script">
+    <link rel="preload" href="css/games.css" as="style" />
+    <link rel="preload" href="./games.json" as="fetch" crossorigin />
+    <link rel="preload" href="js/games.js" as="script" />
+    <link rel="preload" href="css/targetbpm.css" as="style" />
+    <link rel="preload" href="js/targetbpm.js" as="script" />
 
-    <link rel="icon" sizes="32x32" href="favicon.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-    <link rel="manifest" href="manifest.json">
+    <link rel="icon" sizes="32x32" href="favicon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+    <link rel="manifest" href="manifest.json" />
 
     <!-- Open Graph -->
-    <meta property="og:title" content="DDR Speed Calculator">
-    <meta property="og:type" content="website">
-    <meta property="og:description" content="Calculator for DDR speed modifiers">
-    <meta property="og:image" content="https://ddrcalc.andrew67.com/img/preview.png">
-    <meta property="og:image:type" content="image/png">
-    <meta property="og:image:width" content="640">
-    <meta property="og:image:height" content="640">
-    <meta property="og:image:alt" content="DDR Calc Preview">
-</head>
-<body>
-<div id="app">
-    <div id="loading-overlay"></div>
-    <!-- Incompatible browser overlay -->
-    <div id="browser-dialog">
+    <meta property="og:title" content="DDR Speed Calculator" />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:description"
+      content="Calculator for DDR speed modifiers"
+    />
+    <meta
+      property="og:image"
+      content="https://ddrcalc.andrew67.com/img/preview.png"
+    />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="640" />
+    <meta property="og:image:height" content="640" />
+    <meta property="og:image:alt" content="DDR Calc Preview" />
+  </head>
+  <body>
+    <div id="app">
+      <div id="loading-overlay"></div>
+      <!-- Incompatible browser overlay -->
+      <div id="browser-dialog">
         <div>
-            <h1>Browser upgrade needed</h1>
-            <p>To use DDR Calc, one of the following minimum browser/OS versions is required:</p>
-            <ul>
-                <li>iOS 15.7
-                <li>Android System WebView 106
-                <li>Chrome 106
-                <li>Firefox 121
-                <li>Samsung Internet 28
-            </ul>
-            <noscript><p>JavaScript must also be enabled</p></noscript>
-            <p class="footer"><a href="https://github.com/Andrew67/ddr-calc">Project Site</a></p>
+          <h1>Browser upgrade needed</h1>
+          <p>
+            To use DDR Calc, one of the following minimum browser/OS versions is
+            required:
+          </p>
+          <ul>
+            <li>iOS 15.7</li>
+            <li>Android System WebView 106</li>
+            <li>Chrome 106</li>
+            <li>Firefox 121</li>
+            <li>Samsung Internet 28</li>
+          </ul>
+          <noscript><p>JavaScript must also be enabled</p></noscript>
+          <p class="footer">
+            <a href="https://github.com/Andrew67/ddr-calc">Project Site</a>
+          </p>
         </div>
-    </div>
-    <script nonce="573">
+      </div>
+      <script nonce="573">
         // In-line checks, for a flicker-free experience on page load
         // Obtain URL query/hash params and remove them (see URLs.md)
         const urlParams = new URLSearchParams(location.search);
-        history.replaceState(history.state, '', location.pathname);
+        history.replaceState(history.state, "", location.pathname);
 
         // Browser compatibility check, to dismiss the incompatibility dialog
-        if ('fetch' in window &&
-            'forEach' in NodeList.prototype &&
-            CSS.supports('selector(:has(:disabled))')
-        ) document.getElementById('browser-dialog').remove();
+        if (
+          "fetch" in window &&
+          "forEach" in NodeList.prototype &&
+          CSS.supports("selector(:has(:disabled))")
+        )
+          document.getElementById("browser-dialog").remove();
 
         /**
          * Detect app loaded via DDR Finder, to unlock an exclusive theme
          */
-        const isDdrFinderReferral = urlParams.has('df') ||
-            document.referrer.startsWith('android-app://com.andrew67.ddrfinder/') ||
-            document.referrer.startsWith('https://ddrfinder.andrew67.com/') ||
-            sessionStorage.getItem('ddrfinder') === 'true';
+        const isDdrFinderReferral =
+          urlParams.has("df") ||
+          document.referrer.startsWith(
+            "android-app://com.andrew67.ddrfinder/",
+          ) ||
+          document.referrer.startsWith("https://ddrfinder.andrew67.com/") ||
+          sessionStorage.getItem("ddrfinder") === "true";
         /**
          * This key is set to "true" once the user has opened DDR Calc through DDR Finder at least once.
          * DDR Calc will switch to the DDR Finder theme at that moment, even on subsequent launches.
          */
-        const KEY_DDRFINDER_THEME_UNLOCKED = 'ddrfinder-theme-unlocked';
+        const KEY_DDRFINDER_THEME_UNLOCKED = "ddrfinder-theme-unlocked";
         /**
          * This key provides the user with the ability to opt out of the DDR Finder theme after it's unlocked.
          */
-        const KEY_DDRFINDER_THEME_ENABLED = 'ddrfinder-theme-enabled';
-        const isDdrFinderThemeUnlocked = isDdrFinderReferral ||
-            localStorage.getItem(KEY_DDRFINDER_THEME_UNLOCKED) === 'true';
-        const isDdrFinderThemeEnabled = () => isDdrFinderReferral ||
-            (isDdrFinderThemeUnlocked && localStorage.getItem(KEY_DDRFINDER_THEME_ENABLED) !== 'false');
+        const KEY_DDRFINDER_THEME_ENABLED = "ddrfinder-theme-enabled";
+        const isDdrFinderThemeUnlocked =
+          isDdrFinderReferral ||
+          localStorage.getItem(KEY_DDRFINDER_THEME_UNLOCKED) === "true";
+        const isDdrFinderThemeEnabled = () =>
+          isDdrFinderReferral ||
+          (isDdrFinderThemeUnlocked &&
+            localStorage.getItem(KEY_DDRFINDER_THEME_ENABLED) !== "false");
         if (isDdrFinderThemeEnabled()) {
-            document.body.classList.add('theme-ddrfinder');
+          document.body.classList.add("theme-ddrfinder");
         }
-    </script>
+      </script>
 
-    <!-- Calculator UI -->
-    <div id="calculator">
+      <!-- Calculator UI -->
+      <div id="calculator">
         <div id="display">
-            <div id="surface-speedmod">
-                <div id="calculation">
-                    <span>
-                        <span id="bpm"></span> <span id="multsign" hidden>×</span><span id="speedmod"></span>
-                    </span>
-                </div>
-                <div>
-                    <span id="result"></span>
-                </div>
+          <div id="surface-speedmod">
+            <div id="calculation">
+              <span>
+                <span id="bpm"></span> <span id="multsign" hidden>×</span
+                ><span id="speedmod"></span>
+              </span>
             </div>
-            <div id="surface-targetbpm">
-                <!-- Target BPM display UI gets inserted here -->
+            <div>
+              <span id="result"></span>
             </div>
-            <!-- Display overlays get inserted here -->
+          </div>
+          <div id="surface-targetbpm">
+            <!-- Target BPM display UI gets inserted here -->
+          </div>
+          <!-- Display overlays get inserted here -->
         </div>
         <form id="mode-switcher">
-            <!-- Speed mod / Target BPM switcher tabs get inserted here -->
+          <!-- Speed mod / Target BPM switcher tabs get inserted here -->
         </form>
         <main id="keypad">
-            <div id="keypad-main">
-                <button type="button" disabled data-keytype="int" aria-keyshortcuts="7"><span>7</span></button>
-                <button type="button" disabled data-keytype="int" aria-keyshortcuts="8"><span>8</span></button>
-                <button type="button" disabled data-keytype="int" aria-keyshortcuts="9"><span>9</span></button>
-                <button type="button" disabled data-keytype="int" aria-keyshortcuts="4"><span>4</span></button>
-                <button type="button" disabled data-keytype="int" aria-keyshortcuts="5"><span>5</span></button>
-                <button type="button" disabled data-keytype="int" aria-keyshortcuts="6"><span>6</span></button>
-                <button type="button" disabled data-keytype="int" aria-keyshortcuts="1"><span>1</span></button>
-                <button type="button" disabled data-keytype="int" aria-keyshortcuts="2"><span>2</span></button>
-                <button type="button" disabled data-keytype="int" aria-keyshortcuts="3"><span>3</span></button>
-                <button type="button" disabled data-keytype="func" aria-keyshortcuts="* x"><span>×</span></button>
-                <button type="button" disabled data-keytype="int" aria-keyshortcuts="0"><span>0</span></button>
-                <button type="button" disabled data-keytype="func" aria-keyshortcuts="# b ="><span>BPM</span></button>
-            </div>
-            <div id="keypad-ext">
-                <button type="button" disabled data-keytype="func" aria-keyshortcuts="Backspace Delete Clear"><span>DEL</span></button>
-                <button type="button" disabled data-keytype="dec" aria-keyshortcuts="@ Shift+2 Control+2 i"><span>.25</span></button>
-                <button type="button" disabled data-keytype="dec" aria-keyshortcuts="% Shift+5 Control+5 o"><span>.5</span></button>
-                <button type="button" disabled data-keytype="dec" aria-keyshortcuts="& Shift+7 Control+7 p"><span>.75</span></button>
-            </div>
-            <div id="keypad-ohm">
-                <button type="button" disabled data-keytype="func" aria-keyshortcuts="q - + _"><span>+ / −</span></button>
-                <button type="button" disabled data-keytype="add" aria-keyshortcuts="w"><span>100</span></button>
-                <button type="button" disabled data-keytype="add" aria-keyshortcuts="e"><span>10</span></button>
-                <button type="button" disabled data-keytype="add" aria-keyshortcuts="r"><span>1</span></button>
-                <button type="button" disabled data-keytype="func" aria-keyshortcuts="t g ` ~"><span>⇄</span></button>
-            </div>
-            <div id="keypad-ohm-mod">
-                <button type="button" disabled data-keytype="mod" aria-keyshortcuts="a s"><span>−</span></button>
-                <button type="button" disabled data-keytype="mod" aria-keyshortcuts="d f"><span>+</span></button>
-            </div>
+          <div id="keypad-main">
+            <button
+              type="button"
+              disabled
+              data-keytype="int"
+              aria-keyshortcuts="7"
+            >
+              <span>7</span>
+            </button>
+            <button
+              type="button"
+              disabled
+              data-keytype="int"
+              aria-keyshortcuts="8"
+            >
+              <span>8</span>
+            </button>
+            <button
+              type="button"
+              disabled
+              data-keytype="int"
+              aria-keyshortcuts="9"
+            >
+              <span>9</span>
+            </button>
+            <button
+              type="button"
+              disabled
+              data-keytype="int"
+              aria-keyshortcuts="4"
+            >
+              <span>4</span>
+            </button>
+            <button
+              type="button"
+              disabled
+              data-keytype="int"
+              aria-keyshortcuts="5"
+            >
+              <span>5</span>
+            </button>
+            <button
+              type="button"
+              disabled
+              data-keytype="int"
+              aria-keyshortcuts="6"
+            >
+              <span>6</span>
+            </button>
+            <button
+              type="button"
+              disabled
+              data-keytype="int"
+              aria-keyshortcuts="1"
+            >
+              <span>1</span>
+            </button>
+            <button
+              type="button"
+              disabled
+              data-keytype="int"
+              aria-keyshortcuts="2"
+            >
+              <span>2</span>
+            </button>
+            <button
+              type="button"
+              disabled
+              data-keytype="int"
+              aria-keyshortcuts="3"
+            >
+              <span>3</span>
+            </button>
+            <button
+              type="button"
+              disabled
+              data-keytype="func"
+              aria-keyshortcuts="* x"
+            >
+              <span>×</span>
+            </button>
+            <button
+              type="button"
+              disabled
+              data-keytype="int"
+              aria-keyshortcuts="0"
+            >
+              <span>0</span>
+            </button>
+            <button
+              type="button"
+              disabled
+              data-keytype="func"
+              aria-keyshortcuts="# b ="
+            >
+              <span>BPM</span>
+            </button>
+          </div>
+          <div id="keypad-ext">
+            <button
+              type="button"
+              disabled
+              data-keytype="func"
+              aria-keyshortcuts="Backspace Delete Clear"
+            >
+              <span>DEL</span>
+            </button>
+            <button
+              type="button"
+              disabled
+              data-keytype="dec"
+              aria-keyshortcuts="@ Shift+2 Control+2 i"
+            >
+              <span>.25</span>
+            </button>
+            <button
+              type="button"
+              disabled
+              data-keytype="dec"
+              aria-keyshortcuts="% Shift+5 Control+5 o"
+            >
+              <span>.5</span>
+            </button>
+            <button
+              type="button"
+              disabled
+              data-keytype="dec"
+              aria-keyshortcuts="& Shift+7 Control+7 p"
+            >
+              <span>.75</span>
+            </button>
+          </div>
+          <div id="keypad-ohm">
+            <button
+              type="button"
+              disabled
+              data-keytype="func"
+              aria-keyshortcuts="q - + _"
+            >
+              <span>+ / −</span>
+            </button>
+            <button
+              type="button"
+              disabled
+              data-keytype="add"
+              aria-keyshortcuts="w"
+            >
+              <span>100</span>
+            </button>
+            <button
+              type="button"
+              disabled
+              data-keytype="add"
+              aria-keyshortcuts="e"
+            >
+              <span>10</span>
+            </button>
+            <button
+              type="button"
+              disabled
+              data-keytype="add"
+              aria-keyshortcuts="r"
+            >
+              <span>1</span>
+            </button>
+            <button
+              type="button"
+              disabled
+              data-keytype="func"
+              aria-keyshortcuts="t g ` ~"
+            >
+              <span>⇄</span>
+            </button>
+          </div>
+          <div id="keypad-ohm-mod">
+            <button
+              type="button"
+              disabled
+              data-keytype="mod"
+              aria-keyshortcuts="a s"
+            >
+              <span>−</span>
+            </button>
+            <button
+              type="button"
+              disabled
+              data-keytype="mod"
+              aria-keyshortcuts="d f"
+            >
+              <span>+</span>
+            </button>
+          </div>
         </main>
+      </div>
+      <!-- Full-screen overlays get inserted here -->
     </div>
-    <!-- Full-screen overlays get inserted here -->
-</div>
-</body>
+  </body>
 </html>

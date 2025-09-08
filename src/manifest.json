@@ -6,9 +6,19 @@
   "name": "DDR Speed Calculator",
   "icons": [
     { "src": "./img/icon-192.png", "type": "image/png", "sizes": "192x192" },
-    { "src": "./img/icon-192-maskable.png", "type": "image/png", "sizes": "192x192", "purpose": "maskable" },
+    {
+      "src": "./img/icon-192-maskable.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "maskable"
+    },
     { "src": "./img/icon-512.png", "type": "image/png", "sizes": "512x512" },
-    { "src": "./img/icon-512-maskable.png", "type": "image/png", "sizes": "512x512", "purpose": "maskable" }
+    {
+      "src": "./img/icon-512-maskable.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "maskable"
+    }
   ],
   "start_url": "./",
   "background_color": "#263238",
@@ -21,16 +31,34 @@
       "name": "Speed Mod",
       "url": "./?mode=speed-mod",
       "icons": [
-        { "src": "./img/icon-speedmod-192.png", "type": "image/png", "sizes": "192x192" },
-        { "src": "./img/icon-speedmod-288.png", "type": "image/png", "sizes": "288x288", "purpose": "maskable" }
+        {
+          "src": "./img/icon-speedmod-192.png",
+          "type": "image/png",
+          "sizes": "192x192"
+        },
+        {
+          "src": "./img/icon-speedmod-288.png",
+          "type": "image/png",
+          "sizes": "288x288",
+          "purpose": "maskable"
+        }
       ]
     },
     {
       "name": "Target BPM",
       "url": "./?mode=target-bpm",
       "icons": [
-        { "src": "./img/icon-targetbpm-192.png", "type": "image/png", "sizes": "192x192" },
-        { "src": "./img/icon-targetbpm-288.png", "type": "image/png", "sizes": "288x288", "purpose": "maskable" }
+        {
+          "src": "./img/icon-targetbpm-192.png",
+          "type": "image/png",
+          "sizes": "192x192"
+        },
+        {
+          "src": "./img/icon-targetbpm-288.png",
+          "type": "image/png",
+          "sizes": "288x288",
+          "purpose": "maskable"
+        }
       ]
     }
   ],
