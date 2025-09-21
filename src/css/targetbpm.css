@@ -74,8 +74,9 @@
   font-size: calc(4vw + 4vh);
 }
 
-/* Cap font size on wide landscape displays, otherwise elements begin to clash and go off screen */
-@media (min-aspect-ratio: 16/9) {
+/* Cap font size on wide landscape or tall portrait displays,
+   otherwise elements begin to clash and go off screen */
+@media (min-aspect-ratio: 16/9) or (max-aspect-ratio: 9/21) {
   #surface-targetbpm > div,
   #surface-targetbpm > #bpms {
     font-size: calc(3vh + 3vw);
