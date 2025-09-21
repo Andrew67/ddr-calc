@@ -130,6 +130,5 @@
 }
 
 #surface-targetbpm > div > .ideal {
-  font-family: var(--font-stack);
   font-weight: 400;
 }

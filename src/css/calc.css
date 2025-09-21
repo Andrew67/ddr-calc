@@ -3,12 +3,7 @@
 
 /* Default theme */
 :root {
-  --font-stack:
-    "Roboto", "Ubuntu", "Cantarell", system-ui, -apple-system, sans-serif;
-  /* Separate font stack for manually installed font (e.g. dev) / Android 4.x (exposed only through -light alias) */
-  --font-stack-light: "Roboto Light", sans-serif-light, var(--font-stack);
-  /* Same as above, although Roboto Medium isn't available until Android 5 (and doesn't strictly need -medium alias) */
-  --font-stack-medium: "Roboto Medium", sans-serif-medium, var(--font-stack);
+  --font-stack: ui-sans-serif, system-ui, sans-serif;
 
   --opacity-focused: 0.12;
   --opacity-active: 0.24;
@@ -49,19 +44,10 @@
     0 9px 46px 8px rgba(0, 0, 0, 0.12);
 
   /* Safe area insets (iPhoneX notch); set as variables for easier debugging */
-  --safe-area-inset-top: 0px;
-  --safe-area-inset-right: 0px;
-  --safe-area-inset-bottom: 0px;
-  --safe-area-inset-left: 0px;
-}
-
-@supports (width: calc(80% - env(safe-area-inset-right))) {
-  :root {
-    --safe-area-inset-top: env(safe-area-inset-top);
-    --safe-area-inset-right: env(safe-area-inset-right);
-    --safe-area-inset-bottom: env(safe-area-inset-bottom);
-    --safe-area-inset-left: env(safe-area-inset-left);
-  }
+  --safe-area-inset-top: env(safe-area-inset-top, 0px);
+  --safe-area-inset-right: env(safe-area-inset-right, 0px);
+  --safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-area-inset-left: env(safe-area-inset-left, 0px);
 }
 
 /* Dark theme */
@@ -312,7 +298,6 @@ button::-moz-focus-inner {
   line-height: 48px;
   display: flex;
   font-size: 14px;
-  font-family: var(--font-stack-medium);
   font-weight: 500;
   opacity: 0;
 }
@@ -351,7 +336,6 @@ button::-moz-focus-inner {
 
 #display div,
 #keypad {
-  font-family: var(--font-stack-light);
   font-weight: 300;
 }
 
