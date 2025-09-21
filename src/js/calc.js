@@ -456,9 +456,11 @@ function commit() {
   // Lots of code here just to handle fast key clicks (< 300ms) and long presses on desktop + mobile
   document.querySelectorAll("#keypad button").forEach(function (e) {
     // Add a decimal (which gets parsed out later) to the add keys to avoid label-based conflicts
-    const type = e.dataset.keytype,
-      key = e.textContent.trim() + (type === KEYTYPE.ADD ? ".0" : ""),
-      shortcuts = e.getAttribute("aria-keyshortcuts").split(" ");
+    const type = e.dataset.keytype;
+    const key =
+      (e.dataset.key || e.textContent.trim()) +
+      (type === KEYTYPE.ADD ? ".0" : "");
+    const shortcuts = e.getAttribute("aria-keyshortcuts").split(" ");
 
     // "Register" the key label, initial state, type, DOM element, and keyboard shortcuts
     computedState.keys[key] = {};

@@ -471,3 +471,14 @@ button::-moz-focus-inner {
     visibility: hidden;
   }
 }
+
+/* Inspired by alignment trick from
+   https://blog.prototypr.io/align-svg-icons-to-text-and-say-goodbye-to-font-icons-d44b3d7b26b4 */
+.svg-icon {
+  display: inline-block;
+}
+
+.svg-icon svg {
+  top: 0.125em;
+  position: relative;
+}

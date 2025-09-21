@@ -12,12 +12,11 @@
   document.getElementById("display").appendChild(container.firstElementChild);
 
   // Load HTML for the pop-up menu
-  container.innerHTML =
-    '<div id="menu" class="full-screen-overlay">' +
-    '<div id="menu-popup">' +
-    "<ul></ul>" +
-    "</div>" +
-    "</div>";
+  container.innerHTML = `<div id="menu" class="full-screen-overlay">
+        <div id="menu-popup">
+            <ul></ul>
+        </div>
+    </div>`;
   dom.app.appendChild(container.firstChild);
 
   // Set up menu variables
@@ -135,36 +134,28 @@
     : "";
 
   // Load HTML for the about screen
-  container.innerHTML =
-    '<div id="about" class="full-screen-overlay dialog-container scrim">' +
-    "<div>" +
-    '<div id="app-logo">' +
-    '<img src="img/logo-192.png" width="64" height="64" alt="" loading="lazy">' +
-    '<h1>DDR Calc <span id="app-version">Version ' +
-    (version || "9999") +
-    (isDdrFinderReferral ? "n" : "") +
-    (isGPlay ? "g" : "") +
-    (isMobileSafari ? "s" : "") +
-    cfStagingEnvId +
-    "</span></h1>" +
-    "<h2>&copy; 2018&ndash;2025 Andrés Cordero</h2>" +
-    "</div>" +
-    "<ul>" +
-    '<li><a href="https://github.com/Andrew67/ddr-calc" target="_blank" rel="noopener">Project Site / Usage Guide</a>' +
-    '<li><a href="privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a>' +
-    "<li>Available speed modifiers per mix compiled from " +
-    (!isGPlay
-      ? '<a href="https://remywiki.com/" target="_blank" rel="noopener">RemyWiki</a>'
-      : "RemyWiki") +
-    "<li>DDR Arrow by inkjuse on DeviantArt" +
-    '<li>Mini-calculator icon from <a href="https://icons.getbootstrap.com/" target="_blank" rel="noopener">Bootstrap Icons</a>' +
-    '<li>“<a href="https://thenounproject.com/search/?q=target&i=32462" target="_blank" rel="noopener">Target</a>” ' +
-    'icon by Chris Kerr from <a href="https://thenounproject.com/" target="_blank" rel="noopener">the Noun Project</a>.' +
-    '<li>Gamepad icon by <a href="https://fontawesome.com/license/free" target="_blank" rel="noopener">FontAwesome</a>' +
-    '<li>Other icons from <a href="https://material.io/tools/icons/" target="_blank" rel="noopener">Material Design</a>' +
-    "</ul>" +
-    "</div>" +
-    "</div>";
+  container.innerHTML = `<div id="about" class="full-screen-overlay dialog-container scrim">
+        <div>
+            <div id="app-logo">
+                <img src="img/logo-192.png" width="64" height="64" alt="" loading="lazy">
+                <h1>
+                    DDR Calc
+                    <span id="app-version">Version ${version || "9999"}${isDdrFinderReferral ? "n" : ""}${isGPlay ? "g" : ""}${isMobileSafari ? "s" : ""}${cfStagingEnvId}</span>
+                </h1>
+                <h2>&copy; 2018&ndash;2025 Andrés Cordero</h2>
+            </div>
+            <ul>
+                <li><a href="https://github.com/Andrew67/ddr-calc" target="_blank">Project Site / Usage Guide</a>
+                <li><a href="privacy-policy.html" target="_blank">Privacy Policy</a>
+                <li>Available speed modifiers per mix compiled from <a href="https://remywiki.com/" target="_blank">RemyWiki</a>
+                <li>DDR Arrow by inkjuse on DeviantArt
+                <li>Mini-calculator icon from <a href="https://icons.getbootstrap.com/" target="_blank">Bootstrap Icons</a>
+                <li>“<a href="https://thenounproject.com/search/?q=target&i=32462" target="_blank">Target</a>” icon by Chris Kerr from <a href="https://thenounproject.com/" target="_blank">the Noun Project</a>.
+                <li>Gamepad icon by <a href="https://fontawesome.com/license/free" target="_blank">FontAwesome</a>
+                <li>Other icons from <a href="https://material.io/tools/icons/" target="_blank">Material Design</a>
+            </ul>
+        </div>
+    </div>`;
   dom.app.appendChild(container.firstChild);
 
   // Set up About screen
