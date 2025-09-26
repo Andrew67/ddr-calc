@@ -141,7 +141,7 @@ const KEY = {
   BPM: "BPM",
   DEL: "DEL",
   ADDSUB: "+ / −",
-  SWITCH: "⇄",
+  SWITCH: "SWITCH",
   DEC: "−",
   INC: "+",
 };

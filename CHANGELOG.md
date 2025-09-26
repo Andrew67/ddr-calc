@@ -2,10 +2,16 @@
 
 ## 9.0.0 (2025-XX-XX)
 ### Bug fixes
+- Fixed Target BPM font size on tall devices such as Galaxy Z Fold 5 (closed).
 ### Features
 ### UI enhancements
+- Replaced delete and switch button texts with icons.
 ### Other
 - Migrated from Yarn to pnpm.
+- Fix: Service Worker was still trying to cache `dark.js` which was removed in 8.0.0.
+- Bumpled minimum Firefox to 143 since it still supports Android 5.
+- Installed and applied Prettier with default rules.
+- Added proper 404 page instead of returning `index.html` for every path.
 
 ## 8.0.0 (2025-05-01)
 ### Bug fixes

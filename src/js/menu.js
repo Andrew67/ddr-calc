@@ -151,8 +151,7 @@
                 <li>DDR Arrow by inkjuse on DeviantArt
                 <li>Mini-calculator icon from <a href="https://icons.getbootstrap.com/" target="_blank">Bootstrap Icons</a>
                 <li>“<a href="https://thenounproject.com/search/?q=target&i=32462" target="_blank">Target</a>” icon by Chris Kerr from <a href="https://thenounproject.com/" target="_blank">the Noun Project</a>.
-                <li>Gamepad icon by <a href="https://fontawesome.com/license/free" target="_blank">FontAwesome</a>
-                <li>Other icons from <a href="https://material.io/tools/icons/" target="_blank">Material Design</a>
+                <li>Other icons from <a href="https://material.io/tools/icons/" target="_blank">Material Symbols</a>
             </ul>
         </div>
     </div>`;

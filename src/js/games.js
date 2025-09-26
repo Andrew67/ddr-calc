@@ -18,7 +18,7 @@ fetch(`games${extPrefix}.json`)
   .then((r) => r.json())
   .then(function initGamesModule(gameData) {
     const gamepad = `<span class="svg-icon" aria-hidden="true">
-              <svg width="18" height="14.4"><use xlink:href="${getSvgUrl("fa-gamepad")}#gamepad"/></svg>
+              <svg width="16" height="16"><use xlink:href="${getSvgUrl("md-gamepad")}#gamepad"/></svg>
           </span>`,
       checkbox = `<span class="svg-icon" aria-hidden="true"><svg width="24" height="24">
               <use xlink:href="${getSvgUrl("md-check_box")}#check_box-unchecked" color="var(--color-foreground-medium)"/>

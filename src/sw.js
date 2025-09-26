@@ -25,7 +25,6 @@ self.addEventListener("install", (event) => {
     ["css/menu", "css"],
     ["js/ohm", "js"],
     ["css/ohm", "css"],
-    ["js/dark", "js"],
     ["js/theme", "js"],
     ["js/update", "js"],
     ["css/update", "css"],
@@ -38,7 +37,7 @@ self.addEventListener("install", (event) => {
   const appIcons = self.SVG_SPRITE_SHEET
     ? [`img/${self.SVG_SPRITE_SHEET}.svg`]
     : [
-        "img/fa-gamepad.svg",
+        "img/md-gamepad.svg",
         "img/md-check_box.svg",
         "img/md-radio_button.svg",
         "img/md-music_note.svg",
