@@ -211,9 +211,7 @@
   loadNextModule();
 
   // At this point, all main UI elements have loaded, so we can dismiss the splash screen early here
-  document
-    .getElementById("loading-overlay")
-    .style.setProperty("--fade-out-duration", ".2s");
+  document.getElementById("loading-overlay").style.animationDelay = "0s";
   // We can also enable the sliding animation for the mode switcher after the fade-out
   setTimeout(
     () =>

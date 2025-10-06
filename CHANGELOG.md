@@ -6,6 +6,8 @@
 ### Features
 ### UI enhancements
 - Replaced delete and switch button texts with icons.
+- Switched game picker icon from gamepad to D-pad.
+- Improved "splash" screen fade-in.
 ### Other
 - Migrated from Yarn to pnpm.
 - Fix: Service Worker was still trying to cache `dark.js` which was removed in 8.0.0.

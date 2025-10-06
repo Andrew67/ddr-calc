@@ -12,8 +12,8 @@
     "minify": "pnpm run minify:fe && pnpm run minify:sw",
     "replace": "rexreplace '/([a-z-]+).(js|css|json)(>|\")' /\\$1.v$npm_package_version.\\$2\\$3 build/index.html",
     "build": "pnpm run minify && pnpm run replace",
-    "serve:src": "pnpm dlx wrangler@3.73.0 pages dev ./src --port=3000 --compatibility-date=2023-02-17",
-    "serve:build": "pnpm dlx wrangler@3.73.0 pages dev ./build --port=3000 --compatibility-date=2023-02-17",
+    "serve:src": "pnpm dlx wrangler@4.42.0 pages dev ./src --port=3000 --compatibility-date=2025-09-15",
+    "serve:build": "pnpm dlx wrangler@4.42.0 pages dev ./build --port=3000 --compatibility-date=2025-09-15",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -40,5 +40,5 @@
     "stylelint": "16.19.1",
     "stylelint-no-unsupported-browser-features": "8.0.4"
   },
-  "packageManager": "pnpm@10.17.1"
+  "packageManager": "pnpm@10.18.0"
 }
