@@ -32,13 +32,13 @@
   },
   "homepage": "https://github.com/Andrew67/ddr-calc#readme",
   "devDependencies": {
-    "esbuild": "0.25.3",
-    "eslint": "9.25.1",
+    "esbuild": "0.25.10",
+    "eslint": "9.37.0",
     "eslint-plugin-compat": "6.0.2",
     "prettier": "3.6.2",
-    "rexreplace": "7.1.12",
-    "stylelint": "16.19.1",
+    "rexreplace": "7.1.13",
+    "stylelint": "16.25.0",
     "stylelint-no-unsupported-browser-features": "8.0.4"
   },
-  "packageManager": "pnpm@10.18.0"
+  "packageManager": "pnpm@10.18.1"
 }
