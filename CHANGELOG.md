@@ -1,5 +1,13 @@
 # Changelog
 
+## 9.0.1 (2025-XX-XX)
+### Bug fixes
+### Features
+- Now available as an offline pre-packaged Capacitor-based Android app APK.
+  (It can continue to be installed as a WebAPK through Chrome and Samsung Internet)
+### UI enhancements
+### Other
+
 ## 9.0.0 (2025-10-08)
 ### Bug fixes
 - Fixed Target BPM font size on tall devices such as Galaxy Z Fold 5 (closed).

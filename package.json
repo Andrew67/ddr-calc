@@ -1,6 +1,6 @@
 {
   "name": "ddr-calc",
-  "version": "9.0.0",
+  "version": "9.0.1",
   "description": "Calculator with DDR speed-modifier specific functionality; fast and offline PWA",
   "scripts": {
     "clean": "rm -rf build",
@@ -31,7 +31,12 @@
     "url": "https://github.com/Andrew67/ddr-calc/issues"
   },
   "homepage": "https://github.com/Andrew67/ddr-calc#readme",
+  "dependencies": {
+    "@capacitor/android": "7.4.3",
+    "@capacitor/core": "7.4.3"
+  },
   "devDependencies": {
+    "@capacitor/cli": "7.4.3",
     "esbuild": "0.25.10",
     "eslint": "9.37.0",
     "eslint-plugin-compat": "6.0.2",
@@ -40,5 +45,5 @@
     "stylelint": "16.25.0",
     "stylelint-no-unsupported-browser-features": "8.0.4"
   },
-  "packageManager": "pnpm@10.18.1"
+  "packageManager": "pnpm@10.18.2"
 }
