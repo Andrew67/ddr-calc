@@ -53,7 +53,7 @@ const asyncModules = [
 
 // See: https://developers.google.com/web/fundamentals/primers/service-workers/
 let lastUpdateCheck = Date.now();
-if ("serviceWorker" in navigator) {
+if ("serviceWorker" in navigator && !("Capacitor" in window)) {
   asyncModules.push({ name: "update", hasCSS: true, shouldPreload: true });
   window.addEventListener("load", function () {
     // noinspection JSIgnoredPromiseFromCall

@@ -14,6 +14,9 @@ importers:
       '@capacitor/core':
         specifier: 7.4.3
         version: 7.4.3
+      '@capacitor/splash-screen':
+        specifier: ^7.0.3
+        version: 7.0.3(@capacitor/core@7.4.3)
     devDependencies:
       '@capacitor/cli':
         specifier: 7.4.3
@@ -79,6 +82,11 @@ packages:
 
   '@capacitor/core@7.4.3':
     resolution: {integrity: sha512-wCWr8fQ9Wxn0466vPg7nMn0tivbNVjNy1yL4GvDSIZuZx7UpU2HeVGNe9QjN/quEd+YLRFeKEBLBw619VqUiNg==}
+
+  '@capacitor/splash-screen@7.0.3':
+    resolution: {integrity: sha512-coAw2de3rRX0EfneK0/D9IZaDAUOtsPaE9ZNbSdCs2UtmXp0hdcr5Tsil01Kve707nQfLsd03pmvaesJYD60EA==}
+    peerDependencies:
+      '@capacitor/core': '>=7.0.0'
 
   '@csstools/css-parser-algorithms@3.0.5':
     resolution: {integrity: sha512-DaDeUkXZKjdGhgYaHNJTV9pV7Y9B3b644jCLs9Upc3VeNGg6LWARAT6O+Q+/COo+2gg/bM5rhpMAtf70WqfBdQ==}
@@ -1489,6 +1497,10 @@ snapshots:
   '@capacitor/core@7.4.3':
     dependencies:
       tslib: 2.8.1
+
+  '@capacitor/splash-screen@7.0.3(@capacitor/core@7.4.3)':
+    dependencies:
+      '@capacitor/core': 7.4.3
 
   '@csstools/css-parser-algorithms@3.0.5(@csstools/css-tokenizer@3.0.4)':
     dependencies:

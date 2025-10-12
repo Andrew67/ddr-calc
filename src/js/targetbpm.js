@@ -220,4 +220,16 @@
         .style.setProperty("--targetbpm-slide-duration", ".2s"),
     300,
   );
+
+  // In Capacitor, the splash screen doesn't auto-dismiss, we dismiss it here,
+  // since all assets are expected to load as they're pre-packaged.
+  // We also cut the web splash screen animation out to prevent conflicts.
+  if (
+    "Capacitor" in window &&
+    "Plugins" in window.Capacitor &&
+    "SplashScreen" in window.Capacitor.Plugins
+  ) {
+    document.getElementById("loading-overlay").style.animationDuration = "0s";
+    requestAnimationFrame(() => window.Capacitor.Plugins.SplashScreen.hide());
+  }
 })();
