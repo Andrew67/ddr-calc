@@ -8,24 +8,12 @@
 package com.andrew67.ddrcalc;
 
 import android.content.res.Configuration;
-import android.os.Bundle;
 
 import androidx.core.view.WindowInsetsControllerCompat;
 
 import com.getcapacitor.BridgeActivity;
 
 public class MainActivity extends BridgeActivity {
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        var windowInsetsController =
-                new WindowInsetsControllerCompat(getWindow(), getWindow().getDecorView());
-        windowInsetsController.setAppearanceLightStatusBars(
-                (getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK)
-                        != Configuration.UI_MODE_NIGHT_YES
-        );
-    }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {

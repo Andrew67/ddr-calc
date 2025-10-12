@@ -84,6 +84,9 @@ function addStylesheet(stylesheetName) {
 
 /** Inserts the performance analytics snippet at the bottom of the page asynchronously */
 function addAnalytics() {
+  // Skip in Capacitor, which sends `localhost` as the referrer,
+  // and Cloudflare Web Analytics are not as flexible for multiple referrers
+  if ("Capacitor" in window) return;
   const script = document.createElement("script");
   script.defer = true;
   script.src = "https://static.cloudflareinsights.com/beacon.min.js";
