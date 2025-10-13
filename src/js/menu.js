@@ -184,6 +184,12 @@
     dom.about.classList.toggle("show", state.aboutOpen);
   });
 
+  // Capacitor's window.location.href is "https://localhost/"
+  const shareUrl =
+    "Capacitor" in window
+      ? "https://ddrcalc.andrew67.com/"
+      : window.location.href;
+
   // Load HTML for the share screen
   container.innerHTML = `<div id="share" class="full-screen-overlay dialog-container scrim">
         <div>
@@ -193,7 +199,7 @@
                     <use xlink:href="${getSvgUrl("qr")}#qr"/>
                 </svg>
             </div>
-            <p id="share-url">${window.location.href}</p>
+            <p id="share-url">${shareUrl}</p>
             <div id="share-actions">
                 <button type="button" id="share-link">Share link</button>
                 <button type="button" id="copy-link">Copy link</button>
@@ -205,16 +211,25 @@
     const button = e.currentTarget;
     if ("share" in navigator) {
       navigator
-        .share({ title: document.title, url: window.location.href })
-        .catch(() => true);
+        .share({ title: document.title, url: shareUrl })
+        .catch(() => (button.textContent = "Error"));
+    } else if (
+      "Capacitor" in window &&
+      "Plugins" in window.Capacitor &&
+      "Share" in window.Capacitor.Plugins
+    ) {
+      window.Capacitor.Plugins.Share.share({
+        title: document.title,
+        url: shareUrl,
+      });
     } else {
-      button.textContent = "Error";
+      button.textContent = "Not available";
     }
   });
   document.getElementById("copy-link").addEventListener("click", (e) => {
     const button = e.currentTarget;
     navigator.clipboard
-      .writeText(window.location.href)
+      .writeText(shareUrl)
       .then(() => (button.textContent = "Copied"))
       .catch(() => (button.textContent = "Error"));
   });

@@ -1,10 +1,11 @@
 # Changelog
 
-## 9.0.1 (2025-XX-XX)
+## 9.1.0 (2025-XX-XX)
 ### Bug fixes
 ### Features
 - Now available as an offline pre-packaged Capacitor-based Android app APK.
-  (It can continue to be installed as a WebAPK through Chrome and Samsung Internet)
+  It can continue to be installed as a WebAPK through Chrome and Samsung Internet,
+  the TWA (last version 7.0) will also continue to work, and this version can be installed on top of it.
 ### UI enhancements
 ### Other
 

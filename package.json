@@ -1,6 +1,6 @@
 {
   "name": "ddr-calc",
-  "version": "9.0.1",
+  "version": "9.1.0",
   "description": "Calculator with DDR speed-modifier specific functionality; fast and offline PWA",
   "scripts": {
     "clean": "rm -rf build",
@@ -34,7 +34,9 @@
   "dependencies": {
     "@capacitor/android": "7.4.3",
     "@capacitor/core": "7.4.3",
-    "@capacitor/splash-screen": "^7.0.3"
+    "@capacitor/haptics": "7.0.2",
+    "@capacitor/share": "7.0.2",
+    "@capacitor/splash-screen": "7.0.3"
   },
   "devDependencies": {
     "@capacitor/cli": "7.4.3",
