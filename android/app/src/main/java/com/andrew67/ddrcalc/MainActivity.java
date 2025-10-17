@@ -18,12 +18,17 @@ public class MainActivity extends BridgeActivity {
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        var windowInsetsController =
-                new WindowInsetsControllerCompat(getWindow(), getWindow().getDecorView());
-        windowInsetsController.setAppearanceLightStatusBars(
-                (newConfig.uiMode & Configuration.UI_MODE_NIGHT_MASK) !=
-                        Configuration.UI_MODE_NIGHT_YES
-        );
+        final var isLightMode = (newConfig.uiMode & Configuration.UI_MODE_NIGHT_MASK) !=
+                Configuration.UI_MODE_NIGHT_YES;
+        final var window = getWindow();
+        final var windowInsetsController =
+                new WindowInsetsControllerCompat(window, window.getDecorView());
+        windowInsetsController.setAppearanceLightStatusBars(isLightMode);
+
+        // Only applies when running on Android < 15 without edge-to-edge
+        final var white = getResources().getColor(R.color.white, null);
+        final var almostBlack = getResources().getColor(R.color.almostBlack, null);
+        window.setStatusBarColor(isLightMode ? white : almostBlack);
     }
 
 }
