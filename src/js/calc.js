@@ -51,6 +51,8 @@ const asyncModules = [
   { name: "ohm", hasCSS: true, shouldPreload: true },
   { name: "theme", hasCSS: false, shouldPreload: true },
 ];
+if ("Capacitor" in window)
+  asyncModules.push({ name: "capacitor", hasCSS: false });
 
 // See: https://developers.google.com/web/fundamentals/primers/service-workers/
 let lastUpdateCheck = Date.now();
