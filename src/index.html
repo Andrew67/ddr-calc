@@ -79,11 +79,6 @@
         </div>
       </div>
       <script nonce="573">
-        // In-line checks, for a flicker-free experience on page load
-        // Obtain URL query/hash params and remove them (see URLs.md)
-        const urlParams = new URLSearchParams(location.search);
-        history.replaceState(history.state, "", location.pathname);
-
         // Browser compatibility check, to dismiss the incompatibility dialog
         if (
           "fetch" in window &&
@@ -92,35 +87,64 @@
         )
           document.getElementById("browser-dialog").remove();
 
+        // In-line checks, for a flicker-free experience on page load
+        // Obtain URL query/hash params and remove them (see URLs.md)
+        /** @type Promise<URLSearchParams> */
+        const urlParams = new Promise(async (resolve) => {
+          let launchUrlSearch = location.search;
+          if (
+            "Capacitor" in window &&
+            "Plugins" in window.Capacitor &&
+            "App" in window.Capacitor.Plugins
+          ) {
+            const launchUrl = await window.Capacitor.Plugins.App.getLaunchUrl();
+            if (launchUrl) {
+              const actualUrl = launchUrl.url;
+              if (actualUrl.includes("?"))
+                launchUrlSearch = actualUrl.substring(actualUrl.indexOf("?"));
+            }
+          }
+          resolve(new URLSearchParams(launchUrlSearch));
+        });
+        history.replaceState(history.state, "", location.pathname);
+
         /**
-         * Detect app loaded via DDR Finder, to unlock an exclusive theme
+         * Detect app loaded via DDR Finder, to unlock an exclusive theme.
+         * @type Promise<boolean>
          */
-        const isDdrFinderReferral =
-          urlParams.has("df") ||
-          document.referrer.startsWith(
-            "android-app://com.andrew67.ddrfinder/",
-          ) ||
-          document.referrer.startsWith("https://ddrfinder.andrew67.com/") ||
-          sessionStorage.getItem("ddrfinder") === "true";
+        const isDdrFinderReferral = urlParams.then(
+          (params) =>
+            params.has("df") ||
+            document.referrer.startsWith(
+              "android-app://com.andrew67.ddrfinder/",
+            ) ||
+            document.referrer.startsWith("https://ddrfinder.andrew67.com/") ||
+            sessionStorage.getItem("ddrfinder") === "true",
+        );
+
         /**
          * This key is set to "true" once the user has opened DDR Calc through DDR Finder at least once.
          * DDR Calc will switch to the DDR Finder theme at that moment, even on subsequent launches.
          */
         const KEY_DDRFINDER_THEME_UNLOCKED = "ddrfinder-theme-unlocked";
+
         /**
          * This key provides the user with the ability to opt out of the DDR Finder theme after it's unlocked.
          */
         const KEY_DDRFINDER_THEME_ENABLED = "ddrfinder-theme-enabled";
-        const isDdrFinderThemeUnlocked =
-          isDdrFinderReferral ||
-          localStorage.getItem(KEY_DDRFINDER_THEME_UNLOCKED) === "true";
-        const isDdrFinderThemeEnabled = () =>
-          isDdrFinderReferral ||
-          (isDdrFinderThemeUnlocked &&
+        const isDdrFinderThemeUnlocked = isDdrFinderReferral.then(
+          (value) =>
+            value ||
+            localStorage.getItem(KEY_DDRFINDER_THEME_UNLOCKED) === "true",
+        );
+        /** @returns Promise<boolean> */
+        const isDdrFinderThemeEnabled = async () =>
+          (await isDdrFinderReferral) ||
+          ((await isDdrFinderThemeUnlocked) &&
             localStorage.getItem(KEY_DDRFINDER_THEME_ENABLED) !== "false");
-        if (isDdrFinderThemeEnabled()) {
-          document.body.classList.add("theme-ddrfinder");
-        }
+        isDdrFinderThemeEnabled().then((value) => {
+          if (value) document.body.classList.add("theme-ddrfinder");
+        });
       </script>
 
       <!-- Calculator UI -->

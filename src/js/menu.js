@@ -3,7 +3,7 @@
 "use strict";
 
 // Note: some elements in this module (overlay, scrim) depend on the games module loading first
-(function initMenuModule() {
+(async function initMenuModule() {
   // Load HTML for the menu button
   const container = document.createElement("div");
   container.innerHTML = `<button type="button" id="menu-btn" class="overlay" title="Menu">
@@ -140,7 +140,7 @@
                 <img src="img/logo-192.png" width="64" height="64" alt="" loading="lazy">
                 <h1>
                     DDR Calc
-                    <span id="app-version">Version ${version || "9999"}${isDdrFinderReferral ? "n" : ""}${isGPlay ? "g" : ""}${isMobileSafari ? "s" : ""}${cfStagingEnvId}</span>
+                    <span id="app-version">Version ${version || "9999"}${(await isDdrFinderReferral) ? "n" : ""}${isGPlay ? "g" : ""}${isMobileSafari ? "s" : ""}${cfStagingEnvId}</span>
                 </h1>
                 <h2>&copy; 2018&ndash;2025 Andrés Cordero</h2>
             </div>

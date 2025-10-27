@@ -4,11 +4,12 @@
 
 // DDR Finder theme CSS is contained in calc.css so that it loads as quickly as possible for flicker-free UI on return
 // Note: this module depends on the menu module loading first
-try {
+(async function initThemeModule() {
+  const isUnlocked = await isDdrFinderThemeUnlocked;
   // Core logic is defined in index.html for a flicker-free load
-  if (isDdrFinderThemeUnlocked)
+  if (isUnlocked)
     localStorage[setAllowingLoss](KEY_DDRFINDER_THEME_UNLOCKED, "true");
-  state.ddrFinderThemeEnabled = isDdrFinderThemeEnabled();
+  state.ddrFinderThemeEnabled = await isDdrFinderThemeEnabled();
 
   // Manual toggle
   addMenuItem(
@@ -27,7 +28,7 @@ try {
         state.ddrFinderThemeEnabled
           ? "Disable DDR Finder Theme"
           : "DDR Finder Theme",
-      hidden: () => !isDdrFinderThemeUnlocked,
+      hidden: () => !isUnlocked,
     },
   );
 
@@ -40,6 +41,4 @@ try {
 
   commit();
   loadNextModule();
-} catch (err) {
-  console.error("Error in theme.js:", err, "\nModule loading has been halted");
-}
+})();

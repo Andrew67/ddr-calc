@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android='http://schemas.android.com/apk/res/android'>
+    <shortcut
+        android:icon='@mipmap/ic_speed_mod'
+        android:shortcutId='shortcut_speed_mod'
+        android:shortcutLongLabel='@string/shortcut_speed_mod'
+        android:shortcutShortLabel='@string/shortcut_speed_mod'>
+        <intent
+            android:action='android.intent.action.MAIN'
+            android:data='https://ddrcalc.andrew67.com/?mode=speed-mod'
+            android:targetClass='com.andrew67.ddrcalc.MainActivity'
+            android:targetPackage='com.andrew67.ddrcalc.debug' />
+        <categories android:name='android.intent.category.LAUNCHER' />
+    </shortcut>
+    <shortcut
+        android:icon='@mipmap/ic_target_bpm'
+        android:shortcutId='shortcut_target_bpm'
+        android:shortcutLongLabel='@string/shortcut_target_bpm'
+        android:shortcutShortLabel='@string/shortcut_target_bpm'>
+        <intent
+            android:action='android.intent.action.MAIN'
+            android:data='https://ddrcalc.andrew67.com/?mode=target-bpm'
+            android:targetClass='com.andrew67.ddrcalc.MainActivity'
+            android:targetPackage='com.andrew67.ddrcalc.debug' />
+        <categories android:name='android.intent.category.LAUNCHER' />
+    </shortcut>
+</shortcuts>

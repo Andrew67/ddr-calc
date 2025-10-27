@@ -28,11 +28,3 @@ Same as above, but the referrer is the DDR Finder app published on Google Play.
 
 ### `?df=1`
 Unlocks a special DDR Finder matching theme. The referrer is DDR Finder, regardless of publishing method.
-
-
-## Developer Flags
-These flags can trigger the detection and work-around of specific platforms/features.
-It is more productive(/necessary) to test on the actual devices they apply to instead.
-
-### `?sf=1`
-The browser is Safari. Various workarounds are applied.

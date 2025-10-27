@@ -11,7 +11,7 @@ const version = window.APP_VERSION || "";
 const extPrefix = version ? `.v${version}` : "";
 
 /** Detect Mobile Safari via presence of non-standard `navigator.standalone` field */
-const isMobileSafari = "standalone" in navigator || urlParams.has("sf");
+const isMobileSafari = "standalone" in navigator;
 
 /**
  * Detect app loaded via Google Play (for compliance with Google Play developer policies).
@@ -21,12 +21,13 @@ const isMobileSafari = "standalone" in navigator || urlParams.has("sf");
 const isGPlay =
   document.referrer.startsWith("android-app://com.andrew67.ddrcalc/") ||
   document.referrer.includes("play.google.com") ||
-  sessionStorage.getItem("gplay") === "true" ||
-  urlParams.has("gp");
+  sessionStorage.getItem("gplay") === "true";
 if (isGPlay) sessionStorage.setItem("gplay", "true");
 
 // Preserve DDR Finder referral status in session storage
-if (isDdrFinderReferral) sessionStorage.setItem("ddrfinder", "true");
+isDdrFinderReferral.then((value) => {
+  if (value) sessionStorage.setItem("ddrfinder", "true");
+});
 
 /**
  * Works like setItem, but silently catches all exceptions (most likely QuotaExceededException)
