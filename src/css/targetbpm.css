@@ -6,10 +6,6 @@
   --targetbpm-slide-duration: 0s;
 }
 
-#mode-switcher#mode-switcher {
-  opacity: 1;
-}
-
 #mode-switcher label {
   display: inline-block;
   flex: 1;
@@ -103,8 +99,7 @@
   margin-left: 7vw;
 }
 
-#targetbpm-icon::before,
-#songbpm-icon::before {
+:is(#targetbpm-icon, #songbpm-icon)::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -114,18 +109,15 @@
   transition: opacity 0.1s;
 }
 
-#targetbpm-icon:focus::before,
-#songbpm-icon:focus::before {
+:is(#targetbpm-icon, #songbpm-icon):focus::before {
   opacity: var(--opacity-focused);
 }
 
-#targetbpm-icon.active::before,
-#songbpm-icon.active::before {
+:is(#targetbpm-icon, #songbpm-icon).active::before {
   background: var(--color-accent);
 }
 
-#targetbpm-icon svg,
-#songbpm-icon svg {
+:is(#targetbpm-icon, #songbpm-icon) svg {
   width: 1em;
   height: 1em;
 }
