@@ -142,7 +142,7 @@
                     DDR Calc
                     <span id="app-version">Version ${version || "9999"}${(await isDdrFinderReferral) ? "n" : ""}${isGPlay ? "g" : ""}${isMobileSafari ? "s" : ""}${cfStagingEnvId}</span>
                 </h1>
-                <h2>&copy; 2018&ndash;2025 Andrés Cordero</h2>
+                <h2>&copy; 2018&ndash;2026 Andrés Cordero</h2>
             </div>
             <ul>
                 <li><a href="https://github.com/Andrew67/ddr-calc" target="_blank">Project Site / Usage Guide</a>

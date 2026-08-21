@@ -1,6 +1,6 @@
 {
   "name": "ddr-calc",
-  "version": "9.1.0",
+  "version": "9.2.0",
   "description": "Calculator with DDR speed-modifier specific functionality; fast and offline PWA",
   "scripts": {
     "clean": "rm -rf build",
@@ -12,8 +12,8 @@
     "minify": "pnpm run minify:fe && pnpm run minify:sw",
     "replace": "rexreplace '/([a-z-]+).(js|css|json)(>|\")' /\\$1.v$npm_package_version.\\$2\\$3 build/index.html",
     "build": "pnpm run minify && pnpm run replace",
-    "serve:src": "pnpm dlx wrangler@4.42.0 pages dev ./src --port=3000 --compatibility-date=2025-09-15",
-    "serve:build": "pnpm dlx wrangler@4.42.0 pages dev ./build --port=3000 --compatibility-date=2025-09-15",
+    "serve:src": "pnpm dlx wrangler@4.124.0 pages dev ./src --port=3000 --compatibility-date=2026-08-20",
+    "serve:build": "pnpm dlx wrangler@4.124.0 pages dev ./build --port=3000 --compatibility-date=2026-08-20",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -41,13 +41,13 @@
   },
   "devDependencies": {
     "@capacitor/cli": "7.4.3",
-    "esbuild": "0.25.10",
-    "eslint": "9.37.0",
-    "eslint-plugin-compat": "6.0.2",
-    "prettier": "3.6.2",
-    "rexreplace": "7.1.13",
-    "stylelint": "16.25.0",
-    "stylelint-no-unsupported-browser-features": "8.0.4"
+    "esbuild": "0.28.2",
+    "eslint": "10.8.1",
+    "eslint-plugin-compat": "7.0.2",
+    "prettier": "3.9.6",
+    "rexreplace": "7.1.14",
+    "stylelint": "17.14.1",
+    "stylelint-no-unsupported-browser-features": "8.1.1"
   },
-  "packageManager": "pnpm@10.19.0"
+  "packageManager": "pnpm@11.22.0"
 }

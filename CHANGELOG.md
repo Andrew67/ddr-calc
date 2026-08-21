@@ -1,5 +1,12 @@
 # Changelog
 
+## 9.2.0
+### Bug fixes
+### Features
+### UI enhancements
+### Other
+- Library upgrades.
+
 ## 9.1.0 (2025-11-15)
 ### Bug fixes
 ### Features

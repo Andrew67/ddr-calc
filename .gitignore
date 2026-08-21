@@ -45,4 +45,4 @@ node_modules/
 !.yarn/versions
 
 # Wrangler
-.wrangler/tmp
+.wrangler/*
