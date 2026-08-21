@@ -32,15 +32,15 @@
   },
   "homepage": "https://github.com/Andrew67/ddr-calc#readme",
   "dependencies": {
-    "@capacitor/android": "7.4.3",
-    "@capacitor/app": "7.1.0",
-    "@capacitor/core": "7.4.3",
-    "@capacitor/haptics": "7.0.2",
-    "@capacitor/share": "7.0.2",
-    "@capacitor/splash-screen": "7.0.3"
+    "@capacitor/android": "8.5.0",
+    "@capacitor/app": "8.1.1",
+    "@capacitor/core": "8.5.0",
+    "@capacitor/haptics": "8.0.2",
+    "@capacitor/share": "8.0.1",
+    "@capacitor/splash-screen": "8.0.2"
   },
   "devDependencies": {
-    "@capacitor/cli": "7.4.3",
+    "@capacitor/cli": "8.5.0",
     "esbuild": "0.28.2",
     "eslint": "10.8.1",
     "eslint-plugin-compat": "7.0.2",
