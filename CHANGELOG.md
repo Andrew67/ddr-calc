@@ -3,6 +3,7 @@
 ## 9.2.0
 ### Bug fixes
 ### Features
+- Android app only: calculator stays open even when the device is locked.
 ### UI enhancements
 ### Other
 - Library upgrades.
