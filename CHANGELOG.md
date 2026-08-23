@@ -1,5 +1,15 @@
 # Changelog
 
+## 9.2.0 (2026-08-23)
+### Bug fixes
+### Features
+- Android app only: calculator stays open even when the device is locked.
+### UI enhancements
+### Other
+- Library upgrades.
+- Due to the Capacitor 8 upgrade, the app now requires Android 7, up from 6.
+  This does not affect the web version as minimum browsers are unchanged.
+
 ## 9.1.0 (2025-11-15)
 ### Bug fixes
 ### Features
