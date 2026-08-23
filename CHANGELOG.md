@@ -1,6 +1,6 @@
 # Changelog
 
-## 9.2.0
+## 9.2.0 (2026-08-23)
 ### Bug fixes
 ### Features
 - Android app only: calculator stays open even when the device is locked.
